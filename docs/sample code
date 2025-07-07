@@ -1,0 +1,219 @@
+ATOM:
+"use client"
+
+import { Play } from "lucide-react"
+import { Button } from "@/components/ui/button"
+
+interface ProgressCircleProps {
+  progress: number // 0-100
+  size?: number
+  onClick?: () => void
+}
+
+export function ProgressCircle({ progress, size = 48, onClick }: ProgressCircleProps) {
+  const strokeWidth = 3
+  const radius = (size - strokeWidth) / 2
+  const circumference = 2 * Math.PI * radius
+  const strokeDashoffset = circumference - (progress / 100) * circumference
+  const buttonSize = size - strokeWidth * 2
+
+  return (
+    <div className="relative flex items-center justify-center" style={{ width: size, height: size }}>
+      <svg className="absolute transform -rotate-90" width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
+        {/* Background circle */}
+        <circle cx={size / 2} cy={size / 2} r={radius} stroke="#6b7280" strokeWidth={strokeWidth} fill="none" />
+        {/* Progress circle */}
+        <circle
+          cx={size / 2}
+          cy={size / 2}
+          r={radius}
+          stroke="#78af9f"
+          strokeWidth={strokeWidth}
+          fill="none"
+          strokeDasharray={circumference}
+          strokeDashoffset={strokeDashoffset}
+          strokeLinecap="round"
+          className="transition-all duration-300 ease-in-out"
+        />
+      </svg>
+      <Button
+        className="rounded-full bg-gray-600 hover:bg-gray-500 hover:shadow-lg text-white border-0 shadow-sm flex items-center justify-center p-0 transition-all duration-200"
+        style={{ width: buttonSize, height: buttonSize }}
+        onClick={(e) => {
+          e?.stopPropagation()
+          onClick?.()
+        }}
+      >
+        <Play className="h-4 w-4 fill-current text-white ml-0.5" />
+      </Button>
+    </div>
+  )
+}
+
+
+
+
+MOLECULE:
+
+"use client"
+
+import { Card, CardContent } from "@/components/ui/card"
+import { ProgressCircle } from "@/components/atoms/progress-circle"
+
+interface TopicCardProps {
+  title: string
+  description?: string
+  chapters: number
+  items: number
+  progress: number
+  color: string
+  onCardClick?: () => void
+  onPlayClick?: () => void
+}
+
+export function TopicCard({
+  title,
+  description,
+  chapters,
+  items,
+  progress,
+  color,
+  onCardClick,
+  onPlayClick,
+}: TopicCardProps) {
+  return (
+    <Card
+      className="w-64 flex-shrink-0 cursor-pointer hover:shadow-lg transition-all duration-200 rounded-2xl overflow-hidden"
+      onClick={onCardClick}
+    >
+      <CardContent className="p-0">
+        <div className="h-32 p-4 text-white relative overflow-hidden" style={{ background: color }}>
+          <div className="absolute inset-0 bg-gradient-to-br from-transparent to-black/20" />
+          <div className="relative z-10">
+            <h3 className="font-semibold text-lg leading-tight mb-2">{title}</h3>
+            {description && <p className="text-sm opacity-90 line-clamp-2">{description}</p>}
+          </div>
+          <div className="absolute bottom-3 right-3">
+            <ProgressCircle progress={progress} onClick={onPlayClick} />
+          </div>
+        </div>
+        <div className="p-4 space-y-2">
+          <div className="flex justify-between items-center text-sm">
+            <div className="text-center">
+              <div className="font-bold text-white">{chapters}</div>
+              <div className="text-gray-400 text-xs">Chapters</div>
+            </div>
+            <div className="text-center">
+              <div className="font-bold text-white">{items}</div>
+              <div className="text-gray-400 text-xs">Items</div>
+            </div>
+            <div className="text-center">
+              <div className="font-bold text-white">{progress}%</div>
+              <div className="text-gray-400 text-xs">Complete</div>
+            </div>
+          </div>
+        </div>
+      </CardContent>
+    </Card>
+  )
+}
+
+
+
+ORGANISM:
+
+"use client"
+
+import { useState } from "react"
+import { Button } from "@/components/ui/button"
+import { ChevronLeft, ChevronRight } from "lucide-react"
+import { TopicCard } from "@/components/molecules/topic-card"
+
+interface Topic {
+  id: string
+  title: string
+  description?: string
+  chapters: number
+  items: number
+  progress: number
+}
+
+interface SubjectCarouselProps {
+  title: string
+  topics: Topic[]
+  color: string
+  onTopicClick?: (topicId: string) => void
+  onPlayClick?: (topicId: string) => void
+}
+
+export function SubjectCarousel({ title, topics, color, onTopicClick, onPlayClick }: SubjectCarouselProps) {
+  const [scrollPosition, setScrollPosition] = useState(0)
+  const cardWidth = 272 // 256px + 16px gap
+  const maxScroll = Math.max(0, topics.length * cardWidth - 4 * cardWidth)
+
+  const scrollLeft = () => {
+    const newPosition = Math.max(0, scrollPosition - cardWidth * 2)
+    setScrollPosition(newPosition)
+  }
+
+  const scrollRight = () => {
+    const newPosition = Math.min(maxScroll, scrollPosition + cardWidth * 2)
+    setScrollPosition(newPosition)
+  }
+
+  const canScrollLeft = scrollPosition > 0
+  const canScrollRight = scrollPosition < maxScroll
+
+  return (
+    <div className="space-y-4">
+      <div className="flex items-center justify-between">
+        <h2 className="text-2xl font-bold text-white">{title}</h2>
+        <div className="flex space-x-2">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={scrollLeft}
+            disabled={!canScrollLeft}
+            className="h-8 w-8 p-0 bg-transparent"
+          >
+            <ChevronLeft className="h-4 w-4" />
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={scrollRight}
+            disabled={!canScrollRight}
+            className="h-8 w-8 p-0 bg-transparent"
+          >
+            <ChevronRight className="h-4 w-4" />
+          </Button>
+        </div>
+      </div>
+
+      <div className="relative overflow-hidden">
+        <div
+          className="flex space-x-4 transition-transform duration-300 ease-in-out"
+          style={{ transform: `translateX(-${scrollPosition}px)` }}
+        >
+          {topics.map((topic) => (
+            <TopicCard
+              key={topic.id}
+              title={topic.title}
+              description={topic.description}
+              chapters={topic.chapters}
+              items={topic.items}
+              progress={topic.progress}
+              color={color}
+              onCardClick={() => onTopicClick?.(topic.id)}
+              onPlayClick={() => onPlayClick?.(topic.id)}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+
+
+

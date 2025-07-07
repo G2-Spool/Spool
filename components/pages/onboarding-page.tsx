@@ -255,7 +255,7 @@ export function OnboardingPage({ onComplete }: OnboardingPageProps) {
 
   return (
     <OnboardingStep
-      title="Welcome to Learning Companion"
+      title="Welcome to Spool"
       description={steps[currentStep]}
       currentStep={currentStep}
       totalSteps={steps.length}

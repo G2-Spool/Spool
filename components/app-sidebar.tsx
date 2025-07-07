@@ -54,8 +54,8 @@ export function AppSidebar({ activeTab, onTabChange }: AppSidebarProps) {
     <Sidebar>
       <SidebarHeader className="border-b border-border/40 p-4">
         <div className="flex items-center space-x-2">
-          <GraduationCap className="h-6 w-6 text-primary" />
-          <span className="text-lg font-semibold text-foreground">Learning Companion</span>
+          <GraduationCap className="h-4 w-4 text-primary" />
+          <span className="text-lg font-semibold text-foreground">Spool</span>
         </div>
       </SidebarHeader>
       <SidebarContent>

@@ -14,7 +14,7 @@ export function MainLayout({ activeTab, onTabChange, children }: MainLayoutProps
   const getPageTitle = (tab: string) => {
     switch (tab) {
       case "learning":
-        return "Study Session"
+        return "Courses"
       case "dashboard":
         return "Dashboard"
       case "visualization":
@@ -24,7 +24,7 @@ export function MainLayout({ activeTab, onTabChange, children }: MainLayoutProps
       case "profile":
         return "Profile"
       default:
-        return "Learning Companion"
+        return "Spool"
     }
   }
 

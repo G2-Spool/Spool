@@ -289,7 +289,7 @@ export function OnboardingFlow({ onComplete }: OnboardingFlowProps) {
         <CardHeader>
           <div className="flex items-center justify-between">
             <div>
-              <CardTitle>Welcome to Learning Companion</CardTitle>
+              <CardTitle>Welcome to Spool</CardTitle>
               <CardDescription>
                 Step {currentStep + 1} of {steps.length}: {steps[currentStep]}
               </CardDescription>

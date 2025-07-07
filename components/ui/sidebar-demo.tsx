@@ -57,13 +57,13 @@ export function SidebarDemo() {
           <div>
             <SidebarLink
               link={{
-                label: "Learning Companion",
+                label: "Spool",
                 href: "#",
-                icon: (
-                  <div className="h-7 w-7 flex-shrink-0 rounded-full bg-primary flex items-center justify-center">
-                    <GraduationCap className="h-4 w-4 text-primary-foreground" />
-                  </div>
-                ),
+                                  icon: (
+                    <div className="h-5 w-5 flex-shrink-0 rounded-full bg-primary flex items-center justify-center">
+                      <GraduationCap className="h-3 w-3 text-primary-foreground" />
+                    </div>
+                  ),
               }}
             />
           </div>
@@ -83,7 +83,7 @@ export const Logo = () => {
         animate={{ opacity: 1 }}
         className="font-medium text-sidebar-foreground whitespace-pre"
       >
-        Learning Companion
+        Spool
       </motion.span>
     </div>
   );
