@@ -1,0 +1,179 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 40 4% 15%; /* #262624 */
+    --foreground: 0 0% 95%;
+    --card: 40 4% 18%; /* #30302e */
+    --card-foreground: 0 0% 95%;
+    --popover: 40 4% 18%; /* #30302e */
+    --popover-foreground: 0 0% 95%;
+    --primary: 162 25% 58%; /* #78af9f */
+    --primary-foreground: 40 4% 15%;
+    --secondary: 40 4% 22%;
+    --secondary-foreground: 0 0% 95%;
+    --muted: 40 4% 22%;
+    --muted-foreground: 0 0% 70%;
+    --accent: 162 25% 58%; /* #78af9f */
+    --accent-foreground: 40 4% 15%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 40 4% 25%;
+    --input: 40 4% 25%;
+    --ring: 162 25% 58%;
+    --radius: 0.5rem;
+
+    /* Sidebar variables - larger sizes for better UX */
+    --sidebar-width: 18rem;
+    --sidebar-width-icon: 5rem;
+    --sidebar-background: 40 4% 15%; /* #262624 */
+    --sidebar-foreground: 0 0% 95%;
+    --sidebar-primary: 162 25% 58%; /* #78af9f */
+    --sidebar-primary-foreground: 40 4% 15%;
+    --sidebar-accent: 40 4% 22%;
+    --sidebar-accent-foreground: 0 0% 95%;
+    --sidebar-border: 40 4% 25%;
+    --sidebar-ring: 162 25% 58%;
+  }
+
+  .light {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    --primary: 162 25% 58%; /* #78af9f */
+    --primary-foreground: 0 0% 98%;
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --accent: 162 25% 58%; /* #78af9f */
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 162 25% 58%;
+
+    /* Sidebar variables */
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 240 10% 3.9%;
+    --sidebar-primary: 162 25% 58%; /* #78af9f */
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 240 5.9% 90%;
+    --sidebar-ring: 162 25% 58%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Sidebar toggle button styles - make it prominent and bold */
+.sidebar-toggle-button {
+  transition: all 0.2s ease-in-out;
+  font-weight: 700;
+}
+
+.sidebar-toggle-button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Ensure the toggle button is always visible and clickable */
+[data-sidebar="sidebar"] .sidebar-toggle-button {
+  z-index: 50;
+  backdrop-filter: blur(4px);
+}
+
+/* Add subtle glow effect to the toggle button */
+[data-sidebar="sidebar"] button[aria-label*="sidebar"] {
+  box-shadow: 0 2px 8px rgba(120, 175, 159, 0.2);
+}
+
+[data-sidebar="sidebar"] button[aria-label*="sidebar"]:hover {
+  box-shadow: 0 4px 16px rgba(120, 175, 159, 0.3);
+}
+
+/* Enhanced menu button styling for larger, more prominent buttons */
+[data-sidebar="menu-button"] {
+  min-height: 2.75rem;
+  padding: 0.625rem 1rem;
+  font-size: 1rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* Larger icons in menu buttons */
+[data-sidebar="menu-button"] svg {
+  width: 1.5rem;
+  height: 1.5rem;
+  flex-shrink: 0;
+}
+
+/* Better hover and active states */
+[data-sidebar="menu-button"]:hover {
+  background-color: hsl(var(--sidebar-accent));
+  transform: translateX(2px);
+  transition: all 0.2s ease-in-out;
+}
+
+[data-sidebar="menu-button"][data-active="true"] {
+  background-color: hsl(var(--sidebar-accent));
+  border-left: 3px solid hsl(var(--sidebar-primary));
+  font-weight: 600;
+}
+
+/* Enhanced collapsible behavior - ensure only icons show when collapsed */
+.group[data-collapsible="icon"] [data-sidebar="menu-button"] {
+  justify-content: center;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
+
+.group[data-collapsible="icon"] [data-sidebar="menu-button"] span {
+  display: none;
+}
+
+/* Ensure header is properly centered when collapsed */
+.group[data-collapsible="icon"] [data-sidebar="header"] {
+  justify-content: center;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
+
+/* Adjust toggle button position when collapsed */
+.group[data-collapsible="icon"] .sidebar-toggle-button {
+  right: 0.5rem;
+}
+
+/* Ensure proper spacing in sidebar menu */
+[data-sidebar="menu"] {
+  gap: 0.25rem;
+}
+
+/* Make sure sidebar header has proper styling */
+[data-sidebar="header"] {
+  background-color: hsl(var(--sidebar-background));
+  border-bottom: 1px solid hsl(var(--sidebar-border));
+}
+
+/* Ensure sidebar content fills space properly */
+[data-sidebar="content"] {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}

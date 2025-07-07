@@ -1,0 +1,112 @@
+"use client"
+
+import { useState, useEffect } from "react"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { PageHeader } from "@/components/templates/page-header"
+import { StatsGrid } from "@/components/organisms/stats-grid"
+import { StudyFocusCard } from "@/components/organisms/study-focus-card"
+import { InterestsCard } from "@/components/organisms/interests-card"
+import { AchievementsList } from "@/components/organisms/achievements-list"
+import { WeeklyProgressCard } from "@/components/organisms/weekly-progress-card"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+
+interface UserProfile {
+  interests: string[]
+  studyGoals: {
+    subject: string
+    topic: string
+    focusArea: string
+  }
+  learningPace: string
+}
+
+export function DashboardPage() {
+  const [userProfile, setUserProfile] = useState<UserProfile | null>(null)
+  const [studyStreak] = useState(7)
+  const [todayProgress] = useState(60)
+  const [weeklyGoal] = useState(75)
+
+  useEffect(() => {
+    const profile = localStorage.getItem("user-profile")
+    if (profile) {
+      setUserProfile(JSON.parse(profile))
+    }
+  }, [])
+
+  if (!userProfile) {
+    return <div className="text-white">Loading...</div>
+  }
+
+  const achievements = [
+    { title: "Completed 7-day study streak", timeAgo: "Today", color: "#78af9f" },
+    { title: "Mastered basic wave properties", timeAgo: "2 days ago", color: "#e5e7eb" },
+    { title: "Connected guitar playing to sound waves", timeAgo: "1 week ago", color: "#d1d5db" },
+  ]
+
+  const weeklyData = [
+    { day: "Monday", progress: 100 },
+    { day: "Tuesday", progress: 80 },
+    { day: "Wednesday", progress: 60 },
+  ]
+
+  return (
+    <div className="space-y-6">
+      <PageHeader title="Dashboard" description="Track your learning progress and achievements" />
+
+      <Tabs defaultValue="overview" className="w-full">
+        <TabsList className="grid w-full grid-cols-3">
+          <TabsTrigger value="overview">Overview</TabsTrigger>
+          <TabsTrigger value="progress">Progress</TabsTrigger>
+          <TabsTrigger value="achievements">Achievements</TabsTrigger>
+        </TabsList>
+
+        <TabsContent value="overview" className="space-y-6">
+          <StatsGrid
+            studyStreak={studyStreak}
+            todayProgress={todayProgress}
+            weeklyGoal={weeklyGoal}
+            learningPace={userProfile.learningPace}
+          />
+
+          <div className="grid gap-6 md:grid-cols-2">
+            <StudyFocusCard
+              subject={userProfile.studyGoals.subject}
+              topic={userProfile.studyGoals.topic}
+              focusArea={userProfile.studyGoals.focusArea}
+            />
+            <InterestsCard interests={userProfile.interests} />
+          </div>
+        </TabsContent>
+
+        <TabsContent value="progress" className="space-y-6">
+          <div className="grid gap-6 md:grid-cols-2">
+            <WeeklyProgressCard weeklyData={weeklyData} />
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-white">Study Statistics</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                <div className="flex justify-between">
+                  <span className="text-sm text-gray-300">Total Study Time</span>
+                  <span className="font-medium text-white">24h 15m</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-sm text-gray-300">Questions Answered</span>
+                  <span className="font-medium text-white">156</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-sm text-gray-300">Accuracy Rate</span>
+                  <span className="font-medium text-white">78%</span>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </TabsContent>
+
+        <TabsContent value="achievements" className="space-y-6">
+          <AchievementsList achievements={achievements} />
+        </TabsContent>
+      </Tabs>
+    </div>
+  )
+}

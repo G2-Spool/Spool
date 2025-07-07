@@ -1,0 +1,135 @@
+Product Requirements Document: Personalized Learning Companion
+Version: 0.3
+
+Last Updated: July 8, 2025
+
+1. Introduction
+This document outlines the product requirements for a personalized learning companion, an academic tool designed to integrate a student's personal interests and life aspirations into their study curriculum. The application aims to make learning more engaging and effective by tailoring educational content to the individual, fostering a deeper understanding of subjects through the lens of their passions. By leveraging AI, the tool will create a dynamic and adaptive learning journey for each user.
+
+2. User Personas
+2.1. Primary Persona: "The Ambitious High School Student"
+Age: 15-18
+
+Goals: Excelling in academic subjects (e.g., Physics, Math, History) for college applications, exploring how current studies connect to future career paths, and finding more engaging ways to study.
+
+Frustrations: Standardized curriculum feels disconnected from their passions (e.g., video games, music, sports), making it difficult to stay motivated. They struggle to see the real-world application of theoretical knowledge.
+
+3. Key Features
+3.1. Onboarding
+3.1.1. Interest & Hobby Identification:
+
+The user will be prompted to enter a few of their hobbies and interests.
+
+The AI will ask one to two follow-up questions for each interest to gain a deeper understanding.
+
+Example: If a user enters "baking," the AI might ask, "What do you enjoy most about baking? Is it the creativity of decorating, the science of getting a recipe just right, or something else?"
+
+3.1.2. Study Goal Definition:
+
+The user will define their study areas with three levels of specificity:
+
+Subject: (e.g., Physics)
+
+Topic: (e.g., Waves)
+
+Focus Area: (e.g., Sound Waves)
+
+If the user is unsure at any level, the AI will provide suggestions to help them narrow down their choices.
+
+3.1.3. Competency Assessment:
+
+The system will generate a series of open-ended questions to assess the user's baseline knowledge and problem-solving approach.
+
+These questions will be tailored to the user's stated interests.
+
+Example for a user interested in "playing guitar" studying "Sound Waves" in "Physics": "Imagine you're designing a new electric guitar pickup. How would you apply the principles of electromagnetic induction and sound wave propagation to capture the string's vibration and convert it into an electrical signal? Describe the key components you would consider and how their properties would affect the guitar's tone."
+
+The AI will prompt the user to explain their thought process for each answer.
+
+3.1.4. Learning Pace Selection:
+
+The user will set their desired learning pace (e.g., "Turtle" for slower, "Rabbit" for faster).
+
+This setting will determine the number of questions in their daily studies, ranging from 2 (slowest) to 6 (fastest).
+
+3.2. User Dashboard
+The central hub for the user after onboarding, providing access to daily studies, learning maps, and settings.
+
+3.3. Daily Learning Modules
+3.3.1. Exploration Section: The user is presented with lessons and materials to learn the core concepts of their chosen topic.
+
+3.3.2. Study Section: The user answers a series of questions tailored to their personal interests to apply what they've learned.
+
+The AI will ask follow-up questions and inquire about their problem-solving process.
+
+3.3.3. AI-Assisted Correction & Hints:
+
+When a user makes a mistake, the AI will provide hints to guide them toward the correct answer.
+
+After a few incorrect attempts, the AI will provide the full solution with an explanation.
+
+A dedicated "Hint" button will be available for the user to request assistance at any time.
+
+3.3.4. Feedback Mechanism: Users can give a "thumbs up" or "thumbs down" on each study to help curate future content.
+
+3.3.5. Continuous Personalization: The AI will casually inquire further into the user's interests and life during study sessions to enhance future personalization.
+
+3.4. Learning Visualization
+The user can view a d3.js force-directed graph representing their learning map.
+
+Nodes will represent hobbies and academic topics.
+
+Nodes will be color-coded by type (e.g., blue for hobby, green for topic).
+
+The graph will visually represent the integration of interests and studies, with "merging" colors between connected nodes.
+
+Nodes will be clickable to display more detailed information.
+
+3.5. Settings
+A dedicated page for users to manage their account, preferences, and study areas.
+
+4. Technical Specifications
+4.1. Frontend
+Framework: React
+
+Architecture: Atomic Design Principles
+
+Components will be organized following atomic design methodology:
+
+Atoms: Basic building blocks (buttons, inputs, labels)
+
+Molecules: Simple combinations of atoms (form fields, navigation items)
+
+Organisms: Complex UI components (navigation bars, content sections)
+
+Templates: Page-level layouts without specific content
+
+Pages: Specific instances of templates with real content
+
+UI/UX:
+
+Mobile-compatible and responsive design.
+
+Simplistic and minimalist aesthetic.
+
+Color Palette: Dull/mute colors with a single main accent color. The primary palette will consist of variations of gray.
+
+Modes: Supports both light and dark mode.
+
+Data Visualization: d3.js for the force-directed learning map.
+
+4.2. Backend
+Cloud Provider: AWS
+
+Authentication: AWS Cognito
+
+User registration and authentication will be handled through AWS Cognito User Pools
+
+Social login options and multi-factor authentication capabilities
+
+Secure token-based authentication for API access
+
+Data Storage: User answers and knowledge maps will be stored as graphs. (Schema to be defined).
+
+4.3. Navigation
+Main navigation will be handled through tabs at the top of the application.
