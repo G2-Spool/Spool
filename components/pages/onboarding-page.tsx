@@ -9,6 +9,7 @@ import { InterestBadge } from "@/components/atoms/interest-badge"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { generateMockOnboardingData } from "@/lib/utils"
 
 interface OnboardingPageProps {
   onComplete: () => void
@@ -57,6 +58,14 @@ export function OnboardingPage({ onComplete }: OnboardingPageProps) {
       }
       onComplete()
     }
+  }
+
+  const handleSkip = () => {
+    const mockData = generateMockOnboardingData()
+    if (typeof window !== 'undefined') {
+      localStorage.setItem("user-profile", JSON.stringify(mockData))
+    }
+    onComplete()
   }
 
   const handleBack = () => {
@@ -253,6 +262,7 @@ export function OnboardingPage({ onComplete }: OnboardingPageProps) {
       canProceed={canProceed()}
       onNext={handleNext}
       onBack={handleBack}
+      onSkip={handleSkip}
     >
       {renderStepContent()}
     </OnboardingStep>

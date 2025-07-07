@@ -1,8 +1,6 @@
 "use client"
 
 import type React from "react"
-
-import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar"
 import { SidebarNavigation } from "@/components/organisms/sidebar-navigation"
 import { Separator } from "@/components/ui/separator"
 
@@ -31,17 +29,17 @@ export function MainLayout({ activeTab, onTabChange, children }: MainLayoutProps
   }
 
   return (
-    <SidebarProvider defaultOpen={true}>
+    <div className="flex min-h-screen bg-background">
       <SidebarNavigation activeTab={activeTab} onTabChange={onTabChange} />
-      <SidebarInset>
+      <main className="flex-1 flex flex-col">
         <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4 bg-background">
           <Separator orientation="vertical" className="mr-2 h-4" />
           <div className="flex items-center space-x-2">
             <h1 className="text-lg font-semibold text-foreground">{getPageTitle(activeTab)}</h1>
           </div>
         </header>
-        <main className="flex-1 space-y-4 p-6 bg-background">{children}</main>
-      </SidebarInset>
-    </SidebarProvider>
+        <div className="flex-1 space-y-4 p-6 bg-background">{children}</div>
+      </main>
+    </div>
   )
 }

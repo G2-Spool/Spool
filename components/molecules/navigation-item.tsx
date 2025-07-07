@@ -13,9 +13,9 @@ interface NavigationItemProps {
 export function NavigationItem({ title, icon: Icon, isActive, onClick }: NavigationItemProps) {
   return (
     <SidebarMenuItem>
-      <SidebarMenuButton onClick={onClick} isActive={isActive} tooltip={title} size="lg">
+      <SidebarMenuButton onClick={onClick} isActive={isActive}>
         <Icon className="h-6 w-6 flex-shrink-0" />
-        <span className="group-data-[collapsible=icon]:hidden text-base font-medium">{title}</span>
+        <span className="text-base font-medium">{title}</span>
       </SidebarMenuButton>
     </SidebarMenuItem>
   )

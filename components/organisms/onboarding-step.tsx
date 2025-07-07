@@ -16,6 +16,7 @@ interface OnboardingStepProps {
   canProceed: boolean
   onNext: () => void
   onBack: () => void
+  onSkip?: () => void
   children: React.ReactNode
 }
 
@@ -27,6 +28,7 @@ export function OnboardingStep({
   canProceed,
   onNext,
   onBack,
+  onSkip,
   children,
 }: OnboardingStepProps) {
   const isLastStep = currentStep === totalSteps - 1
@@ -51,11 +53,18 @@ export function OnboardingStep({
         </CardHeader>
         <CardContent className="space-y-6">
           {children}
-          <div className="flex justify-between">
-            <Button variant="outline" onClick={onBack} disabled={currentStep === 0}>
-              <ChevronLeft className="h-4 w-4 mr-2" />
-              Back
-            </Button>
+          <div className="flex justify-between items-center">
+            <div className="flex gap-2">
+              <Button variant="outline" onClick={onBack} disabled={currentStep === 0}>
+                <ChevronLeft className="h-4 w-4 mr-2" />
+                Back
+              </Button>
+              {onSkip && (
+                <Button variant="ghost" onClick={onSkip} className="text-muted-foreground">
+                  Skip & Use Demo Data
+                </Button>
+              )}
+            </div>
             <Button onClick={onNext} disabled={!canProceed}>
               {isLastStep ? "Complete Setup" : "Next"}
               <ChevronRight className="h-4 w-4 ml-2" />

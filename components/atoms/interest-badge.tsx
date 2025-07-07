@@ -17,7 +17,10 @@ export function InterestBadge({ interest, onRemove, variant = "secondary" }: Int
     >
       <span>{interest}</span>
       {onRemove && (
-        <button onClick={() => onRemove(interest)} className="ml-1 hover:opacity-70">
+        <button 
+          onClick={() => onRemove(interest)} 
+          className="ml-1 p-0.5 rounded hover:bg-black/10 dark:hover:bg-white/10 transition-colors"
+        >
           <X className="h-3 w-3" />
         </button>
       )}
