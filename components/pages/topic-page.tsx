@@ -2944,31 +2944,518 @@ By the end of this course, you'll have a strong foundation in writing principles
           id: "overview",
           title: "Overview",
           description: "Introduction to philosophical thinking and major traditions",
-          content: `Philosophy explores fundamental questions about existence, knowledge, values, reason, mind, and ethics. This course provides an introduction to major philosophical traditions and thinkers.
+          content: `Philosophy explores fundamental questions about existence, knowledge, values, reason, mind, and ethics. This comprehensive course provides an introduction to major philosophical traditions and thinkers from around the world.
 
-You'll examine classic philosophical problems and learn to think critically about complex issues. The course covers major areas including metaphysics, epistemology, ethics, and logic.
+You'll examine classic philosophical problems and learn to think critically about complex issues. The course covers major areas including metaphysics, epistemology, ethics, logic, and political philosophy.
 
 Through reading primary texts and engaging in philosophical dialogue, you'll develop analytical thinking skills and learn to construct and evaluate arguments.
 
-By the end of this course, you'll have a solid foundation in philosophical thinking and be able to engage thoughtfully with life's biggest questions.`
+By the end of this course, you'll have a solid foundation in philosophical thinking and be able to engage thoughtfully with life's biggest questions.
+
+This course covers 12 comprehensive chapters spanning ancient wisdom to contemporary thought, preparing you for advanced philosophical study and critical thinking in any field.`
         },
         {
-          id: "ancient-philosophy",
-          title: "Ancient Philosophy",
-          description: "Explore the foundations of Western philosophical thought",
+          id: "introduction-to-philosophy",
+          title: "Introduction to Philosophy",
+          description: "Explore the fundamental nature and methods of philosophical inquiry",
           concepts: [
             {
-              id: "socrates",
-              title: "Socrates and the Examined Life",
-              description: "Learn about Socratic questioning and ethics",
+              id: "what-is-philosophy",
+              title: "What Is Philosophy?",
+              description: "Understand the nature and scope of philosophical inquiry",
               completed: false,
               locked: false,
               progress: 0
             },
             {
-              id: "plato",
-              title: "Plato's Theory of Forms",
-              description: "Understand Plato's metaphysical theories",
+              id: "how-philosophers-arrive-truth",
+              title: "How Do Philosophers Arrive at Truth?",
+              description: "Learn about philosophical methods and approaches to truth",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "socrates-paradigmatic-philosopher",
+              title: "Socrates as a Paradigmatic Historical Philosopher",
+              description: "Study Socrates' method and influence on philosophy",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "overview-contemporary-philosophy",
+              title: "An Overview of Contemporary Philosophy",
+              description: "Survey modern philosophical movements and issues",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "critical-thinking-research-reading-writing",
+          title: "Critical Thinking, Research, Reading, and Writing",
+          description: "Develop essential skills for philosophical inquiry and argumentation",
+          concepts: [
+            {
+              id: "brain-inference-machine",
+              title: "The Brain Is an Inference Machine",
+              description: "Understand how the mind processes information and makes inferences",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "overcoming-cognitive-biases",
+              title: "Overcoming Cognitive Biases and Engaging in Critical Reflection",
+              description: "Learn to identify and overcome common thinking errors",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "developing-good-habits-mind",
+              title: "Developing Good Habits of Mind",
+              description: "Cultivate intellectual virtues and thinking skills",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "gathering-information-evaluating-sources",
+              title: "Gathering Information, Evaluating Sources, and Understanding Evidence",
+              description: "Learn research methods and source evaluation for philosophy",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "reading-philosophy",
+              title: "Reading Philosophy",
+              description: "Develop skills for reading and interpreting philosophical texts",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "writing-philosophy-papers",
+              title: "Writing Philosophy Papers",
+              description: "Learn to write clear, persuasive philosophical arguments",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "early-history-philosophy-world",
+          title: "The Early History of Philosophy around the World",
+          description: "Explore diverse philosophical traditions from various cultures",
+          concepts: [
+            {
+              id: "indigenous-philosophy",
+              title: "Indigenous Philosophy",
+              description: "Study philosophical traditions of indigenous peoples",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "classical-indian-philosophy",
+              title: "Classical Indian Philosophy",
+              description: "Explore Hindu, Buddhist, and Jain philosophical traditions",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "classical-chinese-philosophy",
+              title: "Classical Chinese Philosophy",
+              description: "Study Confucian, Daoist, and other Chinese philosophical schools",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "emergence-classical-philosophy",
+          title: "The Emergence of Classical Philosophy",
+          description: "Examine the development of Western philosophical traditions",
+          concepts: [
+            {
+              id: "historiography-history-philosophy",
+              title: "Historiography and the History of Philosophy",
+              description: "Understand how we study and interpret philosophical history",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "classical-philosophy",
+              title: "Classical Philosophy",
+              description: "Study ancient Greek and Roman philosophical traditions",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "jewish-christian-islamic-philosophy",
+              title: "Jewish, Christian, and Islamic Philosophy",
+              description: "Explore medieval religious philosophical traditions",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "logic-reasoning",
+          title: "Logic and Reasoning",
+          description: "Master the tools of logical analysis and argument construction",
+          concepts: [
+            {
+              id: "philosophical-methods-discovering-truth",
+              title: "Philosophical Methods for Discovering Truth",
+              description: "Learn systematic approaches to philosophical inquiry",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "logical-statements",
+              title: "Logical Statements",
+              description: "Understand the structure and types of logical statements",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "arguments",
+              title: "Arguments",
+              description: "Learn to construct and evaluate philosophical arguments",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "types-inferences",
+              title: "Types of Inferences",
+              description: "Study deductive, inductive, and abductive reasoning",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "informal-fallacies",
+              title: "Informal Fallacies",
+              description: "Identify and avoid common logical fallacies",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "metaphysics",
+          title: "Metaphysics",
+          description: "Explore fundamental questions about reality and existence",
+          concepts: [
+            {
+              id: "substance",
+              title: "Substance",
+              description: "Examine theories about the basic building blocks of reality",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "self-identity",
+              title: "Self and Identity",
+              description: "Study questions of personal identity and the nature of self",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "cosmology-existence-god",
+              title: "Cosmology and the Existence of God",
+              description: "Explore arguments for and against the existence of God",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "free-will",
+              title: "Free Will",
+              description: "Examine debates about determinism and human freedom",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "epistemology",
+          title: "Epistemology",
+          description: "Study the nature of knowledge, belief, and justification",
+          concepts: [
+            {
+              id: "what-epistemology-studies",
+              title: "What Epistemology Studies",
+              description: "Understand the scope and methods of epistemological inquiry",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "knowledge",
+              title: "Knowledge",
+              description: "Examine different theories of knowledge and its conditions",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "justification",
+              title: "Justification",
+              description: "Study what makes beliefs justified or warranted",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "skepticism",
+              title: "Skepticism",
+              description: "Explore skeptical challenges to knowledge claims",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "applied-epistemology",
+              title: "Applied Epistemology",
+              description: "Apply epistemological principles to practical questions",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "value-theory",
+          title: "Value Theory",
+          description: "Explore questions about values, ethics, and aesthetic judgment",
+          concepts: [
+            {
+              id: "fact-value-distinction",
+              title: "The Fact-Value Distinction",
+              description: "Examine the relationship between facts and values",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "basic-questions-values",
+              title: "Basic Questions about Values",
+              description: "Study fundamental questions in value theory",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "metaethics",
+              title: "Metaethics",
+              description: "Explore the nature and meaning of ethical claims",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "well-being",
+              title: "Well-Being",
+              description: "Study theories of human flourishing and the good life",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "aesthetics",
+              title: "Aesthetics",
+              description: "Examine philosophical questions about art and beauty",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "normative-moral-theory",
+          title: "Normative Moral Theory",
+          description: "Study systematic approaches to moral reasoning and judgment",
+          concepts: [
+            {
+              id: "requirements-normative-moral-theory",
+              title: "Requirements of a Normative Moral Theory",
+              description: "Understand what makes a moral theory adequate",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "consequentialism",
+              title: "Consequentialism",
+              description: "Study moral theories based on outcomes and consequences",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "deontology",
+              title: "Deontology",
+              description: "Examine duty-based approaches to moral reasoning",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "virtue-ethics",
+              title: "Virtue Ethics",
+              description: "Study character-based approaches to moral philosophy",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "daoism",
+              title: "Daoism",
+              description: "Explore Daoist approaches to ethics and the good life",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "feminist-theories-ethics",
+              title: "Feminist Theories of Ethics",
+              description: "Study feminist perspectives on moral reasoning",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "applied-ethics",
+          title: "Applied Ethics",
+          description: "Apply ethical theories to contemporary moral issues",
+          concepts: [
+            {
+              id: "challenge-bioethics",
+              title: "The Challenge of Bioethics",
+              description: "Examine ethical issues in medicine and biology",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "environmental-ethics",
+              title: "Environmental Ethics",
+              description: "Study moral obligations to the natural world",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "business-ethics-emerging-technology",
+              title: "Business Ethics and Emerging Technology",
+              description: "Explore ethical issues in business and technology",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "political-philosophy",
+          title: "Political Philosophy",
+          description: "Examine questions of government, justice, and political authority",
+          concepts: [
+            {
+              id: "historical-perspectives-government",
+              title: "Historical Perspectives on Government",
+              description: "Study the evolution of political thought and institutions",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "forms-government",
+              title: "Forms of Government",
+              description: "Examine different systems of political organization",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "political-legitimacy-duty",
+              title: "Political Legitimacy and Duty",
+              description: "Study the justification of political authority",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "political-ideologies",
+              title: "Political Ideologies",
+              description: "Explore major political theories and movements",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "contemporary-philosophies-social-theories",
+          title: "Contemporary Philosophies and Social Theories",
+          description: "Study modern developments in philosophical and social thought",
+          concepts: [
+            {
+              id: "enlightenment-social-theory",
+              title: "Enlightenment Social Theory",
+              description: "Examine Enlightenment approaches to society and politics",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "marxist-solution",
+              title: "The Marxist Solution",
+              description: "Study Marxist critiques of capitalism and society",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "continental-philosophy-challenge",
+              title: "Continental Philosophy's Challenge to Enlightenment Theories",
+              description: "Explore continental critiques of Enlightenment thought",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "frankfurt-school",
+              title: "The Frankfurt School",
+              description: "Study critical theory and the Frankfurt School tradition",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "postmodernism",
+              title: "Postmodernism",
+              description: "Examine postmodern critiques of traditional philosophy",
               completed: false,
               locked: true,
               progress: 0
