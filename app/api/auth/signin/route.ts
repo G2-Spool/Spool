@@ -1,64 +1,72 @@
 import { NextRequest, NextResponse } from "next/server"
-import { signIn } from "@/services/cognito-auth"
+import { API_ENDPOINTS } from "@/lib/api-config"
 
 export async function POST(request: NextRequest) {
   try {
-    const { email, password } = await request.json()
+    const body = await request.json()
+    
+    // Forward request to auth service
+    const response = await fetch(API_ENDPOINTS.AUTH.SIGNIN, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(body),
+    })
 
-    if (!email || !password) {
+    const data = await response.json()
+
+    if (!response.ok) {
       return NextResponse.json(
-        { error: "Email and password are required" },
-        { status: 400 }
+        { error: data.error || "Authentication failed" },
+        { status: response.status }
       )
     }
 
-    const result = await signIn(email, password)
+    // Handle successful authentication
+    if (data.success && data.tokens) {
+      // Set secure HTTP-only cookies for tokens
+      const nextResponse = NextResponse.json({ success: true })
+      
+      if (data.tokens.accessToken) {
+        nextResponse.cookies.set("accessToken", data.tokens.accessToken, {
+          httpOnly: true,
+          secure: process.env.NODE_ENV === "production",
+          sameSite: "strict",
+          maxAge: 60 * 60, // 1 hour
+        })
+      }
+      
+      if (data.tokens.idToken) {
+        nextResponse.cookies.set("idToken", data.tokens.idToken, {
+          httpOnly: true,
+          secure: process.env.NODE_ENV === "production",
+          sameSite: "strict",
+          maxAge: 60 * 60, // 1 hour
+        })
+      }
+      
+      if (data.tokens.refreshToken) {
+        nextResponse.cookies.set("refreshToken", data.tokens.refreshToken, {
+          httpOnly: true,
+          secure: process.env.NODE_ENV === "production",
+          sameSite: "strict",
+          maxAge: 30 * 24 * 60 * 60, // 30 days
+        })
+      }
 
-    if (result.error) {
-      return NextResponse.json(
-        { error: result.error },
-        { status: 401 }
-      )
+      return nextResponse
     }
 
-    if (result.challengeName) {
+    // Handle challenges (e.g., new password required)
+    if (data.challengeName) {
       return NextResponse.json({
-        challengeName: result.challengeName,
-        session: result.session,
+        challengeName: data.challengeName,
+        session: data.session,
       })
     }
 
-    // Set secure HTTP-only cookies for tokens
-    const response = NextResponse.json({ success: true })
-    
-    if (result.accessToken) {
-      response.cookies.set("accessToken", result.accessToken, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "strict",
-        maxAge: 60 * 60, // 1 hour
-      })
-    }
-    
-    if (result.idToken) {
-      response.cookies.set("idToken", result.idToken, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "strict",
-        maxAge: 60 * 60, // 1 hour
-      })
-    }
-    
-    if (result.refreshToken) {
-      response.cookies.set("refreshToken", result.refreshToken, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "strict",
-        maxAge: 30 * 24 * 60 * 60, // 30 days
-      })
-    }
-
-    return response
+    return NextResponse.json(data)
   } catch (error) {
     console.error("Sign in API error:", error)
     return NextResponse.json(

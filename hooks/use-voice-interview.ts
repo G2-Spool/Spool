@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useCallback, useRef, useEffect } from "react"
+import { API_SERVICES } from "@/lib/api-config"
 
 interface InterestDetected {
   name: string
@@ -26,7 +27,7 @@ export function useVoiceInterview(apiBaseUrl?: string) {
   const audioContextRef = useRef<AudioContext | null>(null)
   const processorRef = useRef<ScriptProcessorNode | null>(null)
 
-  const baseUrl = apiBaseUrl || process.env.NEXT_PUBLIC_INTERVIEW_API_URL || "http://localhost:8080"
+  const baseUrl = apiBaseUrl || API_SERVICES.INTERVIEW
 
   const startSession = useCallback(async (userId: string) => {
     try {
