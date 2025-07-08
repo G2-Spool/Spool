@@ -50,8 +50,9 @@ export function DashboardPage() {
   ]
 
   return (
-    <div className="space-y-6">
-      <PageHeader title="Dashboard" description="Track your learning progress and achievements" />
+    <div className="min-h-screen bg-background p-6">
+      <div className="max-w-7xl mx-auto space-y-12">
+        <PageHeader title="Dashboard" description="Track your learning progress and achievements" />
 
       <Tabs defaultValue="overview" className="w-full">
         <TabsList className="grid w-full grid-cols-3">
@@ -107,6 +108,7 @@ export function DashboardPage() {
           <AchievementsList achievements={achievements} />
         </TabsContent>
       </Tabs>
+      </div>
     </div>
   )
 }

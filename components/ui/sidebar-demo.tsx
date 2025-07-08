@@ -1,7 +1,8 @@
 "use client";
 import React, { useState } from "react";
 import { Sidebar, SidebarBody, SidebarLink } from "@/components/ui/sidebar";
-import { LayoutDashboard, UserCog, Settings, LogOut, GraduationCap } from "lucide-react";
+import { LayoutDashboard, UserCog, Settings, LogOut } from "lucide-react";
+import { SpoolIcon } from "@/components/atoms/spool-icon";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
@@ -61,7 +62,7 @@ export function SidebarDemo() {
                 href: "#",
                                   icon: (
                     <div className="h-5 w-5 flex-shrink-0 rounded-full bg-primary flex items-center justify-center">
-                      <GraduationCap className="h-3 w-3 text-primary-foreground" />
+                      <SpoolIcon className="h-3 w-3 text-primary-foreground" size={12} />
                     </div>
                   ),
               }}

@@ -1,6 +1,6 @@
 "use client"
 
-import { BookOpen, Home, BarChart3, Settings, User, GraduationCap } from "lucide-react"
+import { BookOpen, Home, BarChart3, Settings, User } from "lucide-react"
 import {
   Sidebar,
   SidebarContent,
@@ -12,6 +12,7 @@ import {
   SidebarMenuItem,
   SidebarRail,
 } from "@/components/ui/sidebar"
+import { SpoolIcon } from "@/components/atoms/spool-icon"
 
 interface AppSidebarProps {
   activeTab: string
@@ -54,7 +55,7 @@ export function AppSidebar({ activeTab, onTabChange }: AppSidebarProps) {
     <Sidebar>
       <SidebarHeader className="border-b border-border/40 p-4">
         <div className="flex items-center space-x-2">
-          <GraduationCap className="h-4 w-4 text-primary" />
+          <SpoolIcon className="h-4 w-4 text-primary" size={16} />
           <span className="text-lg font-semibold text-foreground">Spool</span>
         </div>
       </SidebarHeader>

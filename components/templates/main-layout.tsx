@@ -8,15 +8,18 @@ interface MainLayoutProps {
   activeTab: string
   onTabChange: (tab: string) => void
   children: React.ReactNode
+  title?: string
 }
 
-export function MainLayout({ activeTab, onTabChange, children }: MainLayoutProps) {
+export function MainLayout({ activeTab, onTabChange, children, title }: MainLayoutProps) {
   const getPageTitle = (tab: string) => {
     switch (tab) {
       case "learning":
         return "Courses"
       case "dashboard":
         return "Dashboard"
+      case "classes":
+        return "My Classes"
       case "visualization":
         return "Learning Progress"
       case "settings":
@@ -28,17 +31,13 @@ export function MainLayout({ activeTab, onTabChange, children }: MainLayoutProps
     }
   }
 
+  const displayTitle = title || getPageTitle(activeTab)
+
   return (
     <div className="flex min-h-screen bg-background">
       <SidebarNavigation activeTab={activeTab} onTabChange={onTabChange} />
       <main className="flex-1 flex flex-col">
-        <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4 bg-background">
-          <Separator orientation="vertical" className="mr-2 h-4" />
-          <div className="flex items-center space-x-2">
-            <h1 className="text-lg font-semibold text-foreground">{getPageTitle(activeTab)}</h1>
-          </div>
-        </header>
-        <div className="flex-1 space-y-4 p-6 bg-background">{children}</div>
+        <div className="flex-1 space-y-4 p-6 bg-background overflow-hidden">{children}</div>
       </main>
     </div>
   )

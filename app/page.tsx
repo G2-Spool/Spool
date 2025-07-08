@@ -1,22 +1,33 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { useSearchParams } from "next/navigation"
 import { useLocalStorageBoolean } from "@/hooks/use-local-storage"
 import { MainLayout } from "@/components/templates/main-layout"
 import { OnboardingPage } from "@/components/pages/onboarding-page"
 import { DashboardPage } from "@/components/pages/dashboard-page"
-import { DailyLearning } from "@/components/daily-learning"
-import { LearningVisualization } from "@/components/learning-visualization"
-import { Settings } from "@/components/settings"
-import { Profile } from "@/components/profile"
+import { DailyLearningPage } from "@/components/pages/daily-learning-page"
+import { ProgressPage } from "@/components/pages/progress-page"
+import { SettingsPage } from "@/components/pages/settings-page"
+import { ProfilePage } from "@/components/pages/profile-page"
+import { ClassesPage } from "@/components/pages/classes-page"
 
 export default function App() {
   const [isOnboarded, setIsOnboarded, isLoadingOnboarding] = useLocalStorageBoolean("onboarding-complete", false)
   const [activeTab, setActiveTab] = useState("learning")
+  const searchParams = useSearchParams()
 
   const handleOnboardingComplete = () => {
     setIsOnboarded(true)
   }
+
+  // Check for URL parameters to set the active tab
+  useEffect(() => {
+    const tabParam = searchParams.get("tab")
+    if (tabParam && ["learning", "dashboard", "classes", "visualization", "settings", "profile"].includes(tabParam)) {
+      setActiveTab(tabParam)
+    }
+  }, [searchParams])
 
   // Show loading state while checking localStorage
   if (isLoadingOnboarding) {
@@ -38,17 +49,19 @@ export default function App() {
   const renderPage = () => {
     switch (activeTab) {
       case "learning":
-        return <DailyLearning />
+        return <DailyLearningPage />
       case "dashboard":
         return <DashboardPage />
+      case "classes":
+        return <ClassesPage />
       case "visualization":
-        return <LearningVisualization />
+        return <ProgressPage />
       case "settings":
-        return <Settings />
+        return <SettingsPage />
       case "profile":
-        return <Profile />
+        return <ProfilePage />
       default:
-        return <DailyLearning />
+        return <DailyLearningPage />
     }
   }
 

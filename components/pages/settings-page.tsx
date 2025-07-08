@@ -23,7 +23,7 @@ interface UserProfile {
   learningPace: string
 }
 
-export function Settings() {
+export function SettingsPage() {
   const [userProfile, setUserProfile] = useState<UserProfile | null>(null)
   const [newInterest, setNewInterest] = useState("")
   const [notifications, setNotifications] = useState({
@@ -84,11 +84,12 @@ export function Settings() {
   }
 
   return (
-    <div className="space-y-6">
-      <div>
-        <h2 className="text-2xl font-bold tracking-tight">Settings</h2>
-        <p className="text-muted-foreground">Manage your account preferences and study configuration</p>
-      </div>
+    <div className="min-h-screen bg-background p-6">
+      <div className="max-w-7xl mx-auto space-y-12">
+        <div className="space-y-4">
+          <h1 className="text-4xl font-bold text-foreground">Settings</h1>
+          <p className="text-muted-foreground text-lg">Manage your account preferences and study configuration</p>
+        </div>
 
       <div className="grid gap-6">
         <Card>
@@ -381,6 +382,7 @@ export function Settings() {
             </div>
           </CardContent>
         </Card>
+      </div>
       </div>
     </div>
   )

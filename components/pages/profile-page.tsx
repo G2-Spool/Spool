@@ -21,7 +21,7 @@ interface UserProfile {
   learningPace: string
 }
 
-export function Profile() {
+export function ProfilePage() {
   const [userProfile, setUserProfile] = useState<UserProfile | null>(null)
   const [userName, setUserName] = useState("Student")
   const [userEmail, setUserEmail] = useState("")
@@ -51,11 +51,12 @@ export function Profile() {
   }
 
   return (
-    <div className="space-y-6">
-      <div>
-        <h2 className="text-2xl font-bold tracking-tight text-white">Profile</h2>
-        <p className="text-muted-foreground">Manage your personal information and learning preferences</p>
-      </div>
+    <div className="min-h-screen bg-background p-6">
+      <div className="max-w-7xl mx-auto space-y-12">
+        <div className="space-y-4">
+          <h1 className="text-4xl font-bold text-foreground">Profile</h1>
+          <p className="text-muted-foreground text-lg">Manage your personal information and learning preferences</p>
+        </div>
 
       <div className="grid gap-6">
         <Card>
@@ -192,6 +193,7 @@ export function Profile() {
             </div>
           </CardContent>
         </Card>
+      </div>
       </div>
     </div>
   )

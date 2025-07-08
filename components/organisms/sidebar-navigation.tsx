@@ -1,9 +1,10 @@
 "use client"
 
-import { BookOpen, Home, BarChart3, Settings, User, GraduationCap, LucideIcon } from "lucide-react"
+import { BookOpen, Home, BarChart3, Settings, User, LucideIcon } from "lucide-react"
 import { Sidebar, SidebarBody, SidebarLink } from "@/components/ui/sidebar"
 import { motion } from "framer-motion"
 import Link from "next/link"
+import { SpoolIcon } from "@/components/atoms/spool-icon"
 
 interface SidebarNavigationProps {
   activeTab: string
@@ -22,19 +23,19 @@ export function SidebarNavigation({ activeTab, onTabChange }: SidebarNavigationP
     { 
       label: "Dashboard", 
       value: "dashboard",
-      href: "#", 
+      href: "/?tab=dashboard", 
       icon: Home
     },
     { 
-      label: "Courses", 
-      value: "learning",
-      href: "#", 
+      label: "Classes", 
+      value: "classes",
+      href: "/?tab=classes", 
       icon: BookOpen
     },
     { 
       label: "Progress", 
       value: "visualization",
-      href: "#", 
+      href: "/?tab=visualization", 
       icon: BarChart3
     },
   ]
@@ -43,30 +44,36 @@ export function SidebarNavigation({ activeTab, onTabChange }: SidebarNavigationP
     { 
       label: "Settings", 
       value: "settings",
-      href: "#", 
+      href: "/?tab=settings", 
       icon: Settings
     },
     { 
       label: "Profile", 
       value: "profile",
-      href: "#", 
+      href: "/?tab=profile", 
       icon: User
     },
   ]
 
-  const handleLinkClick = (value: string) => {
-    onTabChange(value)
+  const handleLinkClick = (value: string, e: React.MouseEvent) => {
+    // For same-page navigation, prevent default link behavior and use onTabChange
+    if (window.location.pathname === '/') {
+      e.preventDefault()
+      onTabChange(value)
+    }
+    // For navigation from other pages (like topic pages), let the Link handle it normally
   }
 
   return (
     <Sidebar>
-      <SidebarBody className="justify-between gap-2">
+      <SidebarBody className="justify-between gap-2 h-screen">
         <div className="flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
-          <div 
+          <Link
+            href="/?tab=dashboard"
             className="flex items-center space-x-3 p-4 border-b border-sidebar-border cursor-pointer hover:bg-sidebar-accent transition-colors"
-            onClick={() => handleLinkClick("dashboard")}
+            onClick={(e) => handleLinkClick("dashboard", e)}
           >
-            <GraduationCap className="h-6 w-6 text-primary flex-shrink-0" />
+            <SpoolIcon className="h-6 w-6 text-primary flex-shrink-0" size={24} />
             <motion.span 
               className="text-xl font-bold text-sidebar-foreground truncate"
               initial={{ opacity: 0 }}
@@ -74,7 +81,7 @@ export function SidebarNavigation({ activeTab, onTabChange }: SidebarNavigationP
             >
               Spool
             </motion.span>
-          </div>
+          </Link>
           
           <div className="mt-8 flex flex-col gap-2">
             {menuItems.map((item, idx) => {
@@ -86,7 +93,7 @@ export function SidebarNavigation({ activeTab, onTabChange }: SidebarNavigationP
                     ...item,
                     icon: <IconComponent className={`h-5 w-5 flex-shrink-0 ${activeTab === item.value ? 'text-accent-foreground' : 'text-sidebar-foreground'}`} />
                   }}
-                  onClick={() => handleLinkClick(item.value)}
+                  onClick={(e) => handleLinkClick(item.value, e)}
                   className={activeTab === item.value ? "bg-accent text-accent-foreground font-medium" : ""}
                 />
               )
@@ -104,7 +111,7 @@ export function SidebarNavigation({ activeTab, onTabChange }: SidebarNavigationP
                   ...item,
                   icon: <IconComponent className={`h-5 w-5 flex-shrink-0 ${activeTab === item.value ? 'text-accent-foreground' : 'text-sidebar-foreground'}`} />
                 }}
-                onClick={() => handleLinkClick(item.value)}
+                onClick={(e) => handleLinkClick(item.value, e)}
                 className={activeTab === item.value ? "bg-accent text-accent-foreground font-medium" : ""}
               />
             )

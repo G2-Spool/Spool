@@ -27,7 +27,7 @@ interface Link {
   strength: number
 }
 
-export function LearningVisualization() {
+export function ProgressPage() {
   const svgRef = useRef<SVGSVGElement>(null)
   const [selectedNode, setSelectedNode] = useState<Node | null>(null)
   const [zoomLevel, setZoomLevel] = useState(1)
@@ -238,11 +238,12 @@ export function LearningVisualization() {
   }
 
   return (
-    <div className="space-y-6">
-      <div>
-        <h2 className="text-2xl font-bold tracking-tight text-white">Learning Map</h2>
-        <p className="text-gray-300">Visualize how your interests connect to your studies</p>
-      </div>
+    <div className="min-h-screen bg-background p-6">
+      <div className="max-w-7xl mx-auto space-y-12">
+        <div className="space-y-4">
+          <h1 className="text-4xl font-bold text-foreground">Learning Map</h1>
+          <p className="text-muted-foreground text-lg">Visualize how your interests connect to your studies</p>
+        </div>
 
       <div className="grid gap-6 lg:grid-cols-3">
         <div className="lg:col-span-2">
@@ -348,6 +349,7 @@ export function LearningVisualization() {
             </CardContent>
           </Card>
         </div>
+      </div>
       </div>
     </div>
   )

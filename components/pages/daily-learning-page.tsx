@@ -9,7 +9,7 @@ import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { BookOpen, HelpCircle, ThumbsUp, ThumbsDown, Lightbulb, CheckCircle } from "lucide-react"
 
-export function DailyLearning() {
+export function DailyLearningPage() {
   const [currentSection, setCurrentSection] = useState<"exploration" | "study">("exploration")
   const [currentQuestion, setCurrentQuestion] = useState(0)
   const [userAnswer, setUserAnswer] = useState("")
@@ -68,11 +68,12 @@ export function DailyLearning() {
   }
 
   return (
-    <div className="space-y-6">
-      <div>
-        <h2 className="text-2xl font-bold tracking-tight text-white">Today's Learning Session</h2>
-        <p className="text-gray-300">Exploring Sound Waves through your passion for guitar playing</p>
-      </div>
+    <div className="min-h-screen bg-background p-6">
+      <div className="max-w-7xl mx-auto space-y-12">
+        <div className="space-y-4">
+          <h1 className="text-4xl font-bold text-foreground">Today's Learning Session</h1>
+          <p className="text-muted-foreground text-lg">Exploring Sound Waves through your passion for guitar playing</p>
+        </div>
 
       <Tabs value={currentSection} onValueChange={(value) => setCurrentSection(value as "exploration" | "study")}>
         <TabsList className="grid w-full grid-cols-2">
@@ -234,6 +235,7 @@ export function DailyLearning() {
           </Card>
         </TabsContent>
       </Tabs>
+      </div>
     </div>
   )
 }
