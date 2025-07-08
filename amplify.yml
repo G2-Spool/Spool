@@ -3,11 +3,13 @@ frontend:
   phases:
     preBuild:
       commands:
-        - npm install -g pnpm
-        - pnpm install
+        - echo "Node version:" && node --version
+        - echo "NPM version:" && npm --version
+        - npm ci
     build:
       commands:
-        - pnpm run build
+        - echo "Starting build process..."
+        - npm run build
   artifacts:
     baseDirectory: .next
     files:
@@ -15,4 +17,8 @@ frontend:
   cache:
     paths:
       - node_modules/**/*
-      - .next/cache/**/* 
+      - .next/cache/**/*
+      - ~/.npm/**/*
+  environment:
+    variables:
+      NODE_OPTIONS: '--max-old-space-size=8192' 
