@@ -1,10 +1,9 @@
 "use client"
 
-import { BookOpen, Home, BarChart3, Settings, User, LucideIcon } from "lucide-react"
-import { SidebarBody, SidebarLink } from "@/components/ui/sidebar"
+import { BarChart3, BookOpen, Home, Settings, User, LucideIcon } from "lucide-react"
+import { SidebarLink, SidebarBody } from "../ui/sidebar"
 import { motion } from "framer-motion"
 import Link from "next/link"
-import { SpoolIcon } from "@/components/atoms/spool-icon"
 
 interface SidebarNavigationProps {
   activeTab: string
@@ -72,7 +71,7 @@ export function SidebarNavigation({ activeTab, onTabChange }: SidebarNavigationP
             className="flex items-center space-x-3 p-4 border-b border-sidebar-border cursor-pointer hover:bg-sidebar-accent transition-colors"
             onClick={(e) => handleLinkClick("dashboard", e)}
           >
-            <SpoolIcon className="h-6 w-6 text-primary flex-shrink-0" size={24} />
+            <img src="/spool-logo.png" alt="Spool" className="h-6 w-6 flex-shrink-0" />
             <motion.span 
               className="text-xl font-bold text-sidebar-foreground truncate"
               initial={{ opacity: 0 }}

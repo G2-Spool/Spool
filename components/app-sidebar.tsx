@@ -12,7 +12,6 @@ import {
   SidebarMenuItem,
   SidebarRail,
 } from "@/components/ui/sidebar"
-import { SpoolIcon } from "@/components/atoms/spool-icon"
 
 interface AppSidebarProps {
   activeTab: string
@@ -55,7 +54,7 @@ export function AppSidebar({ activeTab, onTabChange }: AppSidebarProps) {
     <Sidebar>
       <SidebarHeader className="border-b border-border/40 p-4">
         <div className="flex items-center space-x-2">
-          <SpoolIcon className="h-4 w-4 text-primary" size={16} />
+          <img src="/spool-logo.png" alt="Spool" className="h-4 w-4" />
           <span className="text-lg font-semibold text-foreground">Spool</span>
         </div>
       </SidebarHeader>

@@ -54,6 +54,8 @@ export function ProfilePage() {
     localStorage.removeItem("user-signed-in")
     localStorage.removeItem("onboarding-complete")
     localStorage.removeItem("user-profile")
+    localStorage.removeItem("splash-completed")
+    localStorage.setItem("show-splash-screen", "true")
     window.location.reload()
   }
 
