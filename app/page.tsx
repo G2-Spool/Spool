@@ -11,7 +11,7 @@ import { SignInPage } from "@/components/pages/sign-in-page"
 import { Dashboard } from "@/components/dashboard"
 
 function HomeContent() {
-  const { user, isLoading } = useAuth()
+  const { user, isLoading, refreshAuth } = useAuth()
   const [isOnboarded, setIsOnboarded, isLoadingOnboarding] = useLocalStorageBoolean("onboarding-complete", false)
   const [hasSplashCompleted, setHasSplashCompleted, isLoadingSplash] = useLocalStorageBoolean("splash-completed", false)
   const [hasVisitedLanding, setHasVisitedLanding, isLoadingLanding] = useLocalStorageBoolean("visited-landing", false)
@@ -37,25 +37,6 @@ function HomeContent() {
       setForceShowLanding(false)
     }
   }, [user, forceShowLanding])
-
-  // Development bypass: Auto-complete onboarding for better UX
-  // Only bypass if user hasn't explicitly navigated back to landing
-  useEffect(() => {
-    if (!isLoadingOnboarding && !isLoadingSplash && !isLoadingLanding && !forceShowLanding) {
-      if (!hasVisitedLanding) {
-        console.log("🔧 Development mode: Auto-completing landing page")
-        setHasVisitedLanding(true)
-      }
-      if (!hasSplashCompleted) {
-        console.log("🔧 Development mode: Auto-completing splash screen")
-        setHasSplashCompleted(true)
-      }
-      if (!isOnboarded) {
-        console.log("🔧 Development mode: Auto-completing onboarding")
-        setIsOnboarded(true)
-      }
-    }
-  }, [isLoadingOnboarding, isLoadingSplash, isLoadingLanding, hasVisitedLanding, hasSplashCompleted, isOnboarded, forceShowLanding, setHasVisitedLanding, setHasSplashCompleted, setIsOnboarded])
 
   const handleGetStarted = () => {
     setHasVisitedLanding(true)
@@ -108,7 +89,7 @@ function HomeContent() {
     )
   }
 
-  // Show landing page if user hasn't visited yet (bypassed in development) or if forced
+  // Show landing page if user hasn't visited yet or if forced
   if (!hasVisitedLanding || forceShowLanding) {
     return (
       <div className="min-h-screen bg-background">
@@ -117,7 +98,7 @@ function HomeContent() {
     )
   }
 
-  // Show splash screen if requested (from sign out) or after sign in (bypassed in development)
+  // Show splash screen if requested (from sign out) or after sign in
   if (showSplashScreen || (user && !hasSplashCompleted)) {
     return (
       <div className="min-h-screen bg-background">
@@ -140,11 +121,11 @@ function HomeContent() {
     return (
       <div className="min-h-screen bg-background">
         <SignInPage 
-          onSignIn={() => {
+          onSignIn={async () => {
             // Clear force landing flag and let normal flow handle routing
             setForceShowLanding(false)
-            // Reload to trigger auth context update
-            window.location.reload()
+            // Refresh auth context to get the new user
+            await refreshAuth()
           }} 
           onBack={handleBackToLanding}
         />

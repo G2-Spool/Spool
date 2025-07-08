@@ -18,8 +18,10 @@ import {
   Play,
   Star,
   Heart,
-  Lightbulb
+  Lightbulb,
+  Code
 } from "lucide-react"
+import { signIn } from 'aws-amplify/auth'
 
 interface LandingPageProps {
   onGetStarted: () => void
@@ -27,6 +29,7 @@ interface LandingPageProps {
 
 export function LandingPage({ onGetStarted }: LandingPageProps) {
   const [isVisible, setIsVisible] = useState(false)
+  const [isDemoLoading, setIsDemoLoading] = useState(false)
 
   useEffect(() => {
     setIsVisible(true)
@@ -48,6 +51,35 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
+  const handleDemoLogin = async () => {
+    setIsDemoLoading(true)
+    try {
+      // Attempt to sign in with demo credentials
+      const { isSignedIn } = await signIn({
+        username: 'demo@spool.ai',
+        password: 'DemoUser123!'
+      })
+      
+      if (isSignedIn) {
+        console.log("Demo login successful")
+        // Complete all the onboarding flags for a smooth demo experience
+        localStorage.setItem("visited-landing", "true")
+        localStorage.setItem("splash-completed", "true")
+        localStorage.setItem("onboarding-complete", "true")
+        // Navigate to dashboard
+        onGetStarted()
+      }
+    } catch (error) {
+      console.error("Demo login failed:", error)
+      // If demo account doesn't exist or login fails, just proceed normally
+      // This allows the button to work even without a configured demo account
+      console.log("Proceeding with normal flow (demo account not configured)")
+      onGetStarted()
+    } finally {
+      setIsDemoLoading(false)
+    }
   }
 
   return (
@@ -74,6 +106,15 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
               className="text-foreground hover:text-primary transition-colors"
             >
               Features
+            </Button>
+            <Button 
+              variant="outline"
+              onClick={handleDemoLogin}
+              disabled={isDemoLoading}
+              className="hover:shadow-md transition-all duration-300 gap-2"
+            >
+              <Code className="w-4 h-4" />
+              {isDemoLoading ? "Loading Demo..." : "Development Mode"}
             </Button>
             <Button 
               onClick={onGetStarted}

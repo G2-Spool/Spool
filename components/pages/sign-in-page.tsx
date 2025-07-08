@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -8,6 +8,8 @@ import { Label } from "@/components/ui/label"
 import { Separator } from "@/components/ui/separator"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { EyeIcon, EyeOffIcon, ChevronLeft, AlertCircle } from "lucide-react"
+import { signIn, signUp, resetPassword, confirmResetPassword, type SignInInput, type SignUpInput } from 'aws-amplify/auth'
+import { Amplify } from 'aws-amplify'
 
 interface SignInPageProps {
   onSignIn: () => void
@@ -22,6 +24,34 @@ export function SignInPage({ onSignIn, onBack }: SignInPageProps) {
   const [error, setError] = useState("")
   const [isSignUp, setIsSignUp] = useState(false)
   const [successMessage, setSuccessMessage] = useState("")
+  const [isResetPassword, setIsResetPassword] = useState(false)
+  const [resetCode, setResetCode] = useState("")
+  const [newPassword, setNewPassword] = useState("")
+  const [isAmplifyConfigured, setIsAmplifyConfigured] = useState(false)
+
+  // Check if Amplify is configured
+  useEffect(() => {
+    // Import the config to trigger initialization
+    import('@/lib/amplify-config').then(() => {
+      // Give it a moment to configure
+      setTimeout(() => {
+        try {
+          // Check if Amplify has been configured by checking if we can access the config
+          const config = Amplify.getConfig()
+          if (config && config.Auth) {
+            setIsAmplifyConfigured(true)
+            console.log('✅ Amplify is configured and ready')
+          } else {
+            console.error('❌ Amplify configuration not found')
+            setError('Authentication service is not configured. Please check your environment variables.')
+          }
+        } catch (err) {
+          console.error('❌ Failed to check Amplify configuration:', err)
+          setError('Authentication service is not configured. Please check your environment variables.')
+        }
+      }, 100)
+    })
+  }, [])
 
   const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -29,11 +59,14 @@ export function SignInPage({ onSignIn, onBack }: SignInPageProps) {
     setError("")
     setSuccessMessage("")
     
+    if (!isAmplifyConfigured) {
+      setError("Authentication service is not configured. Please check your environment setup.")
+      setIsLoading(false)
+      return
+    }
+    
     try {
-      // Mock authentication - simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000))
-      
-      // Mock validation
+      // Validate inputs
       if (!email || !password) {
         throw new Error("Email and password are required")
       }
@@ -42,27 +75,33 @@ export function SignInPage({ onSignIn, onBack }: SignInPageProps) {
         throw new Error("Password must be at least 6 characters")
       }
       
-      // Set mock authentication token for auth context
-      const mockUser = {
-        sub: "mock-user-123",
-        email: email,
-        email_verified: true,
-        given_name: "Mock",
-        family_name: "User"
+      // Sign in with Cognito
+      const signInInput: SignInInput = {
+        username: email,
+        password: password,
       }
       
-      // Store mock user data in localStorage for auth context
-      localStorage.setItem("mock-auth-user", JSON.stringify(mockUser))
+      const { isSignedIn, nextStep } = await signIn(signInInput)
       
-      // Clear any landing page flags that might interfere
-      localStorage.removeItem("return-to-landing")
-      localStorage.setItem("visited-landing", "true")
-      
-      // Mock successful sign-in
-      console.log("Mock sign-in successful for:", email)
-      onSignIn()
+      if (isSignedIn) {
+        console.log("Sign-in successful")
+        // Trigger auth context refresh and then call onSignIn
+        setTimeout(() => {
+          onSignIn()
+        }, 100)
+      } else {
+        // Handle additional steps if needed (MFA, etc.)
+        setError(`Additional step required: ${nextStep.signInStep}`)
+      }
     } catch (err: any) {
-      setError(err.message || "Authentication failed. Please try again.")
+      console.error("Sign-in error:", err)
+      if (err.name === 'NotAuthorizedException') {
+        setError("Incorrect email or password")
+      } else if (err.name === 'UserNotFoundException') {
+        setError("No account found with this email")
+      } else {
+        setError(err.message || "Authentication failed. Please try again.")
+      }
     } finally {
       setIsLoading(false)
     }
@@ -74,11 +113,14 @@ export function SignInPage({ onSignIn, onBack }: SignInPageProps) {
     setError("")
     setSuccessMessage("")
     
+    if (!isAmplifyConfigured) {
+      setError("Authentication service is not configured. Please check your environment setup.")
+      setIsLoading(false)
+      return
+    }
+    
     try {
-      // Mock sign-up - simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1500))
-      
-      // Mock validation
+      // Validate inputs
       if (!email || !password) {
         throw new Error("Email and password are required")
       }
@@ -91,34 +133,103 @@ export function SignInPage({ onSignIn, onBack }: SignInPageProps) {
         throw new Error("Please enter a valid email address")
       }
       
-      // Set mock authentication token for auth context
-      const mockUser = {
-        sub: "mock-user-" + Date.now(),
-        email: email,
-        email_verified: true,
-        given_name: "Mock",
-        family_name: "User"
+      // Sign up with Cognito
+      const signUpInput: SignUpInput = {
+        username: email,
+        password: password,
+        options: {
+          userAttributes: {
+            email: email,
+          },
+        },
       }
       
-      // Store mock user data in localStorage for auth context
-      localStorage.setItem("mock-auth-user", JSON.stringify(mockUser))
+      const { isSignUpComplete, userId } = await signUp(signUpInput)
       
-      // Clear any landing page flags that might interfere
-      localStorage.removeItem("return-to-landing")
-      localStorage.setItem("visited-landing", "true")
+      console.log("Sign-up successful, user ID:", userId)
+      setSuccessMessage("Account created successfully! Signing you in...")
       
-      // Mock successful sign-up
-      console.log("Mock sign-up successful for:", email)
-      setSuccessMessage("Registration successful! Please check your email to verify your account.")
-      setEmail("")
-      setPassword("")
+      // Auto sign-in after successful sign-up
+      setTimeout(async () => {
+        try {
+          const signInInput: SignInInput = {
+            username: email,
+            password: password,
+          }
+          
+          const { isSignedIn } = await signIn(signInInput)
+          
+          if (isSignedIn) {
+            console.log("Auto sign-in successful")
+            // Give auth context time to update
+            setTimeout(() => {
+              onSignIn()
+            }, 100)
+          }
+        } catch (signInErr: any) {
+          console.error("Auto sign-in error:", signInErr)
+          setError("Account created but auto sign-in failed. Please sign in manually.")
+          setIsSignUp(false) // Switch to sign-in mode
+        }
+      }, 500)
       
-      // Auto sign-in after successful sign-up (for better UX in mock mode)
-      setTimeout(() => {
-        onSignIn()
-      }, 2000)
     } catch (err: any) {
-      setError(err.message || "Registration failed. Please try again.")
+      console.error("Sign-up error:", err)
+      if (err.name === 'UsernameExistsException') {
+        setError("An account with this email already exists")
+      } else {
+        setError(err.message || "Registration failed. Please try again.")
+      }
+      setIsLoading(false)
+    }
+  }
+
+  const handleForgotPassword = async () => {
+    if (!email) {
+      setError("Please enter your email address")
+      return
+    }
+    
+    setIsLoading(true)
+    setError("")
+    
+    try {
+      const output = await resetPassword({ username: email })
+      
+      if (output.nextStep.resetPasswordStep === 'CONFIRM_RESET_PASSWORD_WITH_CODE') {
+        setIsResetPassword(true)
+        setSuccessMessage("Password reset code sent! Please check your email.")
+      }
+    } catch (err: any) {
+      setError(err.message || "Failed to send reset code. Please try again.")
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  const handleResetPassword = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setIsLoading(true)
+    setError("")
+    
+    try {
+      await confirmResetPassword({
+        username: email,
+        confirmationCode: resetCode,
+        newPassword: newPassword,
+      })
+      
+      setSuccessMessage("Password reset successfully! You can now sign in with your new password.")
+      setIsResetPassword(false)
+      setResetCode("")
+      setNewPassword("")
+      setPassword("")
+    } catch (err: any) {
+      if (err.name === 'CodeMismatchException') {
+        setError("Invalid reset code. Please try again.")
+      } else {
+        setError(err.message || "Password reset failed. Please try again.")
+      }
     } finally {
       setIsLoading(false)
     }
@@ -130,6 +241,83 @@ export function SignInPage({ onSignIn, onBack }: SignInPageProps) {
     setSuccessMessage("")
     setEmail("")
     setPassword("")
+    setIsResetPassword(false)
+  }
+
+  // Render password reset form
+  if (isResetPassword) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center p-4">
+        <Card className="w-full max-w-md">
+          <CardHeader className="text-center">
+            <CardTitle className="text-2xl font-bold">Reset Password</CardTitle>
+            <CardDescription>
+              Enter the code sent to {email} and your new password
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            {error && (
+              <Alert variant="destructive" className="mb-4">
+                <AlertCircle className="h-4 w-4" />
+                <AlertDescription>{error}</AlertDescription>
+              </Alert>
+            )}
+
+            {successMessage && (
+              <Alert className="mb-4 border-green-200 bg-green-50">
+                <AlertCircle className="h-4 w-4 text-green-600" />
+                <AlertDescription className="text-green-800">{successMessage}</AlertDescription>
+              </Alert>
+            )}
+
+            <form onSubmit={handleResetPassword} className="space-y-4">
+              <div className="space-y-2">
+                <Label htmlFor="reset-code">Reset Code</Label>
+                <Input
+                  id="reset-code"
+                  type="text"
+                  placeholder="Enter your reset code"
+                  value={resetCode}
+                  onChange={(e) => setResetCode(e.target.value)}
+                  required
+                  disabled={isLoading}
+                />
+              </div>
+              
+              <div className="space-y-2">
+                <Label htmlFor="new-password">New Password</Label>
+                <Input
+                  id="new-password"
+                  type="password"
+                  placeholder="Enter your new password"
+                  value={newPassword}
+                  onChange={(e) => setNewPassword(e.target.value)}
+                  required
+                  disabled={isLoading}
+                />
+              </div>
+
+              <Button 
+                type="submit" 
+                className="w-full" 
+                disabled={isLoading || !resetCode || !newPassword}
+              >
+                {isLoading ? "Resetting..." : "Reset Password"}
+              </Button>
+            </form>
+
+            <div className="mt-4 text-center text-sm text-muted-foreground">
+              <button 
+                className="text-primary hover:underline"
+                onClick={() => setIsResetPassword(false)}
+              >
+                Back to Sign In
+              </button>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    )
   }
 
   return (
@@ -155,8 +343,8 @@ export function SignInPage({ onSignIn, onBack }: SignInPageProps) {
           </CardTitle>
           <CardDescription>
             {isSignUp 
-              ? "Create a new account to get started (Mock Mode)" 
-              : "Enter your email and password to access your account (Mock Mode)"
+              ? "Create a new account to get started" 
+              : "Enter your email and password to access your account"
             }
           </CardDescription>
         </CardHeader>
@@ -165,7 +353,19 @@ export function SignInPage({ onSignIn, onBack }: SignInPageProps) {
           {error && (
             <Alert variant="destructive" className="mb-4">
               <AlertCircle className="h-4 w-4" />
-              <AlertDescription>{error}</AlertDescription>
+              <AlertDescription>
+                {error}
+                {error.includes('environment') && (
+                  <div className="mt-2 text-xs">
+                    <p>Please ensure:</p>
+                    <ul className="list-disc list-inside mt-1">
+                      <li>You have a .env.local file with Cognito configuration</li>
+                      <li>You have restarted the dev server after creating .env.local</li>
+                      <li>The file contains NEXT_PUBLIC_COGNITO_USER_POOL_ID and NEXT_PUBLIC_COGNITO_APP_CLIENT_ID</li>
+                    </ul>
+                  </div>
+                )}
+              </AlertDescription>
             </Alert>
           )}
 
@@ -176,14 +376,6 @@ export function SignInPage({ onSignIn, onBack }: SignInPageProps) {
               <AlertDescription className="text-green-800">{successMessage}</AlertDescription>
             </Alert>
           )}
-
-          {/* Mock Mode Notice */}
-          <Alert className="mb-4 border-blue-200 bg-blue-50">
-            <AlertCircle className="h-4 w-4 text-blue-600" />
-            <AlertDescription className="text-blue-800">
-              <strong>Mock Mode:</strong> Any email/password combination will work and navigate to the dashboard (password must be 6+ chars for sign-in, 8+ for sign-up)
-            </AlertDescription>
-          </Alert>
 
           <form onSubmit={isSignUp ? handleSignUp : handleSignIn} className="space-y-4">
             <div className="space-y-2">
@@ -242,7 +434,8 @@ export function SignInPage({ onSignIn, onBack }: SignInPageProps) {
               <div className="text-center text-sm text-muted-foreground">
                 <button 
                   className="text-primary hover:underline"
-                  onClick={() => setError("Password reset functionality coming soon!")}
+                  onClick={handleForgotPassword}
+                  disabled={isLoading}
                 >
                   Forgot your password?
                 </button>
