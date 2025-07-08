@@ -655,30 +655,54 @@ The course emphasizes practical applications of statistical concepts in various 
 By the end of this course, you'll be able to analyze data critically and make informed decisions based on statistical evidence.`
         },
         {
-          id: "descriptive-statistics",
-          title: "Descriptive Statistics",
-          description: "Describing and summarizing data",
+          id: "sampling-data",
+          title: "Sampling and Data",
+          description: "Introduction to data collection and sampling methods",
           concepts: [
             {
-              id: "measures-center",
-              title: "Measures of Central Tendency",
-              description: "Mean, median, and mode",
+              id: "definitions-statistical-probability",
+              title: "Definitions of Statistics, Probability, and Key Terms",
+              description: "Basic statistical terminology and concepts",
               completed: true,
               locked: false,
               progress: 100
             },
             {
-              id: "measures-spread",
-              title: "Measures of Spread",
-              description: "Range, variance, and standard deviation",
-              completed: false,
+              id: "data-sampling-variation",
+              title: "Data, Sampling, and Variation in Data and Sampling",
+              description: "Understanding different types of data and sampling methods",
+              completed: true,
               locked: false,
-              progress: 60
+              progress: 100
             },
             {
-              id: "data-visualization",
-              title: "Data Visualization",
-              description: "Histograms, box plots, and scatter plots",
+              id: "frequency-frequency-tables",
+              title: "Frequency, Frequency Tables, and Levels of Measurement",
+              description: "Organizing data and understanding measurement scales",
+              completed: false,
+              locked: false,
+              progress: 75
+            },
+            {
+              id: "experimental-design-ethics",
+              title: "Experimental Design and Ethics",
+              description: "Principles of experimental design and research ethics",
+              completed: false,
+              locked: false,
+              progress: 50
+            },
+            {
+              id: "data-collection-experiment",
+              title: "Data Collection Experiment",
+              description: "Hands-on data collection and experimental design",
+              completed: false,
+              locked: false,
+              progress: 25
+            },
+            {
+              id: "sampling-experiment",
+              title: "Sampling Experiment",
+              description: "Understanding sampling distributions through experimentation",
               completed: false,
               locked: true,
               progress: 0
@@ -686,22 +710,675 @@ By the end of this course, you'll be able to analyze data critically and make in
           ]
         },
         {
-          id: "probability",
-          title: "Probability Theory",
-          description: "Fundamental concepts of probability",
+          id: "descriptive-statistics",
+          title: "Descriptive Statistics",
+          description: "Summarizing and describing data",
           concepts: [
             {
-              id: "basic-probability",
-              title: "Basic Probability",
-              description: "Sample spaces, events, and probability rules",
+              id: "stem-and-leaf-graphs",
+              title: "Stem-and-Leaf Graphs (Stemplots), Line Graphs, and Bar Graphs",
+              description: "Basic graphical displays of data",
+              completed: false,
+              locked: false,
+              progress: 60
+            },
+            {
+              id: "histograms-frequency-polygons",
+              title: "Histograms, Frequency Polygons, and Time Series Graphs",
+              description: "Advanced graphical displays and time-based data",
+              completed: false,
+              locked: false,
+              progress: 45
+            },
+            {
+              id: "measures-location",
+              title: "Measures of the Location of the Data",
+              description: "Percentiles, quartiles, and measures of position",
               completed: false,
               locked: false,
               progress: 30
             },
             {
-              id: "conditional-probability",
-              title: "Conditional Probability",
-              description: "Bayes' theorem and independence",
+              id: "box-plots",
+              title: "Box Plots",
+              description: "Five-number summary and outlier detection",
+              completed: false,
+              locked: false,
+              progress: 15
+            },
+            {
+              id: "measures-center",
+              title: "Measures of the Center of the Data",
+              description: "Mean, median, and mode",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "skewness-mean-median-mode",
+              title: "Skewness and the Mean, Median, and Mode",
+              description: "Understanding distribution shape and central tendency",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "measures-spread",
+              title: "Measures of the Spread of the Data",
+              description: "Range, variance, and standard deviation",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "descriptive-statistics",
+              title: "Descriptive Statistics",
+              description: "Applications and summary of descriptive statistics",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "probability-topics",
+          title: "Probability Topics",
+          description: "Fundamental concepts of probability",
+          concepts: [
+            {
+              id: "terminology",
+              title: "Terminology",
+              description: "Basic probability terminology and notation",
+              completed: false,
+              locked: false,
+              progress: 25
+            },
+            {
+              id: "independent-mutually-exclusive",
+              title: "Independent and Mutually Exclusive Events",
+              description: "Understanding different types of events",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "two-basic-rules",
+              title: "Two Basic Rules of Probability",
+              description: "Addition and multiplication rules",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "contingency-tables",
+              title: "Contingency Tables",
+              description: "Joint and conditional probabilities using tables",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "tree-venn-diagrams",
+              title: "Tree and Venn Diagrams",
+              description: "Visual representations of probability",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "probability-topics",
+              title: "Probability Topics",
+              description: "Advanced probability concepts and applications",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "discrete-random-variables",
+          title: "Discrete Random Variables",
+          description: "Random variables with discrete outcomes",
+          concepts: [
+            {
+              id: "probability-distribution-function",
+              title: "Probability Distribution Function (PDF) for a Discrete Random Variable",
+              description: "Defining and working with discrete probability distributions",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "mean-expected-value",
+              title: "Mean or Expected Value and Standard Deviation",
+              description: "Calculating central tendency and spread for discrete variables",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "binomial-distribution",
+              title: "Binomial Distribution",
+              description: "Fixed number of independent trials",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "geometric-distribution",
+              title: "Geometric Distribution",
+              description: "Number of trials until first success",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "hypergeometric-distribution",
+              title: "Hypergeometric Distribution",
+              description: "Sampling without replacement scenarios",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "poisson-distribution",
+              title: "Poisson Distribution",
+              description: "Rate of occurrence over time or space",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "discrete-distribution-playing-card",
+              title: "Discrete Distribution (Playing Card Experiment)",
+              description: "Exploring discrete distributions using playing cards",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "discrete-distribution-dice",
+              title: "Discrete Distribution (Dice Experiment Using Three Regular Dice)",
+              description: "Analyzing discrete distributions with three-dice experiments",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "continuous-random-variables",
+          title: "Continuous Random Variables",
+          description: "Random variables with continuous outcomes",
+          concepts: [
+            {
+              id: "continuous-probability-functions",
+              title: "Continuous Probability Functions",
+              description: "Properties of continuous distributions",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "uniform-distribution",
+              title: "The Uniform Distribution",
+              description: "Equally likely outcomes over an interval",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "exponential-distribution",
+              title: "The Exponential Distribution",
+              description: "Time between events in a Poisson process",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "continuous-distribution",
+              title: "Continuous Distribution",
+              description: "Applications and summary of continuous distributions",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "normal-distribution",
+          title: "The Normal Distribution",
+          description: "The most important continuous distribution",
+          concepts: [
+            {
+              id: "standard-normal-distribution",
+              title: "The Standard Normal Distribution",
+              description: "Properties and characteristics of the standard normal distribution",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "using-normal-distribution",
+              title: "Using the Normal Distribution",
+              description: "Applications and calculations with normal distributions",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "normal-distribution-lap-times",
+              title: "Normal Distribution (Lap Times)",
+              description: "Real-world application using lap time data",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "normal-distribution-pinkie-length",
+              title: "Normal Distribution (Pinkie Length)",
+              description: "Real-world application using pinkie length measurements",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "central-limit-theorem",
+          title: "The Central Limit Theorem",
+          description: "Foundation of statistical inference",
+          concepts: [
+            {
+              id: "central-limit-theorem-sample-means",
+              title: "The Central Limit Theorem for Sample Means (Averages)",
+              description: "Distribution of sample means",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "central-limit-theorem-proportions",
+              title: "The Central Limit Theorem for Sums",
+              description: "Distribution of sample sums",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "using-central-limit-theorem",
+              title: "Using the Central Limit Theorem",
+              description: "Applications and practical use",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "central-limit-theorem-pocket-change",
+              title: "Central Limit Theorem (Pocket Change)",
+              description: "Real-world application using pocket change data",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "central-limit-theorem-cookie-recipes",
+              title: "Central Limit Theorem (Cookie Recipes)",
+              description: "Real-world application using cookie recipe measurements",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "confidence-intervals",
+          title: "Confidence Intervals",
+          description: "Estimating population parameters",
+          concepts: [
+            {
+              id: "single-population-mean-normal",
+              title: "A Single Population Mean using the Normal Distribution",
+              description: "Confidence intervals when σ is known",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "single-population-mean-t-distribution",
+              title: "A Single Population Mean using the Student t Distribution",
+              description: "Confidence intervals when σ is unknown",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "population-proportion",
+              title: "A Population Proportion",
+              description: "Confidence intervals for proportions",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "confidence-interval-home-costs",
+              title: "Confidence Interval (Home Costs)",
+              description: "Real-world application using home cost data",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "confidence-interval-place-of-birth",
+              title: "Confidence Interval (Place of Birth)",
+              description: "Real-world application using place of birth data",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "confidence-interval-womens-heights",
+              title: "Confidence Interval (Women's Heights)",
+              description: "Real-world application using women's height measurements",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "hypothesis-testing-one-sample",
+          title: "Hypothesis Testing with One Sample",
+          description: "Testing claims about population parameters",
+          concepts: [
+            {
+              id: "null-alternative-hypotheses",
+              title: "Null and Alternative Hypotheses",
+              description: "Setting up hypothesis tests",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "outcomes-errors",
+              title: "Outcomes and the Type I and Type II Errors",
+              description: "Understanding test results and errors",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "distribution-needed-test",
+              title: "Distribution Needed for Hypothesis Testing",
+              description: "Choosing the appropriate test statistic",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "rare-events",
+              title: "Rare Events, the Sample, Decision and Conclusion",
+              description: "Making decisions from hypothesis tests",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "additional-information-p-values",
+              title: "Additional Information and Full Hypothesis Test Examples",
+              description: "Complete hypothesis testing procedures",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "hypothesis-testing-single-mean-proportion",
+              title: "Hypothesis Testing of a Single Mean and Single Proportion",
+              description: "Comprehensive hypothesis testing applications",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "hypothesis-testing-two-samples",
+          title: "Hypothesis Testing with Two Samples",
+          description: "Comparing two populations",
+          concepts: [
+            {
+              id: "two-population-means",
+              title: "Two Population Means with Unknown Standard Deviations",
+              description: "Comparing means from two groups",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "two-population-means-known",
+              title: "Two Population Means with Known Standard Deviations",
+              description: "Comparing means when σ is known",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "comparing-two-proportions",
+              title: "Comparing Two Independent Population Proportions",
+              description: "Testing differences in proportions",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "matched-paired-samples",
+              title: "Matched or Paired Samples",
+              description: "Tests for dependent samples",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "hypothesis-testing-two-means-proportions",
+              title: "Hypothesis Testing for Two Means and Two Proportions",
+              description: "Comprehensive two-sample hypothesis testing applications",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "chi-square-distribution",
+          title: "The Chi-Square Distribution",
+          description: "Tests of independence and goodness of fit",
+          concepts: [
+            {
+              id: "facts-about-chi-square",
+              title: "Facts About the Chi-Square Distribution",
+              description: "Properties of the chi-square distribution",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "goodness-of-fit-test",
+              title: "Goodness-of-Fit Test",
+              description: "Testing if data fits a particular distribution",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "test-of-independence",
+              title: "Test of Independence",
+              description: "Testing relationships between categorical variables",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "test-for-homogeneity",
+              title: "Test for Homogeneity",
+              description: "Comparing distributions across groups",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "comparison-chi-square-tests",
+              title: "Comparison of the Chi-Square Tests",
+              description: "When to use different chi-square tests",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "test-single-variance",
+              title: "Test of a Single Variance",
+              description: "Testing claims about population variance",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "lab-chi-square-goodness-of-fit",
+              title: "Lab 1: Chi-Square Goodness-of-Fit",
+              description: "Hands-on practice with chi-square goodness-of-fit tests",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "lab-chi-square-test-of-independence",
+              title: "Lab 2: Chi-Square Test of Independence",
+              description: "Hands-on practice with chi-square independence tests",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "linear-regression-correlation",
+          title: "Linear Regression and Correlation",
+          description: "Analyzing relationships between variables",
+          concepts: [
+            {
+              id: "linear-equations",
+              title: "Linear Equations",
+              description: "Understanding linear relationships",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "scatter-plots",
+              title: "Scatter Plots",
+              description: "Visualizing relationships between variables",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "regression-equation",
+              title: "The Regression Equation",
+              description: "Developing and interpreting regression equations",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "testing-significance-correlation",
+              title: "Testing the Significance of the Correlation Coefficient",
+              description: "Statistical significance of relationships",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "prediction",
+              title: "Prediction",
+              description: "Using regression for prediction",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "outliers",
+              title: "Outliers",
+              description: "Identifying and handling unusual data points",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "regression-assumptions",
+              title: "Regression (Distance from School)",
+              description: "Assumptions and limitations of regression",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "regression-textbook-cost",
+              title: "Regression (Textbook Cost)",
+              description: "Real-world application using textbook cost data",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "regression-fuel-efficiency",
+              title: "Regression (Fuel Efficiency)",
+              description: "Real-world application using fuel efficiency data",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "f-distribution-anova",
+          title: "F Distribution and One-Way ANOVA",
+          description: "Comparing multiple groups",
+          concepts: [
+            {
+              id: "one-way-anova",
+              title: "One-Way ANOVA",
+              description: "Analysis of variance for multiple groups",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "f-distribution-anova-test",
+              title: "The F Distribution and the F-Ratio",
+              description: "Understanding the F distribution",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "facts-about-f-distribution",
+              title: "Facts About the F Distribution",
+              description: "Properties and applications of F distribution",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "test-of-two-variances",
+              title: "Test of Two Variances",
+              description: "Testing equality of variances between two populations",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "lab-one-way-anova",
+              title: "Lab: One-Way ANOVA",
+              description: "Hands-on practice with one-way analysis of variance",
               completed: false,
               locked: true,
               progress: 0
