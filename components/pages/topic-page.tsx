@@ -54,77 +54,117 @@ Duration: 16 weeks
 Credits: 3 credit hours`
         },
         {
-          id: "real-numbers",
-          title: "Real Numbers and Algebraic Expressions",
-          description: "Fundamental properties of real numbers and basic algebraic manipulations",
+          id: "prerequisites",
+          title: "Prerequisites",
+          description: "Fundamental algebraic concepts and skills",
           concepts: [
             {
-              id: "number-systems",
-              title: "Number Systems",
-              description: "Natural numbers, integers, rational and irrational numbers",
+              id: "real-numbers",
+              title: "Real Numbers: Algebra Essentials",
+              description: "Properties of real numbers, number systems, and algebraic operations",
               completed: true,
               locked: false,
               progress: 100
             },
             {
-              id: "order-operations",
-              title: "Order of Operations",
-              description: "PEMDAS and evaluating algebraic expressions",
+              id: "exponents-scientific-notation",
+              title: "Exponents and Scientific Notation",
+              description: "Rules of exponents and scientific notation applications",
               completed: true,
               locked: false,
               progress: 100
             },
             {
-              id: "properties-real-numbers",
-              title: "Properties of Real Numbers",
-              description: "Commutative, associative, and distributive properties",
+              id: "radicals-rational-exponents",
+              title: "Radicals and Rational Exponents",
+              description: "Working with radicals and rational exponents",
               completed: true,
               locked: false,
               progress: 100
             },
             {
-              id: "simplifying-expressions",
-              title: "Simplifying Algebraic Expressions",
-              description: "Combining like terms and using properties",
+              id: "polynomials",
+              title: "Polynomials",
+              description: "Polynomial operations and properties",
               completed: false,
               locked: false,
               progress: 75
+            },
+            {
+              id: "factoring-polynomials",
+              title: "Factoring Polynomials",
+              description: "Techniques for factoring various polynomial expressions",
+              completed: false,
+              locked: false,
+              progress: 50
+            },
+            {
+              id: "rational-expressions",
+              title: "Rational Expressions",
+              description: "Simplifying and operating with rational expressions",
+              completed: false,
+              locked: false,
+              progress: 25
             }
           ]
         },
         {
-          id: "linear-equations",
-          title: "Linear Equations and Inequalities",
-          description: "Solving linear equations and inequalities in one variable",
+          id: "equations-inequalities",
+          title: "Equations and Inequalities",
+          description: "Solving equations and inequalities in one variable",
           concepts: [
             {
-              id: "solving-linear-equations",
-              title: "Solving Linear Equations",
-              description: "One-step, two-step, and multi-step linear equations",
+              id: "rectangular-coordinate-systems",
+              title: "The Rectangular Coordinate Systems and Graphs",
+              description: "Coordinate plane, distance formula, and graphing basics",
               completed: false,
               locked: false,
               progress: 60
             },
             {
-              id: "literal-equations",
-              title: "Literal Equations and Formulas",
-              description: "Solving for specified variables in formulas",
+              id: "linear-equations-one-variable",
+              title: "Linear Equations in One Variable",
+              description: "Solving linear equations and understanding solution sets",
               completed: false,
               locked: false,
-              progress: 40
+              progress: 45
             },
             {
-              id: "applications-linear-equations",
-              title: "Applications of Linear Equations",
-              description: "Word problems and real-world applications",
+              id: "models-applications",
+              title: "Models and Applications",
+              description: "Real-world problem solving with algebraic models",
+              completed: false,
+              locked: false,
+              progress: 30
+            },
+            {
+              id: "complex-numbers",
+              title: "Complex Numbers",
+              description: "Operations with complex numbers and their properties",
               completed: false,
               locked: true,
               progress: 0
             },
             {
-              id: "linear-inequalities",
-              title: "Linear Inequalities",
-              description: "Solving and graphing linear inequalities",
+              id: "quadratic-equations",
+              title: "Quadratic Equations",
+              description: "Solving quadratic equations using various methods",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "other-types-equations",
+              title: "Other Types of Equations",
+              description: "Rational, radical, and absolute value equations",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "linear-inequalities-absolute-value",
+              title: "Linear Inequalities and Absolute Value Inequalities",
+              description: "Solving compound and absolute value inequalities",
               completed: false,
               locked: true,
               progress: 0
@@ -132,38 +172,416 @@ Credits: 3 credit hours`
           ]
         },
         {
-          id: "quadratic-equations",
-          title: "Quadratic Equations and Functions",
-          description: "Solving quadratic equations and analyzing quadratic functions",
+          id: "functions",
+          title: "Functions",
+          description: "Introduction to functions and their properties",
           concepts: [
             {
-              id: "solving-quadratics-factoring",
-              title: "Solving by Factoring",
-              description: "Using factoring to solve quadratic equations",
+              id: "functions-notation",
+              title: "Functions and Function Notation",
+              description: "Definition of functions and function notation",
+              completed: false,
+              locked: false,
+              progress: 25
+            },
+            {
+              id: "domain-range",
+              title: "Domain and Range",
+              description: "Determining domain and range of functions",
               completed: false,
               locked: true,
               progress: 0
             },
             {
-              id: "completing-square",
-              title: "Completing the Square",
-              description: "Solving quadratics by completing the square",
+              id: "rates-change-behavior",
+              title: "Rates of Change and Behavior of Graphs",
+              description: "Analyzing function behavior and rates of change",
               completed: false,
               locked: true,
               progress: 0
             },
             {
-              id: "quadratic-formula",
-              title: "The Quadratic Formula",
-              description: "Using the quadratic formula to solve equations",
+              id: "composition-functions",
+              title: "Composition of Functions",
+              description: "Combining functions and function composition",
               completed: false,
               locked: true,
               progress: 0
             },
+            {
+              id: "transformation-functions",
+              title: "Transformation of Functions",
+              description: "Shifting, stretching, and reflecting functions",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "absolute-value-functions",
+              title: "Absolute Value Functions",
+              description: "Properties and graphs of absolute value functions",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "inverse-functions",
+              title: "Inverse Functions",
+              description: "Finding and working with inverse functions",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "linear-functions",
+          title: "Linear Functions",
+          description: "Properties and applications of linear functions",
+          concepts: [
+            {
+              id: "linear-functions-basics",
+              title: "Linear Functions",
+              description: "Properties and characteristics of linear functions",
+              completed: false,
+              locked: false,
+              progress: 15
+            },
+            {
+              id: "modeling-linear-functions",
+              title: "Modeling with Linear Functions",
+              description: "Using linear functions to model real-world situations",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "fitting-linear-models",
+              title: "Fitting Linear Models to Data",
+              description: "Regression analysis and best-fit lines",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "polynomial-rational-functions",
+          title: "Polynomial and Rational Functions",
+          description: "Advanced study of polynomial and rational functions",
+          concepts: [
             {
               id: "quadratic-functions",
               title: "Quadratic Functions",
-              description: "Graphing parabolas and finding key features",
+              description: "Properties and graphs of quadratic functions",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "power-polynomial-functions",
+              title: "Power Functions and Polynomial Functions",
+              description: "General polynomial functions and their properties",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "graphs-polynomial-functions",
+              title: "Graphs of Polynomial Functions",
+              description: "Analyzing and sketching polynomial graphs",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "dividing-polynomials",
+              title: "Dividing Polynomials",
+              description: "Polynomial division techniques",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "zeros-polynomial-functions",
+              title: "Zeros of Polynomial Functions",
+              description: "Finding roots and zeros of polynomial functions",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "rational-functions",
+              title: "Rational Functions",
+              description: "Properties and graphs of rational functions",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "inverses-radical-functions",
+              title: "Inverses and Radical Functions",
+              description: "Inverse functions and radical function properties",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "modeling-using-variation",
+              title: "Modeling Using Variation",
+              description: "Direct, inverse, and joint variation models",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "exponential-logarithmic-functions",
+          title: "Exponential and Logarithmic Functions",
+          description: "Exponential and logarithmic functions and their applications",
+          concepts: [
+            {
+              id: "exponential-functions",
+              title: "Exponential Functions",
+              description: "Properties and applications of exponential functions",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "graphs-exponential-functions",
+              title: "Graphs of Exponential Functions",
+              description: "Analyzing exponential function graphs",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "logarithmic-functions",
+              title: "Logarithmic Functions",
+              description: "Properties and applications of logarithmic functions",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "graphs-logarithmic-functions",
+              title: "Graphs of Logarithmic Functions",
+              description: "Analyzing logarithmic function graphs",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "logarithmic-properties",
+              title: "Logarithmic Properties",
+              description: "Properties and rules of logarithms",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "exponential-logarithmic-equations",
+              title: "Exponential and Logarithmic Equations",
+              description: "Solving exponential and logarithmic equations",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "exponential-logarithmic-models",
+              title: "Exponential and Logarithmic Models",
+              description: "Real-world applications and modeling",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "fitting-exponential-models",
+              title: "Fitting Exponential Models to Data",
+              description: "Using exponential functions to model data sets",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "systems-equations-inequalities",
+          title: "Systems of Equations and Inequalities",
+          description: "Solving systems of equations and inequalities",
+          concepts: [
+            {
+              id: "systems-linear-two-variables",
+              title: "Systems of Linear Equations: Two Variables",
+              description: "Methods for solving two-variable linear systems",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "systems-linear-three-variables",
+              title: "Systems of Linear Equations: Three Variables",
+              description: "Solving three-variable linear systems",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "systems-nonlinear-equations",
+              title: "Systems of Nonlinear Equations and Inequalities: Two Variables",
+              description: "Solving nonlinear systems and inequalities with two variables",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "partial-fractions",
+              title: "Partial Fractions",
+              description: "Decomposing rational functions using partial fractions",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "matrices-solving-systems",
+              title: "Matrices and Matrix Operations",
+              description: "Using matrices to solve systems of equations",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "solving-systems-gaussian-elimination",
+              title: "Solving Systems with Gaussian Elimination",
+              description: "Row reduction method for solving linear systems",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "solving-systems-inverses",
+              title: "Solving Systems with Inverses",
+              description: "Using matrix inverses to solve linear systems",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "solving-systems-cramers-rule",
+              title: "Solving Systems with Cramer's Rule",
+              description: "Using determinants and Cramer's rule for solving systems",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "analytic-geometry",
+          title: "Analytic Geometry",
+          description: "Conic sections and their properties",
+          concepts: [
+            {
+              id: "ellipse",
+              title: "The Ellipse",
+              description: "Properties and equations of ellipses",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "hyperbola",
+              title: "The Hyperbola",
+              description: "Properties and equations of hyperbolas",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "parabola",
+              title: "The Parabola",
+              description: "Properties and equations of parabolas",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "rotation-axes",
+              title: "Rotation of Axes",
+              description: "Rotating coordinate systems for conic sections",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "conic-sections-polar",
+              title: "Conic Sections in Polar Coordinates",
+              description: "Representing conic sections in polar form",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "sequences-probability",
+          title: "Sequences, Probability, and Counting Theory",
+          description: "Sequences, series, and probability concepts",
+          concepts: [
+            {
+              id: "sequences-notations",
+              title: "Sequences and Their Notations",
+              description: "Introduction to sequences and notation",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "arithmetic-sequences",
+              title: "Arithmetic Sequences",
+              description: "Properties and formulas for arithmetic sequences",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "geometric-sequences",
+              title: "Geometric Sequences",
+              description: "Properties and formulas for geometric sequences",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "series-notations",
+              title: "Series and Their Notations",
+              description: "Introduction to series and summation notation",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "counting-principles",
+              title: "Counting Principles",
+              description: "Fundamental counting techniques",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "binomial-theorem",
+              title: "Binomial Theorem",
+              description: "Expanding binomial expressions",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "probability",
+              title: "Probability",
+              description: "Basic probability concepts and calculations",
               completed: false,
               locked: true,
               progress: 0
