@@ -3,6 +3,7 @@
 import { TopicPage } from "@/components/pages/topic-page"
 import { MainLayout } from "@/components/templates/main-layout"
 import { useRouter, useParams } from "next/navigation"
+import { useNavigationLoading } from "@/hooks/use-navigation-loading"
 
 // Simple function to get topic title from ID
 const getTopicTitle = (topicId: string) => {
@@ -22,17 +23,18 @@ const getTopicTitle = (topicId: string) => {
 export default function TopicRoute() {
   const params = useParams()
   const router = useRouter()
+  const { navigateWithLoading } = useNavigationLoading()
   const topicId = params.topicId as string
   const topicTitle = getTopicTitle(topicId)
 
   const handleBack = () => {
-    // Navigate to the root path and set active tab to classes
-    router.push("/?tab=classes")
+    // Navigate to the root path and set active tab to classes with loading
+    navigateWithLoading("/?tab=classes")
   }
 
   const handleTabChange = (tab: string) => {
-    // Navigate to the root path with the selected tab
-    router.push(`/?tab=${tab}`)
+    // Navigate to the root path with the selected tab with loading
+    navigateWithLoading(`/?tab=${tab}`)
   }
 
   return (

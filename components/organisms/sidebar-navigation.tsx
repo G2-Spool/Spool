@@ -4,6 +4,8 @@ import { BarChart3, BookOpen, Home, Settings, User, LucideIcon } from "lucide-re
 import { SidebarLink, SidebarBody } from "../ui/sidebar"
 import { motion } from "framer-motion"
 import Link from "next/link"
+import { useNavigationLoading } from "@/hooks/use-navigation-loading"
+import { useLoading } from "@/contexts/loading-context"
 
 interface SidebarNavigationProps {
   activeTab: string
@@ -18,6 +20,9 @@ interface MenuItem {
 }
 
 export function SidebarNavigation({ activeTab, onTabChange }: SidebarNavigationProps) {
+  const { navigateWithLoading } = useNavigationLoading();
+  const { startLoading, stopLoading } = useLoading();
+  
   const menuItems: MenuItem[] = [
     { 
       label: "Dashboard", 
@@ -55,12 +60,24 @@ export function SidebarNavigation({ activeTab, onTabChange }: SidebarNavigationP
   ]
 
   const handleLinkClick = (value: string, e: React.MouseEvent) => {
-    // For same-page navigation, prevent default link behavior and use onTabChange
+    e.preventDefault()
+    
+    // For same-page navigation, trigger loading state and then change tab
     if (window.location.pathname === '/') {
-      e.preventDefault()
-      onTabChange(value)
+      // Show loading screen before changing tab
+      startLoading();
+      
+      // Small delay to show loading animation
+      setTimeout(() => {
+        onTabChange(value);
+        setTimeout(() => {
+          stopLoading();
+        }, 300);
+      }, 50);
+    } else {
+      // For navigation from other pages (like topic pages), use loading navigation
+      navigateWithLoading(`/?tab=${value}`)
     }
-    // For navigation from other pages (like topic pages), let the Link handle it normally
   }
 
   return (

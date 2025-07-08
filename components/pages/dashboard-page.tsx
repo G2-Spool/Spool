@@ -9,6 +9,7 @@ import { InterestsCard } from "@/components/organisms/interests-card"
 import { AchievementsList } from "@/components/organisms/achievements-list"
 import { WeeklyProgressCard } from "@/components/organisms/weekly-progress-card"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { LoadingTestButton } from "@/components/ui/loading-test-button"
 
 interface UserProfile {
   interests: string[]
@@ -20,8 +21,18 @@ interface UserProfile {
   learningPace: string
 }
 
+const defaultProfile: UserProfile = {
+  interests: ["Technology", "Science", "Reading"],
+  studyGoals: {
+    subject: "mathematics",
+    topic: "Algebra",
+    focusArea: "Linear Equations"
+  },
+  learningPace: "steady"
+}
+
 export function DashboardPage() {
-  const [userProfile, setUserProfile] = useState<UserProfile | null>(null)
+  const [userProfile, setUserProfile] = useState<UserProfile>(defaultProfile)
   const [studyStreak] = useState(7)
   const [todayProgress] = useState(60)
   const [weeklyGoal] = useState(75)
@@ -29,13 +40,27 @@ export function DashboardPage() {
   useEffect(() => {
     const profile = localStorage.getItem("user-profile")
     if (profile) {
-      setUserProfile(JSON.parse(profile))
+      try {
+        const parsedProfile = JSON.parse(profile)
+        // Merge with default profile to ensure all properties exist
+        const mergedProfile = {
+          ...defaultProfile,
+          ...parsedProfile
+        }
+        setUserProfile(mergedProfile)
+        // Save the merged profile back to localStorage
+        localStorage.setItem("user-profile", JSON.stringify(mergedProfile))
+      } catch (error) {
+        console.error("Failed to parse user profile, using default:", error)
+        // Save default profile to localStorage
+        localStorage.setItem("user-profile", JSON.stringify(defaultProfile))
+      }
+    } else {
+      // Create default profile if none exists
+      console.log("No user profile found, creating default profile")
+      localStorage.setItem("user-profile", JSON.stringify(defaultProfile))
     }
   }, [])
-
-  if (!userProfile) {
-    return <div className="text-white">Loading...</div>
-  }
 
   const achievements = [
     { title: "Completed 7-day study streak", timeAgo: "Today", color: "#78af9f" },
@@ -52,7 +77,10 @@ export function DashboardPage() {
   return (
     <div className="min-h-screen bg-background p-6">
       <div className="max-w-7xl mx-auto space-y-12">
-        <PageHeader title="Dashboard" description="Track your learning progress and achievements" />
+        <div className="flex items-center justify-between">
+          <PageHeader title="Dashboard" description="Track your learning progress and achievements" />
+          <LoadingTestButton />
+        </div>
 
       <Tabs defaultValue="overview" className="w-full">
         <TabsList className="grid w-full grid-cols-3">

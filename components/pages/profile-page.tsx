@@ -21,21 +21,54 @@ interface UserProfile {
   learningPace: string
 }
 
+const defaultProfile: UserProfile = {
+  interests: ["Technology", "Science", "Reading"],
+  interestDetails: {
+    "Technology": "I enjoy learning about software development and emerging tech trends",
+    "Science": "Fascinated by how things work and scientific discoveries",
+    "Reading": "Love exploring different genres and expanding my knowledge"
+  },
+  studyGoals: {
+    subject: "mathematics",
+    topic: "Algebra",
+    focusArea: "Linear Equations"
+  },
+  learningPace: "steady"
+}
+
 export function ProfilePage() {
-  const [userProfile, setUserProfile] = useState<UserProfile | null>(null)
+  const [userProfile, setUserProfile] = useState<UserProfile>(defaultProfile)
   const [userName, setUserName] = useState("Student")
   const [userEmail, setUserEmail] = useState("")
 
   useEffect(() => {
     const profile = localStorage.getItem("user-profile")
     if (profile) {
-      setUserProfile(JSON.parse(profile))
+      try {
+        const parsedProfile = JSON.parse(profile)
+        // Merge with default profile to ensure all properties exist
+        const mergedProfile = {
+          ...defaultProfile,
+          ...parsedProfile,
+          interestDetails: {
+            ...defaultProfile.interestDetails,
+            ...(parsedProfile.interestDetails || {})
+          }
+        }
+        setUserProfile(mergedProfile)
+        // Save the merged profile back to localStorage
+        localStorage.setItem("user-profile", JSON.stringify(mergedProfile))
+      } catch (error) {
+        console.error("Failed to parse user profile, using default:", error)
+        // Save default profile to localStorage
+        localStorage.setItem("user-profile", JSON.stringify(defaultProfile))
+      }
+    } else {
+      // Create default profile if none exists
+      console.log("No user profile found, creating default profile")
+      localStorage.setItem("user-profile", JSON.stringify(defaultProfile))
     }
   }, [])
-
-  if (!userProfile) {
-    return <div className="text-white">Loading...</div>
-  }
 
   const getPaceDescription = (pace: string) => {
     switch (pace) {
