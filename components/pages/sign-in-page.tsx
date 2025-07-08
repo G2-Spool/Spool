@@ -54,6 +54,10 @@ export function SignInPage({ onSignIn, onBack }: SignInPageProps) {
       // Store mock user data in localStorage for auth context
       localStorage.setItem("mock-auth-user", JSON.stringify(mockUser))
       
+      // Clear any landing page flags that might interfere
+      localStorage.removeItem("return-to-landing")
+      localStorage.setItem("visited-landing", "true")
+      
       // Mock successful sign-in
       console.log("Mock sign-in successful for:", email)
       onSignIn()
@@ -98,6 +102,10 @@ export function SignInPage({ onSignIn, onBack }: SignInPageProps) {
       
       // Store mock user data in localStorage for auth context
       localStorage.setItem("mock-auth-user", JSON.stringify(mockUser))
+      
+      // Clear any landing page flags that might interfere
+      localStorage.removeItem("return-to-landing")
+      localStorage.setItem("visited-landing", "true")
       
       // Mock successful sign-up
       console.log("Mock sign-up successful for:", email)

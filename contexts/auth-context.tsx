@@ -79,8 +79,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       console.error("Sign out failed:", error)
     }
     
-    // Clear mock authentication data
+    // Clear all user data
     localStorage.removeItem("mock-auth-user")
+    localStorage.removeItem("user-signed-in")
+    localStorage.removeItem("onboarding-complete")
+    localStorage.removeItem("user-profile")
+    localStorage.removeItem("splash-completed")
+    
+    // Reset to landing page by clearing the visited flag and setting return flag
+    localStorage.setItem("return-to-landing", "true")
+    localStorage.removeItem("visited-landing")
+    
     setUser(null)
     setHasCheckedAuth(false) // Allow re-checking auth after sign out
   }

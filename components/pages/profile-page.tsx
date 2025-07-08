@@ -84,11 +84,18 @@ export function ProfilePage() {
   }
 
   const signOut = () => {
+    // Clear all user data
     localStorage.removeItem("user-signed-in")
     localStorage.removeItem("onboarding-complete")
     localStorage.removeItem("user-profile")
     localStorage.removeItem("splash-completed")
-    localStorage.setItem("show-splash-screen", "true")
+    localStorage.removeItem("mock-auth-user")
+    
+    // Reset to landing page by clearing the visited flag and setting return flag
+    localStorage.setItem("return-to-landing", "true")
+    localStorage.removeItem("visited-landing")
+    
+    // Don't set show-splash-screen - let the normal flow handle it
     window.location.reload()
   }
 

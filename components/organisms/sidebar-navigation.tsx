@@ -4,6 +4,7 @@ import { BarChart3, BookOpen, Home, Settings, User, LucideIcon } from "lucide-re
 import { SidebarLink, SidebarBody } from "../ui/sidebar"
 import { motion } from "framer-motion"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { useNavigationLoading } from "@/hooks/use-navigation-loading"
 import { useLoading } from "@/contexts/loading-context"
 
@@ -20,6 +21,7 @@ interface MenuItem {
 }
 
 export function SidebarNavigation({ activeTab, onTabChange }: SidebarNavigationProps) {
+  const router = useRouter();
   const { navigateWithLoading } = useNavigationLoading();
   const { startLoading, stopLoading } = useLoading();
   
@@ -59,25 +61,19 @@ export function SidebarNavigation({ activeTab, onTabChange }: SidebarNavigationP
     },
   ]
 
-  const handleLinkClick = (value: string, e: React.MouseEvent) => {
+  const handleLinkClick = (value: string, href: string, e: React.MouseEvent) => {
     e.preventDefault()
     
-    // For same-page navigation, trigger loading state and then change tab
-    if (window.location.pathname === '/') {
-      // Show loading screen before changing tab
-      startLoading();
-      
-      // Small delay to show loading animation
-      setTimeout(() => {
-        onTabChange(value);
-        setTimeout(() => {
-          stopLoading();
-        }, 300);
-      }, 50);
-    } else {
-      // For navigation from other pages (like topic pages), use loading navigation
-      navigateWithLoading(`/?tab=${value}`)
-    }
+    // Show loading screen before navigation
+    startLoading();
+    
+    // Navigate to the URL (this will update the URL)
+    router.push(href);
+    
+    // Small delay to show loading animation
+    setTimeout(() => {
+      stopLoading();
+    }, 300);
   }
 
   return (
@@ -86,7 +82,7 @@ export function SidebarNavigation({ activeTab, onTabChange }: SidebarNavigationP
           <Link
             href="/?tab=dashboard"
             className="flex items-center space-x-3 p-4 border-b border-sidebar-border cursor-pointer hover:bg-sidebar-accent transition-colors"
-            onClick={(e) => handleLinkClick("dashboard", e)}
+            onClick={(e) => handleLinkClick("dashboard", "/?tab=dashboard", e)}
           >
             <img src="/spool-logo.png" alt="Spool" className="h-6 w-6 flex-shrink-0" />
             <motion.span 
@@ -108,7 +104,7 @@ export function SidebarNavigation({ activeTab, onTabChange }: SidebarNavigationP
                     ...item,
                     icon: <IconComponent className={`h-5 w-5 flex-shrink-0 ${activeTab === item.value ? 'text-accent-foreground' : 'text-sidebar-foreground'}`} />
                   }}
-                  onClick={(e) => handleLinkClick(item.value, e)}
+                  onClick={(e) => handleLinkClick(item.value, item.href, e)}
                   className={activeTab === item.value ? "bg-accent text-accent-foreground font-medium" : ""}
                 />
               )
@@ -126,7 +122,7 @@ export function SidebarNavigation({ activeTab, onTabChange }: SidebarNavigationP
                   ...item,
                   icon: <IconComponent className={`h-5 w-5 flex-shrink-0 ${activeTab === item.value ? 'text-accent-foreground' : 'text-sidebar-foreground'}`} />
                 }}
-                onClick={(e) => handleLinkClick(item.value, e)}
+                onClick={(e) => handleLinkClick(item.value, item.href, e)}
                 className={activeTab === item.value ? "bg-accent text-accent-foreground font-medium" : ""}
               />
             )

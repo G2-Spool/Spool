@@ -17,11 +17,31 @@ export default function Home() {
   const [hasVisitedLanding, setHasVisitedLanding, isLoadingLanding] = useLocalStorageBoolean("visited-landing", false)
   const [showSplashScreen, setShowSplashScreen] = useState(false)
   const [activeTab, setActiveTab] = useState("dashboard") // Default to dashboard
+  const [forceShowLanding, setForceShowLanding] = useState(false)
   const searchParams = useSearchParams()
 
-  // Development bypass: Auto-complete onboarding for better UX
+  // Check for return-to-landing flag immediately on mount
   useEffect(() => {
-    if (!isLoadingOnboarding && !isLoadingSplash && !isLoadingLanding) {
+    const returnToLanding = localStorage.getItem("return-to-landing")
+    if (returnToLanding === "true") {
+      console.log("🔧 User explicitly returned to landing page")
+      localStorage.removeItem("return-to-landing")
+      setForceShowLanding(true)
+    }
+  }, [])
+
+  // Clear forceShowLanding when user is authenticated
+  useEffect(() => {
+    if (user && forceShowLanding) {
+      console.log("🔧 User authenticated, clearing force landing flag")
+      setForceShowLanding(false)
+    }
+  }, [user, forceShowLanding])
+
+  // Development bypass: Auto-complete onboarding for better UX
+  // Only bypass if user hasn't explicitly navigated back to landing
+  useEffect(() => {
+    if (!isLoadingOnboarding && !isLoadingSplash && !isLoadingLanding && !forceShowLanding) {
       if (!hasVisitedLanding) {
         console.log("🔧 Development mode: Auto-completing landing page")
         setHasVisitedLanding(true)
@@ -35,10 +55,11 @@ export default function Home() {
         setIsOnboarded(true)
       }
     }
-  }, [isLoadingOnboarding, isLoadingSplash, isLoadingLanding, hasVisitedLanding, hasSplashCompleted, isOnboarded, setHasVisitedLanding, setHasSplashCompleted, setIsOnboarded])
+  }, [isLoadingOnboarding, isLoadingSplash, isLoadingLanding, hasVisitedLanding, hasSplashCompleted, isOnboarded, forceShowLanding, setHasVisitedLanding, setHasSplashCompleted, setIsOnboarded])
 
   const handleGetStarted = () => {
     setHasVisitedLanding(true)
+    setForceShowLanding(false)
   }
 
   const handleOnboardingComplete = () => {
@@ -87,8 +108,8 @@ export default function Home() {
     )
   }
 
-  // Show landing page if user hasn't visited yet (bypassed in development)
-  if (!hasVisitedLanding) {
+  // Show landing page if user hasn't visited yet (bypassed in development) or if forced
+  if (!hasVisitedLanding || forceShowLanding) {
     return (
       <div className="min-h-screen bg-background">
         <LandingPage onGetStarted={handleGetStarted} />
@@ -107,9 +128,26 @@ export default function Home() {
 
   // Check if user is signed in
   if (!user) {
+    const handleBackToLanding = () => {
+      // Set flag to indicate user wants to return to landing page
+      localStorage.setItem("return-to-landing", "true")
+      // Clear visited landing flag to show landing page again
+      localStorage.removeItem("visited-landing")
+      // Force show landing page immediately
+      setForceShowLanding(true)
+    }
+
     return (
       <div className="min-h-screen bg-background">
-        <SignInPage onSignIn={() => window.location.reload()} />
+        <SignInPage 
+          onSignIn={() => {
+            // Clear force landing flag and let normal flow handle routing
+            setForceShowLanding(false)
+            // Reload to trigger auth context update
+            window.location.reload()
+          }} 
+          onBack={handleBackToLanding}
+        />
       </div>
     )
   }
