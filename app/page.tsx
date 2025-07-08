@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, Suspense } from "react"
 import { useSearchParams } from "next/navigation"
 import { useLocalStorageBoolean } from "@/hooks/use-local-storage"
 import { MainLayout } from "@/components/templates/main-layout"
@@ -10,7 +10,7 @@ import { useAuth } from "@/contexts/auth-context"
 import { SignInPage } from "@/components/pages/sign-in-page"
 import { Dashboard } from "@/components/dashboard"
 
-export default function Home() {
+function HomeContent() {
   const { user, isLoading } = useAuth()
   const [isOnboarded, setIsOnboarded, isLoadingOnboarding] = useLocalStorageBoolean("onboarding-complete", false)
   const [hasSplashCompleted, setHasSplashCompleted, isLoadingSplash] = useLocalStorageBoolean("splash-completed", false)
@@ -118,5 +118,17 @@ export default function Home() {
     <MainLayout activeTab={activeTab} onTabChange={setActiveTab}>
       <Dashboard activeTab={activeTab} />
     </MainLayout>
+  )
+}
+
+export default function Home() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="text-lg">Loading...</div>
+      </div>
+    }>
+      <HomeContent />
+    </Suspense>
   )
 }

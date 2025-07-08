@@ -5,13 +5,11 @@ frontend:
       commands:
         - echo "Node version:" && node --version
         - echo "NPM version:" && npm --version
-        - npm install -g pnpm@latest
-        - echo "PNPM version:" && pnpm --version
-        - pnpm install --no-frozen-lockfile
+        - npm ci
     build:
       commands:
         - echo "Starting build process..."
-        - pnpm run build
+        - npm run build
   artifacts:
     baseDirectory: .next
     files:
@@ -20,7 +18,7 @@ frontend:
     paths:
       - node_modules/**/*
       - .next/cache/**/*
-      - .pnpm-store/**/*
+      - ~/.npm/**/*
   environment:
     variables:
       NODE_OPTIONS: '--max-old-space-size=8192' 
