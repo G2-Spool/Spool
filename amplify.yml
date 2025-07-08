@@ -7,7 +7,7 @@ frontend:
         - echo "NPM version:" && npm --version
         - npm install -g pnpm@latest
         - echo "PNPM version:" && pnpm --version
-        - pnpm install --frozen-lockfile
+        - pnpm install --no-frozen-lockfile
     build:
       commands:
         - echo "Starting build process..."
