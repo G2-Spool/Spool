@@ -1,6 +1,7 @@
 "use client"
 
 import { useRouter } from "next/navigation"
+import { useNavigationLoading } from "@/hooks/use-navigation-loading"
 import { SubjectCarousel } from "@/components/organisms/subject-carousel"
 
 // Hardcoded data for subjects and topics
@@ -89,15 +90,16 @@ const subjectsData = [
 
 export function ClassesPage() {
   const router = useRouter()
+  const { navigateWithLoading } = useNavigationLoading()
 
   const handleTopicClick = (topicId: string) => {
-    // Navigate to topic overview page
-    router.push(`/topic/${topicId}`)
+    // Navigate to topic overview page with loading
+    navigateWithLoading(`/topic/${topicId}`)
   }
 
   const handlePlayClick = (topicId: string) => {
-    // Navigate to topic learning page
-    router.push(`/topic/${topicId}`)
+    // Navigate to topic learning page with loading
+    navigateWithLoading(`/topic/${topicId}`)
   }
 
   return (

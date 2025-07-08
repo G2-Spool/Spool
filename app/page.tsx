@@ -16,8 +16,26 @@ export default function Home() {
   const [hasSplashCompleted, setHasSplashCompleted, isLoadingSplash] = useLocalStorageBoolean("splash-completed", false)
   const [hasVisitedLanding, setHasVisitedLanding, isLoadingLanding] = useLocalStorageBoolean("visited-landing", false)
   const [showSplashScreen, setShowSplashScreen] = useState(false)
-  const [activeTab, setActiveTab] = useState("learning")
+  const [activeTab, setActiveTab] = useState("dashboard") // Default to dashboard
   const searchParams = useSearchParams()
+
+  // Development bypass: Auto-complete onboarding for better UX
+  useEffect(() => {
+    if (!isLoadingOnboarding && !isLoadingSplash && !isLoadingLanding) {
+      if (!hasVisitedLanding) {
+        console.log("🔧 Development mode: Auto-completing landing page")
+        setHasVisitedLanding(true)
+      }
+      if (!hasSplashCompleted) {
+        console.log("🔧 Development mode: Auto-completing splash screen")
+        setHasSplashCompleted(true)
+      }
+      if (!isOnboarded) {
+        console.log("🔧 Development mode: Auto-completing onboarding")
+        setIsOnboarded(true)
+      }
+    }
+  }, [isLoadingOnboarding, isLoadingSplash, isLoadingLanding, hasVisitedLanding, hasSplashCompleted, isOnboarded, setHasVisitedLanding, setHasSplashCompleted, setIsOnboarded])
 
   const handleGetStarted = () => {
     setHasVisitedLanding(true)
@@ -37,6 +55,8 @@ export default function Home() {
     const tabParam = searchParams.get("tab")
     if (tabParam && ["learning", "dashboard", "classes", "visualization", "settings", "profile"].includes(tabParam)) {
       setActiveTab(tabParam)
+    } else {
+      setActiveTab("dashboard") // Default fallback
     }
   }, [searchParams])
 
@@ -49,16 +69,25 @@ export default function Home() {
     }
   }, [])
 
-  // Show loading state while checking auth and localStorage
-  if (isLoading || isLoadingOnboarding || isLoadingSplash || isLoadingLanding) {
+  // Show loading state only for localStorage operations, not auth
+  if (isLoadingOnboarding || isLoadingSplash || isLoadingLanding) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
-        <div className="text-lg">Loading...</div>
+        <div className="text-lg">Loading preferences...</div>
       </div>
     )
   }
 
-  // Show landing page if user hasn't visited yet
+  // Show auth loading only for initial load
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="text-lg">Checking authentication...</div>
+      </div>
+    )
+  }
+
+  // Show landing page if user hasn't visited yet (bypassed in development)
   if (!hasVisitedLanding) {
     return (
       <div className="min-h-screen bg-background">
@@ -67,7 +96,7 @@ export default function Home() {
     )
   }
 
-  // Show splash screen if requested (from sign out) or after sign in
+  // Show splash screen if requested (from sign out) or after sign in (bypassed in development)
   if (showSplashScreen || (user && !hasSplashCompleted)) {
     return (
       <div className="min-h-screen bg-background">
@@ -85,5 +114,9 @@ export default function Home() {
     )
   }
 
-  return <Dashboard />
+  return (
+    <MainLayout activeTab={activeTab} onTabChange={setActiveTab}>
+      <Dashboard activeTab={activeTab} />
+    </MainLayout>
+  )
 }
