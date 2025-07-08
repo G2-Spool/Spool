@@ -6,17 +6,12 @@ import { useLocalStorageBoolean } from "@/hooks/use-local-storage"
 import { MainLayout } from "@/components/templates/main-layout"
 import { LandingPage } from "@/components/pages/landing-page"
 import { SplashScreenPage } from "@/components/pages/splash-screen-page"
+import { useAuth } from "@/contexts/auth-context"
 import { SignInPage } from "@/components/pages/sign-in-page"
-import { OnboardingPage } from "@/components/pages/onboarding-page"
-import { DashboardPage } from "@/components/pages/dashboard-page"
-import { DailyLearningPage } from "@/components/pages/daily-learning-page"
-import { ProgressPage } from "@/components/pages/progress-page"
-import { SettingsPage } from "@/components/pages/settings-page"
-import { ProfilePage } from "@/components/pages/profile-page"
-import { ClassesPage } from "@/components/pages/classes-page"
+import { Dashboard } from "@/components/dashboard"
 
-export default function App() {
-  const [isSignedIn, setIsSignedIn, isLoadingSignIn] = useLocalStorageBoolean("user-signed-in", false)
+export default function Home() {
+  const { user, isLoading } = useAuth()
   const [isOnboarded, setIsOnboarded, isLoadingOnboarding] = useLocalStorageBoolean("onboarding-complete", false)
   const [hasSplashCompleted, setHasSplashCompleted, isLoadingSplash] = useLocalStorageBoolean("splash-completed", false)
   const [hasVisitedLanding, setHasVisitedLanding, isLoadingLanding] = useLocalStorageBoolean("visited-landing", false)
@@ -26,10 +21,6 @@ export default function App() {
 
   const handleGetStarted = () => {
     setHasVisitedLanding(true)
-  }
-
-  const handleSignIn = () => {
-    setIsSignedIn(true)
   }
 
   const handleOnboardingComplete = () => {
@@ -58,11 +49,11 @@ export default function App() {
     }
   }, [])
 
-  // Show loading state while checking localStorage
-  if (isLoadingSignIn || isLoadingOnboarding || isLoadingSplash || isLoadingLanding) {
+  // Show loading state while checking auth and localStorage
+  if (isLoading || isLoadingOnboarding || isLoadingSplash || isLoadingLanding) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
-        <div className="text-muted-foreground">Loading...</div>
+        <div className="text-lg">Loading...</div>
       </div>
     )
   }
@@ -77,7 +68,7 @@ export default function App() {
   }
 
   // Show splash screen if requested (from sign out) or after sign in
-  if (showSplashScreen || (isSignedIn && !hasSplashCompleted)) {
+  if (showSplashScreen || (user && !hasSplashCompleted)) {
     return (
       <div className="min-h-screen bg-background">
         <SplashScreenPage onComplete={handleSplashComplete} />
@@ -86,47 +77,13 @@ export default function App() {
   }
 
   // Check if user is signed in
-  if (!isSignedIn) {
+  if (!user) {
     return (
       <div className="min-h-screen bg-background">
-        <SignInPage onSignIn={handleSignIn} />
+        <SignInPage onSignIn={() => window.location.reload()} />
       </div>
     )
   }
 
-  // Check if user has completed onboarding
-  if (!isOnboarded) {
-    return (
-      <div className="min-h-screen bg-background">
-        <OnboardingPage onComplete={handleOnboardingComplete} />
-      </div>
-    )
-  }
-
-  const renderPage = () => {
-    switch (activeTab) {
-      case "learning":
-        return <DailyLearningPage />
-      case "dashboard":
-        return <DashboardPage />
-      case "classes":
-        return <ClassesPage />
-      case "visualization":
-        return <ProgressPage />
-      case "settings":
-        return <SettingsPage />
-      case "profile":
-        return <ProfilePage />
-      default:
-        return <DailyLearningPage />
-    }
-  }
-
-  return (
-    <div className="min-h-screen bg-background">
-      <MainLayout activeTab={activeTab} onTabChange={setActiveTab}>
-        {renderPage()}
-      </MainLayout>
-    </div>
-  )
+  return <Dashboard />
 }

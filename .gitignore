@@ -87,3 +87,14 @@ next-env.d.ts
 
 #pdfs
 pdfs/
+
+# Documentation files that might contain secrets
+*SETUP*.md
+*PERMISSION*.md
+*INSTRUCTION*.md
+*SECRET*.md
+*API-KEY*.md
+*AWS-SETUP*.md
+
+# Keep only README.md
+!README.md
