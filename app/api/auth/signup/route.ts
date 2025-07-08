@@ -1,31 +1,29 @@
 import { NextRequest, NextResponse } from "next/server"
-import { signUp } from "@/services/cognito-auth"
+import { API_ENDPOINTS } from "@/lib/api-config"
 
 export async function POST(request: NextRequest) {
   try {
-    const { email, password } = await request.json()
-
-    if (!email || !password) {
-      return NextResponse.json(
-        { error: "Email and password are required" },
-        { status: 400 }
-      )
-    }
-
-    const result = await signUp(email, password)
-
-    if (result.error) {
-      return NextResponse.json(
-        { error: result.error },
-        { status: 400 }
-      )
-    }
-
-    return NextResponse.json({
-      message: "Registration successful. Please check your email for verification.",
-      challengeName: result.challengeName,
-      session: result.session,
+    const body = await request.json()
+    
+    // Forward request to auth service
+    const response = await fetch(API_ENDPOINTS.AUTH.SIGNUP, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(body),
     })
+
+    const data = await response.json()
+
+    if (!response.ok) {
+      return NextResponse.json(
+        { error: data.error || "Registration failed" },
+        { status: response.status }
+      )
+    }
+
+    return NextResponse.json(data)
   } catch (error) {
     console.error("Sign up API error:", error)
     return NextResponse.json(

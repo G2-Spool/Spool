@@ -34,6 +34,7 @@ cdk.context.json
 .env
 .env.local
 .env.*.local
+.env.production
 
 # AWS
 .aws-sam/
@@ -98,3 +99,7 @@ pdfs/
 
 # Keep only README.md
 !README.md
+
+# Testing
+coverage/
+.nyc_output/
