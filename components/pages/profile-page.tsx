@@ -9,6 +9,7 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
 import { User, BookOpen, Calendar, Clock, Award, Target, LogOut } from "lucide-react"
+import { useAuth } from "@/contexts/auth-context"
 
 interface UserProfile {
   interests: string[]
@@ -40,6 +41,20 @@ export function ProfilePage() {
   const [userProfile, setUserProfile] = useState<UserProfile>(defaultProfile)
   const [userName, setUserName] = useState("Student")
   const [userEmail, setUserEmail] = useState("")
+  const [isSigningOut, setIsSigningOut] = useState(false)
+  const { user, signOut: authSignOut } = useAuth()
+
+  // Set user email from auth context
+  useEffect(() => {
+    if (user?.email) {
+      setUserEmail(user.email)
+      // Set initial from email if no name is set
+      if (userName === "Student" && user.email) {
+        const emailName = user.email.split('@')[0]
+        setUserName(emailName.charAt(0).toUpperCase() + emailName.slice(1))
+      }
+    }
+  }, [user])
 
   useEffect(() => {
     const profile = localStorage.getItem("user-profile")
@@ -83,20 +98,19 @@ export function ProfilePage() {
     }
   }
 
-  const signOut = () => {
-    // Clear all user data
-    localStorage.removeItem("user-signed-in")
-    localStorage.removeItem("onboarding-complete")
-    localStorage.removeItem("user-profile")
-    localStorage.removeItem("splash-completed")
-    localStorage.removeItem("mock-auth-user")
-    
-    // Reset to landing page by clearing the visited flag and setting return flag
-    localStorage.setItem("return-to-landing", "true")
-    localStorage.removeItem("visited-landing")
-    
-    // Don't set show-splash-screen - let the normal flow handle it
-    window.location.reload()
+  const signOut = async () => {
+    setIsSigningOut(true)
+    try {
+      // Use the auth context's signOut method which handles Cognito sign out
+      await authSignOut()
+      
+      // Don't reload - the auth context and app router will handle navigation
+      // The auth context already clears user data and sets return-to-landing flag
+      console.log("Sign out completed, navigation will be handled by auth state change")
+    } catch (error) {
+      console.error("Sign out error:", error)
+      setIsSigningOut(false)
+    }
   }
 
   return (
@@ -148,6 +162,7 @@ export function ProfilePage() {
                   value={userEmail}
                   onChange={(e) => setUserEmail(e.target.value)}
                   placeholder="Enter your email"
+                  disabled={!!user?.email} // Disable if email comes from Cognito
                 />
               </div>
             </div>
@@ -260,10 +275,11 @@ export function ProfilePage() {
               <Button 
                 variant="outline" 
                 onClick={signOut} 
+                disabled={isSigningOut}
                 className="border-orange-200 text-orange-700 hover:bg-orange-50 dark:border-orange-900/20 dark:text-orange-300 dark:hover:bg-orange-900/10"
               >
                 <LogOut className="h-4 w-4 mr-2" />
-                Sign Out
+                {isSigningOut ? "Signing Out..." : "Sign Out"}
               </Button>
             </div>
           </CardContent>
