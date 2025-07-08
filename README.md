@@ -1,101 +1,248 @@
-# Spool Auth Service
+# Spool Content Service
 
-Authentication microservice for the Spool educational platform using AWS Cognito.
+A microservice for AI-powered content generation and personalized learning assessments, built with Express.js, TypeScript, and integrated with Langflow, Pinecone, and PostgreSQL.
 
 ## Features
 
-- User registration and email verification
-- User sign in/sign out
-- Password reset functionality
-- Token refresh
-- JWT-based authentication
-- User profile management
+- **AI Content Generation**: Langflow integration for creating personalized exercises
+- **Cognitive Assessment**: Adaptive learning path generation based on user performance
+- **Vector Search**: Pinecone integration for semantic content matching
+- **Exercise Management**: CRUD operations for learning exercises
+- **Learning Analytics**: Track user progress and performance metrics
+- **Personalized Recommendations**: AI-driven content suggestions
+- **Database Integration**: PostgreSQL for persistent data storage
+- **RESTful API**: Clean API design for frontend integration
 
-## Prerequisites
+## API Endpoints
 
-- Node.js 18+
-- AWS Account with Cognito User Pool configured
-- npm or yarn
+### Content Generation
+- `POST /content/generate-exercise` - Generate personalized exercise
+- `POST /content/assess-cognitive` - Perform cognitive assessment
+- `GET /content/exercises/:id` - Get exercise by ID
+- `PUT /content/exercises/:id` - Update exercise
+- `DELETE /content/exercises/:id` - Delete exercise
 
-## Setup
+### Recommendations
+- `GET /content/recommendations/:userId` - Get personalized recommendations
+- `POST /content/search` - Semantic search for content
 
-1. Install dependencies:
+### Analytics
+- `GET /content/analytics/:userId` - Get user learning analytics
+- `POST /content/track-attempt` - Track exercise attempt
+
+### Health
+- `GET /health` - Service health check
+
+## Environment Variables
+
+```env
+PORT=3002
+NODE_ENV=development
+DATABASE_URL=postgresql://user:password@localhost:5432/spool_content
+PINECONE_API_KEY=your-pinecone-api-key
+PINECONE_INDEX_NAME=spool-content-index
+LANGFLOW_API_URL=http://localhost:7860
+LANGFLOW_API_KEY=your-langflow-api-key
+OPENAI_API_KEY=your-openai-api-key
+```
+
+## Local Development
+
+1. **Install dependencies**:
 ```bash
 npm install
 ```
 
-2. Create `.env` file based on `.env.example`:
+2. **Set up environment variables**:
 ```bash
 cp .env.example .env
+# Edit .env with your configuration
 ```
 
-3. Configure environment variables:
-- `COGNITO_USER_POOL_ID`: Your Cognito User Pool ID
-- `COGNITO_APP_CLIENT_ID`: Your Cognito App Client ID
-- `COGNITO_APP_CLIENT_SECRET`: Your Cognito App Client Secret
+3. **Set up PostgreSQL database**:
+```bash
+# Create database
+createdb spool_content
 
-## Development
+# Run migrations (if using migrations)
+npm run migrate
+```
 
+4. **Run in development mode**:
 ```bash
 npm run dev
 ```
 
-## API Endpoints
+5. **Build for production**:
+```bash
+npm run build
+npm start
+```
 
-### Authentication
+## Docker Deployment
 
-- `POST /auth/signin` - Sign in with email and password
-- `POST /auth/signup` - Register new user
-- `POST /auth/confirm` - Confirm email with verification code
-- `POST /auth/forgot-password` - Initiate password reset
-- `POST /auth/reset-password` - Reset password with code
-- `POST /auth/refresh` - Refresh access token
-- `GET /auth/me` - Get current user profile (requires auth)
-- `POST /auth/signout` - Sign out user (requires auth)
+```bash
+# Build image
+docker build -t spool-content-service .
 
-### Health
+# Run container
+docker run -p 3002:3002 \
+  -e DATABASE_URL=postgresql://user:pass@host:5432/db \
+  -e PINECONE_API_KEY=your-key \
+  -e LANGFLOW_API_URL=http://langflow:7860 \
+  spool-content-service
+```
 
-- `GET /health` - Service health check
-- `GET /health/ready` - Readiness check
+## Dependencies Setup
+
+### PostgreSQL
+```sql
+-- Create database
+CREATE DATABASE spool_content;
+
+-- Example table structure
+CREATE TABLE exercises (
+    id SERIAL PRIMARY KEY,
+    user_id VARCHAR(255) NOT NULL,
+    subject VARCHAR(100) NOT NULL,
+    difficulty INTEGER NOT NULL,
+    content JSONB NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE exercise_attempts (
+    id SERIAL PRIMARY KEY,
+    exercise_id INTEGER REFERENCES exercises(id),
+    user_id VARCHAR(255) NOT NULL,
+    score INTEGER NOT NULL,
+    time_spent INTEGER NOT NULL,
+    attempted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+```
+
+### Pinecone
+1. Create a Pinecone account and project
+2. Create an index with dimension 1536 (for OpenAI embeddings)
+3. Configure the API key and index name
+
+### Langflow
+1. Deploy Langflow instance
+2. Create flows for content generation and assessment
+3. Configure API endpoints and authentication
 
 ## Architecture
 
-This service follows a clean architecture pattern:
-
 ```
 src/
-├── routes/         # API route definitions
-├── services/       # Business logic (Cognito integration)
-├── middleware/     # Express middleware
-├── types/          # TypeScript type definitions
-└── utils/          # Utility functions
+├── index.ts                    # Application entry point
+├── integrations/              # External service integrations
+│   ├── langflow.service.ts
+│   └── pinecone.service.ts
+├── middleware/                # Express middleware
+│   ├── error.middleware.ts
+│   ├── logging.middleware.ts
+│   └── validation.middleware.ts
+├── routes/                    # API routes
+│   ├── content.routes.ts
+│   └── health.routes.ts
+├── services/                  # Business logic
+│   ├── content.service.ts
+│   └── database.service.ts
+├── types/                     # TypeScript types
+│   └── content.types.ts
+└── utils/                     # Utilities
+    └── logger.ts
 ```
 
-## Security
+## AI Integration
 
-- All passwords are handled by AWS Cognito
-- JWT tokens are used for authentication
-- CORS is configured for frontend access
-- Helmet.js for security headers
+### Langflow Integration
+- **Content Generation**: Uses Langflow flows to generate personalized exercises
+- **Cognitive Assessment**: Analyzes user responses to adapt difficulty
+- **Learning Path**: Creates dynamic learning sequences
 
-## Deployment
+### Pinecone Integration
+- **Semantic Search**: Find similar content based on vector embeddings
+- **Content Matching**: Match user preferences with available content
+- **Recommendation Engine**: Suggest relevant exercises and materials
 
-1. Build the service:
+## Data Models
+
+### Exercise
+```typescript
+interface Exercise {
+  id: string;
+  userId: string;
+  subject: string;
+  difficulty: number;
+  content: {
+    question: string;
+    options?: string[];
+    correctAnswer: string;
+    explanation: string;
+  };
+  createdAt: Date;
+}
+```
+
+### Exercise Attempt
+```typescript
+interface ExerciseAttempt {
+  id: string;
+  exerciseId: string;
+  userId: string;
+  score: number;
+  timeSpent: number;
+  attemptedAt: Date;
+}
+```
+
+## Testing
+
 ```bash
-npm run build
+# Run tests
+npm test
+
+# Run linting
+npm run lint
+
+# Fix linting issues
+npm run lint:fix
 ```
 
-2. Deploy to your preferred platform (ECS, Lambda, etc.)
+## Security Considerations
 
-## Environment Variables
+- Input validation for all API endpoints
+- Rate limiting on content generation endpoints
+- Secure database connections
+- API key management via environment variables
+- CORS configuration for frontend access
 
-| Variable | Description | Required |
-|----------|-------------|----------|
-| `NODE_ENV` | Environment (development/production) | No |
-| `PORT` | Server port (default: 3001) | No |
-| `AWS_REGION` | AWS region (default: us-east-1) | No |
-| `COGNITO_USER_POOL_ID` | Cognito User Pool ID | Yes |
-| `COGNITO_APP_CLIENT_ID` | Cognito App Client ID | Yes |
-| `COGNITO_APP_CLIENT_SECRET` | Cognito App Client Secret | Yes |
-| `FRONTEND_URL` | Frontend URL for CORS | No |
-| `LOG_LEVEL` | Logging level (default: info) | No | 
+## Monitoring
+
+- Health check endpoint at `/health`
+- Structured logging with Winston
+- Performance metrics for AI operations
+- Database query monitoring
+- Error tracking and alerting
+
+## Performance Optimization
+
+- Database connection pooling
+- Caching for frequently accessed content
+- Batch processing for bulk operations
+- Async processing for AI operations
+- Response compression
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Add tests for new functionality
+5. Run linting and tests
+6. Submit a pull request
+
+## License
+
+MIT 
