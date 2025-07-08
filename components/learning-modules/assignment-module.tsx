@@ -19,13 +19,15 @@ export function AssignmentModuleComponent({
   onComplete, 
   onUpdateResponse 
 }: AssignmentModuleProps) {
-  const [isCollapsed, setIsCollapsed] = useState(module.isCollapsed || module.isCompleted)
+  const [isCollapsed, setIsCollapsed] = useState(module.isCollapsed || false)
   const [userInput, setUserInput] = useState(module.userResponse || "")
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isSubmitted, setIsSubmitted] = useState(module.isCompleted || false)
   const textareaRef = useRef<HTMLTextAreaElement>(null)
 
   useEffect(() => {
-    setIsCollapsed(module.isCollapsed || module.isCompleted)
+    setIsCollapsed(module.isCollapsed || false)
+    setIsSubmitted(module.isCompleted || false)
   }, [module.isCollapsed, module.isCompleted])
 
   const handleSubmit = async () => {
@@ -34,8 +36,8 @@ export function AssignmentModuleComponent({
     setIsSubmitting(true)
     try {
       await onComplete?.(module.id, userInput)
-      // Auto-collapse after completion
-      setIsCollapsed(true)
+      // Mark as submitted but don't auto-collapse
+      setIsSubmitted(true)
     } catch (error) {
       console.error('Error submitting assignment:', error)
     } finally {
@@ -51,7 +53,7 @@ export function AssignmentModuleComponent({
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault()
-      if (userInput.trim() && !isSubmitting) {
+      if (userInput.trim() && !isSubmitting && !isSubmitted) {
         handleSubmit()
       }
     }
@@ -70,7 +72,7 @@ export function AssignmentModuleComponent({
   }, [userInput])
 
   return (
-    <Card className="w-full mb-6 bg-muted/30">
+    <Card className="w-full bg-muted/30">
       <CardHeader className="pb-0 pt-3 bg-muted/10 rounded-t-lg border-b border-border/50">
         <div className="flex items-center justify-between">
           <CardTitle 
@@ -80,10 +82,15 @@ export function AssignmentModuleComponent({
             <div className="flex items-center space-x-2">
               {module.isCompleted ? (
                 <CheckCircle className="h-5 w-5 text-green-600" />
+              ) : isSubmitted ? (
+                <div className="h-5 w-5 rounded-full bg-yellow-400 border-2 border-yellow-500" />
               ) : (
                 <div className="h-5 w-5 rounded-full border-2 border-purple-300" />
               )}
               <span>Assignment: {module.title}</span>
+              {isSubmitted && !module.isCompleted && (
+                <span className="text-sm text-yellow-600 font-medium">• Submitted</span>
+              )}
             </div>
           </CardTitle>
           <Button
@@ -132,11 +139,15 @@ export function AssignmentModuleComponent({
                   onChange={(e) => handleInputChange(e.target.value)}
                   onKeyDown={handleKeyDown}
                   placeholder="Enter your response here. You can use LaTeX notation like $x^2$ for math expressions..."
-                  className="min-h-[100px] resize-none overflow-hidden rounded-xl pr-12 pb-12"
-                  disabled={module.isCompleted}
+                  className={`min-h-[100px] resize-none overflow-hidden rounded-xl pr-12 pb-12 ${
+                    isSubmitted && !module.isCompleted 
+                      ? 'bg-muted/50 text-muted-foreground border-muted cursor-not-allowed' 
+                      : ''
+                  }`}
+                  disabled={isSubmitted || module.isCompleted}
                 />
                 {/* Submit button inside text box */}
-                {!module.isCompleted && (
+                {!isSubmitted && !module.isCompleted && (
                   <Button
                     onClick={handleSubmit}
                     disabled={!userInput.trim() || isSubmitting}
@@ -149,7 +160,11 @@ export function AssignmentModuleComponent({
                 )}
               </div>
               <div className="text-xs text-muted-foreground mt-1">
-                Tip: Use LaTeX notation for math expressions (e.g., $x^2$, $\frac{1}{2}$, $\sum_i^n$). Press Enter to submit, Shift+Enter for new line.
+                {isSubmitted && !module.isCompleted ? (
+                  <span className="text-yellow-600">Response submitted and awaiting review</span>
+                ) : (
+                  "Tip: Use LaTeX notation for math expressions (e.g., $x^2$, $\\frac{1}{2}$, $\\sum_i^n$). Press Enter to submit, Shift+Enter for new line."
+                )}
               </div>
             </div>
             

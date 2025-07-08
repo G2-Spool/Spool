@@ -60,6 +60,9 @@ export function LoadingScreen({ className }: LoadingScreenProps) {
       )}
     >
       <div className="flex flex-col items-center gap-4">
+        <p className="text-xl font-bold text-foreground animate-bounce">
+          Too Spool for School!
+        </p>
         <div className="relative">
           <DotLoader
             frames={loadingFrames}
@@ -70,7 +73,6 @@ export function LoadingScreen({ className }: LoadingScreenProps) {
         </div>
         <div className="text-center">
           <p className="text-lg font-medium text-foreground">Loading...</p>
-          <p className="text-sm text-muted-foreground">Preparing your content</p>
         </div>
       </div>
     </div>

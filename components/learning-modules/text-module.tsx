@@ -107,7 +107,7 @@ export function TextModuleComponent({ module }: TextModuleProps) {
   }, [module.content])
 
   return (
-    <div className="w-full mb-6">
+    <div className="w-full">
       {module.title && (
         <h3 className="text-xl font-semibold mb-3">{module.title}</h3>
       )}
