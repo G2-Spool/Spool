@@ -1492,22 +1492,1443 @@ Through practical exercises and guided practice, you'll develop confidence in ex
 By the end of this course, you'll have a strong foundation in writing principles and the ability to adapt your writing style to different purposes and audiences.`
         },
         {
-          id: "fundamentals",
-          title: "Writing Fundamentals",
-          description: "Basic principles of effective writing",
+          id: "digital-world",
+          title: "The Digital World: Building on What You Already Know to Respond Critically",
+          description: "Critical response to digital media and texts",
           concepts: [
             {
-              id: "structure",
-              title: "Essay Structure",
-              description: "Learn to organize your ideas effectively",
+              id: "reading-to-understand",
+              title: '"Reading" to Understand and Respond',
+              description: "Develop critical reading skills for digital texts",
               completed: false,
               locked: false,
               progress: 0
             },
             {
-              id: "grammar",
-              title: "Grammar and Style",
-              description: "Master grammar rules and writing style",
+              id: "social-media-trailblazer",
+              title: "Social Media Trailblazer: Selena Gomez",
+              description: "Learn from digital media influencers",
+              completed: false,
+              locked: false,
+              progress: 0
+            },
+            {
+              id: "critical-response-rhetoric",
+              title: "Glance at Critical Response: Rhetoric and Critical Thinking",
+              description: "Understanding rhetoric in digital contexts",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "annotated-voter-suppression",
+              title: "Annotated Student Sample: Social Media Post and Responses on Voter Suppression",
+              description: "Analyze social media discourse",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "thinking-critically-text",
+              title: 'Writing Process: Thinking Critically About a "Text"',
+              description: "Develop critical thinking about texts",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "intention-vs-execution",
+              title: "Evaluation: Intention vs. Execution",
+              description: "Assess writing effectiveness",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "spotlight-academia",
+              title: "Spotlight on ... Academia",
+              description: "Academic writing contexts",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "tracing-writing-development",
+              title: "Portfolio: Tracing Writing Development",
+              description: "Track your writing growth",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "language-identity-culture",
+          title: "Language, Identity, and Culture: Exploring, Employing, Embracing",
+          description: "Explore the connections between language, identity, and culture",
+          concepts: [
+            {
+              id: "seeds-of-self",
+              title: "Seeds of Self",
+              description: "Discover your writing identity",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "identity-trailblazer-hong",
+              title: "Identity Trailblazer: Cathy Park Hong",
+              description: "Learn from identity-focused writers",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "oppression-reclamation",
+              title: "Glance at the Issues: Oppression and Reclamation",
+              description: "Understand social justice in writing",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "souls-black-folk",
+              title: "Annotated Sample Reading from The Souls of Black Folk by W. E. B. Du Bois",
+              description: "Analyze classic identity writing",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "identity-through-writing",
+              title: "Writing Process: Thinking Critically about How Identity Is Constructed Through Writing",
+              description: "Examine identity construction in writing",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "antiracism-inclusivity",
+              title: "Evaluation: Antiracism and Inclusivity",
+              description: "Assess inclusive writing practices",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "variations-english",
+              title: "Spotlight on ... Variations of English",
+              description: "Explore linguistic diversity",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "decolonizing-self",
+              title: "Portfolio: Decolonizing Self",
+              description: "Reflect on cultural identity in writing",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "literacy-narrative",
+          title: "Literacy Narrative: Building Bridges, Bridging Gaps",
+          description: "Write personal stories about learning to read and write",
+          concepts: [
+            {
+              id: "identity-expression",
+              title: "Identity and Expression",
+              description: "Connect identity to literacy experiences",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "literacy-trailblazer-westover",
+              title: "Literacy Narrative Trailblazer: Tara Westover",
+              description: "Study exemplary literacy narratives",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "genre-literacy-narrative",
+              title: "Glance at Genre: The Literacy Narrative",
+              description: "Understand the literacy narrative genre",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "frederick-douglass",
+              title: "Annotated Sample Reading: from Narrative of the Life of Frederick Douglass by Frederick Douglass",
+              description: "Analyze classic literacy narrative",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "beginnings-literacy",
+              title: "Writing Process: Tracing the Beginnings of Literacy",
+              description: "Develop your literacy narrative",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "sentence-structure",
+              title: "Editing Focus: Sentence Structure",
+              description: "Improve sentence construction",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "self-evaluating",
+              title: "Evaluation: Self-Evaluating",
+              description: "Assess your own writing",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "digital-archive",
+              title: "Spotlight on ... The Digital Archive of Literacy Narratives (DALN)",
+              description: "Explore digital literacy collections",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "literacy-artifact",
+              title: "Portfolio: A Literacy Artifact",
+              description: "Create a literacy portfolio piece",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "memoir-personal-narrative",
+          title: "Memoir or Personal Narrative: Learning Lessons from the Personal",
+          description: "Craft compelling personal stories with universal themes",
+          concepts: [
+            {
+              id: "past-present",
+              title: "Exploring the Past to Understand the Present",
+              description: "Connect past experiences to current insights",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "memoir-trailblazer-coates",
+              title: "Memoir Trailblazer: Ta-Nehisi Coates",
+              description: "Study powerful memoir writing",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "conflict-detail-revelation",
+              title: "Glance at Genre: Conflict, Detail, and Revelation",
+              description: "Understand memoir elements",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "life-mississippi",
+              title: "Annotated Sample Reading: from Life on the Mississippi by Mark Twain",
+              description: "Analyze classic memoir writing",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "personal-public",
+              title: "Writing Process: Making the Personal Public",
+              description: "Transform personal experience into public narrative",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "characterization-point-view",
+              title: "Editing Focus: More on Characterization and Point of View",
+              description: "Develop character and perspective",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "structure-organization",
+              title: "Evaluation: Structure and Organization",
+              description: "Assess narrative structure",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "multilingual-writers",
+              title: "Spotlight on ... Multilingual Writers",
+              description: "Support diverse language backgrounds",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "filtered-memories",
+              title: "Portfolio: Filtered Memories",
+              description: "Reflect on memory and narrative",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "profile",
+          title: "Profile: Telling a Rich and Compelling Story",
+          description: "Write detailed portraits of people, places, or phenomena",
+          concepts: [
+            {
+              id: "profiles-inspiration",
+              title: "Profiles as Inspiration",
+              description: "Understand the power of profile writing",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "profile-trailblazer-chambers",
+              title: "Profile Trailblazer: Veronica Chambers",
+              description: "Study expert profile writers",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "subject-angle-background",
+              title: "Glance at Genre: Subject, Angle, Background, and Description",
+              description: "Master profile writing elements",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "remembering-john-lewis",
+              title: 'Annotated Sample Reading: "Remembering John Lewis" by Carla D. Hayden',
+              description: "Analyze profile writing techniques",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "angle-subject",
+              title: "Writing Process: Focusing on the Angle of Your Subject",
+              description: "Develop your profile approach",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "verb-tense-consistency",
+              title: "Editing Focus: Verb Tense Consistency",
+              description: "Maintain consistent verb tenses",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "text-personal-introduction",
+              title: "Evaluation: Text as Personal Introduction",
+              description: "Assess profile effectiveness",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "cultural-artifact",
+              title: "Spotlight on ... Profiling a Cultural Artifact",
+              description: "Profile objects and cultural items",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "subject-reflection-self",
+              title: "Portfolio: Subject as a Reflection of Self",
+              description: "Reflect on profile choices",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "proposal",
+          title: "Proposal: Writing About Problems and Solutions",
+          description: "Identify problems and propose effective solutions",
+          concepts: [
+            {
+              id: "proposing-change",
+              title: "Proposing Change: Thinking Critically About Problems and Solutions",
+              description: "Develop problem-solving thinking",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "proposal-trailblazer-gawande",
+              title: "Proposal Trailblazer: Atul Gawande",
+              description: "Study effective proposal writing",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "features-proposals",
+              title: "Glance at Genre: Features of Proposals",
+              description: "Understand proposal structure",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "slowing-climate-change",
+              title: 'Annotated Student Sample: "Slowing Climate Change" by Shawn Krukowski',
+              description: "Analyze student proposal writing",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "creating-proposal",
+              title: "Writing Process: Creating a Proposal",
+              description: "Develop your proposal",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "subject-verb-agreement",
+              title: "Editing Focus: Subject-Verb Agreement",
+              description: "Master subject-verb agreement",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "conventions-clarity-coherence",
+              title: "Evaluation: Conventions, Clarity, and Coherence",
+              description: "Assess proposal quality",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "technical-writing-career",
+              title: "Spotlight on ... Technical Writing as a Career",
+              description: "Explore technical writing professions",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "reflecting-problems-solutions",
+              title: "Portfolio: Reflecting on Problems and Solutions",
+              description: "Reflect on problem-solving approaches",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "evaluation-review",
+          title: "Evaluation or Review: Would You Recommend It?",
+          description: "Write thoughtful evaluations and reviews",
+          concepts: [
+            {
+              id: "thumbs-up-down",
+              title: "Thumbs Up or Down?",
+              description: "Understand evaluation criteria",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "review-trailblazer-kakutani",
+              title: "Review Trailblazer: Michiko Kakutani",
+              description: "Study expert review writing",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "criteria-evidence-evaluation",
+              title: "Glance at Genre: Criteria, Evidence, Evaluation",
+              description: "Master review elements",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "black-representation-film",
+              title: 'Annotated Student Sample: "Black Representation in Film" by Caelia Marshall',
+              description: "Analyze student review writing",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "thinking-critically-entertainment",
+              title: "Writing Process: Thinking Critically About Entertainment",
+              description: "Develop evaluation skills",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "quotations",
+              title: "Editing Focus: Quotations",
+              description: "Use quotations effectively",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "effect-audience",
+              title: "Evaluation: Effect on Audience",
+              description: "Assess audience impact",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "language-culture",
+              title: "Spotlight on ... Language and Culture",
+              description: "Explore cultural contexts in evaluation",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "arts-say-about-you",
+              title: "Portfolio: What the Arts Say About You",
+              description: "Reflect on cultural preferences",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "analytical-report",
+          title: "Analytical Report: Writing from Facts",
+          description: "Create objective, fact-based analytical reports",
+          concepts: [
+            {
+              id: "information-critical-thinking",
+              title: "Information and Critical Thinking",
+              description: "Develop analytical thinking skills",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "analytical-trailblazer-ehrenreich",
+              title: "Analytical Report Trailblazer: Barbara Ehrenreich",
+              description: "Study analytical reporting",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "informal-formal-reports",
+              title: "Glance at Genre: Informal and Formal Analytical Reports",
+              description: "Understand report types",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "us-response-covid",
+              title: 'Annotated Student Sample: "U.S. Response to COVID-19" by Trevor Garcia',
+              description: "Analyze student analytical writing",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "creating-analytical-report",
+              title: "Writing Process: Creating an Analytical Report",
+              description: "Develop analytical reports",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "commas-nonessential-essential",
+              title: "Editing Focus: Commas with Nonessential and Essential Information",
+              description: "Master comma usage",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "reviewing-final-draft",
+              title: "Evaluation: Reviewing the Final Draft",
+              description: "Assess analytical writing quality",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "discipline-specific-language",
+              title: "Spotlight on ... Discipline-Specific and Technical Language",
+              description: "Use appropriate professional language",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "evidence-objectivity",
+              title: "Portfolio: Evidence and Objectivity",
+              description: "Reflect on analytical approaches",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "rhetorical-analysis",
+          title: "Rhetorical Analysis: Interpreting the Art of Rhetoric",
+          description: "Analyze how writers use rhetorical strategies",
+          concepts: [
+            {
+              id: "breaking-whole-parts",
+              title: "Breaking the Whole into Its Parts",
+              description: "Understand analytical decomposition",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "rhetorical-trailblazer-smith",
+              title: "Rhetorical Analysis Trailblazer: Jamil Smith",
+              description: "Study rhetorical analysis experts",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "rhetorical-strategies",
+              title: "Glance at Genre: Rhetorical Strategies",
+              description: "Identify rhetorical techniques",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "evicted-desmond-analysis",
+              title: 'Annotated Student Sample: "Rhetorical Analysis: Evicted by Matthew Desmond" by Eliana Evans',
+              description: "Analyze student rhetorical analysis",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "thinking-critically-rhetoric",
+              title: "Writing Process: Thinking Critically about Rhetoric",
+              description: "Develop rhetorical analysis skills",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "mixed-sentence-constructions",
+              title: "Editing Focus: Mixed Sentence Constructions",
+              description: "Improve sentence clarity",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "rhetorical-analysis-evaluation",
+              title: "Evaluation: Rhetorical Analysis",
+              description: "Assess rhetorical analysis quality",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "business-law",
+              title: "Spotlight on ... Business and Law",
+              description: "Apply rhetoric in professional contexts",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "rhetoric-intellectual-growth",
+              title: "Portfolio: How Thinking Critically about Rhetoric Affects Intellectual Growth",
+              description: "Reflect on rhetorical awareness",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "position-argument",
+          title: "Position Argument: Practicing the Art of Rhetoric",
+          description: "Craft persuasive arguments on important issues",
+          concepts: [
+            {
+              id: "defining-position-argument",
+              title: "Making a Case: Defining a Position Argument",
+              description: "Understand argumentative writing",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "position-trailblazer-blow",
+              title: "Position Argument Trailblazer: Charles Blow",
+              description: "Study effective argumentation",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "thesis-reasoning-evidence",
+              title: "Glance at Genre: Thesis, Reasoning, and Evidence",
+              description: "Master argument structure",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "remarks-university-michigan",
+              title: 'Annotated Sample Reading: "Remarks at the University of Michigan" by Lyndon B. Johnson',
+              description: "Analyze political argumentation",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "creating-position-argument",
+              title: "Writing Process: Creating a Position Argument",
+              description: "Develop persuasive arguments",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "paragraphs-transitions",
+              title: "Editing Focus: Paragraphs and Transitions",
+              description: "Improve paragraph flow",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "varied-appeals",
+              title: "Evaluation: Varied Appeals",
+              description: "Assess persuasive techniques",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "citation",
+              title: "Spotlight on ... Citation",
+              description: "Master citation practices",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "growth-argument-development",
+              title: "Portfolio: Growth in the Development of Argument",
+              description: "Reflect on argumentative skills",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "reasoning-strategies",
+          title: "Reasoning Strategies: Improving Critical Thinking",
+          description: "Develop logical reasoning and critical thinking skills",
+          concepts: [
+            {
+              id: "developing-sense-logic",
+              title: "Developing Your Sense of Logic",
+              description: "Build logical thinking skills",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "reasoning-trailblazer-hebert",
+              title: "Reasoning Trailblazer: Paul D. N. Hebert",
+              description: "Study logical reasoning examples",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "reasoning-strategies-signals",
+              title: "Glance at Genre: Reasoning Strategies and Signal Words",
+              description: "Identify reasoning patterns",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "republic-plato",
+              title: "Annotated Sample Reading: from Book VII of The Republic by Plato",
+              description: "Analyze classical reasoning",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "reasoning-supported-evidence",
+              title: "Writing Process: Reasoning Supported by Evidence",
+              description: "Develop evidence-based reasoning",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "argumentative-research",
+          title: "Argumentative Research: Enhancing the Art of Rhetoric with Evidence",
+          description: "Combine research with persuasive argumentation",
+          concepts: [
+            {
+              id: "introducing-research-evidence",
+              title: "Introducing Research and Research Evidence",
+              description: "Understand research in argumentation",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "argumentative-trailblazer-nosrat",
+              title: "Argumentative Research Trailblazer: Samin Nosrat",
+              description: "Study research-based arguments",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "research-as-evidence",
+              title: "Glance at Genre: Introducing Research as Evidence",
+              description: "Use research effectively in arguments",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "healthy-diets-sustainable",
+              title: 'Annotated Student Sample: "Healthy Diets from Sustainable Sources Can Save the Earth" by Lily Tran',
+              description: "Analyze research-based student writing",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "integrating-research",
+              title: "Writing Process: Integrating Research",
+              description: "Blend research with argumentation",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "integrating-sources-quotations",
+              title: "Editing Focus: Integrating Sources and Quotations",
+              description: "Seamlessly incorporate sources",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "effectiveness-research-paper",
+              title: "Evaluation: Effectiveness of Research Paper",
+              description: "Assess research integration",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "bias-language-research",
+              title: "Spotlight on ... Bias in Language and Research",
+              description: "Identify and avoid bias",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "facts-matter-research",
+              title: "Portfolio: Why Facts Matter in Research Argumentation",
+              description: "Reflect on evidence and truth",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "research-process",
+          title: "Research Process: Accessing and Recording Information",
+          description: "Master the research process from start to finish",
+          concepts: [
+            {
+              id: "existing-sources",
+              title: "The Research Process: Where to Look for Existing Sources",
+              description: "Find and evaluate sources",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "create-sources",
+              title: "The Research Process: How to Create Sources",
+              description: "Conduct primary research",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "research-key-skills",
+              title: "Glance at the Research Process: Key Skills",
+              description: "Develop essential research skills",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "research-log-sample",
+              title: "Annotated Student Sample: Research Log",
+              description: "Learn research documentation",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "notes-synthesizing-log",
+              title: "Research Process: Making Notes, Synthesizing Information, and Keeping a Research Log",
+              description: "Organize and synthesize research",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "ethical-research",
+              title: "Spotlight on ... Ethical Research",
+              description: "Understand research ethics",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "annotated-bibliography",
+          title: "Annotated Bibliography: Gathering, Evaluating, and Documenting Sources",
+          description: "Create comprehensive annotated bibliographies",
+          concepts: [
+            {
+              id: "compiling-sources",
+              title: "Compiling Sources for an Annotated Bibliography",
+              description: "Gather and organize sources",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "citation-style-formatting",
+              title: "Glance at Form: Citation Style, Purpose, and Formatting",
+              description: "Master citation formats",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "healthy-diets-bibliography",
+              title: 'Annotated Student Sample: "Healthy Diets from Sustainable Sources Can Save the Earth" by Lily Tran',
+              description: "Study annotated bibliography examples",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "informing-analyzing",
+              title: "Writing Process: Informing and Analyzing",
+              description: "Write effective annotations",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "case-study-profile",
+          title: "Case Study Profile: What One Person Says About All",
+          description: "Use individual cases to illuminate broader issues",
+          concepts: [
+            {
+              id: "broad-issue-individual",
+              title: "Tracing a Broad Issue in the Individual",
+              description: "Connect individual to universal",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "case-study-trailblazer-ramachandran",
+              title: "Case Study Trailblazer: Vilayanur S. Ramachandran",
+              description: "Study case study methodology",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "observation-description-analysis",
+              title: "Glance at Genre: Observation, Description, and Analysis",
+              description: "Master case study elements",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "louis-victor-leborgne",
+              title: 'Annotated Sample Reading: Case Study on Louis Victor "Tan" Leborgne',
+              description: "Analyze case study writing",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "people-language-interact",
+              title: "Writing Process: Thinking Critically About How People and Language Interact",
+              description: "Develop case study approach",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "words-often-confused",
+              title: "Editing Focus: Words Often Confused",
+              description: "Avoid common word errors",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "presentation-analysis-case",
+              title: "Evaluation: Presentation and Analysis of Case Study",
+              description: "Assess case study effectiveness",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "applied-linguistics",
+              title: "Spotlight on ... Applied Linguistics",
+              description: "Explore language research applications",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "own-uses-language",
+              title: "Portfolio: Your Own Uses of Language",
+              description: "Reflect on personal language use",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "textual-analysis",
+          title: "Print or Textual Analysis: What You Read",
+          description: "Analyze written texts for meaning and technique",
+          concepts: [
+            {
+              id: "author-choices",
+              title: "An Author's Choices: What Text Says and How It Says It",
+              description: "Understand authorial decisions",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "textual-trailblazer-hooks",
+              title: "Textual Analysis Trailblazer: bell hooks",
+              description: "Study textual analysis experts",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "print-textual-analysis-genre",
+              title: "Glance at Genre: Print or Textual Analysis",
+              description: "Understand textual analysis approaches",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "artists-at-work",
+              title: 'Annotated Student Sample: "Artists at Work" by Gwyn Garrison',
+              description: "Analyze student textual analysis",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "thinking-critically-text-analysis",
+              title: "Writing Process: Thinking Critically About Text",
+              description: "Develop textual analysis skills",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "literary-works-present",
+              title: "Editing Focus: Literary Works Live in the Present",
+              description: "Use proper tense for literary analysis",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "self-directed-assessment",
+              title: "Evaluation: Self-Directed Assessment",
+              description: "Self-assess analytical writing",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "humanities",
+              title: "Spotlight on ... Humanities",
+              description: "Apply analysis in humanities contexts",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "academic-personal",
+              title: "Portfolio: The Academic and the Personal",
+              description: "Balance scholarly and personal perspectives",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "image-analysis",
+          title: "Image Analysis: What You See",
+          description: "Analyze visual texts and their rhetorical impact",
+          concepts: [
+            {
+              id: "reading-images",
+              title: '"Reading" Images',
+              description: "Develop visual literacy skills",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "image-trailblazer-ludy",
+              title: "Image Trailblazer: Sara Ludy",
+              description: "Study visual analysis experts",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "image-rhetoric-relationship",
+              title: "Glance at Genre: Relationship Between Image and Rhetoric",
+              description: "Understand visual rhetoric",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "hints-homoerotic",
+              title: 'Annotated Student Sample: "Hints of the Homoerotic" by Leo Davis',
+              description: "Analyze student image analysis",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "writing-persuasively-images",
+              title: "Writing Process: Thinking Critically and Writing Persuasively About Images",
+              description: "Develop visual analysis writing",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "descriptive-diction",
+              title: "Editing Focus: Descriptive Diction",
+              description: "Use precise descriptive language",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "analysis-image-relationship",
+              title: "Evaluation: Relationship Between Analysis and Image",
+              description: "Assess visual analysis quality",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "video-film",
+              title: "Spotlight on ... Video and Film",
+              description: "Extend analysis to moving images",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "text-image-interplay",
+              title: "Portfolio: Interplay Between Text and Image",
+              description: "Explore multimodal communication",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "multimodal-online-writing",
+          title: "Multimodal and Online Writing: Creative Interaction between Text and Image",
+          description: "Create multimodal digital communications",
+          concepts: [
+            {
+              id: "mixing-genres-modes",
+              title: "Mixing Genres and Modes",
+              description: "Combine different communication modes",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "multimodal-trailblazer-bolatagici",
+              title: "Multimodal Trailblazer: Torika Bolatagici",
+              description: "Study multimodal communication experts",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "genre-audience-purpose",
+              title: "Glance at Genre: Genre, Audience, Purpose, Organization",
+              description: "Design for digital audiences",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "celebrating-win-win",
+              title: 'Annotated Sample Reading: "Celebrating a Win-Win" by Alexandra Dapolito Dunn',
+              description: "Analyze multimodal texts",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "multimodal-advocacy-project",
+              title: "Writing Process: Create a Multimodal Advocacy Project",
+              description: "Develop multimodal projects",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "transitions",
+              title: "Evaluation: Transitions",
+              description: "Connect multimodal elements",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "technology",
+              title: "Spotlight on ... Technology",
+              description: "Leverage digital tools",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "multimodalism",
+              title: "Portfolio: Multimodalism",
+              description: "Reflect on multimodal communication",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "scripting-public-forum",
+          title: "Scripting for the Public Forum: Writing to Speak",
+          description: "Write for oral presentation and public speaking",
+          concepts: [
+            {
+              id: "writing-speaking-activism",
+              title: "Writing, Speaking, and Activism",
+              description: "Connect writing to social action",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "podcast-trailblazer-wong",
+              title: "Podcast Trailblazer: Alice Wong",
+              description: "Study audio communication",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "language-performance-visuals",
+              title: "Glance at Genre: Language Performance and Visuals",
+              description: "Design for spoken delivery",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "dot-regulations-discriminatory",
+              title: 'Annotated Student Sample: "Are New DOT Regulations Discriminatory?" by Zain A. Kumar',
+              description: "Analyze writing for speaking",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "writing-to-speak",
+              title: "Writing Process: Writing to Speak",
+              description: "Adapt writing for oral presentation",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "bridging-writing-speaking",
+              title: "Evaluation: Bridging Writing and Speaking",
+              description: "Assess oral communication writing",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "delivery-public-speaking",
+              title: "Spotlight on ... Delivery/Public Speaking",
+              description: "Master presentation skills",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "everyday-rhetoric",
+              title: "Portfolio: Everyday Rhetoric, Rhetoric Every Day",
+              description: "Recognize rhetoric in daily life",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "portfolio-reflection",
+          title: "Portfolio Reflection: Your Growth as a Writer",
+          description: "Reflect on your development as a writer",
+          concepts: [
+            {
+              id: "thinking-critically-semester",
+              title: "Thinking Critically about Your Semester",
+              description: "Assess your learning journey",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "reflection-trailblazer-cisneros",
+              title: "Reflection Trailblazer: Sandra Cisneros",
+              description: "Study reflective writing",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "purpose-structure",
+              title: "Glance at Genre: Purpose and Structure",
+              description: "Organize reflective writing",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "dont-expect-congrats",
+              title: 'Annotated Sample Reading: "Don\'t Expect Congrats" by Dale Trumbore',
+              description: "Analyze reflective writing",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "looking-back-forward",
+              title: "Writing Process: Looking Back, Looking Forward",
+              description: "Develop reflective perspective",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "pronouns",
+              title: "Editing Focus: Pronouns",
+              description: "Use pronouns effectively",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "evaluating-self-reflection",
+              title: "Evaluation: Evaluating Self-Reflection",
+              description: "Assess reflective writing quality",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "pronouns-context",
+              title: "Spotlight on ... Pronouns in Context",
+              description: "Understand pronoun usage in context",
               completed: false,
               locked: true,
               progress: 0
@@ -1523,31 +2944,518 @@ By the end of this course, you'll have a strong foundation in writing principles
           id: "overview",
           title: "Overview",
           description: "Introduction to philosophical thinking and major traditions",
-          content: `Philosophy explores fundamental questions about existence, knowledge, values, reason, mind, and ethics. This course provides an introduction to major philosophical traditions and thinkers.
+          content: `Philosophy explores fundamental questions about existence, knowledge, values, reason, mind, and ethics. This comprehensive course provides an introduction to major philosophical traditions and thinkers from around the world.
 
-You'll examine classic philosophical problems and learn to think critically about complex issues. The course covers major areas including metaphysics, epistemology, ethics, and logic.
+You'll examine classic philosophical problems and learn to think critically about complex issues. The course covers major areas including metaphysics, epistemology, ethics, logic, and political philosophy.
 
 Through reading primary texts and engaging in philosophical dialogue, you'll develop analytical thinking skills and learn to construct and evaluate arguments.
 
-By the end of this course, you'll have a solid foundation in philosophical thinking and be able to engage thoughtfully with life's biggest questions.`
+By the end of this course, you'll have a solid foundation in philosophical thinking and be able to engage thoughtfully with life's biggest questions.
+
+This course covers 12 comprehensive chapters spanning ancient wisdom to contemporary thought, preparing you for advanced philosophical study and critical thinking in any field.`
         },
         {
-          id: "ancient-philosophy",
-          title: "Ancient Philosophy",
-          description: "Explore the foundations of Western philosophical thought",
+          id: "introduction-to-philosophy",
+          title: "Introduction to Philosophy",
+          description: "Explore the fundamental nature and methods of philosophical inquiry",
           concepts: [
             {
-              id: "socrates",
-              title: "Socrates and the Examined Life",
-              description: "Learn about Socratic questioning and ethics",
+              id: "what-is-philosophy",
+              title: "What Is Philosophy?",
+              description: "Understand the nature and scope of philosophical inquiry",
               completed: false,
               locked: false,
               progress: 0
             },
             {
-              id: "plato",
-              title: "Plato's Theory of Forms",
-              description: "Understand Plato's metaphysical theories",
+              id: "how-philosophers-arrive-truth",
+              title: "How Do Philosophers Arrive at Truth?",
+              description: "Learn about philosophical methods and approaches to truth",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "socrates-paradigmatic-philosopher",
+              title: "Socrates as a Paradigmatic Historical Philosopher",
+              description: "Study Socrates' method and influence on philosophy",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "overview-contemporary-philosophy",
+              title: "An Overview of Contemporary Philosophy",
+              description: "Survey modern philosophical movements and issues",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "critical-thinking-research-reading-writing",
+          title: "Critical Thinking, Research, Reading, and Writing",
+          description: "Develop essential skills for philosophical inquiry and argumentation",
+          concepts: [
+            {
+              id: "brain-inference-machine",
+              title: "The Brain Is an Inference Machine",
+              description: "Understand how the mind processes information and makes inferences",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "overcoming-cognitive-biases",
+              title: "Overcoming Cognitive Biases and Engaging in Critical Reflection",
+              description: "Learn to identify and overcome common thinking errors",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "developing-good-habits-mind",
+              title: "Developing Good Habits of Mind",
+              description: "Cultivate intellectual virtues and thinking skills",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "gathering-information-evaluating-sources",
+              title: "Gathering Information, Evaluating Sources, and Understanding Evidence",
+              description: "Learn research methods and source evaluation for philosophy",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "reading-philosophy",
+              title: "Reading Philosophy",
+              description: "Develop skills for reading and interpreting philosophical texts",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "writing-philosophy-papers",
+              title: "Writing Philosophy Papers",
+              description: "Learn to write clear, persuasive philosophical arguments",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "early-history-philosophy-world",
+          title: "The Early History of Philosophy around the World",
+          description: "Explore diverse philosophical traditions from various cultures",
+          concepts: [
+            {
+              id: "indigenous-philosophy",
+              title: "Indigenous Philosophy",
+              description: "Study philosophical traditions of indigenous peoples",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "classical-indian-philosophy",
+              title: "Classical Indian Philosophy",
+              description: "Explore Hindu, Buddhist, and Jain philosophical traditions",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "classical-chinese-philosophy",
+              title: "Classical Chinese Philosophy",
+              description: "Study Confucian, Daoist, and other Chinese philosophical schools",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "emergence-classical-philosophy",
+          title: "The Emergence of Classical Philosophy",
+          description: "Examine the development of Western philosophical traditions",
+          concepts: [
+            {
+              id: "historiography-history-philosophy",
+              title: "Historiography and the History of Philosophy",
+              description: "Understand how we study and interpret philosophical history",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "classical-philosophy",
+              title: "Classical Philosophy",
+              description: "Study ancient Greek and Roman philosophical traditions",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "jewish-christian-islamic-philosophy",
+              title: "Jewish, Christian, and Islamic Philosophy",
+              description: "Explore medieval religious philosophical traditions",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "logic-reasoning",
+          title: "Logic and Reasoning",
+          description: "Master the tools of logical analysis and argument construction",
+          concepts: [
+            {
+              id: "philosophical-methods-discovering-truth",
+              title: "Philosophical Methods for Discovering Truth",
+              description: "Learn systematic approaches to philosophical inquiry",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "logical-statements",
+              title: "Logical Statements",
+              description: "Understand the structure and types of logical statements",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "arguments",
+              title: "Arguments",
+              description: "Learn to construct and evaluate philosophical arguments",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "types-inferences",
+              title: "Types of Inferences",
+              description: "Study deductive, inductive, and abductive reasoning",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "informal-fallacies",
+              title: "Informal Fallacies",
+              description: "Identify and avoid common logical fallacies",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "metaphysics",
+          title: "Metaphysics",
+          description: "Explore fundamental questions about reality and existence",
+          concepts: [
+            {
+              id: "substance",
+              title: "Substance",
+              description: "Examine theories about the basic building blocks of reality",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "self-identity",
+              title: "Self and Identity",
+              description: "Study questions of personal identity and the nature of self",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "cosmology-existence-god",
+              title: "Cosmology and the Existence of God",
+              description: "Explore arguments for and against the existence of God",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "free-will",
+              title: "Free Will",
+              description: "Examine debates about determinism and human freedom",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "epistemology",
+          title: "Epistemology",
+          description: "Study the nature of knowledge, belief, and justification",
+          concepts: [
+            {
+              id: "what-epistemology-studies",
+              title: "What Epistemology Studies",
+              description: "Understand the scope and methods of epistemological inquiry",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "knowledge",
+              title: "Knowledge",
+              description: "Examine different theories of knowledge and its conditions",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "justification",
+              title: "Justification",
+              description: "Study what makes beliefs justified or warranted",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "skepticism",
+              title: "Skepticism",
+              description: "Explore skeptical challenges to knowledge claims",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "applied-epistemology",
+              title: "Applied Epistemology",
+              description: "Apply epistemological principles to practical questions",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "value-theory",
+          title: "Value Theory",
+          description: "Explore questions about values, ethics, and aesthetic judgment",
+          concepts: [
+            {
+              id: "fact-value-distinction",
+              title: "The Fact-Value Distinction",
+              description: "Examine the relationship between facts and values",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "basic-questions-values",
+              title: "Basic Questions about Values",
+              description: "Study fundamental questions in value theory",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "metaethics",
+              title: "Metaethics",
+              description: "Explore the nature and meaning of ethical claims",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "well-being",
+              title: "Well-Being",
+              description: "Study theories of human flourishing and the good life",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "aesthetics",
+              title: "Aesthetics",
+              description: "Examine philosophical questions about art and beauty",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "normative-moral-theory",
+          title: "Normative Moral Theory",
+          description: "Study systematic approaches to moral reasoning and judgment",
+          concepts: [
+            {
+              id: "requirements-normative-moral-theory",
+              title: "Requirements of a Normative Moral Theory",
+              description: "Understand what makes a moral theory adequate",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "consequentialism",
+              title: "Consequentialism",
+              description: "Study moral theories based on outcomes and consequences",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "deontology",
+              title: "Deontology",
+              description: "Examine duty-based approaches to moral reasoning",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "virtue-ethics",
+              title: "Virtue Ethics",
+              description: "Study character-based approaches to moral philosophy",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "daoism",
+              title: "Daoism",
+              description: "Explore Daoist approaches to ethics and the good life",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "feminist-theories-ethics",
+              title: "Feminist Theories of Ethics",
+              description: "Study feminist perspectives on moral reasoning",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "applied-ethics",
+          title: "Applied Ethics",
+          description: "Apply ethical theories to contemporary moral issues",
+          concepts: [
+            {
+              id: "challenge-bioethics",
+              title: "The Challenge of Bioethics",
+              description: "Examine ethical issues in medicine and biology",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "environmental-ethics",
+              title: "Environmental Ethics",
+              description: "Study moral obligations to the natural world",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "business-ethics-emerging-technology",
+              title: "Business Ethics and Emerging Technology",
+              description: "Explore ethical issues in business and technology",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "political-philosophy",
+          title: "Political Philosophy",
+          description: "Examine questions of government, justice, and political authority",
+          concepts: [
+            {
+              id: "historical-perspectives-government",
+              title: "Historical Perspectives on Government",
+              description: "Study the evolution of political thought and institutions",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "forms-government",
+              title: "Forms of Government",
+              description: "Examine different systems of political organization",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "political-legitimacy-duty",
+              title: "Political Legitimacy and Duty",
+              description: "Study the justification of political authority",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "political-ideologies",
+              title: "Political Ideologies",
+              description: "Explore major political theories and movements",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "contemporary-philosophies-social-theories",
+          title: "Contemporary Philosophies and Social Theories",
+          description: "Study modern developments in philosophical and social thought",
+          concepts: [
+            {
+              id: "enlightenment-social-theory",
+              title: "Enlightenment Social Theory",
+              description: "Examine Enlightenment approaches to society and politics",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "marxist-solution",
+              title: "The Marxist Solution",
+              description: "Study Marxist critiques of capitalism and society",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "continental-philosophy-challenge",
+              title: "Continental Philosophy's Challenge to Enlightenment Theories",
+              description: "Explore continental critiques of Enlightenment thought",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "frankfurt-school",
+              title: "The Frankfurt School",
+              description: "Study critical theory and the Frankfurt School tradition",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "postmodernism",
+              title: "Postmodernism",
+              description: "Examine postmodern critiques of traditional philosophy",
               completed: false,
               locked: true,
               progress: 0
