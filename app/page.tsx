@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import { useSearchParams } from "next/navigation"
 import { useLocalStorageBoolean } from "@/hooks/use-local-storage"
 import { MainLayout } from "@/components/templates/main-layout"
+import { SignInPage } from "@/components/pages/sign-in-page"
 import { OnboardingPage } from "@/components/pages/onboarding-page"
 import { DashboardPage } from "@/components/pages/dashboard-page"
 import { DailyLearningPage } from "@/components/pages/daily-learning-page"
@@ -13,9 +14,14 @@ import { ProfilePage } from "@/components/pages/profile-page"
 import { ClassesPage } from "@/components/pages/classes-page"
 
 export default function App() {
+  const [isSignedIn, setIsSignedIn, isLoadingSignIn] = useLocalStorageBoolean("user-signed-in", false)
   const [isOnboarded, setIsOnboarded, isLoadingOnboarding] = useLocalStorageBoolean("onboarding-complete", false)
   const [activeTab, setActiveTab] = useState("learning")
   const searchParams = useSearchParams()
+
+  const handleSignIn = () => {
+    setIsSignedIn(true)
+  }
 
   const handleOnboardingComplete = () => {
     setIsOnboarded(true)
@@ -30,7 +36,7 @@ export default function App() {
   }, [searchParams])
 
   // Show loading state while checking localStorage
-  if (isLoadingOnboarding) {
+  if (isLoadingSignIn || isLoadingOnboarding) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-muted-foreground">Loading...</div>
@@ -38,6 +44,16 @@ export default function App() {
     )
   }
 
+  // Check if user is signed in
+  if (!isSignedIn) {
+    return (
+      <div className="min-h-screen bg-background">
+        <SignInPage onSignIn={handleSignIn} />
+      </div>
+    )
+  }
+
+  // Check if user has completed onboarding
   if (!isOnboarded) {
     return (
       <div className="min-h-screen bg-background">

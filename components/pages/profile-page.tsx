@@ -8,7 +8,7 @@ import { Label } from "@/components/ui/label"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
-import { User, BookOpen, Calendar, Clock, Award, Target } from "lucide-react"
+import { User, BookOpen, Calendar, Clock, Award, Target, LogOut } from "lucide-react"
 
 interface UserProfile {
   interests: string[]
@@ -48,6 +48,13 @@ export function ProfilePage() {
       default:
         return "Custom pace"
     }
+  }
+
+  const signOut = () => {
+    localStorage.removeItem("user-signed-in")
+    localStorage.removeItem("onboarding-complete")
+    localStorage.removeItem("user-profile")
+    window.location.reload()
   }
 
   return (
@@ -190,6 +197,32 @@ export function ProfilePage() {
                 <div className="text-2xl font-bold text-white">78%</div>
                 <div className="text-sm text-gray-300">Accuracy</div>
               </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center space-x-2 text-white">
+              <LogOut className="h-5 w-5" />
+              <span>Account</span>
+            </CardTitle>
+            <CardDescription>Manage your account session</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="p-4 border border-orange-200 rounded-lg bg-orange-50 dark:border-orange-900/20 dark:bg-orange-900/5">
+              <div className="font-medium text-orange-700 dark:text-orange-300 mb-2">Sign Out</div>
+              <div className="text-sm text-muted-foreground mb-4">
+                Sign out of your account and return to the sign-in page. Your learning progress will be preserved.
+              </div>
+              <Button 
+                variant="outline" 
+                onClick={signOut} 
+                className="border-orange-200 text-orange-700 hover:bg-orange-50 dark:border-orange-900/20 dark:text-orange-300 dark:hover:bg-orange-900/10"
+              >
+                <LogOut className="h-4 w-4 mr-2" />
+                Sign Out
+              </Button>
             </div>
           </CardContent>
         </Card>

@@ -79,6 +79,13 @@ export function SettingsPage() {
     window.location.reload()
   }
 
+  const signOut = () => {
+    localStorage.removeItem("user-signed-in")
+    localStorage.removeItem("onboarding-complete")
+    localStorage.removeItem("user-profile")
+    window.location.reload()
+  }
+
   if (!userProfile) {
     return <div>Loading...</div>
   }
@@ -365,11 +372,20 @@ export function SettingsPage() {
           <CardHeader>
             <CardTitle className="flex items-center space-x-2">
               <RotateCcw className="h-5 w-5" />
-              <span>Reset Options</span>
+              <span>Account Actions</span>
             </CardTitle>
-            <CardDescription>Start over or reset your learning progress</CardDescription>
+            <CardDescription>Sign out or reset your learning progress</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
+            <div className="p-4 border border-orange-200 rounded-lg bg-orange-50 dark:border-orange-900/20 dark:bg-orange-900/5">
+              <div className="font-medium text-orange-700 dark:text-orange-300 mb-2">Sign Out</div>
+              <div className="text-sm text-muted-foreground mb-4">
+                Sign out of your account and return to the sign-in page. Your data will be preserved.
+              </div>
+              <Button variant="outline" onClick={signOut} className="border-orange-200 text-orange-700 hover:bg-orange-50 dark:border-orange-900/20 dark:text-orange-300 dark:hover:bg-orange-900/10">
+                Sign Out
+              </Button>
+            </div>
             <div className="p-4 border border-destructive/20 rounded-lg bg-destructive/5">
               <div className="font-medium text-destructive mb-2">Reset Onboarding</div>
               <div className="text-sm text-muted-foreground mb-4">
