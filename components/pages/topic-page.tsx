@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { ConceptList } from "../organisms/concept-list"
 import { SectionNavigation } from "../organisms/section-navigation"
+import { LearningPage } from "./learning-page"
 
 interface TopicPageProps {
   topicId: string
@@ -29,6 +30,54 @@ interface Concept {
   completed: boolean
   locked: boolean
   progress: number
+}
+
+// Subject color mapping - matches the colors from classes-page.tsx
+const getSubjectColorForTopic = (topicId: string) => {
+  const topicToSubjectMap: Record<string, { gradient: string; shadowColor: string }> = {
+    // Math topics
+    "college-algebra": {
+      gradient: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+      shadowColor: "rgba(59, 130, 246, 0.4)" // blue-500 with 40% opacity
+    },
+    "statistics": {
+      gradient: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+      shadowColor: "rgba(59, 130, 246, 0.4)" // blue-500 with 40% opacity
+    },
+    // Literature topics
+    "writing": {
+      gradient: "linear-gradient(135deg, #f093fb 0%, #f5576c 100%)",
+      shadowColor: "rgba(236, 72, 153, 0.4)" // pink-500 with 40% opacity
+    },
+    // Humanities topics
+    "philosophy": {
+      gradient: "linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)",
+      shadowColor: "rgba(6, 182, 212, 0.4)" // cyan-500 with 40% opacity
+    },
+    "world-history": {
+      gradient: "linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)",
+      shadowColor: "rgba(6, 182, 212, 0.4)" // cyan-500 with 40% opacity
+    },
+    // Science topics
+    "biology": {
+      gradient: "linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)",
+      shadowColor: "rgba(34, 197, 94, 0.4)" // green-500 with 40% opacity
+    },
+    "anatomy": {
+      gradient: "linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)",
+      shadowColor: "rgba(34, 197, 94, 0.4)" // green-500 with 40% opacity
+    },
+    // Default for unknown topics (like data-structures-algorithms)
+    "data-structures-algorithms": {
+      gradient: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+      shadowColor: "rgba(59, 130, 246, 0.4)" // blue-500 with 40% opacity
+    }
+  }
+
+  return topicToSubjectMap[topicId] || {
+    gradient: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+    shadowColor: "rgba(59, 130, 246, 0.4)" // blue-500 with 40% opacity
+  }
 }
 
 // Comprehensive mock data with rich content for multiple subjects
@@ -967,6 +1016,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and u
 
 export function TopicPage({ topicId, title, sections, onBack }: TopicPageProps) {
   const [activeSection, setActiveSection] = useState("overview")
+  const [activeConcept, setActiveConcept] = useState<{ id: string; title: string } | null>(null)
   
   // Ensure topicId is a string and handle potential undefined cases
   const safeTopicId = typeof topicId === 'string' ? topicId : 'unknown'
@@ -974,6 +1024,9 @@ export function TopicPage({ topicId, title, sections, onBack }: TopicPageProps) 
   // Use mock data if no sections provided, otherwise use provided data
   const topicData = sections && sections.length > 0 ? { title, sections } : getTopicData(safeTopicId)
   const currentSection = topicData?.sections?.find(section => section.id === activeSection)
+  
+  // Get subject colors for this topic
+  const subjectColors = getSubjectColorForTopic(safeTopicId)
 
   // Early return if no topic data
   if (!topicData || !topicData.sections || topicData.sections.length === 0) {
@@ -994,26 +1047,50 @@ export function TopicPage({ topicId, title, sections, onBack }: TopicPageProps) 
   }
 
   const handleConceptClick = (conceptId: string) => {
-    // TODO: Navigate to concept details or start learning
-    console.log(`Opening concept: ${conceptId}`)
+    // Find the concept to get its title
+    const concept = topicData.sections
+      .flatMap(section => section.concepts || [])
+      .find(c => c.id === conceptId)
+    
+    if (concept) {
+      setActiveConcept({ id: conceptId, title: concept.title })
+    }
+  }
+
+  const handleBackFromLearning = () => {
+    setActiveConcept(null)
+  }
+
+  // Show learning page if concept is active
+  if (activeConcept) {
+    return (
+      <LearningPage
+        conceptId={activeConcept.id}
+        conceptTitle={activeConcept.title}
+        onBack={handleBackFromLearning}
+      />
+    )
   }
 
   return (
     <div className="space-y-0">
       {/* Colored Banner with Title */}
-      <div className="bg-gradient-to-r from-purple-600 to-blue-600 text-white -mx-6 -mt-6 px-6 py-12">
-        <div className="max-w-7xl mx-auto relative">
-          <div className="absolute left-0 top-0">
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={onBack}
-              className="text-white/80 hover:text-white hover:bg-white/20"
-            >
-              <ChevronLeft className="h-4 w-4 mr-2" />
-              Back to Classes
-            </Button>
-          </div>
+      <div 
+        className="text-white -mx-6 -mt-6 px-6 py-16 relative"
+        style={{ background: subjectColors.gradient }}
+      >
+        <div className="absolute left-4 top-4">
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={onBack}
+            className="text-white/80 hover:text-white hover:bg-white/20"
+          >
+            <ChevronLeft className="h-4 w-4 mr-2" />
+            Back to Classes
+          </Button>
+        </div>
+        <div className="max-w-7xl mx-auto">
           <div className="text-center">
             <h1 className="text-4xl font-bold">{topicData.title}</h1>
           </div>
@@ -1022,11 +1099,26 @@ export function TopicPage({ topicId, title, sections, onBack }: TopicPageProps) 
 
       {/* Main Content */}
       <div className="pt-8">
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Sidebar Navigation */}
-          <div className="lg:col-span-2">
-            <div className="sticky top-6">
-              <Card className="transition-all duration-300 hover:shadow-2xl hover:shadow-purple-500/50 hover:drop-shadow-2xl">
+          <div className="lg:col-span-1">
+            <div className="sticky top-6 -mt-16">
+              <Card 
+                className="transition-all duration-300 hover:shadow-2xl hover:drop-shadow-2xl"
+                style={{
+                  '--hover-shadow': `0 25px 50px -12px ${subjectColors.shadowColor}`,
+                  '&:hover': {
+                    boxShadow: `0 25px 50px -12px ${subjectColors.shadowColor}`
+                  }
+                } as React.CSSProperties}
+                onMouseEnter={(e) => {
+                  (e.currentTarget as HTMLElement).style.boxShadow = `0 25px 50px -12px ${subjectColors.shadowColor}`
+                }}
+                onMouseLeave={(e) => {
+                  (e.currentTarget as HTMLElement).style.boxShadow = ''
+                }}
+              >
                 <CardContent className="p-0">
                   <SectionNavigation
                     sections={topicData.sections}
@@ -1039,7 +1131,7 @@ export function TopicPage({ topicId, title, sections, onBack }: TopicPageProps) 
           </div>
 
           {/* Content Area */}
-          <div className="lg:col-span-3">
+          <div className="lg:col-span-2">
             {currentSection ? (
               <div className="space-y-6">
                 <div className="space-y-2">
@@ -1080,6 +1172,7 @@ export function TopicPage({ topicId, title, sections, onBack }: TopicPageProps) 
               </div>
             )}
           </div>
+        </div>
         </div>
       </div>
     </div>

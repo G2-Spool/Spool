@@ -43,7 +43,7 @@ export function SectionNavigation({ sections, activeSection, onSectionChange }: 
       <div className="p-4 border-b">
         <div className="flex items-center gap-2 mb-2">
           <FileText className="h-5 w-5 text-primary" />
-          <h3 className="font-semibold text-lg">Course Content</h3>
+          <h3 className="font-semibold text-lg">Course Sections</h3>
         </div>
       </div>
       
@@ -58,8 +58,8 @@ export function SectionNavigation({ sections, activeSection, onSectionChange }: 
               key={section.id}
               variant="ghost"
               className={cn(
-                "w-full justify-start p-4 mb-2 text-left min-h-[80px]",
-                isActive && "bg-accent text-accent-foreground"
+                "w-full justify-start p-4 mb-2 text-left min-h-[80px] border-2 border-transparent",
+                isActive && "border-primary"
               )}
               onClick={() => onSectionChange(section.id)}
             >
