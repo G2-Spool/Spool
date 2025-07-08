@@ -1,52 +1,51 @@
-# Spool Content Service
+# Spool Frontend
 
-A microservice for AI-powered content generation and personalized learning assessments, built with Express.js, TypeScript, and integrated with Langflow, Pinecone, and PostgreSQL.
+Next.js frontend for the Spool educational platform. This frontend connects to separate backend microservices for authentication and content generation.
+
+## Architecture
+
+This is a **Next.js frontend** that connects to:
+- **Auth Service** (`../spool-auth-service`) - Authentication via AWS Cognito, deployed on ECS
+- **Content Service** (`../spool-content-service`) - AI-powered content generation, deployed on ECS
+
+## Deployment
+
+- **Frontend**: Deployed via AWS Amplify
+- **Backend Services**: Deployed via CodeBuild → ECR → ECS
 
 ## Features
 
-- **AI Content Generation**: Langflow integration for creating personalized exercises
-- **Cognitive Assessment**: Adaptive learning path generation based on user performance
-- **Vector Search**: Pinecone integration for semantic content matching
-- **Exercise Management**: CRUD operations for learning exercises
-- **Learning Analytics**: Track user progress and performance metrics
-- **Personalized Recommendations**: AI-driven content suggestions
-- **Database Integration**: PostgreSQL for persistent data storage
-- **RESTful API**: Clean API design for frontend integration
+- **Authentication**: User registration, sign-in, and profile management
+- **Personalized Learning**: AI-generated exercises and assessments
+- **Progress Tracking**: Learning analytics and progress visualization
+- **Responsive Design**: Modern UI built with Radix UI and Tailwind CSS
+- **Real-time Updates**: WebSocket integration for live features
 
-## API Endpoints
+## API Integration
 
-### Content Generation
-- `POST /content/generate-exercise` - Generate personalized exercise
-- `POST /content/assess-cognitive` - Perform cognitive assessment
-- `GET /content/exercises/:id` - Get exercise by ID
-- `PUT /content/exercises/:id` - Update exercise
-- `DELETE /content/exercises/:id` - Delete exercise
+The frontend connects to backend services via configured endpoints:
 
-### Recommendations
-- `GET /content/recommendations/:userId` - Get personalized recommendations
-- `POST /content/search` - Semantic search for content
-
-### Analytics
-- `GET /content/analytics/:userId` - Get user learning analytics
-- `POST /content/track-attempt` - Track exercise attempt
-
-### Health
-- `GET /health` - Service health check
-
-## Environment Variables
+### Environment Variables
 
 ```env
-PORT=3002
-NODE_ENV=development
-DATABASE_URL=postgresql://user:password@localhost:5432/spool_content
-PINECONE_API_KEY=your-pinecone-api-key
-PINECONE_INDEX_NAME=spool-content-index
-LANGFLOW_API_URL=http://localhost:7860
-LANGFLOW_API_KEY=your-langflow-api-key
-OPENAI_API_KEY=your-openai-api-key
+NEXT_PUBLIC_AUTH_SERVICE_URL=https://auth-service.spool.com
+NEXT_PUBLIC_CONTENT_SERVICE_URL=https://content-service.spool.com
+NEXT_PUBLIC_INTERVIEW_SERVICE_URL=https://interview-service.spool.com
 ```
 
-## Local Development
+### Auth Service Integration
+- User authentication and registration
+- JWT token management
+- Profile management
+- Password reset functionality
+
+### Content Service Integration
+- Exercise generation and assessment
+- Learning path recommendations
+- Progress tracking and analytics
+- Semantic content search
+
+## Development
 
 1. **Install dependencies**:
 ```bash
@@ -55,25 +54,16 @@ npm install
 
 2. **Set up environment variables**:
 ```bash
-cp .env.example .env
-# Edit .env with your configuration
+cp .env.example .env.local
+# Edit .env.local with your backend service URLs
 ```
 
-3. **Set up PostgreSQL database**:
-```bash
-# Create database
-createdb spool_content
-
-# Run migrations (if using migrations)
-npm run migrate
-```
-
-4. **Run in development mode**:
+3. **Run development server**:
 ```bash
 npm run dev
 ```
 
-5. **Build for production**:
+4. **Build for production**:
 ```bash
 npm run build
 npm start
