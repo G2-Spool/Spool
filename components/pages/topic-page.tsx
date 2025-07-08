@@ -3470,32 +3470,596 @@ This course covers 12 comprehensive chapters spanning ancient wisdom to contempo
         {
           id: "overview",
           title: "Overview",
-          description: "Journey through major events and civilizations",
-          content: `World History takes you on a journey through the major events, civilizations, and developments that have shaped human society across the globe.
+          description: "Journey through major events and civilizations from 1200 to present",
+          content: `World History takes you on a comprehensive journey through the major events, civilizations, and developments that have shaped human society across the globe from 1200 to the present day.
 
-This course examines the interconnected nature of world cultures and civilizations, from ancient times to the present day. You'll explore political, social, economic, and cultural developments across different regions.
+This course examines the interconnected nature of world cultures and civilizations, exploring how trade, empires, revolutions, and global forces have shaped our modern world. You'll study the rise and fall of great civilizations, the impact of industrialization, and the challenges of the contemporary world.
 
-Through studying primary sources and historical evidence, you'll develop skills in historical thinking and analysis. The course emphasizes understanding how past events continue to influence our world today.
+Through analyzing primary sources and historical evidence, you'll develop critical thinking skills and learn to understand complex historical patterns and relationships.
 
-By the end of this course, you'll have a comprehensive understanding of world history and the ability to think critically about historical events and their significance.`
+By the end of this course, you'll have a comprehensive understanding of world history and the ability to think critically about how historical events continue to influence our interconnected world today.
+
+This course covers 15 comprehensive chapters from medieval trade networks through contemporary global challenges, preparing you for advanced historical study and informed global citizenship.`
         },
         {
-          id: "ancient-civilizations",
-          title: "Ancient Civilizations",
-          description: "Explore the earliest human civilizations",
+          id: "understanding-past",
+          title: "Understanding the Past",
+          description: "Learn the foundations of historical thinking and methodology",
           concepts: [
             {
-              id: "mesopotamia",
-              title: "Ancient Mesopotamia",
-              description: "Study the cradle of civilization",
+              id: "developing-global-perspective",
+              title: "Developing a Global Perspective",
+              description: "Understand how to approach history from a global viewpoint",
               completed: false,
               locked: false,
               progress: 0
             },
             {
-              id: "egypt",
-              title: "Ancient Egypt",
-              description: "Explore Egyptian civilization and culture",
+              id: "primary-sources",
+              title: "Primary Sources",
+              description: "Learn to analyze and interpret historical documents and evidence",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "causation-interpretation-history",
+              title: "Causation and Interpretation in History",
+              description: "Understand how historians determine causes and interpret historical events",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "exchange-east-asia-indian-ocean",
+          title: "Exchange in East Asia and the Indian Ocean",
+          description: "Explore the great trading networks that connected Asia",
+          concepts: [
+            {
+              id: "india-international-connections",
+              title: "India and International Connections",
+              description: "Study India's role in medieval international trade and diplomacy",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "malacca-sultanate",
+              title: "The Malacca Sultanate",
+              description: "Examine the powerful trading state that controlled Southeast Asian commerce",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "exchange-east-asia",
+              title: "Exchange in East Asia",
+              description: "Analyze trade and cultural exchange in China, Japan, and Korea",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "early-modern-africa-wider-world",
+          title: "Early Modern Africa and the Wider World",
+          description: "Study Africa's great empires and their global connections",
+          concepts: [
+            {
+              id: "roots-african-trade",
+              title: "The Roots of African Trade",
+              description: "Understand the foundations of African commercial networks",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "songhai-empire",
+              title: "The Songhai Empire",
+              description: "Explore one of Africa's greatest medieval empires",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "swahili-coast",
+              title: "The Swahili Coast",
+              description: "Study the trading cities of East Africa and their Indian Ocean connections",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "trans-saharan-slave-trade",
+              title: "The Trans-Saharan Slave Trade",
+              description: "Examine the impact of slavery on African societies",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "islamic-world",
+          title: "The Islamic World",
+          description: "Explore the great Islamic empires and their global influence",
+          concepts: [
+            {
+              id: "connected-islamic-world",
+              title: "A Connected Islamic World",
+              description: "Understand the unity and diversity of Islamic civilization",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "ottoman-empire",
+              title: "The Ottoman Empire",
+              description: "Study the rise and expansion of the Ottoman Empire",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "safavid-empire",
+              title: "The Safavid Empire",
+              description: "Examine the Persian Safavid Empire and its cultural achievements",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "foundations-atlantic-world",
+          title: "Foundations of the Atlantic World",
+          description: "Study the creation of Atlantic trade networks and colonial systems",
+          concepts: [
+            {
+              id: "protestant-reformation",
+              title: "The Protestant Reformation",
+              description: "Understand the religious revolution that transformed Europe",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "crossing-atlantic",
+              title: "Crossing the Atlantic",
+              description: "Study European exploration and colonization of the Americas",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "mercantilist-economy",
+              title: "The Mercantilist Economy",
+              description: "Examine early modern economic theories and practices",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "atlantic-slave-trade",
+              title: "The Atlantic Slave Trade",
+              description: "Analyze the devastating impact of the Atlantic slave trade",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "colonization-economic-expansion",
+          title: "Colonization and Economic Expansion",
+          description: "Examine European expansion and the rise of global capitalism",
+          concepts: [
+            {
+              id: "european-colonization-americas",
+              title: "European Colonization in the Americas",
+              description: "Study the establishment and development of European colonies",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "rise-global-economy",
+              title: "The Rise of a Global Economy",
+              description: "Understand the emergence of worldwide economic connections",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "capitalism-first-industrial-revolution",
+              title: "Capitalism and the First Industrial Revolution",
+              description: "Explore the transformation of production and economic systems",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "revolutions-europe-north-america",
+          title: "Revolutions in Europe and North America",
+          description: "Study the age of democratic and political revolutions",
+          concepts: [
+            {
+              id: "enlightenment",
+              title: "The Enlightenment",
+              description: "Examine the intellectual revolution that changed European thought",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "exchange-ideas-public-sphere",
+              title: "The Exchange of Ideas in the Public Sphere",
+              description: "Study how new ideas spread through society",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "revolutions-america-france-haiti",
+              title: "Revolutions: America, France, and Haiti",
+              description: "Analyze the great democratic revolutions of the 18th century",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "nationalism-liberalism-conservatism",
+              title: "Nationalism, Liberalism, Conservatism, and the Political Order",
+              description: "Understand the competing political ideologies of the 19th century",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "revolutions-latin-america",
+          title: "Revolutions in Latin America",
+          description: "Explore the independence movements that transformed Latin America",
+          concepts: [
+            {
+              id: "revolution-for-whom",
+              title: "Revolution for Whom?",
+              description: "Examine who benefited from Latin American independence movements",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "spanish-north-america",
+              title: "Spanish North America",
+              description: "Study independence movements in Mexico and Central America",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "spanish-south-america",
+              title: "Spanish South America",
+              description: "Analyze revolutionary movements in Spanish South America",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "portuguese-south-america",
+              title: "Portuguese South America",
+              description: "Examine Brazilian independence and its unique characteristics",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "expansion-industrial-age",
+          title: "Expansion in the Industrial Age",
+          description: "Study the new imperialism and industrial expansion of the 19th century",
+          concepts: [
+            {
+              id: "second-industrial-revolution",
+              title: "The Second Industrial Revolution",
+              description: "Explore technological advances and industrial growth",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "motives-means-imperialism",
+              title: "Motives and Means of Imperialism",
+              description: "Understand why and how European powers expanded globally",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "colonial-empires",
+              title: "Colonial Empires",
+              description: "Study the establishment and administration of colonial systems",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "exploitation-resistance",
+              title: "Exploitation and Resistance",
+              description: "Examine colonial exploitation and indigenous resistance movements",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "life-labor-industrial-world",
+          title: "Life and Labor in the Industrial World",
+          description: "Explore the social transformation brought by industrialization",
+          concepts: [
+            {
+              id: "inventions-innovations-mechanization",
+              title: "Inventions, Innovations, and Mechanization",
+              description: "Study technological advances that transformed production",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "life-industrial-city",
+              title: "Life in the Industrial City",
+              description: "Examine urbanization and the transformation of city life",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "coerced-semicoerced-labor",
+              title: "Coerced and Semicoerced Labor",
+              description: "Analyze various forms of forced labor in the industrial era",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "communities-diaspora",
+              title: "Communities in Diaspora",
+              description: "Study migration patterns and diaspora communities",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "regulation-reform-revolutionary-ideologies",
+              title: "Regulation, Reform, and Revolutionary Ideologies",
+              description: "Examine responses to industrial social problems",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "war-end-all-wars",
+          title: "The War to End All Wars",
+          description: "Study World War I and its global impact",
+          concepts: [
+            {
+              id: "alliances-expansion-conflict",
+              title: "Alliances, Expansion, and Conflict",
+              description: "Understand the causes and outbreak of World War I",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "collapse-ottomans-coming-war",
+              title: "The Collapse of the Ottomans and the Coming of War",
+              description: "Examine the decline of the Ottoman Empire and regional conflicts",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "total-war",
+              title: "Total War",
+              description: "Study the unprecedented scale and nature of World War I",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "war-homefront",
+              title: "War on the Homefront",
+              description: "Analyze how the war transformed societies at home",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "war-ends",
+              title: "The War Ends",
+              description: "Examine the conclusion of World War I and its immediate aftermath",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "interwar-period",
+          title: "The Interwar Period",
+          description: "Study the turbulent years between the world wars",
+          concepts: [
+            {
+              id: "recovering-world-war-i",
+              title: "Recovering from World War I",
+              description: "Understand post-war reconstruction and its challenges",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "formation-soviet-union",
+              title: "The Formation of the Soviet Union",
+              description: "Study the Russian Revolution and creation of the Soviet state",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "great-depression",
+              title: "The Great Depression",
+              description: "Analyze the global economic crisis of the 1930s",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "old-empires-new-colonies",
+              title: "Old Empires and New Colonies",
+              description: "Examine changes in imperial systems after World War I",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "resistance-civil-rights-democracy",
+              title: "Resistance, Civil Rights, and Democracy",
+              description: "Study movements for rights and democracy in the interwar period",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "causes-consequences-world-war-ii",
+          title: "The Causes and Consequences of World War II",
+          description: "Examine the deadliest conflict in human history",
+          concepts: [
+            {
+              id: "unstable-peace",
+              title: "An Unstable Peace",
+              description: "Understand the factors that led to World War II",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "theaters-war",
+              title: "Theaters of War",
+              description: "Study the global scope and major campaigns of World War II",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "keeping-home-fires-burning",
+              title: "Keeping the Home Fires Burning",
+              description: "Examine the war's impact on civilian populations",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "out-of-ashes",
+              title: "Out of the Ashes",
+              description: "Analyze the end of World War II and its immediate consequences",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "cold-war-conflicts",
+          title: "Cold War Conflicts",
+          description: "Study the global ideological struggle between superpowers",
+          concepts: [
+            {
+              id: "cold-war-begins",
+              title: "The Cold War Begins",
+              description: "Understand the origins and early development of the Cold War",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "spread-communism",
+              title: "The Spread of Communism",
+              description: "Examine the expansion of communist influence worldwide",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "non-aligned-movement",
+              title: "The Non-Aligned Movement",
+              description: "Study nations that sought neutrality in the Cold War",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "global-tensions-decolonization",
+              title: "Global Tensions and Decolonization",
+              description: "Analyze the end of colonial empires and its impact",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "new-world-order",
+              title: "A New World Order",
+              description: "Examine the end of the Cold War and its consequences",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "contemporary-world-ongoing-challenges",
+          title: "The Contemporary World and Ongoing Challenges",
+          description: "Explore current global issues and their historical roots",
+          concepts: [
+            {
+              id: "global-economy",
+              title: "A Global Economy",
+              description: "Study economic globalization and its effects",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "debates-environment",
+              title: "Debates about the Environment",
+              description: "Examine environmental challenges and responses",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "science-technology-todays-world",
+              title: "Science and Technology for Today's World",
+              description: "Analyze the role of technology in shaping the modern world",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "ongoing-problems-solutions",
+              title: "Ongoing Problems and Solutions",
+              description: "Study contemporary global challenges and potential solutions",
               completed: false,
               locked: true,
               progress: 0
