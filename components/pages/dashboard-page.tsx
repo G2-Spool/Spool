@@ -10,6 +10,11 @@ import { AchievementsList } from "@/components/organisms/achievements-list"
 import { WeeklyProgressCard } from "@/components/organisms/weekly-progress-card"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { LoadingTestButton } from "@/components/ui/loading-test-button"
+import { Button } from "@/components/ui/button"
+import { ArrowRight } from "lucide-react"
+import { useRouter } from "next/navigation"
+import { useNavigationLoading } from "@/hooks/use-navigation-loading"
+import { useLoading } from "@/contexts/loading-context"
 
 interface UserProfile {
   interests: string[]
@@ -36,6 +41,9 @@ export function DashboardPage() {
   const [studyStreak] = useState(7)
   const [todayProgress] = useState(60)
   const [weeklyGoal] = useState(75)
+  const router = useRouter()
+  const { navigateWithLoading } = useNavigationLoading()
+  const { startLoading, stopLoading } = useLoading()
 
   useEffect(() => {
     const profile = localStorage.getItem("user-profile")
@@ -73,6 +81,21 @@ export function DashboardPage() {
     { day: "Tuesday", progress: 80 },
     { day: "Wednesday", progress: 60 },
   ]
+
+  const handleGoToClasses = (e: React.MouseEvent) => {
+    e.preventDefault()
+    
+    // Show loading screen before navigation
+    startLoading()
+    
+    // Navigate to the classes tab
+    router.push("/?tab=classes")
+    
+    // Small delay to show loading animation
+    setTimeout(() => {
+      stopLoading()
+    }, 300)
+  }
 
   return (
     <div className="min-h-screen bg-background p-6">
@@ -136,6 +159,18 @@ export function DashboardPage() {
           <AchievementsList achievements={achievements} />
         </TabsContent>
       </Tabs>
+      
+      {/* Go to Classes button under the cards */}
+      <div className="flex justify-end mt-4">
+        <Button 
+          size="lg"
+          className="px-6 py-3 text-lg"
+          onClick={handleGoToClasses}
+        >
+          Go to Classes
+          <ArrowRight className="ml-2 h-5 w-5" />
+        </Button>
+      </div>
       </div>
     </div>
   )

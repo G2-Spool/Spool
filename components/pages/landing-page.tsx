@@ -129,7 +129,6 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
 
       {/* Hero Section - New Geometric Design */}
       <HeroGeometric 
-        badge="AI-Powered Learning Platform"
         title1="Learn Through"
         title2="Your Passions"
       />
@@ -218,11 +217,11 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
               <div className="text-muted-foreground">Student Satisfaction</div>
             </div>
             <div className="space-y-2">
-              <div className="text-4xl font-bold text-primary">10K+</div>
+              <div className="text-4xl font-bold text-primary">5+</div>
               <div className="text-muted-foreground">Active Learners</div>
             </div>
             <div className="space-y-2">
-              <div className="text-4xl font-bold text-primary">50+</div>
+              <div className="text-4xl font-bold text-primary">7+</div>
               <div className="text-muted-foreground">Subject Areas</div>
             </div>
             <div className="space-y-2">

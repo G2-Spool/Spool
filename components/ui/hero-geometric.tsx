@@ -28,7 +28,7 @@ interface Connection {
 
 function ForceGraph() {
     const canvasRef = useRef<HTMLCanvasElement>(null);
-    const animationRef = useRef<number>();
+    const animationRef = useRef<number | undefined>(undefined);
     const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
     
     const colors = [
@@ -88,8 +88,8 @@ function ForceGraph() {
                 id: i,
                 x: x,
                 y: y,
-                vx: (Math.random() - 0.5) * 0.02,
-                vy: (Math.random() - 0.5) * 0.02,
+                vx: (Math.random() - 0.5) * 0.025,
+                vy: (Math.random() - 0.5) * 0.025,
                 radius: Math.random() * 4 + 2,
                 color: colors[Math.floor(Math.random() * colors.length)],
                 connections: [],
@@ -124,7 +124,7 @@ function ForceGraph() {
             const elapsedTime = (currentTime - startTime) / 1000; // Convert to seconds
             
             // Calculate damping factor based on time
-            let dampingFactor = 0.985;
+            let dampingFactor = 0.998;
             let forceMultiplier = 1;
             
             if (elapsedTime > 2.5) {
@@ -144,7 +144,7 @@ function ForceGraph() {
                             const distance = Math.sqrt(dx * dx + dy * dy);
                             
                             if (distance > 0 && distance < 100) {
-                                const force = (0.005 / (distance * distance)) * forceMultiplier;
+                                const force = (0.00625 / (distance * distance)) * forceMultiplier;
                                 node.vx += (dx / distance) * force;
                                 node.vy += (dy / distance) * force;
                             }
@@ -238,11 +238,9 @@ function ForceGraph() {
 }
 
 function HeroGeometric({
-    badge = "Design Collective",
     title1 = "Elevate Your Digital Vision",
     title2 = "Crafting Exceptional Websites",
 }: {
-    badge?: string;
     title1?: string;
     title2?: string;
 }) {
@@ -260,7 +258,7 @@ function HeroGeometric({
     };
 
     return (
-        <div className="relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-[#030303]">
+        <div className="relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-[#030303] pt-16">
             <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/[0.05] via-transparent to-rose-500/[0.05] blur-3xl" />
 
             <div className="absolute inset-0 overflow-hidden">
@@ -273,28 +271,16 @@ function HeroGeometric({
                         variants={fadeUpVariants}
                         initial="hidden"
                         animate="visible"
-                        className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.03] border border-white/[0.08] mb-8 md:mb-12"
-                    >
-                        <Circle className="h-2 w-2 fill-rose-500/80" />
-                        <span className="text-sm text-white/60 tracking-wide">
-                            {badge}
-                        </span>
-                    </motion.div>
-
-                    <motion.div
-                        variants={fadeUpVariants}
-                        initial="hidden"
-                        animate="visible"
                         transition={{ delay: 0.7 }}
                     >
                         <h1 className="text-4xl sm:text-6xl md:text-8xl font-bold mb-6 md:mb-8 tracking-tight">
-                            <span className="bg-clip-text text-transparent bg-gradient-to-b from-white to-white/80">
+                            <span className="bg-clip-text text-transparent bg-gradient-to-r from-accent via-white to-accent">
                                 {title1}
                             </span>
                             <br />
                             <span
                                 className={cn(
-                                    "bg-clip-text text-transparent bg-gradient-to-r from-indigo-300 via-white/90 to-rose-300 "
+                                    "bg-clip-text text-transparent bg-gradient-to-r from-accent via-white/90 to-accent/80 "
                                 )}
                             >
                                 {title2}
