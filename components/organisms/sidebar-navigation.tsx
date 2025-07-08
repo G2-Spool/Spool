@@ -1,7 +1,7 @@
 "use client"
 
 import { BookOpen, Home, BarChart3, Settings, User, LucideIcon } from "lucide-react"
-import { Sidebar, SidebarBody, SidebarLink } from "@/components/ui/sidebar"
+import { SidebarBody, SidebarLink } from "@/components/ui/sidebar"
 import { motion } from "framer-motion"
 import Link from "next/link"
 import { SpoolIcon } from "@/components/atoms/spool-icon"
@@ -65,8 +65,7 @@ export function SidebarNavigation({ activeTab, onTabChange }: SidebarNavigationP
   }
 
   return (
-    <Sidebar>
-      <SidebarBody className="justify-between gap-2 h-screen">
+    <SidebarBody className="justify-between gap-2 h-screen">
         <div className="flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
           <Link
             href="/?tab=dashboard"
@@ -118,6 +117,5 @@ export function SidebarNavigation({ activeTab, onTabChange }: SidebarNavigationP
           })}
         </div>
       </SidebarBody>
-    </Sidebar>
   )
 }
