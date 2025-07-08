@@ -62,13 +62,14 @@ if [ -z "${SERVICE_ROLE_ARN}" ] || [ "${SERVICE_ROLE_ARN}" = "null" ]; then
 EOF
 
     # Create the role
-    aws iam create-role \
+    if aws iam create-role \
         --role-name "${ROLE_NAME}" \
         --assume-role-policy-document file:///tmp/amplify-trust-policy.json \
-        --description "Service role for Amplify app ${AMPLIFY_APP_ID}" || {
-        print_error "Failed to create service role"
-        exit 1
-    }
+        --description "Service role for Amplify app ${AMPLIFY_APP_ID}" 2>/dev/null; then
+        print_success "Created new service role"
+    else
+        print_warning "Role ${ROLE_NAME} already exists, using existing role"
+    fi
     
     SERVICE_ROLE_ARN="arn:aws:iam::$(aws sts get-caller-identity --query Account --output text):role/${ROLE_NAME}"
     print_success "Created service role: ${SERVICE_ROLE_ARN}"
@@ -76,7 +77,7 @@ EOF
     # Update Amplify app to use the service role
     aws amplify update-app \
         --app-id ${AMPLIFY_APP_ID} \
-        --service-role ${SERVICE_ROLE_ARN} \
+        --iam-service-role-arn ${SERVICE_ROLE_ARN} \
         --region ${AWS_REGION} || {
         print_error "Failed to update Amplify app with service role"
         exit 1

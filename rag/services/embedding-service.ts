@@ -33,7 +33,7 @@ export class EmbeddingService {
 
   constructor(options: Partial<EmbeddingOptions> = {}) {
     this.openai = new OpenAI({
-      apiKey: appConfig.OPENAI_API_KEY,
+      apiKey: appConfig.PINECONE_OPENAI_API_KEY,
     });
 
     this.options = {
