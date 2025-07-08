@@ -9,7 +9,8 @@ import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
-import { ChevronRight, ChevronLeft, Plus, X, Turtle, Zap, Gauge } from "lucide-react"
+import { ChevronRight, ChevronLeft, Plus, X, Turtle, Zap, Gauge, Mic, MicOff } from "lucide-react"
+import { useVoiceInterview } from "@/hooks/use-voice-interview"
 
 interface OnboardingFlowProps {
   onComplete: () => void
@@ -27,8 +28,22 @@ export function OnboardingFlow({ onComplete }: OnboardingFlowProps) {
   })
   const [competencyAnswers, setCompetencyAnswers] = useState<string[]>([])
   const [learningPace, setLearningPace] = useState("")
+  const [useVoice, setUseVoice] = useState(false)
 
   const steps = ["Interests & Hobbies", "Interest Details", "Study Goals", "Competency Assessment", "Learning Pace"]
+  
+  // Voice interview hook
+  const {
+    isConnected,
+    isRecording,
+    interests: voiceInterests,
+    transcript,
+    error: voiceError,
+    startSession,
+    startRecording,
+    stopRecording,
+    endSession,
+  } = useVoiceInterview()
 
   const addInterest = () => {
     if (newInterest.trim() && !interests.includes(newInterest.trim())) {
@@ -70,7 +85,9 @@ export function OnboardingFlow({ onComplete }: OnboardingFlowProps) {
   const canProceed = () => {
     switch (currentStep) {
       case 0:
-        return interests.length > 0
+        // Can proceed if there are manual interests or voice-detected interests
+        const totalInterests = interests.length + voiceInterests.length
+        return totalInterests > 0
       case 1:
         return interests.every((interest) => interestDetails[interest]?.trim())
       case 2:
@@ -89,8 +106,71 @@ export function OnboardingFlow({ onComplete }: OnboardingFlowProps) {
       case 0:
         return (
           <div className="space-y-4">
+            {/* Voice interview option */}
+            <div className="flex items-center justify-between mb-4 p-4 bg-muted rounded-lg">
+              <div>
+                <h4 className="font-medium">Use Voice Interview</h4>
+                <p className="text-sm text-muted-foreground">
+                  Talk with our AI assistant to share your interests
+                </p>
+              </div>
+              <Button
+                variant={useVoice ? "default" : "outline"}
+                size="sm"
+                onClick={async () => {
+                  if (!useVoice) {
+                    setUseVoice(true)
+                    try {
+                      await startSession("user-" + Date.now())
+                      await startRecording()
+                    } catch (err) {
+                      console.error("Failed to start voice session:", err)
+                    }
+                  } else {
+                    setUseVoice(false)
+                    await endSession()
+                  }
+                }}
+              >
+                {isRecording ? (
+                  <>
+                    <MicOff className="h-4 w-4 mr-2" />
+                    Stop Voice
+                  </>
+                ) : (
+                  <>
+                    <Mic className="h-4 w-4 mr-2" />
+                    Start Voice
+                  </>
+                )}
+              </Button>
+            </div>
+
+            {voiceError && (
+              <div className="p-4 bg-destructive/10 text-destructive rounded-lg">
+                {voiceError}
+              </div>
+            )}
+
+            {/* Voice transcript display */}
+            {useVoice && transcript.length > 0 && (
+              <div className="max-h-40 overflow-y-auto p-4 bg-muted rounded-lg space-y-2">
+                {transcript.slice(-5).map((entry, idx) => (
+                  <div key={idx} className={`text-sm ${entry.speaker === "user" ? "text-right" : "text-left"}`}>
+                    <span className="font-medium">
+                      {entry.speaker === "user" ? "You: " : "Assistant: "}
+                    </span>
+                    {entry.text}
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {/* Manual input */}
             <div>
-              <Label htmlFor="interest">Add your interests and hobbies</Label>
+              <Label htmlFor="interest">
+                {useVoice ? "Or type to add more interests" : "Add your interests and hobbies"}
+              </Label>
               <div className="flex space-x-2 mt-2">
                 <Input
                   id="interest"
@@ -98,13 +178,17 @@ export function OnboardingFlow({ onComplete }: OnboardingFlowProps) {
                   onChange={(e) => setNewInterest(e.target.value)}
                   placeholder="e.g., baking, guitar, video games"
                   onKeyPress={(e) => e.key === "Enter" && addInterest()}
+                  disabled={isRecording}
                 />
-                <Button onClick={addInterest} size="sm">
+                <Button onClick={addInterest} size="sm" disabled={isRecording}>
                   <Plus className="h-4 w-4" />
                 </Button>
               </div>
             </div>
+
+            {/* Interests display */}
             <div className="flex flex-wrap gap-2">
+              {/* Manual interests */}
               {interests.map((interest) => (
                 <Badge key={interest} variant="secondary" className="flex items-center space-x-1">
                   <span>{interest}</span>
@@ -113,7 +197,29 @@ export function OnboardingFlow({ onComplete }: OnboardingFlowProps) {
                   </button>
                 </Badge>
               ))}
+              
+              {/* Voice-detected interests */}
+              {voiceInterests.map((interest, idx) => (
+                <Badge key={`voice-${idx}`} variant="default" className="flex items-center space-x-1">
+                  <Mic className="h-3 w-3 mr-1" />
+                  <span>{interest.name}</span>
+                  <button onClick={() => {
+                    // Add to manual interests if not already there
+                    if (!interests.includes(interest.name)) {
+                      setInterests([...interests, interest.name])
+                    }
+                  }}>
+                    <Plus className="h-3 w-3" />
+                  </button>
+                </Badge>
+              ))}
             </div>
+
+            {useVoice && (
+              <div className="text-sm text-muted-foreground text-center">
+                {isRecording ? "Listening... speak naturally about your interests" : "Click Start Voice to begin"}
+              </div>
+            )}
           </div>
         )
 
