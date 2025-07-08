@@ -71,7 +71,7 @@ export function LearningContent({
       </Card>
 
       {/* Concept Content Modules */}
-      <div className="space-y-4">
+      <div className="space-y-8">
         {concept.modules.length > 0 ? (
           concept.modules
             .sort((a, b) => a.order - b.order)

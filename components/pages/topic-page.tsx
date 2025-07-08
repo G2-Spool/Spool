@@ -1811,8 +1811,8 @@ export function TopicPage({ topicId, title, sections, onBack }: TopicPageProps) 
           <div className="lg:col-span-2">
             {currentSection ? (
               <div className="space-y-6">
-                <div className="space-y-2">
-                  <h2 className="text-2xl font-bold">{currentSection.title}</h2>
+                <div className="space-y-6">
+                  <h2 className="text-3xl font-bold">{currentSection.title}</h2>
                   {currentSection.description && (
                     <p className="text-muted-foreground text-base">{currentSection.description}</p>
                   )}

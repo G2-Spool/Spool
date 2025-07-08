@@ -60,27 +60,21 @@ export function LatexModuleComponent({ module }: LatexModuleProps) {
   }, [module.equation])
 
   return (
-    <Card className="w-full mb-6 bg-muted/30">
+    <Card className="w-full bg-muted/30">
       {module.title && (
-        <CardHeader className="pb-3">
-          <CardTitle className="text-xl font-semibold flex items-center">
-            <span className="mr-2">∑</span>
+        <CardHeader className="pb-0 pt-3">
+          <CardTitle className="text-xl font-semibold">
             {module.title}
           </CardTitle>
         </CardHeader>
       )}
-      <CardContent>
+      <CardContent className="pt-0 pb-0">
         <div 
           ref={mathRef}
-          className="mathjax text-center py-4 text-lg"
+          className="mathjax text-center py-0 text-lg"
         >
           {`$$${module.equation}$$`}
         </div>
-        {module.description && (
-          <p className="text-base text-muted-foreground mt-4 text-center">
-            {module.description}
-          </p>
-        )}
       </CardContent>
     </Card>
   )

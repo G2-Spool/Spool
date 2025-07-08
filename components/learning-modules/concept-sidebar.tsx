@@ -70,11 +70,13 @@ export function ConceptSidebar({
         {concepts.map((concept) => (
           <div key={concept.id} className="space-y-2">
             <Button
-              variant={currentConceptId === concept.id ? "default" : "ghost"}
+              variant="ghost"
               onClick={() => !concept.locked && onConceptSelect(concept.id)}
               disabled={concept.locked}
               className={`w-full justify-start p-3 h-auto text-left min-w-0 ${
                 concept.locked ? 'opacity-50 cursor-not-allowed' : ''
+              } ${
+                currentConceptId === concept.id ? 'border-2 border-primary bg-primary/10 hover:bg-muted/100' : 'border-2 border-transparent hover:bg-muted/100'
               }`}
             >
               <div className="flex items-center space-x-3 w-full">

@@ -40,7 +40,7 @@ export function YouTubeModuleComponent({ module }: YouTubeModuleProps) {
   }
 
   return (
-    <Card className="w-full mb-6 bg-muted/30">
+    <Card className="w-full bg-muted/30">
       <CardHeader className="pb-2 pt-3">
         <div className="flex items-center justify-between">
           <CardTitle className="text-xl font-semibold">
