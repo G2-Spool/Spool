@@ -55,7 +55,7 @@ export function ProgressPage() {
     { id: "history", name: "History", type: "subject", connections: 3 },
     { id: "psychology", name: "Psychology", type: "subject", connections: 4 },
     { id: "literature", name: "Literature", type: "subject", connections: 3 },
-    { id: "economics", name: "Economics", type: "subject", connections: 2 },
+
     
     // Physics Topics
     { id: "waves", name: "Waves", type: "topic", connections: 7 },
@@ -109,65 +109,91 @@ export function ProgressPage() {
   ]
 
   const links: Link[] = [
-    // Key hobby connections
-    { source: "guitar", target: "sound-waves", strength: 0.9 },
-    { source: "guitar", target: "frequency", strength: 0.8 },
-    { source: "photography", target: "light-waves", strength: 0.8 },
-    { source: "photography", target: "geometry", strength: 0.7 },
-    { source: "gaming", target: "algorithms", strength: 0.7 },
-    { source: "gaming", target: "problem-solving", strength: 0.8 },
-    { source: "reading", target: "literature", strength: 0.9 },
-    { source: "hiking", target: "ecology", strength: 0.8 },
-    { source: "drawing", target: "geometry", strength: 0.8 },
-    { source: "drawing", target: "creativity", strength: 0.9 },
-    { source: "coding", target: "computer-science", strength: 0.9 },
-    { source: "coding", target: "algorithms", strength: 0.8 },
-    { source: "coding", target: "problem-solving", strength: 0.9 },
-    { source: "gardening", target: "biology", strength: 0.8 },
+    // Physics Cluster - completely isolated
+    { source: "physics", target: "waves", strength: 0.9 },
+    { source: "physics", target: "mechanics", strength: 0.9 },
+    { source: "physics", target: "thermodynamics", strength: 0.8 },
+    { source: "physics", target: "electromagnetism", strength: 0.8 },
+    { source: "waves", target: "sound-waves", strength: 0.9 },
+    { source: "waves", target: "light-waves", strength: 0.8 },
+    { source: "waves", target: "frequency", strength: 0.7 },
+    { source: "sound-waves", target: "guitar", strength: 0.9 },
+    { source: "sound-waves", target: "resonance", strength: 0.8 },
+    { source: "light-waves", target: "photography", strength: 0.8 },
+    { source: "thermodynamics", target: "heat-transfer", strength: 0.8 },
+    { source: "thermodynamics", target: "energy", strength: 0.7 },
+    { source: "frequency", target: "vibration", strength: 0.8 },
+    { source: "resonance", target: "vibration", strength: 0.7 },
+    { source: "energy", target: "mechanics", strength: 0.6 },
+
+    // Chemistry Cluster - completely isolated
+    { source: "chemistry", target: "organic-chemistry", strength: 0.9 },
+    { source: "chemistry", target: "chemical-reactions", strength: 0.9 },
+    { source: "chemistry", target: "molecular-structure", strength: 0.8 },
+    { source: "organic-chemistry", target: "molecular-structure", strength: 0.8 },
+    { source: "chemical-reactions", target: "organic-chemistry", strength: 0.7 },
     { source: "cooking", target: "chemistry", strength: 0.8 },
     { source: "baking", target: "chemistry", strength: 0.8 },
-    
-    // Core subject connections
-    { source: "waves", target: "physics", strength: 0.9 },
-    { source: "sound-waves", target: "physics", strength: 0.8 },
-    { source: "light-waves", target: "physics", strength: 0.8 },
-    { source: "mechanics", target: "physics", strength: 0.9 },
-    { source: "thermodynamics", target: "physics", strength: 0.8 },
-    
-    { source: "organic-chemistry", target: "chemistry", strength: 0.9 },
-    { source: "chemical-reactions", target: "chemistry", strength: 0.9 },
-    { source: "heat-transfer", target: "chemistry", strength: 0.6 },
-    
-    { source: "calculus", target: "mathematics", strength: 0.9 },
-    { source: "algebra", target: "mathematics", strength: 0.8 },
-    { source: "geometry", target: "mathematics", strength: 0.8 },
-    { source: "statistics", target: "mathematics", strength: 0.7 },
-    
-    { source: "ecology", target: "biology", strength: 0.9 },
-    { source: "genetics", target: "biology", strength: 0.8 },
-    { source: "cell-biology", target: "biology", strength: 0.9 },
-    
-    { source: "algorithms", target: "computer-science", strength: 0.9 },
-    { source: "data-structures", target: "computer-science", strength: 0.8 },
-    { source: "machine-learning", target: "computer-science", strength: 0.8 },
-    
-    // Key wave connections
-    { source: "sound-waves", target: "waves", strength: 0.9 },
-    { source: "light-waves", target: "waves", strength: 0.8 },
-    { source: "frequency", target: "waves", strength: 0.7 },
-    
-    // Important cross-disciplinary links
-    { source: "calculus", target: "physics", strength: 0.7 },
-    { source: "statistics", target: "data-analysis", strength: 0.8 },
-    { source: "machine-learning", target: "statistics", strength: 0.8 },
-    { source: "data-analysis", target: "statistics", strength: 0.9 },
-    
-    // Key connection hubs
-    { source: "problem-solving", target: "mathematics", strength: 0.7 },
-    { source: "logic", target: "mathematics", strength: 0.8 },
-    { source: "energy", target: "physics", strength: 0.7 },
-    { source: "data-structures", target: "algorithms", strength: 0.8 },
-    { source: "optimization", target: "algorithms", strength: 0.8 },
+    { source: "baking", target: "cooking", strength: 0.7 },
+
+    // Mathematics Cluster - completely isolated
+    { source: "mathematics", target: "calculus", strength: 0.9 },
+    { source: "mathematics", target: "algebra", strength: 0.8 },
+    { source: "mathematics", target: "geometry", strength: 0.8 },
+    { source: "mathematics", target: "statistics", strength: 0.7 },
+    { source: "mathematics", target: "linear-algebra", strength: 0.8 },
+    { source: "calculus", target: "algebra", strength: 0.6 },
+    { source: "geometry", target: "drawing", strength: 0.8 },
+    { source: "geometry", target: "symmetry", strength: 0.7 },
+    { source: "statistics", target: "linear-algebra", strength: 0.6 },
+    { source: "algebra", target: "patterns", strength: 0.7 },
+    { source: "linear-algebra", target: "patterns", strength: 0.6 },
+    { source: "drawing", target: "creativity", strength: 0.9 },
+    { source: "patterns", target: "symmetry", strength: 0.8 },
+    { source: "logic", target: "mathematics", strength: 0.7 },
+
+    // Computer Science Cluster - completely isolated
+    { source: "computer-science", target: "algorithms", strength: 0.9 },
+    { source: "computer-science", target: "data-structures", strength: 0.8 },
+    { source: "computer-science", target: "machine-learning", strength: 0.8 },
+    { source: "computer-science", target: "web-development", strength: 0.7 },
+    { source: "computer-science", target: "databases", strength: 0.7 },
+    { source: "algorithms", target: "data-structures", strength: 0.8 },
+    { source: "algorithms", target: "optimization", strength: 0.8 },
+    { source: "machine-learning", target: "data-analysis", strength: 0.9 },
+    { source: "coding", target: "computer-science", strength: 0.9 },
+    { source: "coding", target: "algorithms", strength: 0.8 },
+    { source: "gaming", target: "algorithms", strength: 0.7 },
+    { source: "gaming", target: "problem-solving", strength: 0.8 },
+    { source: "web-development", target: "visualization", strength: 0.7 },
+    { source: "databases", target: "data-structures", strength: 0.6 },
+    { source: "problem-solving", target: "optimization", strength: 0.7 },
+    { source: "data-analysis", target: "visualization", strength: 0.6 },
+
+    // Biology Cluster - completely isolated
+    { source: "biology", target: "ecology", strength: 0.9 },
+    { source: "biology", target: "genetics", strength: 0.8 },
+    { source: "biology", target: "cell-biology", strength: 0.9 },
+    { source: "biology", target: "evolution", strength: 0.8 },
+    { source: "ecology", target: "systems", strength: 0.8 },
+    { source: "genetics", target: "cell-biology", strength: 0.7 },
+    { source: "cell-biology", target: "evolution", strength: 0.6 },
+    { source: "evolution", target: "systems", strength: 0.7 },
+    { source: "gardening", target: "biology", strength: 0.8 },
+    { source: "gardening", target: "ecology", strength: 0.7 },
+    { source: "hiking", target: "ecology", strength: 0.8 },
+
+    // Humanities Cluster - completely isolated
+    { source: "history", target: "literature", strength: 0.8 },
+    { source: "history", target: "psychology", strength: 0.7 },
+    { source: "literature", target: "reading", strength: 0.9 },
+    { source: "literature", target: "composition", strength: 0.8 },
+    { source: "psychology", target: "reading", strength: 0.6 },
+    { source: "reading", target: "composition", strength: 0.7 },
+    { source: "composition", target: "literature", strength: 0.6 },
+    { source: "psychology", target: "history", strength: 0.5 },
+
+    // Note: Economics node removed to avoid isolated nodes
   ]
 
   useEffect(() => {
@@ -184,16 +210,15 @@ export function ProgressPage() {
 
     const g = svg.append("g")
 
-    // Create zoom behavior with bounds
-    const maxDistance = Math.min(width, height) / 1.8
-    const padding = 50
-    const horizontalPadding = 150 // More horizontal movement space
+    // Create zoom behavior with circular bounds
+    const radius = Math.min(width, height) / 2 - 40
+    const padding = 80
     
     zoomBehavior
       .scaleExtent([0.5, 3])
       .translateExtent([
-        [width / 2 - maxDistance - horizontalPadding, height / 2 - maxDistance - padding],
-        [width / 2 + maxDistance + horizontalPadding, height / 2 + maxDistance + padding]
+        [width / 2 - radius - padding, height / 2 - radius - padding],
+        [width / 2 + radius + padding, height / 2 + radius + padding]
       ])
       .on("zoom", (event) => {
         g.attr("transform", event.transform)
@@ -202,40 +227,113 @@ export function ProgressPage() {
 
     svg.call(zoomBehavior as any)
 
-    // Create force simulation
+    // Define cluster centers closer together for less separation
+    const clusterCenters = {
+      physics: { x: width * 0.3, y: height * 0.3 },
+      chemistry: { x: width * 0.7, y: height * 0.3 },
+      mathematics: { x: width * 0.3, y: height * 0.7 },
+      "computer-science": { x: width * 0.7, y: height * 0.7 },
+      biology: { x: width * 0.5, y: height * 0.25 },
+      humanities: { x: width * 0.5, y: height * 0.75 },
+    }
+
+    // Assign nodes to clusters
+    const getClusterForNode = (nodeId: string) => {
+      const physicsNodes = ["physics", "waves", "mechanics", "thermodynamics", "electromagnetism", "sound-waves", "light-waves", "frequency", "vibration", "resonance", "energy", "heat-transfer", "guitar", "photography"]
+      const chemistryNodes = ["chemistry", "organic-chemistry", "chemical-reactions", "molecular-structure", "cooking", "baking"]
+      const mathNodes = ["mathematics", "calculus", "algebra", "geometry", "statistics", "linear-algebra", "patterns", "symmetry", "logic", "creativity", "drawing"]
+      const csNodes = ["computer-science", "algorithms", "data-structures", "machine-learning", "web-development", "databases", "problem-solving", "optimization", "data-analysis", "visualization", "coding", "gaming"]
+      const biologyNodes = ["biology", "ecology", "genetics", "cell-biology", "evolution", "systems", "gardening", "hiking"]
+      const humanitiesNodes = ["history", "literature", "psychology", "composition", "reading"]
+
+      if (physicsNodes.includes(nodeId)) return "physics"
+      if (chemistryNodes.includes(nodeId)) return "chemistry"
+      if (mathNodes.includes(nodeId)) return "mathematics"
+      if (csNodes.includes(nodeId)) return "computer-science"
+      if (biologyNodes.includes(nodeId)) return "biology"
+      if (humanitiesNodes.includes(nodeId)) return "humanities"
+      return "physics" // fallback
+    }
+
+    // Create force simulation optimized for disjoint clusters
     const simulation = forceSimulation<Node>(nodes)
-      .velocityDecay(0.7) // Reduce maximum velocity
+      .velocityDecay(0.8) // Moderate decay for natural movement
       .force(
         "link",
         forceLink<Node, Link>(links)
           .id((d) => d.id)
-          .strength((d) => d.strength * 0.3)
-          .distance(100),
+          .strength((d) => d.strength * 0.3) // Gentler links for looser clusters
+          .distance(120), // Longer distance for more spread
       )
-      .force("charge", forceManyBody().strength(-250))
-      .force("center", forceCenter(width / 2, height / 2))
-      .force("collision", forceCollide().radius((d) => Math.sqrt((d as Node).connections) * 3 + 10))
-      .force("bounds", () => {
-        // Keep nodes within bounds but allow much more spread
+      .force("charge", forceManyBody().strength(-200).distanceMax(250)) // Gentler repulsion with longer range
+      .force("collision", forceCollide().radius((d) => Math.sqrt((d as Node).connections) * 3 + 8).strength(0.7))
+      .force("cluster", () => {
+        // Very gentle force toward cluster centers
         nodes.forEach((node) => {
-          if (node.x && node.y) {
-            // Very soft boundary force to keep nodes from flying too far
-            const centerX = width / 2
-            const centerY = height / 2
-            const maxDistance = Math.min(width, height) / 1.8
-            
-            const dx = node.x - centerX
-            const dy = node.y - centerY
+          const cluster = getClusterForNode(node.id)
+          const center = clusterCenters[cluster as keyof typeof clusterCenters]
+          if (center && node.x && node.y) {
+            const dx = center.x - node.x
+            const dy = center.y - node.y
             const distance = Math.sqrt(dx * dx + dy * dy)
-            
-            if (distance > maxDistance) {
-              const force = (distance - maxDistance) * 0.02
-              node.x! -= (dx / distance) * force
-              node.y! -= (dy / distance) * force
+            if (distance > 100) { // Only apply if far from center
+              const force = (distance - 100) * 0.02 // Very gentle pull
+              node.x! += (dx / distance) * force
+              node.y! += (dy / distance) * force
             }
           }
         })
       })
+             .force("separate", () => {
+         // Reduced inter-cluster repulsion for closer clusters
+         for (let i = 0; i < nodes.length; i++) {
+           for (let j = i + 1; j < nodes.length; j++) {
+             const nodeA = nodes[i]
+             const nodeB = nodes[j]
+             const clusterA = getClusterForNode(nodeA.id)
+             const clusterB = getClusterForNode(nodeB.id)
+             
+             // Only apply repulsion between different clusters
+             if (clusterA !== clusterB && nodeA.x && nodeA.y && nodeB.x && nodeB.y) {
+               const dx = nodeB.x - nodeA.x
+               const dy = nodeB.y - nodeA.y
+               const distance = Math.sqrt(dx * dx + dy * dy)
+               
+               if (distance < 100) { // Even smaller threshold for closer clusters
+                 const force = (100 - distance) * 0.005 // Much weaker repulsion
+                 const normalizedDx = dx / distance
+                 const normalizedDy = dy / distance
+                 
+                 nodeA.x! -= normalizedDx * force
+                 nodeA.y! -= normalizedDy * force
+                 nodeB.x! += normalizedDx * force
+                 nodeB.y! += normalizedDy * force
+               }
+             }
+           }
+         }
+       })
+       .force("bounds", () => {
+         // Circular boundary instead of rectangular
+         const centerX = width / 2
+         const centerY = height / 2
+         const radius = Math.min(width, height) / 2 - 40 // Circular boundary with padding
+         
+         nodes.forEach((node) => {
+           if (node.x && node.y) {
+             const dx = node.x - centerX
+             const dy = node.y - centerY
+             const distance = Math.sqrt(dx * dx + dy * dy)
+             
+             if (distance > radius) {
+               // Push node back inside the circle
+               const force = (distance - radius) * 0.1
+               node.x! -= (dx / distance) * force
+               node.y! -= (dy / distance) * force
+             }
+           }
+         })
+       })
 
     // Create links
     const link = g
@@ -479,12 +577,12 @@ export function ProgressPage() {
                 <span className="font-medium text-white">{links.length}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-sm text-gray-300">Strongest Link</span>
-                <span className="font-medium text-white">Programming → Problem Solving</span>
+                <span className="text-sm text-gray-300">Clusters</span>
+                <span className="font-medium text-white">5 separate groups</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-sm text-gray-300">Hub Nodes</span>
-                <span className="font-medium text-white">Mathematics, Physics</span>
+                <span className="text-sm text-gray-300">Strongest Link</span>
+                <span className="font-medium text-white">Guitar → Sound Waves</span>
               </div>
             </CardContent>
           </Card>
