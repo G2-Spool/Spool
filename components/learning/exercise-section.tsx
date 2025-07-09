@@ -1,9 +1,62 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Textarea } from '@/components/ui/textarea'
 import { ChevronDown, ChevronUp, Send, Loader2 } from 'lucide-react'
 import { cn } from '@/lib/utils'
+
+// Function to detect and format equations in text
+function formatTextWithEquations(text: string): JSX.Element[] {
+  const parts: JSX.Element[] = []
+  
+  // Regex to match LaTeX equations: $$...$$ for display, $...$ for inline
+  const equationRegex = /(\$\$[\s\S]*?\$\$|\$[^$\n]*?\$)/g
+  
+  let lastIndex = 0
+  let match
+  let keyCounter = 0
+  
+  while ((match = equationRegex.exec(text)) !== null) {
+    // Add text before the equation
+    if (match.index > lastIndex) {
+      const beforeText = text.slice(lastIndex, match.index)
+      if (beforeText.trim()) {
+        parts.push(<span key={`text-${keyCounter++}`}>{beforeText}</span>)
+      }
+    }
+    
+    // Add the equation
+    const equation = match[0]
+    const isDisplayMode = equation.startsWith('$$')
+    
+    parts.push(
+      <span
+        key={`equation-${keyCounter++}`}
+        className={`mathjax-equation ${isDisplayMode ? 'block text-center my-4' : 'inline'}`}
+        data-equation={equation}
+      >
+        {equation}
+      </span>
+    )
+    
+    lastIndex = match.index + match[0].length
+  }
+  
+  // Add remaining text
+  if (lastIndex < text.length) {
+    const remainingText = text.slice(lastIndex)
+    if (remainingText.trim()) {
+      parts.push(<span key={`text-${keyCounter++}`}>{remainingText}</span>)
+    }
+  }
+  
+  // If no equations found, return the original text
+  if (parts.length === 0) {
+    parts.push(<span key="text-0">{text}</span>)
+  }
+  
+  return parts
+}
 
 interface ExerciseMessage {
   id: string
@@ -20,6 +73,8 @@ interface ExercisePrompt {
   messages: ExerciseMessage[]
 }
 
+type ExerciseStatus = 'in_progress' | 'wrong' | 'complete'
+
 interface ExerciseSectionProps {
   conceptId: string
   className?: string
@@ -27,6 +82,7 @@ interface ExerciseSectionProps {
 
 export function ExerciseSection({ conceptId, className }: ExerciseSectionProps) {
   const [isExpanded, setIsExpanded] = useState(false)
+  const [exerciseStatus, setExerciseStatus] = useState<ExerciseStatus>('in_progress')
   const [exerciseData, setExerciseData] = useState<ExercisePrompt[]>([
     {
       id: '1',
@@ -36,7 +92,7 @@ export function ExerciseSection({ conceptId, className }: ExerciseSectionProps) 
     },
     {
       id: '2', 
-      content: 'Here\'s your first problem: **3x + 7 = 22**\n\nBefore we solve it, tell me: What do you think the first step should be?',
+      content: 'Here\'s your first problem: $3x + 7 = 22$\n\nBefore we solve it, tell me: What do you think the first step should be?',
       requiresResponse: true,
       messages: []
     }
@@ -44,6 +100,52 @@ export function ExerciseSection({ conceptId, className }: ExerciseSectionProps) 
 
   const [currentInput, setCurrentInput] = useState<{ [key: string]: string }>({})
   const [isLoading, setIsLoading] = useState<{ [key: string]: boolean }>({})
+  const contentRef = useRef<HTMLDivElement>(null)
+
+  // Initialize MathJax
+  useEffect(() => {
+    if (!window.MathJax) {
+      window.MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          displayMath: [['$$', '$$'], ['\\[', '\\]']],
+          processEscapes: true,
+          processEnvironments: true
+        },
+        options: {
+          processHtmlClass: 'mathjax-equation',
+          ignoreHtmlClass: 'no-mathjax'
+        },
+        startup: {
+          ready: () => {
+            window.MathJax.startup.defaultReady()
+          }
+        }
+      }
+      
+      const mathJaxScript = document.createElement('script')
+      mathJaxScript.id = 'MathJax-script'
+      mathJaxScript.async = true
+      mathJaxScript.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js'
+      document.head.appendChild(mathJaxScript)
+    }
+  }, [])
+
+  // Re-render equations when content changes
+  useEffect(() => {
+    const renderEquations = () => {
+      if (window.MathJax && window.MathJax.typesetPromise && contentRef.current) {
+        window.MathJax.typesetPromise([contentRef.current]).catch((err: any) => {
+          console.error('MathJax rendering error:', err)
+        })
+      } else {
+        setTimeout(renderEquations, 500)
+      }
+    }
+    
+    const timer = setTimeout(renderEquations, 100)
+    return () => clearTimeout(timer)
+  }, [exerciseData, isExpanded])
 
   const handleSendResponse = async (promptId: string) => {
     const input = currentInput[promptId]?.trim()
@@ -65,7 +167,7 @@ export function ExerciseSection({ conceptId, className }: ExerciseSectionProps) 
       const aiResponse: ExerciseMessage = {
         id: `ai_${Date.now()}`,
         type: 'ai',
-        content: 'Great thinking! That\'s exactly right. Now let\'s continue to the next step...',
+        content: 'Great thinking! That\'s exactly right. Now let\'s continue to the next step...\n\nTo solve $3x + 7 = 22$, we need to isolate $x$. The next step would be to subtract 7 from both sides: $3x = 15$',
         timestamp: new Date()
       }
 
@@ -79,6 +181,10 @@ export function ExerciseSection({ conceptId, className }: ExerciseSectionProps) 
 
       setCurrentInput(prev => ({ ...prev, [promptId]: '' }))
       setIsLoading(prev => ({ ...prev, [promptId]: false }))
+      
+      // Demo: randomly set status based on response (in real app, this would be based on correctness)
+      const randomStatus: ExerciseStatus = Math.random() > 0.7 ? 'complete' : Math.random() > 0.5 ? 'wrong' : 'in_progress'
+      setExerciseStatus(randomStatus)
     }, 1500)
   }
 
@@ -89,13 +195,31 @@ export function ExerciseSection({ conceptId, className }: ExerciseSectionProps) 
     }
   }
 
+  const getBorderColor = (status: ExerciseStatus) => {
+    switch (status) {
+      case 'in_progress':
+        return 'border-l-blue-500'
+      case 'wrong':
+        return 'border-l-red-500'
+      case 'complete':
+        return 'border-l-green-500'
+      default:
+        return 'border-l-blue-500'
+    }
+  }
+
   return (
     <div className={cn("w-full mt-8", className)}>
       <Card className="bg-muted/20 border-border">
         <CardContent className="p-0">
           {/* Header */}
           <div 
-            className="flex items-center justify-between p-4 cursor-pointer bg-muted/30 hover:bg-muted/40 transition-colors"
+            className={cn(
+              "flex items-center justify-between p-4 cursor-pointer bg-muted/30 hover:bg-muted/40 transition-colors",
+              "border-l-4",
+              isExpanded ? "rounded-tl-md" : "rounded-l-md",
+              getBorderColor(exerciseStatus)
+            )}
             onClick={() => setIsExpanded(!isExpanded)}
           >
             <h2 className="text-xl font-medium text-white">Practice Exercise</h2>
@@ -109,13 +233,13 @@ export function ExerciseSection({ conceptId, className }: ExerciseSectionProps) 
           {/* Content */}
           {isExpanded && (
             <div className="border-t border-border">
-              <div className="p-6 space-y-8">
+              <div ref={contentRef} className="p-6 space-y-8">
                 {exerciseData.map((prompt) => (
                   <div key={prompt.id} className="space-y-4">
                     {/* AI Prompt */}
                     <div className="prose prose-sm max-w-none">
-                      <p className="text-foreground leading-relaxed whitespace-pre-wrap">
-                        {prompt.content}
+                      <p className="text-foreground leading-relaxed">
+                        {formatTextWithEquations(prompt.content)}
                       </p>
                     </div>
 
@@ -139,7 +263,7 @@ export function ExerciseSection({ conceptId, className }: ExerciseSectionProps) 
                         ) : (
                           <div key={message.id} className="mx-2">
                             <p className="text-foreground leading-relaxed">
-                              {message.content}
+                              {formatTextWithEquations(message.content)}
                             </p>
                             <div className="text-xs text-muted-foreground mt-2">
                               AI Tutor • {message.timestamp.toLocaleTimeString()}
@@ -197,4 +321,11 @@ export function ExerciseSection({ conceptId, className }: ExerciseSectionProps) 
       </Card>
     </div>
   )
+}
+
+// Extend window type for MathJax
+declare global {
+  interface Window {
+    MathJax?: any
+  }
 } 
