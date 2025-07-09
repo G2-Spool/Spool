@@ -4074,8 +4074,8 @@ This course covers 15 comprehensive chapters from medieval trade networks throug
         {
           id: "overview",
           title: "Overview",
-          description: "Scientific study of living organisms",
-          content: `Biology is the scientific study of living organisms and their interactions with the environment. This course provides a comprehensive introduction to biological concepts and processes.
+          description: "Scientific study of living organisms and their interactions with the environment",
+          content: `Biology is the scientific study of living organisms and their interactions with the environment. This comprehensive course covers 47 chapters spanning from basic molecular biology to complex ecological systems.
 
 You'll explore the fundamental principles of life, from the molecular level to entire ecosystems. The course covers cell biology, genetics, evolution, ecology, and human biology.
 
@@ -4084,22 +4084,1992 @@ Through laboratory work and field studies, you'll develop scientific thinking sk
 By the end of this course, you'll have a solid foundation in biological science and understand how living systems function and interact.`
         },
         {
-          id: "cell-biology",
-          title: "Cell Biology",
-          description: "Study the basic unit of life",
+          id: "chapter-1",
+          title: "The Study of Life",
+          description: "Introduction to biology and its foundational concepts",
           concepts: [
             {
-              id: "cell-structure",
-              title: "Cell Structure and Function",
-              description: "Learn about cellular components and their roles",
+              id: "science-of-biology",
+              title: "The Science of Biology",
+              description: "Understanding biological science principles and methods",
               completed: false,
               locked: false,
               progress: 0
             },
             {
-              id: "metabolism",
-              title: "Cellular Metabolism",
-              description: "Understand how cells obtain and use energy",
+              id: "themes-concepts-biology",
+              title: "Themes and Concepts of Biology",
+              description: "Core themes that unify biological sciences",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "chapter-2",
+          title: "The Chemical Foundation of Life",
+          description: "Basic chemistry concepts essential for biology",
+          concepts: [
+            {
+              id: "atoms-molecules",
+              title: "Atoms, Isotopes, Ions, and Molecules: The Building Blocks",
+              description: "Understanding the basic units of matter",
+              completed: false,
+              locked: false,
+              progress: 0
+            },
+            {
+              id: "water",
+              title: "Water",
+              description: "Properties of water and its biological importance",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "carbon",
+              title: "Carbon",
+              description: "Carbon's role in biological molecules",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "chapter-3",
+          title: "Biological Macromolecules",
+          description: "Structure and function of life's essential molecules",
+          concepts: [
+            {
+              id: "synthesis-macromolecules",
+              title: "Synthesis of Biological Macromolecules",
+              description: "How macromolecules are built and broken down",
+              completed: false,
+              locked: false,
+              progress: 0
+            },
+            {
+              id: "carbohydrates",
+              title: "Carbohydrates",
+              description: "Structure and function of carbohydrates",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "lipids",
+              title: "Lipids",
+              description: "Structure and function of lipids",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "proteins",
+              title: "Proteins",
+              description: "Structure and function of proteins",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "nucleic-acids",
+              title: "Nucleic Acids",
+              description: "Structure and function of DNA and RNA",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "chapter-4",
+          title: "Cell Structure",
+          description: "Organization and components of cells",
+          concepts: [
+            {
+              id: "studying-cells",
+              title: "Studying Cells",
+              description: "Methods and techniques for cell observation",
+              completed: false,
+              locked: false,
+              progress: 0
+            },
+            {
+              id: "prokaryotic-cells",
+              title: "Prokaryotic Cells",
+              description: "Structure and characteristics of prokaryotic cells",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "eukaryotic-cells",
+              title: "Eukaryotic Cells",
+              description: "Structure and characteristics of eukaryotic cells",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "endomembrane-system",
+              title: "The Endomembrane System and Proteins",
+              description: "Internal membrane systems and protein processing",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "cytoskeleton",
+              title: "The Cytoskeleton",
+              description: "Cell's structural framework and movement",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "cell-connections",
+              title: "Connections between Cells and Cellular Activities",
+              description: "How cells communicate and interact",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "chapter-5",
+          title: "Structure and Function of Plasma Membranes",
+          description: "Cell membrane structure and transport mechanisms",
+          concepts: [
+            {
+              id: "membrane-components",
+              title: "Components and Structure",
+              description: "Membrane composition and organization",
+              completed: false,
+              locked: false,
+              progress: 0
+            },
+            {
+              id: "passive-transport",
+              title: "Passive Transport",
+              description: "Movement across membranes without energy",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "active-transport",
+              title: "Active Transport",
+              description: "Energy-requiring membrane transport",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "bulk-transport",
+              title: "Bulk Transport",
+              description: "Large-scale movement across membranes",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "chapter-6",
+          title: "Metabolism",
+          description: "Energy transformations in living systems",
+          concepts: [
+            {
+              id: "energy-metabolism",
+              title: "Energy and Metabolism",
+              description: "Basic principles of energy in biological systems",
+              completed: false,
+              locked: false,
+              progress: 0
+            },
+            {
+              id: "energy-types",
+              title: "Potential, Kinetic, Free, and Activation Energy",
+              description: "Different forms of energy in biological processes",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "thermodynamics",
+              title: "The Laws of Thermodynamics",
+              description: "Fundamental laws governing energy transformations",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "atp",
+              title: "ATP: Adenosine Triphosphate",
+              description: "The universal energy currency of cells",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "enzymes",
+              title: "Enzymes",
+              description: "Biological catalysts and their functions",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "chapter-7",
+          title: "Cellular Respiration",
+          description: "How cells extract energy from nutrients",
+          concepts: [
+            {
+              id: "energy-living-systems",
+              title: "Energy in Living Systems",
+              description: "Energy requirements and sources in organisms",
+              completed: false,
+              locked: false,
+              progress: 0
+            },
+            {
+              id: "glycolysis",
+              title: "Glycolysis",
+              description: "Breakdown of glucose to pyruvate",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "citric-acid-cycle",
+              title: "Oxidation of Pyruvate and the Citric Acid Cycle",
+              description: "Central metabolic pathway for energy production",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "oxidative-phosphorylation",
+              title: "Oxidative Phosphorylation",
+              description: "ATP production through electron transport",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "metabolism-without-oxygen",
+              title: "Metabolism without Oxygen",
+              description: "Fermentation and anaerobic respiration",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "metabolic-pathways",
+              title: "Connections of Carbohydrate, Protein, and Lipid Metabolic Pathways",
+              description: "Integration of different metabolic processes",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "respiration-regulation",
+              title: "Regulation of Cellular Respiration",
+              description: "Control mechanisms of respiratory processes",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "chapter-8",
+          title: "Photosynthesis",
+          description: "How plants capture and use light energy",
+          concepts: [
+            {
+              id: "photosynthesis-overview",
+              title: "Overview of Photosynthesis",
+              description: "Basic principles of photosynthetic energy conversion",
+              completed: false,
+              locked: false,
+              progress: 0
+            },
+            {
+              id: "light-reactions",
+              title: "The Light-Dependent Reactions of Photosynthesis",
+              description: "Capturing light energy and producing ATP",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "light-energy-molecules",
+              title: "Using Light Energy to Make Organic Molecules",
+              description: "Calvin cycle and carbon fixation",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "chapter-9",
+          title: "Cell Communication",
+          description: "How cells send and receive signals",
+          concepts: [
+            {
+              id: "signaling-molecules",
+              title: "Signaling Molecules and Cellular Receptors",
+              description: "Chemical signals and their detection",
+              completed: false,
+              locked: false,
+              progress: 0
+            },
+            {
+              id: "signal-propagation",
+              title: "Propagation of the Signal",
+              description: "Signal transduction pathways",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "signal-response",
+              title: "Response to the Signal",
+              description: "Cellular responses to signaling",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "single-cell-signaling",
+              title: "Signaling in Single-Celled Organisms",
+              description: "Communication in unicellular life",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "chapter-10",
+          title: "Cell Reproduction",
+          description: "Cell division and reproduction mechanisms",
+          concepts: [
+            {
+              id: "cell-division",
+              title: "Cell Division",
+              description: "Basic principles of cell division",
+              completed: false,
+              locked: false,
+              progress: 0
+            },
+            {
+              id: "cell-cycle",
+              title: "The Cell Cycle",
+              description: "Stages of cell division and growth",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "cell-cycle-control",
+              title: "Control of the Cell Cycle",
+              description: "Regulatory mechanisms of cell division",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "cancer-cell-cycle",
+              title: "Cancer and the Cell Cycle",
+              description: "When cell division goes wrong",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "prokaryotic-division",
+              title: "Prokaryotic Cell Division",
+              description: "Cell division in bacteria and archaea",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "chapter-11",
+          title: "Meiosis and Sexual Reproduction",
+          description: "Special cell division for gamete formation",
+          concepts: [
+            {
+              id: "meiosis-process",
+              title: "The Process of Meiosis",
+              description: "Reduction division and genetic recombination",
+              completed: false,
+              locked: false,
+              progress: 0
+            },
+            {
+              id: "sexual-reproduction",
+              title: "Sexual Reproduction",
+              description: "Advantages and mechanisms of sexual reproduction",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "chapter-12",
+          title: "Mendel's Experiments and Heredity",
+          description: "Foundations of genetics and inheritance",
+          concepts: [
+            {
+              id: "mendel-experiments",
+              title: "Mendel's Experiments and the Laws of Probability",
+              description: "Classic genetics experiments and statistical analysis",
+              completed: false,
+              locked: false,
+              progress: 0
+            },
+            {
+              id: "characteristics-traits",
+              title: "Characteristics and Traits",
+              description: "Genetic traits and their inheritance patterns",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "laws-inheritance",
+              title: "Laws of Inheritance",
+              description: "Mendel's laws and their applications",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "chapter-13",
+          title: "Modern Understandings of Inheritance",
+          description: "Contemporary genetics beyond Mendel",
+          concepts: [
+            {
+              id: "chromosomal-theory",
+              title: "Chromosomal Theory and Genetic Linkage",
+              description: "Genes on chromosomes and linkage mapping",
+              completed: false,
+              locked: false,
+              progress: 0
+            },
+            {
+              id: "inherited-disorders",
+              title: "Chromosomal Basis of Inherited Disorders",
+              description: "Genetic diseases and chromosomal abnormalities",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "chapter-14",
+          title: "DNA Structure and Function",
+          description: "The molecular basis of heredity",
+          concepts: [
+            {
+              id: "dna-history",
+              title: "Historical Basis of Modern Understanding",
+              description: "Discovery of DNA structure and function",
+              completed: false,
+              locked: false,
+              progress: 0
+            },
+            {
+              id: "dna-structure",
+              title: "DNA Structure and Sequencing",
+              description: "Double helix structure and sequencing methods",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "dna-replication-basics",
+              title: "Basics of DNA Replication",
+              description: "Fundamental principles of DNA copying",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "prokaryotic-replication",
+              title: "DNA Replication in Prokaryotes",
+              description: "Bacterial DNA replication mechanisms",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "eukaryotic-replication",
+              title: "DNA Replication in Eukaryotes",
+              description: "Eukaryotic DNA replication complexities",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "dna-repair",
+              title: "DNA Repair",
+              description: "Mechanisms for maintaining DNA integrity",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "chapter-15",
+          title: "Genes and Proteins",
+          description: "From genes to proteins - the central dogma",
+          concepts: [
+            {
+              id: "genetic-code",
+              title: "The Genetic Code",
+              description: "How DNA codes for proteins",
+              completed: false,
+              locked: false,
+              progress: 0
+            },
+            {
+              id: "prokaryotic-transcription",
+              title: "Prokaryotic Transcription",
+              description: "RNA synthesis in bacteria",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "eukaryotic-transcription",
+              title: "Eukaryotic Transcription",
+              description: "RNA synthesis in eukaryotes",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "rna-processing",
+              title: "RNA Processing in Eukaryotes",
+              description: "mRNA modification and maturation",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "protein-synthesis",
+              title: "Ribosomes and Protein Synthesis",
+              description: "Translation of mRNA to proteins",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "chapter-16",
+          title: "Gene Expression",
+          description: "Regulation of gene activity",
+          concepts: [
+            {
+              id: "gene-expression-regulation",
+              title: "Regulation of Gene Expression",
+              description: "General principles of gene regulation",
+              completed: false,
+              locked: false,
+              progress: 0
+            },
+            {
+              id: "prokaryotic-regulation",
+              title: "Prokaryotic Gene Regulation",
+              description: "Gene control in bacteria",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "epigenetic-regulation",
+              title: "Eukaryotic Epigenetic Gene Regulation",
+              description: "Epigenetic modifications and inheritance",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "transcriptional-regulation",
+              title: "Eukaryotic Transcription Gene Regulation",
+              description: "Transcriptional control mechanisms",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "post-transcriptional-regulation",
+              title: "Eukaryotic Post-transcriptional Gene Regulation",
+              description: "RNA-based gene regulation",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "translational-regulation",
+              title: "Eukaryotic Translational and Post-translational Gene Regulation",
+              description: "Protein-level gene regulation",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "cancer-gene-regulation",
+              title: "Cancer and Gene Regulation",
+              description: "Disrupted gene regulation in cancer",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "chapter-17",
+          title: "Biotechnology and Genomics",
+          description: "Modern molecular techniques and applications",
+          concepts: [
+            {
+              id: "biotechnology",
+              title: "Biotechnology",
+              description: "Applications of molecular biology techniques",
+              completed: false,
+              locked: false,
+              progress: 0
+            },
+            {
+              id: "mapping-genomes",
+              title: "Mapping Genomes",
+              description: "Techniques for genome mapping",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "genome-sequencing",
+              title: "Whole-Genome Sequencing",
+              description: "Large-scale DNA sequencing projects",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "applying-genomics",
+              title: "Applying Genomics",
+              description: "Practical applications of genomic data",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "genomics-proteomics",
+              title: "Genomics and Proteomics",
+              description: "Studying genes and proteins at scale",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "chapter-18",
+          title: "Evolution and the Origin of Species",
+          description: "Evolutionary processes and speciation",
+          concepts: [
+            {
+              id: "understanding-evolution",
+              title: "Understanding Evolution",
+              description: "Mechanisms and evidence for evolution",
+              completed: false,
+              locked: false,
+              progress: 0
+            },
+            {
+              id: "new-species-formation",
+              title: "Formation of New Species",
+              description: "Speciation mechanisms and patterns",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "speciation-rates",
+              title: "Reconnection and Speciation Rates",
+              description: "Factors affecting speciation rates",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "chapter-19",
+          title: "The Evolution of Populations",
+          description: "Population genetics and evolutionary change",
+          concepts: [
+            {
+              id: "population-evolution",
+              title: "Population Evolution",
+              description: "Evolution at the population level",
+              completed: false,
+              locked: false,
+              progress: 0
+            },
+            {
+              id: "population-genetics",
+              title: "Population Genetics",
+              description: "Genetic variation in populations",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "adaptive-evolution",
+              title: "Adaptive Evolution",
+              description: "Natural selection and adaptation",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "chapter-20",
+          title: "Phylogenies and the History of Life",
+          description: "Evolutionary relationships and life's history",
+          concepts: [
+            {
+              id: "organizing-life",
+              title: "Organizing Life on Earth",
+              description: "Classification and phylogenetic trees",
+              completed: false,
+              locked: false,
+              progress: 0
+            },
+            {
+              id: "evolutionary-relationships",
+              title: "Determining Evolutionary Relationships",
+              description: "Methods for inferring phylogenies",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "phylogenetic-perspectives",
+              title: "Perspectives on the Phylogenetic Tree",
+              description: "Interpreting evolutionary trees",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "chapter-21",
+          title: "Viruses",
+          description: "Non-living infectious agents",
+          concepts: [
+            {
+              id: "viral-evolution",
+              title: "Viral Evolution, Morphology, and Classification",
+              description: "Structure and diversity of viruses",
+              completed: false,
+              locked: false,
+              progress: 0
+            },
+            {
+              id: "virus-infections",
+              title: "Virus Infections and Hosts",
+              description: "Viral life cycles and host interactions",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "viral-prevention",
+              title: "Prevention and Treatment of Viral Infections",
+              description: "Antiviral strategies and vaccines",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "acellular-entities",
+              title: "Other Acellular Entities: Prions and Viroids",
+              description: "Non-viral infectious agents",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "chapter-22",
+          title: "Prokaryotes: Bacteria and Archaea",
+          description: "Diversity and importance of prokaryotic life",
+          concepts: [
+            {
+              id: "prokaryotic-diversity",
+              title: "Prokaryotic Diversity",
+              description: "Variety of prokaryotic organisms",
+              completed: false,
+              locked: false,
+              progress: 0
+            },
+            {
+              id: "prokaryotic-structure",
+              title: "Structure of Prokaryotes: Bacteria and Archaea",
+              description: "Cellular organization of prokaryotes",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "prokaryotic-metabolism",
+              title: "Prokaryotic Metabolism",
+              description: "Energy and nutrient processing in prokaryotes",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "bacterial-diseases",
+              title: "Bacterial Diseases in Humans",
+              description: "Pathogenic bacteria and human health",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "beneficial-prokaryotes",
+              title: "Beneficial Prokaryotes",
+              description: "Positive roles of prokaryotes in ecosystems",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "chapter-23",
+          title: "Protists",
+          description: "Diverse eukaryotic microorganisms",
+          concepts: [
+            {
+              id: "eukaryotic-origins",
+              title: "Eukaryotic Origins",
+              description: "Evolution of eukaryotic cells",
+              completed: false,
+              locked: false,
+              progress: 0
+            },
+            {
+              id: "protist-characteristics",
+              title: "Characteristics of Protists",
+              description: "Common features of protist organisms",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "protist-groups",
+              title: "Groups of Protists",
+              description: "Major protist classifications",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "protist-ecology",
+              title: "Ecology of Protists",
+              description: "Protist roles in ecosystems",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "chapter-24",
+          title: "Fungi",
+          description: "Heterotrophic eukaryotes and decomposers",
+          concepts: [
+            {
+              id: "fungal-characteristics",
+              title: "Characteristics of Fungi",
+              description: "Basic features of fungal organisms",
+              completed: false,
+              locked: false,
+              progress: 0
+            },
+            {
+              id: "fungal-classifications",
+              title: "Classifications of Fungi",
+              description: "Major fungal groups and taxonomy",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "fungal-ecology",
+              title: "Ecology of Fungi",
+              description: "Fungal roles in ecosystems",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "fungal-parasites",
+              title: "Fungal Parasites and Pathogens",
+              description: "Disease-causing fungi",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "fungal-importance",
+              title: "Importance of Fungi in Human Life",
+              description: "Beneficial uses of fungi",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "chapter-25",
+          title: "Seedless Plants",
+          description: "Early plant evolution and non-seed plants",
+          concepts: [
+            {
+              id: "early-plant-life",
+              title: "Early Plant Life",
+              description: "Evolution of the first plants",
+              completed: false,
+              locked: false,
+              progress: 0
+            },
+            {
+              id: "green-algae",
+              title: "Green Algae: Precursors of Land Plants",
+              description: "Algal ancestors of plants",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "bryophytes",
+              title: "Bryophytes",
+              description: "Mosses, liverworts, and hornworts",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "seedless-vascular",
+              title: "Seedless Vascular Plants",
+              description: "Ferns and their relatives",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "chapter-26",
+          title: "Seed Plants",
+          description: "Evolution and diversity of seed-bearing plants",
+          concepts: [
+            {
+              id: "seed-plant-evolution",
+              title: "Evolution of Seed Plants",
+              description: "Advantages and evolution of seeds",
+              completed: false,
+              locked: false,
+              progress: 0
+            },
+            {
+              id: "gymnosperms",
+              title: "Gymnosperms",
+              description: "Conifers and other naked seed plants",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "angiosperms",
+              title: "Angiosperms",
+              description: "Flowering plants and their diversity",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "seed-plant-role",
+              title: "The Role of Seed Plants",
+              description: "Ecological and economic importance",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "chapter-27",
+          title: "Introduction to Animal Diversity",
+          description: "Overview of animal classification and evolution",
+          concepts: [
+            {
+              id: "animal-kingdom-features",
+              title: "Features of the Animal Kingdom",
+              description: "Common characteristics of animals",
+              completed: false,
+              locked: false,
+              progress: 0
+            },
+            {
+              id: "animal-classification",
+              title: "Features Used to Classify Animals",
+              description: "Criteria for animal taxonomy",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "animal-phylogeny",
+              title: "Animal Phylogeny",
+              description: "Evolutionary relationships among animals",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "animal-evolutionary-history",
+              title: "The Evolutionary History of the Animal Kingdom",
+              description: "Major events in animal evolution",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "chapter-28",
+          title: "Invertebrates",
+          description: "Animals without backbones",
+          concepts: [
+            {
+              id: "porifera",
+              title: "Phylum Porifera",
+              description: "Sponges and their characteristics",
+              completed: false,
+              locked: false,
+              progress: 0
+            },
+            {
+              id: "cnidaria",
+              title: "Phylum Cnidaria",
+              description: "Jellyfish, corals, and relatives",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "lophotrochozoa-flatworms",
+              title: "Superphylum Lophotrochozoa: Flatworms, Rotifers, and Nemerteans",
+              description: "Simple bilateral animals",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "lophotrochozoa-molluscs",
+              title: "Superphylum Lophotrochozoa: Molluscs and Annelids",
+              description: "Soft-bodied animals and segmented worms",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "ecdysozoa-nematodes",
+              title: "Superphylum Ecdysozoa: Nematodes and Tardigrades",
+              description: "Molting animals - roundworms",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "ecdysozoa-arthropods",
+              title: "Superphylum Ecdysozoa: Arthropods",
+              description: "Insects, spiders, and crustaceans",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "deuterostomia",
+              title: "Superphylum Deuterostomia",
+              description: "Echinoderms and early chordates",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "chapter-29",
+          title: "Vertebrates",
+          description: "Animals with backbones",
+          concepts: [
+            {
+              id: "chordates",
+              title: "Chordates",
+              description: "Defining characteristics of chordates",
+              completed: false,
+              locked: false,
+              progress: 0
+            },
+            {
+              id: "fishes",
+              title: "Fishes",
+              description: "Aquatic vertebrates and their diversity",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "amphibians",
+              title: "Amphibians",
+              description: "Transition from water to land",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "reptiles",
+              title: "Reptiles",
+              description: "First fully terrestrial vertebrates",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "birds",
+              title: "Birds",
+              description: "Feathered vertebrates and flight",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "mammals",
+              title: "Mammals",
+              description: "Hair-bearing vertebrates",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "primate-evolution",
+              title: "The Evolution of Primates",
+              description: "Human evolutionary history",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "chapter-30",
+          title: "Plant Form and Physiology",
+          description: "Structure and function of plant bodies",
+          concepts: [
+            {
+              id: "plant-body",
+              title: "The Plant Body",
+              description: "Basic plant anatomy and organization",
+              completed: false,
+              locked: false,
+              progress: 0
+            },
+            {
+              id: "stems",
+              title: "Stems",
+              description: "Structure and function of plant stems",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "roots",
+              title: "Roots",
+              description: "Root systems and their functions",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "leaves",
+              title: "Leaves",
+              description: "Leaf structure and photosynthesis",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "water-transport",
+              title: "Transport of Water and Solutes in Plants",
+              description: "Vascular transport systems",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "plant-sensory",
+              title: "Plant Sensory Systems and Responses",
+              description: "How plants detect and respond to stimuli",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "chapter-31",
+          title: "Soil and Plant Nutrition",
+          description: "How plants obtain nutrients",
+          concepts: [
+            {
+              id: "plant-nutrition",
+              title: "Nutritional Requirements of Plants",
+              description: "Essential nutrients for plant growth",
+              completed: false,
+              locked: false,
+              progress: 0
+            },
+            {
+              id: "soil",
+              title: "The Soil",
+              description: "Soil composition and properties",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "nutritional-adaptations",
+              title: "Nutritional Adaptations of Plants",
+              description: "Special strategies for nutrient acquisition",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "chapter-32",
+          title: "Plant Reproduction",
+          description: "Sexual and asexual reproduction in plants",
+          concepts: [
+            {
+              id: "reproductive-development",
+              title: "Reproductive Development and Structure",
+              description: "Development of reproductive organs",
+              completed: false,
+              locked: false,
+              progress: 0
+            },
+            {
+              id: "pollination-fertilization",
+              title: "Pollination and Fertilization",
+              description: "Sexual reproduction mechanisms",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "asexual-reproduction",
+              title: "Asexual Reproduction",
+              description: "Vegetative propagation methods",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "chapter-33",
+          title: "The Animal Body: Basic Form and Function",
+          description: "Fundamental principles of animal physiology",
+          concepts: [
+            {
+              id: "animal-form-function",
+              title: "Animal Form and Function",
+              description: "Relationship between structure and function",
+              completed: false,
+              locked: false,
+              progress: 0
+            },
+            {
+              id: "animal-tissues",
+              title: "Animal Primary Tissues",
+              description: "Basic tissue types in animals",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "homeostasis",
+              title: "Homeostasis",
+              description: "Maintaining internal balance",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "chapter-34",
+          title: "Animal Nutrition and the Digestive System",
+          description: "How animals obtain and process food",
+          concepts: [
+            {
+              id: "digestive-systems",
+              title: "Digestive Systems",
+              description: "Types of digestive systems",
+              completed: false,
+              locked: false,
+              progress: 0
+            },
+            {
+              id: "nutrition-energy",
+              title: "Nutrition and Energy Production",
+              description: "Nutritional requirements and energy",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "digestive-processes",
+              title: "Digestive System Processes",
+              description: "Mechanical and chemical digestion",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "digestive-regulation",
+              title: "Digestive System Regulation",
+              description: "Control of digestive processes",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "chapter-35",
+          title: "The Nervous System",
+          description: "Neural control and coordination",
+          concepts: [
+            {
+              id: "neurons-glia",
+              title: "Neurons and Glial Cells",
+              description: "Basic cellular components of nervous systems",
+              completed: false,
+              locked: false,
+              progress: 0
+            },
+            {
+              id: "neural-communication",
+              title: "How Neurons Communicate",
+              description: "Electrical and chemical signaling",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "central-nervous-system",
+              title: "The Central Nervous System",
+              description: "Brain and spinal cord organization",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "peripheral-nervous-system",
+              title: "The Peripheral Nervous System",
+              description: "Nerves and ganglia outside the CNS",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "nervous-system-disorders",
+              title: "Nervous System Disorders",
+              description: "Diseases of the nervous system",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "chapter-36",
+          title: "Sensory Systems",
+          description: "How animals detect environmental stimuli",
+          concepts: [
+            {
+              id: "sensory-processes",
+              title: "Sensory Processes",
+              description: "General principles of sensation",
+              completed: false,
+              locked: false,
+              progress: 0
+            },
+            {
+              id: "somatosensation",
+              title: "Somatosensation",
+              description: "Touch, temperature, and pain",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "taste-smell",
+              title: "Taste and Smell",
+              description: "Chemical senses",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "hearing-vestibular",
+              title: "Hearing and Vestibular Sensation",
+              description: "Sound detection and balance",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "vision",
+              title: "Vision",
+              description: "Light detection and image formation",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "chapter-37",
+          title: "The Endocrine System",
+          description: "Hormonal control and regulation",
+          concepts: [
+            {
+              id: "hormone-types",
+              title: "Types of Hormones",
+              description: "Chemical classes of hormones",
+              completed: false,
+              locked: false,
+              progress: 0
+            },
+            {
+              id: "hormone-function",
+              title: "How Hormones Work",
+              description: "Mechanisms of hormone action",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "body-process-regulation",
+              title: "Regulation of Body Processes",
+              description: "Hormonal control of physiology",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "hormone-production-regulation",
+              title: "Regulation of Hormone Production",
+              description: "Control of hormone synthesis and release",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "endocrine-glands",
+              title: "Endocrine Glands",
+              description: "Major hormone-producing organs",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "chapter-38",
+          title: "The Musculoskeletal System",
+          description: "Support and movement in animals",
+          concepts: [
+            {
+              id: "skeletal-system-types",
+              title: "Types of Skeletal Systems",
+              description: "Different types of animal skeletons",
+              completed: false,
+              locked: false,
+              progress: 0
+            },
+            {
+              id: "bone",
+              title: "Bone",
+              description: "Structure and function of bone tissue",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "joints-movement",
+              title: "Joints and Skeletal Movement",
+              description: "Types of joints and their functions",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "muscle-contraction",
+              title: "Muscle Contraction and Locomotion",
+              description: "How muscles produce movement",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "chapter-39",
+          title: "The Respiratory System",
+          description: "Gas exchange in animals",
+          concepts: [
+            {
+              id: "gas-exchange-systems",
+              title: "Systems of Gas Exchange",
+              description: "Different respiratory systems",
+              completed: false,
+              locked: false,
+              progress: 0
+            },
+            {
+              id: "respiratory-surfaces",
+              title: "Gas Exchange across Respiratory Surfaces",
+              description: "Mechanisms of gas exchange",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "breathing",
+              title: "Breathing",
+              description: "Ventilation mechanisms",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "gas-transport",
+              title: "Transport of Gases in Human Bodily Fluids",
+              description: "Oxygen and carbon dioxide transport",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "chapter-40",
+          title: "The Circulatory System",
+          description: "Transport of materials in animals",
+          concepts: [
+            {
+              id: "circulatory-overview",
+              title: "Overview of the Circulatory System",
+              description: "Types of circulatory systems",
+              completed: false,
+              locked: false,
+              progress: 0
+            },
+            {
+              id: "blood-components",
+              title: "Components of the Blood",
+              description: "Blood composition and functions",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "heart-blood-vessels",
+              title: "Mammalian Heart and Blood Vessels",
+              description: "Structure of the cardiovascular system",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "blood-flow-regulation",
+              title: "Blood Flow and Blood Pressure Regulation",
+              description: "Control of circulation",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "chapter-41",
+          title: "Osmotic Regulation and Excretion",
+          description: "Water balance and waste removal",
+          concepts: [
+            {
+              id: "osmoregulation",
+              title: "Osmoregulation and Osmotic Balance",
+              description: "Water and salt balance",
+              completed: false,
+              locked: false,
+              progress: 0
+            },
+            {
+              id: "kidneys-osmoregulation",
+              title: "The Kidneys and Osmoregulatory Organs",
+              description: "Organs that regulate water balance",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "excretion-systems",
+              title: "Excretion Systems",
+              description: "Removal of metabolic wastes",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "nitrogenous-wastes",
+              title: "Nitrogenous Wastes",
+              description: "Types of nitrogen waste products",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "hormonal-osmoregulation",
+              title: "Hormonal Control of Osmoregulatory Functions",
+              description: "Hormonal regulation of water balance",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "chapter-42",
+          title: "The Immune System",
+          description: "Defense against pathogens",
+          concepts: [
+            {
+              id: "innate-immunity",
+              title: "Innate Immune Response",
+              description: "Non-specific defense mechanisms",
+              completed: false,
+              locked: false,
+              progress: 0
+            },
+            {
+              id: "adaptive-immunity",
+              title: "Adaptive Immune Response",
+              description: "Specific immune responses",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "antibodies",
+              title: "Antibodies",
+              description: "Structure and function of antibodies",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "immune-disruptions",
+              title: "Disruptions in the Immune System",
+              description: "Immune system disorders",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "chapter-43",
+          title: "Animal Reproduction and Development",
+          description: "Reproductive strategies and development",
+          concepts: [
+            {
+              id: "reproduction-methods",
+              title: "Reproduction Methods",
+              description: "Sexual and asexual reproduction in animals",
+              completed: false,
+              locked: false,
+              progress: 0
+            },
+            {
+              id: "fertilization",
+              title: "Fertilization",
+              description: "Sperm and egg fusion",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "human-reproduction",
+              title: "Human Reproductive Anatomy and Gametogenesis",
+              description: "Human reproductive systems",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "hormonal-reproduction",
+              title: "Hormonal Control of Human Reproduction",
+              description: "Reproductive hormones",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "pregnancy-birth",
+              title: "Human Pregnancy and Birth",
+              description: "Development and birth process",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "embryonic-development",
+              title: "Fertilization and Early Embryonic Development",
+              description: "Early stages of development",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "organogenesis",
+              title: "Organogenesis and Vertebrate Formation",
+              description: "Organ system development",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "chapter-44",
+          title: "Ecology and the Biosphere",
+          description: "Environmental interactions and global ecology",
+          concepts: [
+            {
+              id: "ecology-scope",
+              title: "The Scope of Ecology",
+              description: "Levels of ecological organization",
+              completed: false,
+              locked: false,
+              progress: 0
+            },
+            {
+              id: "biogeography",
+              title: "Biogeography",
+              description: "Distribution of life on Earth",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "terrestrial-biomes",
+              title: "Terrestrial Biomes",
+              description: "Major land-based ecosystems",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "aquatic-biomes",
+              title: "Aquatic Biomes",
+              description: "Freshwater and marine ecosystems",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "climate-change",
+              title: "Climate and the Effects of Global Climate Change",
+              description: "Climate patterns and global change",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "chapter-45",
+          title: "Population and Community Ecology",
+          description: "Interactions within and between species",
+          concepts: [
+            {
+              id: "population-demography",
+              title: "Population Demography",
+              description: "Population structure and dynamics",
+              completed: false,
+              locked: false,
+              progress: 0
+            },
+            {
+              id: "life-histories",
+              title: "Life Histories and Natural Selection",
+              description: "Evolutionary strategies",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "population-limits",
+              title: "Environmental Limits to Population Growth",
+              description: "Carrying capacity and limiting factors",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "population-dynamics",
+              title: "Population Dynamics and Regulation",
+              description: "Population growth and regulation",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "human-population",
+              title: "Human Population Growth",
+              description: "Human demographics and growth",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "community-ecology",
+              title: "Community Ecology",
+              description: "Species interactions and communities",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "behavioral-biology",
+              title: "Behavioral Biology: Proximate and Ultimate Causes of Behavior",
+              description: "Animal behavior and its evolution",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "chapter-46",
+          title: "Ecosystems",
+          description: "Energy flow and nutrient cycling",
+          concepts: [
+            {
+              id: "ecosystem-ecology",
+              title: "Ecology of Ecosystems",
+              description: "Ecosystem structure and function",
+              completed: false,
+              locked: false,
+              progress: 0
+            },
+            {
+              id: "energy-flow",
+              title: "Energy Flow through Ecosystems",
+              description: "Trophic levels and energy transfer",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "biogeochemical-cycles",
+              title: "Biogeochemical Cycles",
+              description: "Nutrient cycling in ecosystems",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "chapter-47",
+          title: "Conservation Biology and Biodiversity",
+          description: "Protecting Earth's biological diversity",
+          concepts: [
+            {
+              id: "biodiversity-crisis",
+              title: "The Biodiversity Crisis",
+              description: "Current threats to biodiversity",
+              completed: false,
+              locked: false,
+              progress: 0
+            },
+            {
+              id: "biodiversity-importance",
+              title: "The Importance of Biodiversity to Human Life",
+              description: "Ecosystem services and human welfare",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "biodiversity-threats",
+              title: "Threats to Biodiversity",
+              description: "Human impacts on biodiversity",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "preserving-biodiversity",
+              title: "Preserving Biodiversity",
+              description: "Conservation strategies and solutions",
               completed: false,
               locked: true,
               progress: 0
