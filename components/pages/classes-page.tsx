@@ -18,7 +18,7 @@ const subjectsData = [
       },
       {
         id: "statistics",
-        title: "Statistics",
+        title: "Introductory Statistics",
         description: "Learn statistical analysis and data interpretation",
         chapters: 10,
         items: 40,
@@ -32,7 +32,7 @@ const subjectsData = [
     topics: [
       {
         id: "writing",
-        title: "Writing",
+        title: "Writing Guide",
         description: "Develop your writing skills and communication abilities",
         chapters: 8,
         items: 32,
@@ -40,7 +40,7 @@ const subjectsData = [
       },
       {
         id: "philosophy",
-        title: "Philosophy",
+        title: "Introduction to Philosophy",
         description: "Explore fundamental questions about existence and knowledge",
         chapters: 15,
         items: 60,
@@ -48,7 +48,7 @@ const subjectsData = [
       },
       {
         id: "world-history",
-        title: "World History",
+        title: "World History, Volume 2: from 1400",
         description: "Journey through major events and civilizations",
         chapters: 20,
         items: 80,
@@ -70,7 +70,7 @@ const subjectsData = [
       },
       {
         id: "anatomy",
-        title: "Anatomy",
+        title: "Anatomy and Physiology",
         description: "Learn about the structure and organization of the human body",
         chapters: 16,
         items: 64,

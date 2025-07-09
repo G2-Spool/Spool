@@ -641,7 +641,7 @@ Credits: 3 credit hours`
       ]
     },
     "statistics": {
-      title: "Statistics",
+      title: "Introductory Statistics",
       sections: [
         {
           id: "overview",
@@ -1478,7 +1478,7 @@ Regardless of your initial skill level, you should be comfortable with preparing
       ]
     },
     "writing": {
-      title: "Writing",
+      title: "Writing Guide",
       sections: [
         {
           id: "overview",
@@ -2939,7 +2939,7 @@ By the end of this course, you'll have a strong foundation in writing principles
       ]
     },
     "philosophy": {
-      title: "Philosophy",
+      title: "Introduction to Philosophy",
       sections: [
         {
           id: "overview",
@@ -3466,7 +3466,7 @@ This course covers 12 comprehensive chapters spanning ancient wisdom to contempo
       ]
     },
     "world-history": {
-      title: "World History",
+      title: "World History, Volume 2: from 1400",
       sections: [
         {
           id: "overview",
