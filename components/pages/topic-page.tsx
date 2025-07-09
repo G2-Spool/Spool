@@ -112,49 +112,49 @@ Credits: 3 credit hours`
               id: "real-numbers",
               title: "Real Numbers: Algebra Essentials",
               description: "Properties of real numbers, number systems, and algebraic operations",
-              completed: false,
+              completed: true,
               locked: false,
-              progress: 0
+              progress: 100
             },
             {
               id: "exponents-scientific-notation",
               title: "Exponents and Scientific Notation",
               description: "Rules of exponents and scientific notation applications",
-              completed: false,
+              completed: true,
               locked: false,
-              progress: 0
+              progress: 100
             },
             {
               id: "radicals-rational-exponents",
               title: "Radicals and Rational Exponents",
               description: "Working with radicals and rational exponents",
-              completed: false,
+              completed: true,
               locked: false,
-              progress: 0
+              progress: 100
             },
             {
               id: "polynomials",
               title: "Polynomials",
               description: "Polynomial operations and properties",
-              completed: false,
+              completed: true,
               locked: false,
-              progress: 0
+              progress: 100
             },
             {
               id: "factoring-polynomials",
               title: "Factoring Polynomials",
               description: "Techniques for factoring various polynomial expressions",
-              completed: false,
+              completed: true,
               locked: false,
-              progress: 0
+              progress: 100
             },
             {
               id: "rational-expressions",
               title: "Rational Expressions",
               description: "Simplifying and operating with rational expressions",
-              completed: false,
+              completed: true,
               locked: false,
-              progress: 0
+              progress: 100
             }
           ]
         },
@@ -167,9 +167,9 @@ Credits: 3 credit hours`
               id: "rectangular-coordinate-systems",
               title: "The Rectangular Coordinate Systems and Graphs",
               description: "Coordinate plane, distance formula, and graphing basics",
-              completed: false,
+              completed: true,
               locked: false,
-              progress: 0
+              progress: 100
             },
             {
               id: "linear-equations-one-variable",
@@ -192,7 +192,7 @@ Credits: 3 credit hours`
               title: "Complex Numbers",
               description: "Operations with complex numbers and their properties",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -200,23 +200,7 @@ Credits: 3 credit hours`
               title: "Quadratic Equations",
               description: "Solving quadratic equations using various methods",
               completed: false,
-              locked: true,
-              progress: 0
-            },
-            {
-              id: "other-types-equations",
-              title: "Other Types of Equations",
-              description: "Rational, radical, and absolute value equations",
-              completed: false,
-              locked: true,
-              progress: 0
-            },
-            {
-              id: "linear-inequalities-absolute-value",
-              title: "Linear Inequalities and Absolute Value Inequalities",
-              description: "Solving compound and absolute value inequalities",
-              completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -7646,7 +7630,8 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
     }
   }
 
-  return topicDataMap[topicId] || {
+  // Apply sequential locking to all concepts
+  const rawTopicData = topicDataMap[topicId] || {
     title: "Topic Not Found",
     sections: [
       {
@@ -7656,6 +7641,53 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
         content: "The requested topic is not available. Please check the topic ID or go back to the classes page."
       }
     ]
+  }
+
+  return applySequentialLocking(rawTopicData)
+}
+
+/**
+ * Apply sequential locking to concepts across all sections
+ * Only the first incomplete concept should be unlocked, all others locked
+ */
+function applySequentialLocking(topicData: { title: string; sections: Section[] }): { title: string; sections: Section[] } {
+  const processedSections = [...topicData.sections]
+  let foundFirstIncomplete = false
+  
+  // Process all sections in order
+  for (let sectionIndex = 0; sectionIndex < processedSections.length; sectionIndex++) {
+    const section = processedSections[sectionIndex]
+    
+    // Skip overview section (no concepts)
+    if (section.id === "overview" || !section.concepts) {
+      continue
+    }
+    
+    // Process concepts in this section
+    const processedConcepts = section.concepts.map(concept => {
+      if (concept.completed) {
+        // Completed concepts are always unlocked
+        return { ...concept, locked: false }
+      } else if (!foundFirstIncomplete) {
+        // First incomplete concept is unlocked
+        foundFirstIncomplete = true
+        return { ...concept, locked: false }
+      } else {
+        // All subsequent concepts are locked
+        return { ...concept, locked: true }
+      }
+    })
+    
+    // Update the section with processed concepts
+    processedSections[sectionIndex] = {
+      ...section,
+      concepts: processedConcepts
+    }
+  }
+  
+  return {
+    ...topicData,
+    sections: processedSections
   }
 }
 
