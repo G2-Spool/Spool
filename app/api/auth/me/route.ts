@@ -1,42 +1,47 @@
 import { NextRequest, NextResponse } from "next/server"
-import { parseJwtToken } from "@/services/cognito-auth"
+import { getCurrentUser, fetchAuthSession } from 'aws-amplify/auth'
+import { runWithAmplifyServerContext } from '@/lib/amplify-server-utils'
 
 export async function GET(request: NextRequest) {
   try {
-    const idToken = request.cookies.get("idToken")?.value
+    // Run the auth check within Amplify server context
+    const user = await runWithAmplifyServerContext({
+      nextServerContext: { request },
+      operation: async (contextSpec) => {
+        try {
+          // Get current user and session
+          const currentUser = await getCurrentUser(contextSpec)
+          const session = await fetchAuthSession(contextSpec)
+          
+          if (!session.tokens?.idToken) {
+            return null
+          }
 
-    if (!idToken) {
-      return NextResponse.json(
-        { error: "No authentication token found" },
-        { status: 401 }
-      )
-    }
+          const idToken = session.tokens.idToken
+          const payload = idToken.payload
 
-    const payload = parseJwtToken(idToken)
-    
-    if (!payload) {
-      return NextResponse.json(
-        { error: "Invalid token" },
-        { status: 401 }
-      )
-    }
-
-    // Check if token is expired
-    const now = Math.floor(Date.now() / 1000)
-    if (payload.exp && payload.exp < now) {
-      return NextResponse.json(
-        { error: "Token expired" },
-        { status: 401 }
-      )
-    }
-
-    return NextResponse.json({
-      sub: payload.sub,
-      email: payload.email,
-      email_verified: payload.email_verified,
-      given_name: payload.given_name,
-      family_name: payload.family_name,
+          return {
+            sub: currentUser.userId,
+            email: payload.email as string || '',
+            email_verified: payload.email_verified as boolean || false,
+            given_name: payload.given_name as string || undefined,
+            family_name: payload.family_name as string || undefined,
+          }
+        } catch (error) {
+          console.error("Error getting user:", error)
+          return null
+        }
+      }
     })
+
+    if (!user) {
+      return NextResponse.json(
+        { error: "Not authenticated" },
+        { status: 401 }
+      )
+    }
+
+    return NextResponse.json(user)
   } catch (error) {
     console.error("Auth check error:", error)
     return NextResponse.json(

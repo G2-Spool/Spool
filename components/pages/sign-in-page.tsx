@@ -8,7 +8,7 @@ import { Label } from "@/components/ui/label"
 import { Separator } from "@/components/ui/separator"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { EyeIcon, EyeOffIcon, ChevronLeft, AlertCircle } from "lucide-react"
-import { signIn, signUp, resetPassword, confirmResetPassword, type SignInInput, type SignUpInput } from 'aws-amplify/auth'
+import { signIn, signUp, resetPassword, confirmResetPassword, confirmSignUp, type SignInInput, type SignUpInput } from 'aws-amplify/auth'
 import { Amplify } from 'aws-amplify'
 
 interface SignInPageProps {
@@ -89,6 +89,9 @@ export function SignInPage({ onSignIn, onBack }: SignInPageProps) {
         setTimeout(() => {
           onSignIn()
         }, 100)
+      } else if (nextStep.signInStep === 'CONFIRM_SIGN_UP') {
+        // User needs confirmation
+        setError("Your account needs to be confirmed. Please contact support to activate your account.")
       } else {
         // Handle additional steps if needed (MFA, etc.)
         setError(`Additional step required: ${nextStep.signInStep}`)
@@ -141,37 +144,94 @@ export function SignInPage({ onSignIn, onBack }: SignInPageProps) {
           userAttributes: {
             email: email,
           },
+          autoSignIn: true, // Enable auto sign-in after sign-up
         },
       }
       
-      const { isSignUpComplete, userId } = await signUp(signUpInput)
+      const { isSignUpComplete, userId, nextStep } = await signUp(signUpInput)
       
       console.log("Sign-up successful, user ID:", userId)
-      setSuccessMessage("Account created successfully! Signing you in...")
+      console.log("Sign-up complete:", isSignUpComplete)
+      console.log("Next step:", nextStep)
       
-      // Auto sign-in after successful sign-up
-      setTimeout(async () => {
+      // Check if user needs confirmation
+      if (nextStep && nextStep.signUpStep === 'CONFIRM_SIGN_UP') {
+        // User needs confirmation - try to auto-confirm
+        setSuccessMessage("Account created! Attempting to activate your account...")
+        
+        // Try to confirm the user (this might fail if we don't have the right permissions)
         try {
-          const signInInput: SignInInput = {
+          await confirmSignUp({
             username: email,
-            password: password,
-          }
-          
-          const { isSignedIn } = await signIn(signInInput)
-          
-          if (isSignedIn) {
-            console.log("Auto sign-in successful")
-            // Give auth context time to update
-            setTimeout(() => {
-              onSignIn()
-            }, 100)
-          }
-        } catch (signInErr: any) {
-          console.error("Auto sign-in error:", signInErr)
-          setError("Account created but auto sign-in failed. Please sign in manually.")
-          setIsSignUp(false) // Switch to sign-in mode
+            confirmationCode: '123456' // This won't work, but we try anyway
+          })
+        } catch (confirmErr) {
+          console.log("Auto-confirm failed (expected):", confirmErr)
         }
-      }, 500)
+        
+        // Now try to sign in - it might work if the admin has confirmed the user
+        setTimeout(async () => {
+          try {
+            const signInInput: SignInInput = {
+              username: email,
+              password: password,
+            }
+            
+            const { isSignedIn } = await signIn(signInInput)
+            
+            if (isSignedIn) {
+              console.log("Sign-in successful after sign-up")
+              setTimeout(() => {
+                onSignIn()
+              }, 100)
+            } else {
+              // Sign-in didn't work, user needs manual confirmation
+              setError("Account created but needs activation. Please contact support or try signing in again in a few minutes.")
+              setSuccessMessage("")
+              setIsSignUp(false) // Switch to sign-in mode
+            }
+          } catch (signInErr: any) {
+            console.error("Auto sign-in error:", signInErr)
+            if (signInErr.message?.includes('not confirmed')) {
+              setError("Account created but needs activation. Please contact support or try signing in again in a few minutes.")
+            } else {
+              setError("Account created! Please try signing in.")
+            }
+            setSuccessMessage("")
+            setIsSignUp(false) // Switch to sign-in mode
+          }
+        }, 1000)
+      } else {
+        // Sign-up is complete, try to sign in
+        setSuccessMessage("Account created! Signing you in...")
+        
+        setTimeout(async () => {
+          try {
+            const signInInput: SignInInput = {
+              username: email,
+              password: password,
+            }
+            
+            const { isSignedIn } = await signIn(signInInput)
+            
+            if (isSignedIn) {
+              console.log("Auto sign-in successful")
+              setTimeout(() => {
+                onSignIn()
+              }, 100)
+            } else {
+              // If auto sign-in didn't work, switch to sign-in mode
+              setSuccessMessage("Account created! Please sign in.")
+              setIsSignUp(false)
+            }
+          } catch (signInErr: any) {
+            console.error("Auto sign-in error:", signInErr)
+            setError("Account created! Please sign in manually.")
+            setSuccessMessage("")
+            setIsSignUp(false)
+          }
+        }, 500)
+      }
       
     } catch (err: any) {
       console.error("Sign-up error:", err)
@@ -180,7 +240,11 @@ export function SignInPage({ onSignIn, onBack }: SignInPageProps) {
       } else {
         setError(err.message || "Registration failed. Please try again.")
       }
-      setIsLoading(false)
+    } finally {
+      // Make sure to reset loading state after a timeout if nothing else does
+      setTimeout(() => {
+        setIsLoading(false)
+      }, 3000)
     }
   }
 

@@ -2,6 +2,7 @@
 
 import { TopicPage } from "@/components/pages/topic-page"
 import { MainLayout } from "@/components/templates/main-layout"
+import { AuthGuard } from "@/components/auth-guard"
 import { useRouter, useParams } from "next/navigation"
 import { useNavigationLoading } from "@/hooks/use-navigation-loading"
 
@@ -20,7 +21,7 @@ const getTopicTitle = (topicId: string) => {
   return titleMap[topicId] || "My Classes"
 }
 
-export default function TopicRoute() {
+function TopicContent() {
   const params = useParams()
   const router = useRouter()
   const { navigateWithLoading } = useNavigationLoading()
@@ -48,5 +49,13 @@ export default function TopicRoute() {
         />
       </MainLayout>
     </div>
+  )
+}
+
+export default function TopicRoute() {
+  return (
+    <AuthGuard>
+      <TopicContent />
+    </AuthGuard>
   )
 } 
