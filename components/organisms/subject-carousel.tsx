@@ -9,8 +9,8 @@ interface Topic {
   id: string
   title: string
   description?: string
-  chapters: number
-  items: number
+  sections: number
+  concepts: number
   progress: number
 }
 
@@ -76,8 +76,8 @@ export function SubjectCarousel({ title, topics, color, onTopicClick, onPlayClic
               key={topic.id}
               title={topic.title}
               description={topic.description}
-              chapters={topic.chapters}
-              items={topic.items}
+              sections={topic.sections}
+              concepts={topic.concepts}
               progress={topic.progress}
               color={color}
               onCardClick={() => onTopicClick?.(topic.id)}

@@ -189,22 +189,28 @@ export function SectionNavigation({ sections, activeSection, onSectionChange }: 
                   )}
                 </div>
                 <div className="flex-1 min-w-0" style={{ width: 'calc(100% - 48px)' }}>
-                  <div className={cn(
-                    "font-medium mb-1 leading-tight",
-                    section.id === "overview" ? "text-lg" : "text-base",
-                    (sectionState === "current" || section === sectionWindow.current) && "text-primary"
-                  )}>
-                    {section.title}
-                    {section === sectionWindow.current && (
-                      <span className="ml-2 text-xs bg-primary text-primary-foreground px-2 py-1 rounded">
-                        Current
-                      </span>
+                  <div className="flex items-center gap-2 mb-1">
+                    <div className={cn(
+                      "font-medium leading-tight truncate",
+                      section.id === "overview" ? "text-lg" : "text-base",
+                      (sectionState === "current" || section === sectionWindow.current) && "text-primary"
                     )}
-                    {sectionState === "completed" && (
-                      <span className="ml-2 text-xs bg-green-500 text-white px-2 py-1 rounded">
-                        Complete
-                      </span>
-                    )}
+                    title={section.title}
+                    >
+                      {section.title}
+                    </div>
+                    <div className="flex-shrink-0 flex items-center gap-1">
+                      {section === sectionWindow.current && (
+                        <span className="text-xs bg-primary text-primary-foreground px-2 py-1 rounded whitespace-nowrap">
+                          Current
+                        </span>
+                      )}
+                      {sectionState === "completed" && (
+                        <span className="text-xs bg-green-500 text-white px-2 py-1 rounded whitespace-nowrap">
+                          Complete
+                        </span>
+                      )}
+                    </div>
                   </div>
                   {section.description && (
                     <div 

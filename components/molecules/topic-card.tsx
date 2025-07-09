@@ -7,8 +7,8 @@ import { useToast } from "@/hooks/use-toast"
 interface TopicCardProps {
   title: string
   description?: string
-  chapters: number
-  items: number
+  sections: number
+  concepts: number
   progress: number
   color: string
   onCardClick?: () => void
@@ -18,8 +18,8 @@ interface TopicCardProps {
 export function TopicCard({
   title,
   description,
-  chapters,
-  items,
+  sections,
+  concepts,
   progress,
   color,
   onCardClick,
@@ -71,12 +71,12 @@ export function TopicCard({
           </div>
           <div className="flex justify-between items-center text-base pt-2">
             <div className="text-center">
-              <div className="font-bold text-foreground text-lg">{chapters}</div>
-              <div className="text-muted-foreground text-sm">Chapters</div>
+              <div className="font-bold text-foreground text-lg">{sections}</div>
+              <div className="text-muted-foreground text-sm">Sections</div>
             </div>
             <div className="text-center">
-              <div className="font-bold text-foreground text-lg">{items}</div>
-              <div className="text-muted-foreground text-sm">Items</div>
+              <div className="font-bold text-foreground text-lg">{concepts}</div>
+              <div className="text-muted-foreground text-sm">Concepts</div>
             </div>
             <div className="text-center">
               <div className="font-bold text-foreground">{progress}%</div>
