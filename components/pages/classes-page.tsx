@@ -21,6 +21,28 @@ const calculateTopicStats = (topicId: string) => {
   return { sections, concepts }
 }
 
+// Function to calculate actual progress based on completed concepts
+const calculateTopicProgress = (topicId: string): number => {
+  const topicData = getTopicData(topicId)
+  
+  let totalConcepts = 0
+  let completedConcepts = 0
+  
+  // Count total and completed concepts across all sections
+  topicData.sections.forEach((section: any) => {
+    if (section.concepts) {
+      totalConcepts += section.concepts.length
+      completedConcepts += section.concepts.filter((concept: any) => concept.completed).length
+    }
+  })
+  
+  // Calculate percentage (avoid division by zero)
+  if (totalConcepts === 0) return 0
+  
+  const percentage = (completedConcepts / totalConcepts) * 100
+  return Math.round(percentage) // Round to nearest whole number
+}
+
 const subjectsData = [
   {
     title: "Mathematics",
@@ -31,14 +53,14 @@ const subjectsData = [
         title: "College Algebra",
         description: "Master algebraic concepts and problem-solving techniques",
         ...calculateTopicStats("college-algebra"),
-        progress: 45
+        progress: calculateTopicProgress("college-algebra")
       },
       {
         id: "statistics",
         title: "Introductory Statistics",
         description: "Learn statistical analysis and data interpretation",
         ...calculateTopicStats("statistics"),
-        progress: 30
+        progress: calculateTopicProgress("statistics")
       }
     ]
   },
@@ -51,21 +73,21 @@ const subjectsData = [
         title: "Writing Guide",
         description: "Develop your writing skills and communication abilities",
         ...calculateTopicStats("writing"),
-        progress: 60
+        progress: calculateTopicProgress("writing")
       },
       {
         id: "philosophy",
         title: "Introduction to Philosophy",
         description: "Explore fundamental questions about existence and knowledge",
         ...calculateTopicStats("philosophy"),
-        progress: 25
+        progress: calculateTopicProgress("philosophy")
       },
       {
         id: "world-history",
         title: "World History, Volume 2: from 1400",
         description: "Journey through major events and civilizations",
         ...calculateTopicStats("world-history"),
-        progress: 15
+        progress: calculateTopicProgress("world-history")
       }
     ]
   },
@@ -78,14 +100,14 @@ const subjectsData = [
         title: "Biology",
         description: "Study living organisms and their interactions with the environment",
         ...calculateTopicStats("biology"),
-        progress: 75
+        progress: calculateTopicProgress("biology")
       },
       {
         id: "anatomy",
         title: "Anatomy and Physiology",
         description: "Learn about the structure and organization of the human body",
         ...calculateTopicStats("anatomy"),
-        progress: 40
+        progress: calculateTopicProgress("anatomy")
       }
     ]
   }

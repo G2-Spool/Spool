@@ -112,25 +112,25 @@ Credits: 3 credit hours`
               id: "real-numbers",
               title: "Real Numbers: Algebra Essentials",
               description: "Properties of real numbers, number systems, and algebraic operations",
-              completed: true,
+              completed: false,
               locked: false,
-              progress: 100
+              progress: 0
             },
             {
               id: "exponents-scientific-notation",
               title: "Exponents and Scientific Notation",
               description: "Rules of exponents and scientific notation applications",
-              completed: true,
+              completed: false,
               locked: false,
-              progress: 100
+              progress: 0
             },
             {
               id: "radicals-rational-exponents",
               title: "Radicals and Rational Exponents",
               description: "Working with radicals and rational exponents",
-              completed: true,
+              completed: false,
               locked: false,
-              progress: 100
+              progress: 0
             },
             {
               id: "polynomials",
@@ -138,7 +138,7 @@ Credits: 3 credit hours`
               description: "Polynomial operations and properties",
               completed: false,
               locked: false,
-              progress: 75
+              progress: 0
             },
             {
               id: "factoring-polynomials",
@@ -146,7 +146,7 @@ Credits: 3 credit hours`
               description: "Techniques for factoring various polynomial expressions",
               completed: false,
               locked: false,
-              progress: 50
+              progress: 0
             },
             {
               id: "rational-expressions",
@@ -154,7 +154,7 @@ Credits: 3 credit hours`
               description: "Simplifying and operating with rational expressions",
               completed: false,
               locked: false,
-              progress: 25
+              progress: 0
             }
           ]
         },
@@ -169,7 +169,7 @@ Credits: 3 credit hours`
               description: "Coordinate plane, distance formula, and graphing basics",
               completed: false,
               locked: false,
-              progress: 60
+              progress: 0
             },
             {
               id: "linear-equations-one-variable",
@@ -177,7 +177,7 @@ Credits: 3 credit hours`
               description: "Solving linear equations and understanding solution sets",
               completed: false,
               locked: false,
-              progress: 45
+              progress: 0
             },
             {
               id: "models-applications",
@@ -185,7 +185,7 @@ Credits: 3 credit hours`
               description: "Real-world problem solving with algebraic models",
               completed: false,
               locked: false,
-              progress: 30
+              progress: 0
             },
             {
               id: "complex-numbers",
@@ -232,7 +232,7 @@ Credits: 3 credit hours`
               description: "Definition of functions and function notation",
               completed: false,
               locked: false,
-              progress: 25
+              progress: 0
             },
             {
               id: "domain-range",
@@ -295,7 +295,7 @@ Credits: 3 credit hours`
               description: "Properties and characteristics of linear functions",
               completed: false,
               locked: false,
-              progress: 15
+              progress: 0
             },
             {
               id: "modeling-linear-functions",
@@ -664,17 +664,17 @@ By the end of this course, you'll be able to analyze data critically and make in
               id: "definitions-statistical-probability",
               title: "Definitions of Statistics, Probability, and Key Terms",
               description: "Basic statistical terminology and concepts",
-              completed: true,
+              completed: false,
               locked: false,
-              progress: 100
+              progress: 0
             },
             {
               id: "data-sampling-variation",
               title: "Data, Sampling, and Variation in Data and Sampling",
               description: "Understanding different types of data and sampling methods",
-              completed: true,
+              completed: false,
               locked: false,
-              progress: 100
+              progress: 0
             },
             {
               id: "frequency-frequency-tables",
@@ -682,7 +682,7 @@ By the end of this course, you'll be able to analyze data critically and make in
               description: "Organizing data and understanding measurement scales",
               completed: false,
               locked: false,
-              progress: 75
+              progress: 0
             },
             {
               id: "experimental-design-ethics",
@@ -690,7 +690,7 @@ By the end of this course, you'll be able to analyze data critically and make in
               description: "Principles of experimental design and research ethics",
               completed: false,
               locked: false,
-              progress: 50
+              progress: 0
             },
             {
               id: "data-collection-experiment",
@@ -698,7 +698,7 @@ By the end of this course, you'll be able to analyze data critically and make in
               description: "Hands-on data collection and experimental design",
               completed: false,
               locked: false,
-              progress: 25
+              progress: 0
             },
             {
               id: "sampling-experiment",
@@ -721,7 +721,7 @@ By the end of this course, you'll be able to analyze data critically and make in
               description: "Basic graphical displays of data",
               completed: false,
               locked: false,
-              progress: 60
+              progress: 0
             },
             {
               id: "histograms-frequency-polygons",
@@ -729,7 +729,7 @@ By the end of this course, you'll be able to analyze data critically and make in
               description: "Advanced graphical displays and time-based data",
               completed: false,
               locked: false,
-              progress: 45
+              progress: 0
             },
             {
               id: "measures-location",
@@ -737,7 +737,7 @@ By the end of this course, you'll be able to analyze data critically and make in
               description: "Percentiles, quartiles, and measures of position",
               completed: false,
               locked: false,
-              progress: 30
+              progress: 0
             },
             {
               id: "box-plots",
@@ -745,7 +745,7 @@ By the end of this course, you'll be able to analyze data critically and make in
               description: "Five-number summary and outlier detection",
               completed: false,
               locked: false,
-              progress: 15
+              progress: 0
             },
             {
               id: "measures-center",
@@ -792,7 +792,7 @@ By the end of this course, you'll be able to analyze data critically and make in
               description: "Basic probability terminology and notation",
               completed: false,
               locked: false,
-              progress: 25
+              progress: 0
             },
             {
               id: "independent-mutually-exclusive",
@@ -1414,17 +1414,17 @@ Regardless of your initial skill level, you should be comfortable with preparing
               id: "testimonials",
               title: "Testimonials",
               description: "Student success stories and feedback",
-              completed: true,
+              completed: false,
               locked: false,
-              progress: 100
+              progress: 0
             },
             {
               id: "intro-big-o",
               title: "Introduction to big O",
               description: "Understanding algorithmic complexity",
-              completed: true,
+              completed: false,
               locked: false,
-              progress: 100
+              progress: 0
             },
             {
               id: "intro-recursion",
@@ -1432,7 +1432,7 @@ Regardless of your initial skill level, you should be comfortable with preparing
               description: "Fundamental recursive concepts",
               completed: false,
               locked: false,
-              progress: 25
+              progress: 0
             },
             {
               id: "notes-before-starting",
@@ -1455,7 +1455,7 @@ Regardless of your initial skill level, you should be comfortable with preparing
               description: "Understanding arrays and their operations",
               completed: false,
               locked: false,
-              progress: 45
+              progress: 0
             },
             {
               id: "string-manipulation",
@@ -1463,7 +1463,7 @@ Regardless of your initial skill level, you should be comfortable with preparing
               description: "Common string operations and algorithms",
               completed: false,
               locked: false,
-              progress: 20
+              progress: 0
             },
             {
               id: "two-pointers",
