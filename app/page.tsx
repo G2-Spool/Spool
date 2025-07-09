@@ -1,7 +1,6 @@
 "use client"
 
 import { useState, useEffect, Suspense } from "react"
-import { useSearchParams } from "next/navigation"
 import { useLocalStorageBoolean } from "@/hooks/use-local-storage"
 import { MainLayout } from "@/components/templates/main-layout"
 import { LandingPage } from "@/components/pages/landing-page"
@@ -9,16 +8,16 @@ import { SplashScreenPage } from "@/components/pages/splash-screen-page"
 import { useAuth } from "@/contexts/auth-context"
 import { SignInPage } from "@/components/pages/sign-in-page"
 import { Dashboard } from "@/components/dashboard"
+import { useUnifiedNavigation } from "@/hooks/use-unified-navigation"
 
 function HomeContent() {
   const { user, isLoading, refreshAuth } = useAuth()
-  const [isOnboarded, setIsOnboarded, isLoadingOnboarding] = useLocalStorageBoolean("onboarding-complete", false)
+  const { navigateToUrl, navigateToLanding } = useUnifiedNavigation()
+  const [, , isLoadingOnboarding] = useLocalStorageBoolean("onboarding-complete", false)
   const [hasSplashCompleted, setHasSplashCompleted, isLoadingSplash] = useLocalStorageBoolean("splash-completed", false)
   const [hasVisitedLanding, setHasVisitedLanding, isLoadingLanding] = useLocalStorageBoolean("visited-landing", false)
   const [showSplashScreen, setShowSplashScreen] = useState(false)
-  const [activeTab, setActiveTab] = useState("dashboard") // Default to dashboard
   const [forceShowLanding, setForceShowLanding] = useState(false)
-  const searchParams = useSearchParams()
 
   // Check for return-to-landing flag immediately on mount
   useEffect(() => {
@@ -41,26 +40,16 @@ function HomeContent() {
   const handleGetStarted = () => {
     setHasVisitedLanding(true)
     setForceShowLanding(false)
-  }
-
-  const handleOnboardingComplete = () => {
-    setIsOnboarded(true)
+    // Don't navigate to dashboard here - just let the app show sign-in page
+    // Navigation to dashboard will happen after successful sign-in
   }
 
   const handleSplashComplete = () => {
     setHasSplashCompleted(true)
     setShowSplashScreen(false)
+    // Navigate to dashboard after splash screen
+    navigateToUrl("/?tab=dashboard")
   }
-
-  // Check for URL parameters to set the active tab
-  useEffect(() => {
-    const tabParam = searchParams.get("tab")
-    if (tabParam && ["learning", "dashboard", "classes", "visualization", "settings", "profile"].includes(tabParam)) {
-      setActiveTab(tabParam)
-    } else {
-      setActiveTab("dashboard") // Default fallback
-    }
-  }, [searchParams])
 
   // Check if user wants to see splash screen (from sign out)
   useEffect(() => {
@@ -110,12 +99,12 @@ function HomeContent() {
   // Check if user is signed in
   if (!user) {
     const handleBackToLanding = () => {
-      // Set flag to indicate user wants to return to landing page
-      localStorage.setItem("return-to-landing", "true")
-      // Clear visited landing flag to show landing page again
-      localStorage.removeItem("visited-landing")
-      // Force show landing page immediately
+      // Immediately update local state to show landing page
+      setHasVisitedLanding(false)
       setForceShowLanding(true)
+      
+      // Also call navigateToLanding to update URL and localStorage
+      navigateToLanding()
     }
 
     return (
@@ -126,6 +115,8 @@ function HomeContent() {
             setForceShowLanding(false)
             // Refresh auth context to get the new user
             await refreshAuth()
+            // Navigate to dashboard after sign in
+            navigateToUrl("/?tab=dashboard")
           }} 
           onBack={handleBackToLanding}
         />
@@ -134,8 +125,8 @@ function HomeContent() {
   }
 
   return (
-    <MainLayout activeTab={activeTab} onTabChange={setActiveTab}>
-      <Dashboard activeTab={activeTab} />
+    <MainLayout>
+      <Dashboard />
     </MainLayout>
   )
 }

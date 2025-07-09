@@ -1,7 +1,7 @@
 "use client"
 
 import { BookOpen, Home, BarChart3, Settings, User } from "lucide-react"
-import { useRouter } from "next/navigation"
+import { useUnifiedNavigation, AppTab } from "@/hooks/use-unified-navigation"
 import {
   Sidebar,
   SidebarContent,
@@ -14,29 +14,24 @@ import {
   SidebarRail,
 } from "@/components/ui/sidebar"
 
-interface AppSidebarProps {
-  activeTab: string
-  onTabChange: (tab: string) => void
-}
-
-export function AppSidebar({ activeTab, onTabChange }: AppSidebarProps) {
-  const router = useRouter()
+export function AppSidebar() {
+  const { navigateToTab, isTabActive } = useUnifiedNavigation()
   
   const menuItems = [
     {
       title: "Study",
       icon: BookOpen,
-      value: "learning",
+      value: "learning" as AppTab,
     },
     {
       title: "Dashboard",
       icon: Home,
-      value: "dashboard",
+      value: "dashboard" as AppTab,
     },
     {
       title: "Progress",
       icon: BarChart3,
-      value: "visualization",
+      value: "visualization" as AppTab,
     },
   ]
 
@@ -44,17 +39,17 @@ export function AppSidebar({ activeTab, onTabChange }: AppSidebarProps) {
     {
       title: "Settings",
       icon: Settings,
-      value: "settings",
+      value: "settings" as AppTab,
     },
     {
       title: "Profile",
       icon: User,
-      value: "profile",
+      value: "profile" as AppTab,
     },
   ]
 
-  const handleNavigation = (value: string) => {
-    router.push(`/?tab=${value}`)
+  const handleNavigation = (value: AppTab) => {
+    navigateToTab(value)
   }
 
   return (
@@ -71,7 +66,7 @@ export function AppSidebar({ activeTab, onTabChange }: AppSidebarProps) {
             <SidebarMenu>
               {menuItems.map((item) => (
                 <SidebarMenuItem key={item.value}>
-                  <SidebarMenuButton onClick={() => handleNavigation(item.value)} isActive={activeTab === item.value}>
+                  <SidebarMenuButton onClick={() => handleNavigation(item.value)} isActive={isTabActive(item.value)}>
                     <item.icon className="h-4 w-4" />
                     <span>{item.title}</span>
                   </SidebarMenuButton>
@@ -87,7 +82,7 @@ export function AppSidebar({ activeTab, onTabChange }: AppSidebarProps) {
               <SidebarMenu>
                 {bottomItems.map((item) => (
                   <SidebarMenuItem key={item.value}>
-                    <SidebarMenuButton onClick={() => handleNavigation(item.value)} isActive={activeTab === item.value}>
+                    <SidebarMenuButton onClick={() => handleNavigation(item.value)} isActive={isTabActive(item.value)}>
                       <item.icon className="h-4 w-4" />
                       <span>{item.title}</span>
                     </SidebarMenuButton>

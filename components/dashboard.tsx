@@ -1,17 +1,16 @@
 "use client"
 
+import { DailyLearningPage } from "@/components/pages/daily-learning-page"
 import { DashboardPage } from "@/components/pages/dashboard-page"
 import { ClassesPage } from "@/components/pages/classes-page"
 import { ProgressPage } from "@/components/pages/progress-page"
 import { SettingsPage } from "@/components/pages/settings-page"
 import { ProfilePage } from "@/components/pages/profile-page"
-import { DailyLearningPage } from "@/components/pages/daily-learning-page"
+import { useUnifiedNavigation } from "@/hooks/use-unified-navigation"
 
-interface DashboardProps {
-  activeTab?: string
-}
-
-export function Dashboard({ activeTab = "dashboard" }: DashboardProps) {
+export function Dashboard() {
+  const { activeTab } = useUnifiedNavigation()
+  
   const renderPage = () => {
     switch (activeTab) {
       case "learning":

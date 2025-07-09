@@ -2,18 +2,18 @@
 
 import type React from "react"
 import { SidebarNavigation } from "@/components/organisms/sidebar-navigation"
-import { Separator } from "@/components/ui/separator"
+
 import { Sidebar, useSidebar } from "@/components/ui/sidebar"
+import { useUnifiedNavigation } from "@/hooks/use-unified-navigation"
 
 interface MainLayoutProps {
-  activeTab: string
-  onTabChange: (tab: string) => void
   children: React.ReactNode
   title?: string
 }
 
-function MainLayoutContent({ activeTab, onTabChange, children, title }: MainLayoutProps) {
+function MainLayoutContent({ children, title }: MainLayoutProps) {
   const { open } = useSidebar()
+  const { activeTab } = useUnifiedNavigation()
   
   const getPageTitle = (tab: string) => {
     switch (tab) {
@@ -34,11 +34,11 @@ function MainLayoutContent({ activeTab, onTabChange, children, title }: MainLayo
     }
   }
 
-  const displayTitle = title || getPageTitle(activeTab)
+  // const displayTitle = title || getPageTitle(activeTab)
 
   return (
     <div className="min-h-screen bg-background">
-      <SidebarNavigation activeTab={activeTab} onTabChange={onTabChange} />
+      <SidebarNavigation />
       <main className={`flex flex-col transition-all duration-200 ${open ? 'ml-20 md:ml-[300px]' : 'ml-20 md:ml-20'}`}>
         <div className="flex-1 space-y-4 p-6 bg-background overflow-hidden">{children}</div>
       </main>
@@ -46,10 +46,12 @@ function MainLayoutContent({ activeTab, onTabChange, children, title }: MainLayo
   )
 }
 
-export function MainLayout(props: MainLayoutProps) {
+export function MainLayout({ children, title }: MainLayoutProps) {
   return (
     <Sidebar>
-      <MainLayoutContent {...props} />
+      <MainLayoutContent title={title}>
+        {children}
+      </MainLayoutContent>
     </Sidebar>
   )
 }

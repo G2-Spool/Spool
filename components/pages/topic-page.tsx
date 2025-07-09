@@ -1,12 +1,13 @@
 "use client"
 
 import React, { useState } from "react"
-import { ChevronLeft } from "lucide-react"
+import { ChevronLeft, BookOpen, Play, CheckCircle, Lock } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { ConceptList } from "../organisms/concept-list"
-import { SectionNavigation } from "../organisms/section-navigation"
-import { LearningPage } from "./learning-page"
+import { ConceptList } from "@/components/organisms/concept-list"
+import { SectionNavigation } from "@/components/organisms/section-navigation"
+import { LearningPage } from "@/components/pages/learning-page"
+import { useUnifiedNavigation } from "@/hooks/use-unified-navigation"
 
 interface TopicPageProps {
   topicId: string
@@ -7661,6 +7662,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
 export function TopicPage({ topicId, title, sections, onBack }: TopicPageProps) {
   const [activeSection, setActiveSection] = useState("overview")
   const [activeConcept, setActiveConcept] = useState<{ id: string; title: string } | null>(null)
+  const { navigateToUrl } = useUnifiedNavigation()
   
   // Ensure topicId is a string and handle potential undefined cases
   const safeTopicId = typeof topicId === 'string' ? topicId : 'unknown'
@@ -7698,11 +7700,15 @@ export function TopicPage({ topicId, title, sections, onBack }: TopicPageProps) 
     
     if (concept) {
       setActiveConcept({ id: conceptId, title: concept.title })
+      // Update URL to reflect the learning content
+      navigateToUrl(`/topic/${safeTopicId}/learn/${conceptId}`)
     }
   }
 
   const handleBackFromLearning = () => {
     setActiveConcept(null)
+    // Navigate back to the topic overview
+    navigateToUrl(`/topic/${safeTopicId}`)
   }
 
   // Show learning page if concept is active

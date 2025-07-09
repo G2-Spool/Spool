@@ -12,9 +12,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { LoadingTestButton } from "@/components/ui/loading-test-button"
 import { Button } from "@/components/ui/button"
 import { ArrowRight } from "lucide-react"
-import { useRouter } from "next/navigation"
-import { useNavigationLoading } from "@/hooks/use-navigation-loading"
-import { useLoading } from "@/contexts/loading-context"
+import { useUnifiedNavigation } from "@/hooks/use-unified-navigation"
 
 interface UserProfile {
   interests: string[]
@@ -41,9 +39,7 @@ export function DashboardPage() {
   const [studyStreak] = useState(7)
   const [todayProgress] = useState(60)
   const [weeklyGoal] = useState(75)
-  const router = useRouter()
-  const { navigateWithLoading } = useNavigationLoading()
-  const { startLoading, stopLoading } = useLoading()
+  const { navigateToTab } = useUnifiedNavigation()
 
   useEffect(() => {
     const profile = localStorage.getItem("user-profile")
@@ -84,17 +80,7 @@ export function DashboardPage() {
 
   const handleGoToClasses = (e: React.MouseEvent) => {
     e.preventDefault()
-    
-    // Show loading screen before navigation
-    startLoading()
-    
-    // Navigate to the classes tab
-    router.push("/?tab=classes")
-    
-    // Small delay to show loading animation
-    setTimeout(() => {
-      stopLoading()
-    }, 300)
+    navigateToTab("classes")
   }
 
   return (
@@ -128,49 +114,42 @@ export function DashboardPage() {
             />
             <InterestsCard interests={userProfile.interests} />
           </div>
+
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-xl">Quick Actions</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="flex flex-col gap-4">
+                <Button
+                  variant="outline"
+                  className="flex items-center justify-between p-4 h-auto"
+                  onClick={handleGoToClasses}
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="p-2 bg-primary/10 rounded-md">
+                      <ArrowRight className="h-5 w-5 text-primary" />
+                    </div>
+                    <div className="text-left">
+                      <p className="font-medium">Go to Classes</p>
+                      <p className="text-sm text-muted-foreground">Browse and study your courses</p>
+                    </div>
+                  </div>
+                  <ArrowRight className="h-4 w-4" />
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
         </TabsContent>
 
         <TabsContent value="progress" className="space-y-6">
-          <div className="grid gap-6 md:grid-cols-2">
-            <WeeklyProgressCard weeklyData={weeklyData} />
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-white">Study Statistics</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-3">
-                <div className="flex justify-between">
-                  <span className="text-sm text-gray-300">Total Study Time</span>
-                  <span className="font-medium text-white">24h 15m</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-sm text-gray-300">Questions Answered</span>
-                  <span className="font-medium text-white">156</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-sm text-gray-300">Accuracy Rate</span>
-                  <span className="font-medium text-white">78%</span>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
+          <WeeklyProgressCard weeklyData={weeklyData} />
         </TabsContent>
 
         <TabsContent value="achievements" className="space-y-6">
           <AchievementsList achievements={achievements} />
         </TabsContent>
       </Tabs>
-      
-      {/* Go to Classes button under the cards */}
-      <div className="flex justify-end mt-4">
-        <Button 
-          size="lg"
-          className="px-6 py-3 text-lg"
-          onClick={handleGoToClasses}
-        >
-          Go to Classes
-          <ArrowRight className="ml-2 h-5 w-5" />
-        </Button>
-      </div>
       </div>
     </div>
   )

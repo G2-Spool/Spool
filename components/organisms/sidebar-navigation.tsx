@@ -4,26 +4,17 @@ import { BarChart3, BookOpen, Home, Settings, User, LucideIcon } from "lucide-re
 import { SidebarLink, SidebarBody } from "../ui/sidebar"
 import { motion } from "framer-motion"
 import Link from "next/link"
-import { useRouter } from "next/navigation"
-import { useNavigationLoading } from "@/hooks/use-navigation-loading"
-import { useLoading } from "@/contexts/loading-context"
-
-interface SidebarNavigationProps {
-  activeTab: string
-  onTabChange: (tab: string) => void
-}
+import { useUnifiedNavigation, AppTab } from "@/hooks/use-unified-navigation"
 
 interface MenuItem {
   label: string
-  value: string
+  value: AppTab
   href: string
   icon: LucideIcon
 }
 
-export function SidebarNavigation({ activeTab, onTabChange }: SidebarNavigationProps) {
-  const router = useRouter();
-  const { navigateWithLoading } = useNavigationLoading();
-  const { startLoading, stopLoading } = useLoading();
+export function SidebarNavigation() {
+  const { navigateToTab, isTabActive } = useUnifiedNavigation()
   
   const menuItems: MenuItem[] = [
     { 
@@ -61,19 +52,9 @@ export function SidebarNavigation({ activeTab, onTabChange }: SidebarNavigationP
     },
   ]
 
-  const handleLinkClick = (value: string, href: string, e: React.MouseEvent) => {
+  const handleLinkClick = (value: AppTab, e: React.MouseEvent) => {
     e.preventDefault()
-    
-    // Show loading screen before navigation
-    startLoading();
-    
-    // Navigate to the URL (this will update the URL)
-    router.push(href);
-    
-    // Small delay to show loading animation
-    setTimeout(() => {
-      stopLoading();
-    }, 300);
+    navigateToTab(value)
   }
 
   return (
@@ -82,7 +63,7 @@ export function SidebarNavigation({ activeTab, onTabChange }: SidebarNavigationP
           <Link
             href="/?tab=dashboard"
             className="flex items-center space-x-3 p-4 border-b border-sidebar-border cursor-pointer hover:bg-sidebar-accent transition-colors"
-            onClick={(e) => handleLinkClick("dashboard", "/?tab=dashboard", e)}
+            onClick={(e) => handleLinkClick("dashboard", e)}
           >
             <img src="/spool-logo.png" alt="Spool" className="h-6 w-6 flex-shrink-0" />
             <motion.span 
@@ -97,37 +78,41 @@ export function SidebarNavigation({ activeTab, onTabChange }: SidebarNavigationP
           <div className="mt-8 flex flex-col gap-2">
             {menuItems.map((item, idx) => {
               const IconComponent = item.icon
+              const isActive = isTabActive(item.value)
+              
               return (
                 <SidebarLink 
                   key={idx} 
                   link={{
                     ...item,
-                    icon: <IconComponent className={`h-5 w-5 flex-shrink-0 ${activeTab === item.value ? 'text-accent-foreground' : 'text-sidebar-foreground'}`} />
+                    icon: <IconComponent className={`h-5 w-5 flex-shrink-0 ${isActive ? 'text-accent-foreground' : 'text-sidebar-foreground'}`} />
                   }}
-                  onClick={(e) => handleLinkClick(item.value, item.href, e)}
-                  className={activeTab === item.value ? "bg-accent text-accent-foreground font-medium" : ""}
+                  onClick={(e) => handleLinkClick(item.value, e)}
+                  className={isActive ? "bg-accent text-accent-foreground font-medium" : ""}
                 />
               )
             })}
           </div>
         </div>
-        
-        <div className="flex flex-col gap-2">
+
+        <div className="mt-auto flex flex-col gap-2">
           {bottomItems.map((item, idx) => {
             const IconComponent = item.icon
+            const isActive = isTabActive(item.value)
+            
             return (
               <SidebarLink 
                 key={idx} 
                 link={{
                   ...item,
-                  icon: <IconComponent className={`h-5 w-5 flex-shrink-0 ${activeTab === item.value ? 'text-accent-foreground' : 'text-sidebar-foreground'}`} />
+                  icon: <IconComponent className={`h-5 w-5 flex-shrink-0 ${isActive ? 'text-accent-foreground' : 'text-sidebar-foreground'}`} />
                 }}
-                onClick={(e) => handleLinkClick(item.value, item.href, e)}
-                className={activeTab === item.value ? "bg-accent text-accent-foreground font-medium" : ""}
+                onClick={(e) => handleLinkClick(item.value, e)}
+                className={isActive ? "bg-accent text-accent-foreground font-medium" : ""}
               />
             )
           })}
         </div>
-      </SidebarBody>
+    </SidebarBody>
   )
 }

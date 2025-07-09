@@ -3,13 +3,17 @@
 import { useState, useEffect } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
-import { Separator } from "@/components/ui/separator"
-import { User, BookOpen, Calendar, Clock, Award, Target, LogOut } from "lucide-react"
+import { 
+  User, 
+  BookOpen, 
+  Settings, 
+  LogOut, 
+  Target, 
+  Zap 
+} from "lucide-react"
 import { useAuth } from "@/contexts/auth-context"
+import { useUnifiedNavigation } from "@/hooks/use-unified-navigation"
 
 interface UserProfile {
   interests: string[]
@@ -43,6 +47,7 @@ export function ProfilePage() {
   const [userEmail, setUserEmail] = useState("")
   const [isSigningOut, setIsSigningOut] = useState(false)
   const { user, signOut: authSignOut } = useAuth()
+  const { navigateToLanding } = useUnifiedNavigation()
 
   // Set user email from auth context
   useEffect(() => {
@@ -104,9 +109,8 @@ export function ProfilePage() {
       // Use the auth context's signOut method which handles Cognito sign out
       await authSignOut()
       
-      // Don't reload - the auth context and app router will handle navigation
-      // The auth context already clears user data and sets return-to-landing flag
-      console.log("Sign out completed, navigation will be handled by auth state change")
+      // Navigate to landing page after sign out
+      navigateToLanding()
     } catch (error) {
       console.error("Sign out error:", error)
       setIsSigningOut(false)
@@ -115,176 +119,148 @@ export function ProfilePage() {
 
   return (
     <div className="min-h-screen bg-background p-6">
-      <div className="max-w-7xl mx-auto space-y-12">
-        <div className="space-y-4">
-          <h1 className="text-4xl font-bold text-foreground">Profile</h1>
-          <p className="text-muted-foreground text-lg">Manage your personal information and learning preferences</p>
+      <div className="max-w-4xl mx-auto space-y-8">
+        <div className="space-y-2">
+          <h1 className="text-3xl font-bold text-foreground">Profile</h1>
+          <p className="text-muted-foreground">View and manage your learning profile</p>
         </div>
 
-      <div className="grid gap-6">
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center space-x-2 text-white">
-              <User className="h-5 w-5" />
-              <span>Personal Information</span>
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-6">
-            <div className="flex items-center space-x-4">
-              <Avatar className="h-20 w-20">
-                <AvatarFallback className="text-2xl bg-primary text-primary-foreground">
-                  {userName.charAt(0).toUpperCase()}
-                </AvatarFallback>
-              </Avatar>
-              <div className="space-y-2">
-                <Button variant="outline" size="sm">
-                  Change Avatar
-                </Button>
-                <p className="text-sm text-muted-foreground">Upload a new profile picture</p>
-              </div>
-            </div>
-
-            <div className="grid gap-4 md:grid-cols-2">
-              <div className="space-y-2">
-                <Label htmlFor="name">Name</Label>
-                <Input
-                  id="name"
-                  value={userName}
-                  onChange={(e) => setUserName(e.target.value)}
-                  placeholder="Enter your name"
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="email">Email</Label>
-                <Input
-                  id="email"
-                  type="email"
-                  value={userEmail}
-                  onChange={(e) => setUserEmail(e.target.value)}
-                  placeholder="Enter your email"
-                  disabled={!!user?.email} // Disable if email comes from Cognito
-                />
-              </div>
-            </div>
-
-            <Button>Save Changes</Button>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center space-x-2 text-white">
-              <BookOpen className="h-5 w-5" />
-              <span>Learning Profile</span>
-            </CardTitle>
-            <CardDescription>Your current study configuration and interests</CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-6">
-            <div>
-              <h4 className="font-medium text-white mb-3">Study Goals</h4>
-              <div className="grid gap-3 md:grid-cols-3">
+        <div className="grid gap-6">
+          {/* Personal Information */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center space-x-2 text-white">
+                <User className="h-5 w-5" />
+                <span>Personal Information</span>
+              </CardTitle>
+              <CardDescription>Your account and profile details</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <div className="text-sm font-medium text-gray-300">Subject</div>
-                  <div className="text-white capitalize">{userProfile.studyGoals.subject}</div>
+                  <div className="text-sm text-muted-foreground mb-1">Name</div>
+                  <div className="font-medium">{userName}</div>
                 </div>
                 <div>
-                  <div className="text-sm font-medium text-gray-300">Topic</div>
-                  <div className="text-white">{userProfile.studyGoals.topic}</div>
-                </div>
-                <div>
-                  <div className="text-sm font-medium text-gray-300">Focus Area</div>
-                  <div className="text-white">{userProfile.studyGoals.focusArea}</div>
+                  <div className="text-sm text-muted-foreground mb-1">Email</div>
+                  <div className="font-medium">{userEmail}</div>
                 </div>
               </div>
-            </div>
+            </CardContent>
+          </Card>
 
-            <Separator />
+          {/* Interests */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center space-x-2 text-white">
+                <Target className="h-5 w-5" />
+                <span>Interests & Hobbies</span>
+              </CardTitle>
+              <CardDescription>Your personal interests that shape your learning</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                <div className="flex flex-wrap gap-2">
+                  {userProfile.interests.map((interest) => (
+                    <Badge key={interest} variant="secondary" className="text-sm">
+                      {interest}
+                    </Badge>
+                  ))}
+                </div>
+                {userProfile.interests.length > 0 && (
+                  <div className="space-y-3">
+                    {userProfile.interests.map((interest) => (
+                      userProfile.interestDetails[interest] && (
+                        <div key={interest} className="p-3 bg-secondary/20 rounded-lg">
+                          <div className="font-medium text-sm mb-1">{interest}</div>
+                          <div className="text-sm text-muted-foreground">
+                            {userProfile.interestDetails[interest]}
+                          </div>
+                        </div>
+                      )
+                    ))}
+                  </div>
+                )}
+              </div>
+            </CardContent>
+          </Card>
 
-            <div>
-              <h4 className="font-medium text-white mb-3">Learning Pace</h4>
+          {/* Study Goals */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center space-x-2 text-white">
+                <BookOpen className="h-5 w-5" />
+                <span>Study Goals</span>
+              </CardTitle>
+              <CardDescription>Your current learning objectives</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                  <div className="text-sm text-muted-foreground mb-1">Subject</div>
+                  <div className="font-medium">{userProfile.studyGoals.subject}</div>
+                </div>
+                <div>
+                  <div className="text-sm text-muted-foreground mb-1">Topic</div>
+                  <div className="font-medium">{userProfile.studyGoals.topic}</div>
+                </div>
+                <div>
+                  <div className="text-sm text-muted-foreground mb-1">Focus Area</div>
+                  <div className="font-medium">{userProfile.studyGoals.focusArea}</div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Learning Pace */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center space-x-2 text-white">
+                <Zap className="h-5 w-5" />
+                <span>Learning Pace</span>
+              </CardTitle>
+              <CardDescription>Your preferred learning speed</CardDescription>
+            </CardHeader>
+            <CardContent>
               <div className="flex items-center space-x-3">
-                <Badge variant="secondary" className="capitalize">
-                  {userProfile.learningPace}
+                <Badge variant="outline" className="text-sm">
+                  {userProfile.learningPace.charAt(0).toUpperCase() + userProfile.learningPace.slice(1)}
                 </Badge>
-                <span className="text-sm text-gray-300">{getPaceDescription(userProfile.learningPace)}</span>
+                <span className="text-sm text-muted-foreground">
+                  {getPaceDescription(userProfile.learningPace)}
+                </span>
               </div>
-            </div>
+            </CardContent>
+          </Card>
 
-            <Separator />
-
-            <div>
-              <h4 className="font-medium text-white mb-3">Your Interests</h4>
-              <div className="flex flex-wrap gap-2">
-                {userProfile.interests.map((interest) => (
-                  <Badge key={interest} variant="outline">
-                    {interest}
-                  </Badge>
-                ))}
+          {/* Account Management */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center space-x-2 text-white">
+                <LogOut className="h-5 w-5" />
+                <span>Account</span>
+              </CardTitle>
+              <CardDescription>Manage your account session</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="p-4 border border-orange-200 rounded-lg bg-orange-50 dark:border-orange-900/20 dark:bg-orange-900/5">
+                <div className="font-medium text-orange-700 dark:text-orange-300 mb-2">Sign Out</div>
+                <div className="text-sm text-muted-foreground mb-4">
+                  Sign out of your account and return to the landing page. Your learning progress will be preserved.
+                </div>
+                <Button 
+                  variant="outline" 
+                  onClick={signOut} 
+                  disabled={isSigningOut}
+                  className="border-orange-200 text-orange-700 hover:bg-orange-50 dark:border-orange-900/20 dark:text-orange-300 dark:hover:bg-orange-900/10"
+                >
+                  <LogOut className="h-4 w-4 mr-2" />
+                  {isSigningOut ? "Signing Out..." : "Sign Out"}
+                </Button>
               </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center space-x-2 text-white">
-              <Award className="h-5 w-5" />
-              <span>Learning Statistics</span>
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-              <div className="text-center p-4">
-                <Calendar className="h-8 w-8 text-primary mx-auto mb-2" />
-                <div className="text-2xl font-bold text-white">7</div>
-                <div className="text-sm text-gray-300">Day Streak</div>
-              </div>
-              <div className="text-center p-4">
-                <Clock className="h-8 w-8 text-primary mx-auto mb-2" />
-                <div className="text-2xl font-bold text-white">24h</div>
-                <div className="text-sm text-gray-300">Study Time</div>
-              </div>
-              <div className="text-center p-4">
-                <Target className="h-8 w-8 text-primary mx-auto mb-2" />
-                <div className="text-2xl font-bold text-white">156</div>
-                <div className="text-sm text-gray-300">Questions</div>
-              </div>
-              <div className="text-center p-4">
-                <Award className="h-8 w-8 text-primary mx-auto mb-2" />
-                <div className="text-2xl font-bold text-white">78%</div>
-                <div className="text-sm text-gray-300">Accuracy</div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center space-x-2 text-white">
-              <LogOut className="h-5 w-5" />
-              <span>Account</span>
-            </CardTitle>
-            <CardDescription>Manage your account session</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="p-4 border border-orange-200 rounded-lg bg-orange-50 dark:border-orange-900/20 dark:bg-orange-900/5">
-              <div className="font-medium text-orange-700 dark:text-orange-300 mb-2">Sign Out</div>
-              <div className="text-sm text-muted-foreground mb-4">
-                Sign out of your account and return to the sign-in page. Your learning progress will be preserved.
-              </div>
-              <Button 
-                variant="outline" 
-                onClick={signOut} 
-                disabled={isSigningOut}
-                className="border-orange-200 text-orange-700 hover:bg-orange-50 dark:border-orange-900/20 dark:text-orange-300 dark:hover:bg-orange-900/10"
-              >
-                <LogOut className="h-4 w-4 mr-2" />
-                {isSigningOut ? "Signing Out..." : "Sign Out"}
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
+            </CardContent>
+          </Card>
+        </div>
       </div>
     </div>
   )

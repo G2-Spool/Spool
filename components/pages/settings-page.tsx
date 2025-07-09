@@ -5,12 +5,11 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Badge } from "@/components/ui/badge"
-import { Switch } from "@/components/ui/switch"
-import { Separator } from "@/components/ui/separator"
-import { User, BookOpen, Bell, Palette, RotateCcw, Plus, X } from "lucide-react"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { RotateCcw } from "lucide-react"
+import { useUnifiedNavigation } from "@/hooks/use-unified-navigation"
+import { useAuth } from "@/contexts/auth-context"
 
 interface UserProfile {
   interests: string[]
@@ -41,16 +40,9 @@ const defaultProfile: UserProfile = {
 export function SettingsPage() {
   const [userProfile, setUserProfile] = useState<UserProfile>(defaultProfile)
   const [newInterest, setNewInterest] = useState("")
-  const [notifications, setNotifications] = useState({
-    dailyReminder: true,
-    weeklyProgress: true,
-    achievements: true,
-  })
-  const [preferences, setPreferences] = useState({
-    theme: "light",
-    difficulty: "adaptive",
-    feedbackFrequency: "normal",
-  })
+  const [isSigningOut, setIsSigningOut] = useState(false)
+  const { navigateToLanding } = useUnifiedNavigation()
+  const { signOut: authSignOut } = useAuth()
 
   useEffect(() => {
     const profile = localStorage.getItem("user-profile")
@@ -113,170 +105,129 @@ export function SettingsPage() {
   const resetOnboarding = () => {
     localStorage.removeItem("onboarding-complete")
     localStorage.removeItem("user-profile")
-    window.location.reload()
+    navigateToLanding()
   }
 
-  const signOut = () => {
-    // Clear all user data
-    localStorage.removeItem("user-signed-in")
-    localStorage.removeItem("onboarding-complete")
-    localStorage.removeItem("user-profile")
-    localStorage.removeItem("splash-completed")
-    localStorage.removeItem("mock-auth-user")
-    
-    // Reset to landing page by clearing the visited flag and setting return flag
-    localStorage.setItem("return-to-landing", "true")
-    localStorage.removeItem("visited-landing")
-    
-    // Don't set show-splash-screen - let the normal flow handle it
-    window.location.reload()
+  const signOut = async () => {
+    setIsSigningOut(true)
+    try {
+      // Use the auth context's signOut method which handles Cognito sign out
+      await authSignOut()
+      
+      // Navigate to landing page after sign out
+      navigateToLanding()
+    } catch (error) {
+      console.error("Sign out error:", error)
+      setIsSigningOut(false)
+    }
   }
 
   return (
     <div className="min-h-screen bg-background p-6">
-      <div className="max-w-7xl mx-auto space-y-12">
-        <div className="space-y-4">
-          <h1 className="text-4xl font-bold text-foreground">Settings</h1>
-          <p className="text-muted-foreground text-lg">Manage your account preferences and study configuration</p>
+      <div className="max-w-4xl mx-auto space-y-8">
+        <div className="space-y-2">
+          <h1 className="text-3xl font-bold text-foreground">Settings</h1>
+          <p className="text-muted-foreground">Manage your learning preferences and account settings</p>
         </div>
 
-      <div className="grid gap-6">
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center space-x-2">
-              <User className="h-5 w-5" />
-              <span>Profile Information</span>
-            </CardTitle>
-            <CardDescription>Update your interests and personal details</CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-6">
-            <div className="space-y-4">
-              <div>
-                <Label htmlFor="interests">Your Interests</Label>
-                <div className="flex space-x-2 mt-2">
+        <div className="grid gap-6">
+          {/* Interests & Hobbies */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-white">Interests & Hobbies</CardTitle>
+              <CardDescription>Tell us about your interests to personalize your learning experience</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="space-y-2">
+                <Label htmlFor="interests">Add new interest</Label>
+                <div className="flex gap-2">
                   <Input
                     id="interests"
                     value={newInterest}
                     onChange={(e) => setNewInterest(e.target.value)}
-                    placeholder="Add a new interest"
+                    placeholder="e.g., photography, cooking, music"
                     onKeyPress={(e) => e.key === "Enter" && addInterest()}
                   />
                   <Button onClick={addInterest} size="sm">
-                    <Plus className="h-4 w-4" />
+                    Add
                   </Button>
                 </div>
-                <div className="flex flex-wrap gap-2 mt-3">
-                  {userProfile.interests.map((interest) => (
-                    <Badge key={interest} variant="secondary" className="flex items-center space-x-1">
-                      <span>{interest}</span>
-                      <button onClick={() => removeInterest(interest)}>
-                        <X className="h-3 w-3" />
-                      </button>
-                    </Badge>
-                  ))}
-                </div>
               </div>
+              <div className="flex flex-wrap gap-2">
+                {userProfile.interests.map((interest) => (
+                  <Badge
+                    key={interest}
+                    variant="secondary"
+                    className="cursor-pointer hover:bg-destructive hover:text-destructive-foreground"
+                    onClick={() => removeInterest(interest)}
+                  >
+                    {interest} ×
+                  </Badge>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
 
-              {userProfile.interests.map((interest) => (
-                <div key={interest} className="space-y-2">
-                  <Label htmlFor={`detail-${interest}`}>What do you enjoy about {interest}?</Label>
-                  <Textarea
-                    id={`detail-${interest}`}
-                    value={userProfile.interestDetails?.[interest] || ""}
-                    onChange={(e) =>
-                      setUserProfile({
-                        ...userProfile,
-                        interestDetails: {
-                          ...(userProfile.interestDetails || {}),
-                          [interest]: e.target.value,
-                        },
-                      })
-                    }
-                    placeholder={`Describe what you love about ${interest}...`}
-                    rows={2}
+          {/* Study Goals */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-white">Study Goals</CardTitle>
+              <CardDescription>Set your current learning objectives</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="space-y-2">
+                  <Label htmlFor="subject">Subject</Label>
+                  <Input
+                    id="subject"
+                    value={userProfile.studyGoals.subject}
+                    onChange={(e) => setUserProfile({
+                      ...userProfile,
+                      studyGoals: { ...userProfile.studyGoals, subject: e.target.value }
+                    })}
+                    placeholder="e.g., Mathematics"
                   />
                 </div>
-              ))}
-            </div>
-
-            <Button onClick={saveProfile}>Save Profile Changes</Button>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center space-x-2">
-              <BookOpen className="h-5 w-5" />
-              <span>Study Configuration</span>
-            </CardTitle>
-            <CardDescription>Adjust your learning goals and pace</CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-6">
-            <div className="grid gap-4 md:grid-cols-3">
-              <div>
-                <Label htmlFor="subject">Subject</Label>
-                <Select
-                  value={userProfile.studyGoals.subject}
-                  onValueChange={(value) =>
-                    setUserProfile({
+                <div className="space-y-2">
+                  <Label htmlFor="topic">Topic</Label>
+                  <Input
+                    id="topic"
+                    value={userProfile.studyGoals.topic}
+                    onChange={(e) => setUserProfile({
                       ...userProfile,
-                      studyGoals: { ...userProfile.studyGoals, subject: value },
-                    })
-                  }
-                >
-                  <SelectTrigger>
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="physics">Physics</SelectItem>
-                    <SelectItem value="mathematics">Mathematics</SelectItem>
-                    <SelectItem value="chemistry">Chemistry</SelectItem>
-                    <SelectItem value="biology">Biology</SelectItem>
-                    <SelectItem value="history">History</SelectItem>
-                    <SelectItem value="literature">Literature</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-              <div>
-                <Label htmlFor="topic">Topic</Label>
-                <Input
-                  id="topic"
-                  value={userProfile.studyGoals.topic}
-                  onChange={(e) =>
-                    setUserProfile({
+                      studyGoals: { ...userProfile.studyGoals, topic: e.target.value }
+                    })}
+                    placeholder="e.g., Algebra"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="focusArea">Focus Area</Label>
+                  <Input
+                    id="focusArea"
+                    value={userProfile.studyGoals.focusArea}
+                    onChange={(e) => setUserProfile({
                       ...userProfile,
-                      studyGoals: { ...userProfile.studyGoals, topic: e.target.value },
-                    })
-                  }
-                />
+                      studyGoals: { ...userProfile.studyGoals, focusArea: e.target.value }
+                    })}
+                    placeholder="e.g., Linear Equations"
+                  />
+                </div>
               </div>
-              <div>
-                <Label htmlFor="focus">Focus Area</Label>
-                <Input
-                  id="focus"
-                  value={userProfile.studyGoals.focusArea}
-                  onChange={(e) =>
-                    setUserProfile({
-                      ...userProfile,
-                      studyGoals: { ...userProfile.studyGoals, focusArea: e.target.value },
-                    })
-                  }
-                />
-              </div>
-            </div>
+            </CardContent>
+          </Card>
 
-            <div>
-              <Label>Learning Pace</Label>
+          {/* Learning Pace */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-white">Learning Pace</CardTitle>
+              <CardDescription>How quickly do you want to progress through the material?</CardDescription>
+            </CardHeader>
+            <CardContent>
               <Select
                 value={userProfile.learningPace}
-                onValueChange={(value) =>
-                  setUserProfile({
-                    ...userProfile,
-                    learningPace: value,
-                  })
-                }
+                onValueChange={(pace: string) => setUserProfile({ ...userProfile, learningPace: pace })}
               >
-                <SelectTrigger className="mt-2">
+                <SelectTrigger>
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -285,162 +236,59 @@ export function SettingsPage() {
                   <SelectItem value="rabbit">Fast - 5-6 questions/day</SelectItem>
                 </SelectContent>
               </Select>
-            </div>
+            </CardContent>
+          </Card>
 
-            <Button onClick={saveProfile}>Save Study Settings</Button>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center space-x-2">
-              <Bell className="h-5 w-5" />
-              <span>Notifications</span>
-            </CardTitle>
-            <CardDescription>Choose what notifications you'd like to receive</CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <div className="font-medium">Daily Study Reminder</div>
-                <div className="text-sm text-muted-foreground">
-                  Get reminded to complete your daily learning session
-                </div>
-              </div>
-              <Switch
-                checked={notifications.dailyReminder}
-                onCheckedChange={(checked) =>
-                  setNotifications({
-                    ...notifications,
-                    dailyReminder: checked,
-                  })
-                }
-              />
-            </div>
-            <Separator />
-            <div className="flex items-center justify-between">
-              <div>
-                <div className="font-medium">Weekly Progress Report</div>
-                <div className="text-sm text-muted-foreground">
-                  Receive a summary of your learning progress each week
-                </div>
-              </div>
-              <Switch
-                checked={notifications.weeklyProgress}
-                onCheckedChange={(checked) =>
-                  setNotifications({
-                    ...notifications,
-                    weeklyProgress: checked,
-                  })
-                }
-              />
-            </div>
-            <Separator />
-            <div className="flex items-center justify-between">
-              <div>
-                <div className="font-medium">Achievement Notifications</div>
-                <div className="text-sm text-muted-foreground">Get notified when you unlock new achievements</div>
-              </div>
-              <Switch
-                checked={notifications.achievements}
-                onCheckedChange={(checked) =>
-                  setNotifications({
-                    ...notifications,
-                    achievements: checked,
-                  })
-                }
-              />
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center space-x-2">
-              <Palette className="h-5 w-5" />
-              <span>Preferences</span>
-            </CardTitle>
-            <CardDescription>Customize your learning experience</CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="grid gap-4 md:grid-cols-2">
-              <div>
-                <Label>Difficulty Level</Label>
-                <Select
-                  value={preferences.difficulty}
-                  onValueChange={(value) =>
-                    setPreferences({
-                      ...preferences,
-                      difficulty: value,
-                    })
-                  }
-                >
-                  <SelectTrigger className="mt-2">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="beginner">Beginner</SelectItem>
-                    <SelectItem value="adaptive">Adaptive (Recommended)</SelectItem>
-                    <SelectItem value="advanced">Advanced</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-              <div>
-                <Label>Feedback Frequency</Label>
-                <Select
-                  value={preferences.feedbackFrequency}
-                  onValueChange={(value) =>
-                    setPreferences({
-                      ...preferences,
-                      feedbackFrequency: value,
-                    })
-                  }
-                >
-                  <SelectTrigger className="mt-2">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="minimal">Minimal</SelectItem>
-                    <SelectItem value="normal">Normal</SelectItem>
-                    <SelectItem value="frequent">Frequent</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center space-x-2">
-              <RotateCcw className="h-5 w-5" />
-              <span>Account Actions</span>
-            </CardTitle>
-            <CardDescription>Sign out or reset your learning progress</CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="p-4 border border-orange-200 rounded-lg bg-orange-50 dark:border-orange-900/20 dark:bg-orange-900/5">
-              <div className="font-medium text-orange-700 dark:text-orange-300 mb-2">Sign Out</div>
-              <div className="text-sm text-muted-foreground mb-4">
-                Sign out of your account and return to the sign-in page. Your data will be preserved.
-              </div>
-              <Button variant="outline" onClick={signOut} className="border-orange-200 text-orange-700 hover:bg-orange-50 dark:border-orange-900/20 dark:text-orange-300 dark:hover:bg-orange-900/10">
-                Sign Out
+          {/* Save Settings */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-white">Save Changes</CardTitle>
+              <CardDescription>Save your updated preferences</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Button onClick={saveProfile} className="w-full">
+                Save Settings
               </Button>
-            </div>
-            <div className="p-4 border border-destructive/20 rounded-lg bg-destructive/5">
-              <div className="font-medium text-destructive mb-2">Reset Onboarding</div>
-              <div className="text-sm text-muted-foreground mb-4">
-                This will clear all your profile data and take you back to the initial setup. This action cannot be
-                undone.
+            </CardContent>
+          </Card>
+
+          {/* Account Actions */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center space-x-2">
+                <RotateCcw className="h-5 w-5" />
+                <span>Account Actions</span>
+              </CardTitle>
+              <CardDescription>Sign out or reset your learning progress</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="p-4 border border-orange-200 rounded-lg bg-orange-50 dark:border-orange-900/20 dark:bg-orange-900/5">
+                <div className="font-medium text-orange-700 dark:text-orange-300 mb-2">Sign Out</div>
+                <div className="text-sm text-muted-foreground mb-4">
+                  Sign out of your account and return to the landing page. Your data will be preserved.
+                </div>
+                <Button 
+                  variant="outline" 
+                  onClick={signOut} 
+                  disabled={isSigningOut}
+                  className="border-orange-200 text-orange-700 hover:bg-orange-50 dark:border-orange-900/20 dark:text-orange-300 dark:hover:bg-orange-900/10"
+                >
+                  {isSigningOut ? "Signing Out..." : "Sign Out"}
+                </Button>
               </div>
-              <Button variant="destructive" onClick={resetOnboarding}>
-                Reset Everything
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
+              <div className="p-4 border border-destructive/20 rounded-lg bg-destructive/5">
+                <div className="font-medium text-destructive mb-2">Reset Onboarding</div>
+                <div className="text-sm text-muted-foreground mb-4">
+                  This will clear all your profile data and take you back to the initial setup. This action cannot be
+                  undone.
+                </div>
+                <Button variant="destructive" onClick={resetOnboarding}>
+                  Reset Everything
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
       </div>
     </div>
   )

@@ -1,63 +1,55 @@
 "use client"
 
-import { useRouter } from "next/navigation"
-import { useNavigationLoading } from "@/hooks/use-navigation-loading"
+import { useUnifiedNavigation } from "@/hooks/use-unified-navigation"
 import { SubjectCarousel } from "@/components/organisms/subject-carousel"
 
-// Hardcoded data for subjects and topics
 const subjectsData = [
   {
-    title: "Math",
+    title: "Mathematics",
     color: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
     topics: [
       {
         id: "college-algebra",
         title: "College Algebra",
-        description: "Master fundamental algebraic concepts and problem-solving techniques",
+        description: "Master algebraic concepts and problem-solving techniques",
         chapters: 12,
         items: 48,
-        progress: 65
+        progress: 45
       },
       {
         id: "statistics",
         title: "Statistics",
-        description: "Learn data analysis, probability, and statistical inference",
-        chapters: 8,
-        items: 32,
+        description: "Learn statistical analysis and data interpretation",
+        chapters: 10,
+        items: 40,
         progress: 30
       }
     ]
   },
   {
-    title: "Literature",
+    title: "Humanities",
     color: "linear-gradient(135deg, #f093fb 0%, #f5576c 100%)",
     topics: [
       {
         id: "writing",
         title: "Writing",
-        description: "Develop creative and academic writing skills",
-        chapters: 10,
-        items: 40,
-        progress: 45
-      }
-    ]
-  },
-  {
-    title: "Humanities",
-    color: "linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)",
-    topics: [
+        description: "Develop your writing skills and communication abilities",
+        chapters: 8,
+        items: 32,
+        progress: 60
+      },
       {
         id: "philosophy",
         title: "Philosophy",
-        description: "Explore fundamental questions about existence, knowledge, and ethics",
+        description: "Explore fundamental questions about existence and knowledge",
         chapters: 15,
         items: 60,
-        progress: 20
+        progress: 25
       },
       {
         id: "world-history",
         title: "World History",
-        description: "Journey through the major events and civilizations of human history",
+        description: "Journey through major events and civilizations",
         chapters: 20,
         items: 80,
         progress: 15
@@ -89,17 +81,14 @@ const subjectsData = [
 ]
 
 export function ClassesPage() {
-  const router = useRouter()
-  const { navigateWithLoading } = useNavigationLoading()
+  const { navigateToTopic } = useUnifiedNavigation()
 
   const handleTopicClick = (topicId: string) => {
-    // Navigate to topic overview page with loading
-    navigateWithLoading(`/topic/${topicId}`)
+    navigateToTopic(topicId)
   }
 
   const handlePlayClick = (topicId: string) => {
-    // Navigate to topic learning page with loading
-    navigateWithLoading(`/topic/${topicId}`)
+    navigateToTopic(topicId)
   }
 
   return (

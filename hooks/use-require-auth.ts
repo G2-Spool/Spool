@@ -1,8 +1,8 @@
 "use client"
 
 import { useEffect } from "react"
-import { useRouter } from "next/navigation"
 import { useAuth } from "@/contexts/auth-context"
+import { useUnifiedNavigation } from "@/hooks/use-unified-navigation"
 
 /**
  * Hook that ensures user is authenticated and returns user data
@@ -19,17 +19,16 @@ import { useAuth } from "@/contexts/auth-context"
  */
 export function useRequireAuth() {
   const { user, isLoading } = useAuth()
-  const router = useRouter()
+  const { navigateToSignInWithRedirect } = useUnifiedNavigation()
 
   useEffect(() => {
     if (!isLoading && !user) {
-      // Store the current path for redirect after sign in
+      // Store the current path for redirect after sign in and navigate to sign in
       if (typeof window !== 'undefined') {
-        localStorage.setItem('auth-redirect', window.location.pathname)
+        navigateToSignInWithRedirect(window.location.pathname)
       }
-      router.push("/")
     }
-  }, [user, isLoading, router])
+  }, [user, isLoading, navigateToSignInWithRedirect])
 
   // Return non-null user for TypeScript
   if (!user) {
