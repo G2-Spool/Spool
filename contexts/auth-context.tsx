@@ -83,7 +83,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         setUser(null)
       }
     } catch (error: any) {
-      if (error.name === 'UserUnAuthenticatedException' || error.name === 'NotAuthorizedException') {
+      if (error.name === 'UserUnAuthenticatedException' || 
+          error.name === 'NotAuthorizedException' || 
+          error.name === 'UserNotFoundException') {
         console.log("🔐 User not authenticated")
       } else {
         console.error("🔐 Auth check error:", error)
