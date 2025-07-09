@@ -7693,7 +7693,7 @@ function applySequentialLocking(topicData: { title: string; sections: Section[] 
 
 export function TopicPage({ topicId, title, sections, onBack }: TopicPageProps) {
   const [activeSection, setActiveSection] = useState("overview")
-  const [activeConcept, setActiveConcept] = useState<{ id: string; title: string } | null>(null)
+  const [activeConcept, setActiveConcept] = useState<{ id: string; title: string; section?: Section } | null>(null)
   const { navigateToUrl } = useUnifiedNavigation()
   
   // Ensure topicId is a string and handle potential undefined cases
@@ -7725,13 +7725,32 @@ export function TopicPage({ topicId, title, sections, onBack }: TopicPageProps) 
   }
 
   const handleConceptClick = (conceptId: string) => {
-    // Find the concept to get its title
-    const concept = topicData.sections
-      .flatMap(section => section.concepts || [])
-      .find(c => c.id === conceptId)
+    console.log('TopicPage - handleConceptClick called with conceptId:', conceptId)
     
-    if (concept) {
-      setActiveConcept({ id: conceptId, title: concept.title })
+    // Find the concept and its section
+    let foundConcept = null
+    let foundSection = null
+    
+    for (const section of topicData.sections) {
+      if (section.concepts) {
+        const concept = section.concepts.find(c => c.id === conceptId)
+        if (concept) {
+          foundConcept = concept
+          foundSection = section
+          break
+        }
+      }
+    }
+    
+    console.log('TopicPage - foundConcept:', foundConcept)
+    console.log('TopicPage - foundSection:', foundSection)
+    
+    if (foundConcept && foundSection) {
+      setActiveConcept({ 
+        id: conceptId, 
+        title: foundConcept.title, 
+        section: foundSection 
+      })
       // Update URL to reflect the learning content
       navigateToUrl(`/topic/${safeTopicId}/learn/${conceptId}`)
     }
@@ -7749,6 +7768,8 @@ export function TopicPage({ topicId, title, sections, onBack }: TopicPageProps) 
       <LearningPage
         conceptId={activeConcept.id}
         conceptTitle={activeConcept.title}
+        topicId={safeTopicId}
+        section={activeConcept.section}
         onBack={handleBackFromLearning}
       />
     )
