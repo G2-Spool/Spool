@@ -1,7 +1,7 @@
 "use client"
 
 import React from "react"
-import { CheckCircle, Lock, Circle, ChevronRight, ChevronLeft } from "lucide-react"
+import { CheckCircle, Lock, Circle, ChevronRight, ChevronLeft, Check } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
@@ -25,7 +25,11 @@ export function ConceptSidebar({
 }: ConceptSidebarProps) {
   const getStatusIcon = (concept: ConceptItem) => {
     if (concept.completed) {
-      return <CheckCircle className="h-4 w-4 text-green-600" />
+      return (
+        <div className="w-4 h-4 bg-green-500 rounded-full flex items-center justify-center">
+          <Check className="h-2.5 w-2.5 text-white" style={{ width: '11px', height: '11px' }} />
+        </div>
+      )
     } else if (concept.locked) {
       return <Lock className="h-4 w-4 text-gray-400" />
     } else {

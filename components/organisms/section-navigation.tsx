@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { FileText, CheckCircle, Circle, Lock, ChevronDown, ChevronUp } from "lucide-react"
+import { FileText, CheckCircle, Circle, Lock, ChevronDown, ChevronUp, BookOpen, Check } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { ProgressRing } from "@/components/atoms/progress-ring"
 import { cn } from "@/lib/utils"
@@ -99,8 +99,11 @@ export function SectionNavigation({ sections, activeSection, onSectionChange }: 
   }
 
   const sectionWindow = calculateSectionWindow(sections)
-  const totalSections = sections.length
-  const currentSectionIndex = sections.findIndex(s => s === sectionWindow.current) || 0
+  
+  // Exclude overview section from counting
+  const nonOverviewSections = sections.filter(s => s.id !== "overview")
+  const totalSections = nonOverviewSections.length
+  const currentSectionIndex = sectionWindow.current ? nonOverviewSections.findIndex(s => s === sectionWindow.current) : -1
 
   // Get sections to display based on showAll state
   const windowedSections = [
@@ -147,7 +150,7 @@ export function SectionNavigation({ sections, activeSection, onSectionChange }: 
         </div>
         {/* Progress Context */}
         <div className="text-sm text-muted-foreground">
-          {sectionWindow.current ? (
+          {sectionWindow.current && currentSectionIndex >= 0 ? (
             <>Section {currentSectionIndex + 1} of {totalSections}</>
           ) : (
             <>Course Complete ({totalSections} sections)</>
@@ -168,7 +171,6 @@ export function SectionNavigation({ sections, activeSection, onSectionChange }: 
               className={cn(
                 "w-full justify-start p-4 mb-2 text-left min-h-[80px] border-2 border-transparent transition-all duration-200",
                 isActive && "border-primary",
-                sectionState === "completed" && "opacity-60 hover:opacity-80",
                 (sectionState === "current" || section === sectionWindow.current) && "ring-2 ring-primary/20 bg-primary/5",
                 sectionState === "upcoming" && "opacity-80"
               )}
@@ -176,10 +178,20 @@ export function SectionNavigation({ sections, activeSection, onSectionChange }: 
             >
               <div className="flex items-start gap-3 w-full max-w-full">
                 <div className="flex-shrink-0 mt-2" style={{ width: '36px', minWidth: '36px' }}>
-                  {sectionState === "completed" && progress === 100 ? (
-                    <CheckCircle className="h-9 w-9 text-green-500" />
+                  {section.id === "overview" ? (
+                    <div className="flex items-center justify-center flex-shrink-0" style={{ width: 36, height: 36 }}>
+                      <BookOpen className="h-9 w-9 text-primary" style={{ transform: 'scale(2.0)' }} />
+                    </div>
+                  ) : sectionState === "completed" && progress === 100 ? (
+                    <div className="flex items-center justify-center flex-shrink-0" style={{ width: 36, height: 36 }}>
+                      <div className="bg-green-500 rounded-full flex items-center justify-center" style={{ width: 36, height: 36 }}>
+                        <Check className="h-7 w-7 text-white" style={{ width: '28px', height: '28px' }} />
+                      </div>
+                    </div>
                   ) : sectionState === "upcoming" && progress === 0 && section !== sectionWindow.current ? (
-                    <Circle className="h-9 w-9 text-muted-foreground" />
+                    <div className="flex items-center justify-center flex-shrink-0" style={{ width: 36, height: 36 }}>
+                      <Lock className="h-9 w-9 text-muted-foreground" style={{ transform: 'scale(2.0)' }} />
+                    </div>
                   ) : (
                     <ProgressRing 
                       progress={progress} 
@@ -197,19 +209,7 @@ export function SectionNavigation({ sections, activeSection, onSectionChange }: 
                     )}
                     title={section.title}
                     >
-                      {section.title}
-                    </div>
-                    <div className="flex-shrink-0 flex items-center gap-1">
-                      {section === sectionWindow.current && (
-                        <span className="text-xs bg-primary text-primary-foreground px-2 py-1 rounded whitespace-nowrap">
-                          Current
-                        </span>
-                      )}
-                      {sectionState === "completed" && (
-                        <span className="text-xs bg-green-500 text-white px-2 py-1 rounded whitespace-nowrap">
-                          Complete
-                        </span>
-                      )}
+                                            {section.title}
                     </div>
                   </div>
                   {section.description && (
