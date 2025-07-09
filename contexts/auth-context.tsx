@@ -56,6 +56,26 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const checkAuthStatus = async () => {
     console.log("🔐 Checking authentication status...")
     
+    // Check for mock authentication first
+    const mockAuthEnabled = localStorage.getItem("mock-auth-enabled")
+    if (mockAuthEnabled === "true") {
+      console.log("🔐 Mock authentication enabled")
+      const mockUserData = localStorage.getItem("mock-user-data")
+      if (mockUserData) {
+        try {
+          const userData = JSON.parse(mockUserData)
+          setUser(userData)
+          console.log("🔐 Mock user authenticated:", userData.email)
+          setIsLoading(false)
+          return
+        } catch (error) {
+          console.error("🔐 Failed to parse mock user data:", error)
+          localStorage.removeItem("mock-auth-enabled")
+          localStorage.removeItem("mock-user-data")
+        }
+      }
+    }
+    
     try {
       // Get current authenticated user from Cognito
       const cognitoUser = await getCurrentUser()
@@ -101,8 +121,18 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const signOut = async () => {
     try {
-      await amplifySignOut()
-      setUser(null)
+      // Check if using mock auth
+      const mockAuthEnabled = localStorage.getItem("mock-auth-enabled")
+      if (mockAuthEnabled === "true") {
+        console.log("🔐 Mock sign out")
+        localStorage.removeItem("mock-auth-enabled")
+        localStorage.removeItem("mock-user-data")
+        setUser(null)
+      } else {
+        // Regular Cognito sign out
+        await amplifySignOut()
+        setUser(null)
+      }
       
       // Clear all user data
       localStorage.removeItem("user-signed-in")
