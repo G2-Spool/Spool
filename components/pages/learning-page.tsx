@@ -48,12 +48,7 @@ export function LearningPage({ conceptId, conceptTitle, topicId, section, onBack
   
   const effectiveTopicId = topicId || extractTopicIdFromPath()
   
-  // Debug logging
-  console.log('LearningPage - conceptId:', conceptId)
-  console.log('LearningPage - topicId prop:', topicId)
-  console.log('LearningPage - pathname:', pathname)
-  console.log('LearningPage - effectiveTopicId:', effectiveTopicId)
-  console.log('LearningPage - section:', section)
+
   
   // Dynamically find section data using topicId and conceptId
   const findSectionForConcept = (topicId: string, conceptId: string) => {
@@ -75,9 +70,6 @@ export function LearningPage({ conceptId, conceptTitle, topicId, section, onBack
   const dynamicSection = effectiveTopicId ? findSectionForConcept(effectiveTopicId, conceptId) : null
   const activeSection = dynamicSection || section
   
-  console.log('LearningPage - activeSection:', activeSection)
-  console.log('LearningPage - activeSection?.concepts:', activeSection?.concepts)
-  
   // Use section concepts if available, otherwise fall back to sample concepts
   const sectionConcepts: ConceptItem[] = activeSection?.concepts?.map(concept => ({
     id: concept.id,
@@ -88,8 +80,6 @@ export function LearningPage({ conceptId, conceptTitle, topicId, section, onBack
     progress: concept.progress,
     modules: [] // Default empty modules for sidebar display
   })) || sampleConcepts
-  
-  console.log('LearningPage - using sectionConcepts:', sectionConcepts)
 
   const [currentConceptId, setCurrentConceptId] = useState(conceptId || "introduction-to-functions")
   const currentConcept = sectionConcepts.find(c => c.id === currentConceptId)

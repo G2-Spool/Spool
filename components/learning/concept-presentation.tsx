@@ -92,7 +92,7 @@ export function ConceptPresentation({ conceptId, conceptTitle, className }: Conc
         <CardContent className="space-y-12 py-8">
           {/* Concept Title */}
           <div className="text-center space-y-2">
-            <h1 className="text-3xl font-bold text-foreground">{conceptData.title}</h1>
+            <h1 className="text-3xl font-bold text-foreground">{conceptTitle || conceptData.title}</h1>
             <p className="text-lg text-muted-foreground">{conceptData.subtitle}</p>
           </div>
 

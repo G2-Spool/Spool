@@ -7725,8 +7725,6 @@ export function TopicPage({ topicId, title, sections, onBack }: TopicPageProps) 
   }
 
   const handleConceptClick = (conceptId: string) => {
-    console.log('TopicPage - handleConceptClick called with conceptId:', conceptId)
-    
     // Find the concept and its section
     let foundConcept = null
     let foundSection = null
@@ -7741,9 +7739,6 @@ export function TopicPage({ topicId, title, sections, onBack }: TopicPageProps) 
         }
       }
     }
-    
-    console.log('TopicPage - foundConcept:', foundConcept)
-    console.log('TopicPage - foundSection:', foundSection)
     
     if (foundConcept && foundSection) {
       setActiveConcept({ 

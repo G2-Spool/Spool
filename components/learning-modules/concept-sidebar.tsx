@@ -91,9 +91,17 @@ export function ConceptSidebar({
                     )}
                   </div>
                   {concept.description && (
-                    <p className="text-xs text-muted-foreground mt-1 line-clamp-2">
+                    <div 
+                      className="text-xs text-muted-foreground mt-1 leading-tight overflow-hidden"
+                      style={{
+                        height: '2.5em',
+                        lineHeight: '1.25em',
+                        wordWrap: 'break-word',
+                        whiteSpace: 'normal'
+                      }}
+                    >
                       {concept.description}
-                    </p>
+                    </div>
                   )}
                 </div>
               </div>
