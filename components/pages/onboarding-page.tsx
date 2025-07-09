@@ -3,13 +3,12 @@
 import { useState } from "react"
 import { OnboardingStep } from "@/components/organisms/onboarding-step"
 import { InterestInput } from "@/components/molecules/interest-input"
-import { StudyGoalField } from "@/components/molecules/study-goal-field"
 import { PaceSelector } from "@/components/molecules/pace-selector"
 import { InterestBadge } from "@/components/atoms/interest-badge"
 import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Button } from "@/components/ui/button"
 import { generateMockOnboardingData } from "@/lib/utils"
+import { cn } from "@/lib/utils"
 
 interface OnboardingPageProps {
   onComplete: () => void
@@ -18,16 +17,28 @@ interface OnboardingPageProps {
 export function OnboardingPage({ onComplete }: OnboardingPageProps) {
   const [currentStep, setCurrentStep] = useState(0)
   const [interests, setInterests] = useState<string[]>([])
-  const [interestDetails, setInterestDetails] = useState<Record<string, string>>({})
-  const [studyGoals, setStudyGoals] = useState({
-    subject: "",
-    topic: "",
-    focusArea: "",
-  })
-  const [competencyAnswers, setCompetencyAnswers] = useState<string[]>([])
+  const [selectedTopics, setSelectedTopics] = useState<string[]>([])
+  const [gradeLevel, setGradeLevel] = useState("")
   const [learningPace, setLearningPace] = useState("")
 
-  const steps = ["Interests & Hobbies", "Interest Details", "Study Goals", "Competency Assessment", "Learning Pace"]
+  const steps = ["Interests & Hobbies", "Study Topics", "Grade Level", "Learning Pace"]
+
+  const availableTopics = [
+    "College Algebra",
+    "Statistics", 
+    "Writing",
+    "Philosophy",
+    "World History",
+    "Biology",
+    "Anatomy"
+  ]
+
+  const gradeLevels = [
+    { value: "middle", label: "Middle School", description: "Grades 6-8" },
+    { value: "high", label: "High School", description: "Grades 9-12" },
+    { value: "college", label: "College", description: "Undergraduate level" },
+    { value: "graduate", label: "Graduate", description: "Masters/PhD level" }
+  ]
 
   const addInterest = (interest: string) => {
     if (!interests.includes(interest)) {
@@ -37,9 +48,14 @@ export function OnboardingPage({ onComplete }: OnboardingPageProps) {
 
   const removeInterest = (interest: string) => {
     setInterests(interests.filter((i) => i !== interest))
-    const newDetails = { ...interestDetails }
-    delete newDetails[interest]
-    setInterestDetails(newDetails)
+  }
+
+  const toggleTopic = (topic: string) => {
+    if (selectedTopics.includes(topic)) {
+      setSelectedTopics(selectedTopics.filter((t) => t !== topic))
+    } else {
+      setSelectedTopics([...selectedTopics, topic])
+    }
   }
 
   const handleNext = () => {
@@ -48,9 +64,8 @@ export function OnboardingPage({ onComplete }: OnboardingPageProps) {
     } else {
       const onboardingData = {
         interests,
-        interestDetails,
-        studyGoals,
-        competencyAnswers,
+        selectedTopics,
+        gradeLevel,
         learningPace,
       }
       if (typeof window !== 'undefined') {
@@ -79,12 +94,10 @@ export function OnboardingPage({ onComplete }: OnboardingPageProps) {
       case 0:
         return interests.length > 0
       case 1:
-        return interests.every((interest) => !!interestDetails[interest]?.trim())
+        return selectedTopics.length > 0
       case 2:
-        return !!(studyGoals.subject && studyGoals.topic && studyGoals.focusArea)
+        return gradeLevel !== ""
       case 3:
-        return competencyAnswers.length > 0 && competencyAnswers.every((answer) => !!answer.trim())
-      case 4:
         return learningPace !== ""
       default:
         return false
@@ -109,25 +122,33 @@ export function OnboardingPage({ onComplete }: OnboardingPageProps) {
         return (
           <div className="space-y-4">
             <p className="text-sm text-muted-foreground">
-              Tell us more about your interests to help personalize your learning experience.
+              Select the topics you'd like to study. You can choose multiple areas.
             </p>
-            {interests.map((interest) => (
-              <div key={interest} className="space-y-2">
-                <Label htmlFor={`detail-${interest}`}>What do you enjoy most about {interest}?</Label>
-                <Textarea
-                  id={`detail-${interest}`}
-                  value={interestDetails[interest] || ""}
-                  onChange={(e) =>
-                    setInterestDetails({
-                      ...interestDetails,
-                      [interest]: e.target.value,
-                    })
-                  }
-                  placeholder={`Describe what you love about ${interest}...`}
-                  rows={3}
-                />
-              </div>
-            ))}
+            <div className="grid grid-cols-2 gap-3">
+              {availableTopics.map((topic) => (
+                <Button
+                  key={topic}
+                  variant={selectedTopics.includes(topic) ? "default" : "outline"}
+                  onClick={() => toggleTopic(topic)}
+                  className={cn(
+                    "h-auto p-4 text-left justify-start transition-all",
+                    selectedTopics.includes(topic) 
+                      ? "bg-primary text-primary-foreground" 
+                      : "hover:bg-muted"
+                  )}
+                >
+                  <div className="flex items-center space-x-2">
+                    <div className={cn(
+                      "w-3 h-3 rounded-full border-2 transition-colors",
+                      selectedTopics.includes(topic) 
+                        ? "bg-primary-foreground border-primary-foreground" 
+                        : "border-muted-foreground"
+                    )} />
+                    <span className="text-sm font-medium">{topic}</span>
+                  </div>
+                </Button>
+              ))}
+            </div>
           </div>
         )
 
@@ -135,83 +156,43 @@ export function OnboardingPage({ onComplete }: OnboardingPageProps) {
         return (
           <div className="space-y-4">
             <div>
-              <Label htmlFor="subject">Subject</Label>
-              <Select
-                value={studyGoals.subject}
-                onValueChange={(value) => setStudyGoals({ ...studyGoals, subject: value })}
-              >
-                <SelectTrigger>
-                  <SelectValue placeholder="Select a subject" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="physics">Physics</SelectItem>
-                  <SelectItem value="mathematics">Mathematics</SelectItem>
-                  <SelectItem value="chemistry">Chemistry</SelectItem>
-                  <SelectItem value="biology">Biology</SelectItem>
-                  <SelectItem value="history">History</SelectItem>
-                  <SelectItem value="literature">Literature</SelectItem>
-                </SelectContent>
-              </Select>
+              <Label>What's your current grade level?</Label>
+              <p className="text-sm text-muted-foreground mt-1">
+                This helps us tailor the difficulty and explanations to your level.
+              </p>
+              <div className="grid grid-cols-1 gap-3 mt-4">
+                {gradeLevels.map((level) => (
+                  <Button
+                    key={level.value}
+                    variant={gradeLevel === level.value ? "default" : "outline"}
+                    onClick={() => setGradeLevel(level.value)}
+                    className={cn(
+                      "h-auto p-4 text-left justify-start transition-all",
+                      gradeLevel === level.value 
+                        ? "bg-primary text-primary-foreground" 
+                        : "hover:bg-muted"
+                    )}
+                  >
+                    <div className="flex items-center space-x-3">
+                      <div className={cn(
+                        "w-4 h-4 rounded-full border-2 transition-colors",
+                        gradeLevel === level.value 
+                          ? "bg-primary-foreground border-primary-foreground" 
+                          : "border-muted-foreground"
+                      )} />
+                      <div>
+                        <div className="font-medium">{level.label}</div>
+                        <div className="text-sm opacity-70">{level.description}</div>
+                      </div>
+                    </div>
+                  </Button>
+                ))}
+              </div>
             </div>
-            <StudyGoalField
-              label="Topic"
-              value={studyGoals.topic}
-              onChange={(value) => setStudyGoals({ ...studyGoals, topic: value })}
-              placeholder="e.g., Waves, Calculus, World War II"
-            />
-            <StudyGoalField
-              label="Focus Area"
-              value={studyGoals.focusArea}
-              onChange={(value) => setStudyGoals({ ...studyGoals, focusArea: value })}
-              placeholder="e.g., Sound Waves, Derivatives, European Theater"
-            />
           </div>
         )
 
       case 3:
-        return (
-          <div className="space-y-4">
-            <p className="text-sm text-muted-foreground">
-              Let's assess your current knowledge. Answer these questions to help us understand your baseline.
-            </p>
-            <div className="space-y-4">
-              <div>
-                <Label htmlFor="assessment1">
-                  How would you explain {studyGoals.focusArea} to someone who has never heard of it?
-                </Label>
-                <Textarea
-                  id="assessment1"
-                  value={competencyAnswers[0] || ""}
-                  onChange={(e) => {
-                    const newAnswers = [...competencyAnswers]
-                    newAnswers[0] = e.target.value
-                    setCompetencyAnswers(newAnswers)
-                  }}
-                  placeholder="Explain in your own words..."
-                  rows={4}
-                />
-              </div>
-              <div>
-                <Label htmlFor="assessment2">
-                  Can you think of a real-world application of {studyGoals.focusArea} that relates to your interests?
-                </Label>
-                <Textarea
-                  id="assessment2"
-                  value={competencyAnswers[1] || ""}
-                  onChange={(e) => {
-                    const newAnswers = [...competencyAnswers]
-                    newAnswers[1] = e.target.value
-                    setCompetencyAnswers(newAnswers)
-                  }}
-                  placeholder="Connect it to something you're passionate about..."
-                  rows={4}
-                />
-              </div>
-            </div>
-          </div>
-        )
-
-      case 4:
         return (
           <div className="space-y-4">
             <div>
