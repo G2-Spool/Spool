@@ -6079,37 +6079,1562 @@ By the end of this course, you'll have a solid foundation in biological science 
       ]
     },
     "anatomy": {
-      title: "Anatomy",
+      title: "Anatomy and Physiology",
       sections: [
         {
           id: "overview",
           title: "Overview",
           description: "Study of human body structure and organization",
-          content: `Human Anatomy is the study of the structure and organization of the human body. This course provides a systematic examination of all body systems and their interrelationships.
+          content: `Human Anatomy and Physiology is the study of the structure and function of the human body. This course provides a systematic examination of all body systems from the cellular level to complex organ systems.
 
-You'll learn about the structure and function of organs, tissues, and systems that make up the human body. The course covers all major body systems including skeletal, muscular, cardiovascular, nervous, and more.
+You'll learn about the fundamental organization of life from molecules to organs, and how these structures work together to maintain life. The course covers all major body systems including skeletal, muscular, cardiovascular, nervous, endocrine, and reproductive systems.
 
-Through detailed study of anatomical structures and their relationships, you'll develop a comprehensive understanding of human body organization.
+This comprehensive course integrates structure and function, showing how anatomy and physiology are interconnected. You'll develop a deep understanding of how the human body maintains homeostasis and responds to internal and external changes.
 
-By the end of this course, you'll have detailed knowledge of human anatomy and understand how structure relates to function in the human body.`
+By the end of this course, you'll have detailed knowledge of human anatomy and physiology and understand how structure relates to function in the human body.`
         },
         {
-          id: "skeletal-system",
-          title: "Skeletal System",
-          description: "Study bones, joints, and skeletal function",
+          id: "introduction-to-human-body",
+          title: "An Introduction to the Human Body",
+          description: "Overview of anatomy and physiology, body organization, and basic concepts",
           concepts: [
             {
-              id: "bone-structure",
-              title: "Bone Structure and Function",
-              description: "Learn about bone anatomy and physiology",
+              id: "anatomy-physiology-overview",
+              title: "Overview of Anatomy and Physiology",
+              description: "Definition and scope of anatomy and physiology study",
               completed: false,
               locked: false,
               progress: 0
             },
             {
-              id: "joints",
-              title: "Joints and Movement",
-              description: "Understand joint classification and movement",
+              id: "structural-organization",
+              title: "Structural Organization of the Human Body",
+              description: "Levels of structural organization from atoms to organ systems",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "functions-of-human-life",
+              title: "Functions of Human Life",
+              description: "Essential life processes and characteristics of living organisms",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "requirements-for-human-life",
+              title: "Requirements for Human Life",
+              description: "Basic needs for survival and optimal functioning",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "homeostasis",
+              title: "Homeostasis",
+              description: "Dynamic equilibrium and regulatory mechanisms",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "anatomical-terminology",
+              title: "Anatomical Terminology",
+              description: "Standard terminology used in anatomy and physiology",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "medical-imaging",
+              title: "Medical Imaging",
+              description: "Various imaging techniques used in medical diagnosis",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "chemical-level-organization",
+          title: "The Chemical Level of Organization",
+          description: "Chemical foundations of life including atoms, molecules, and chemical reactions",
+          concepts: [
+            {
+              id: "elements-and-atoms",
+              title: "Elements and Atoms: The Building Blocks of Matter",
+              description: "Atomic structure and properties of biologically important elements",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "chemical-bonds",
+              title: "Chemical Bonds",
+              description: "Types of chemical bonds and their role in biological molecules",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "chemical-reactions",
+              title: "Chemical Reactions",
+              description: "Types of chemical reactions and their biological significance",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "inorganic-compounds",
+              title: "Inorganic Compounds Essential to Human Functioning",
+              description: "Water, acids, bases, and salts in biological systems",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "organic-compounds",
+              title: "Organic Compounds Essential to Human Functioning",
+              description: "Carbohydrates, lipids, proteins, and nucleic acids",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "cellular-level-organization",
+          title: "The Cellular Level of Organization",
+          description: "Cell structure, function, and cellular processes",
+          concepts: [
+            {
+              id: "cell-membrane",
+              title: "The Cell Membrane",
+              description: "Structure and function of the plasma membrane",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "cytoplasm-organelles",
+              title: "The Cytoplasm and Cellular Organelles",
+              description: "Internal structure and organelles of cells",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "nucleus-dna-replication",
+              title: "The Nucleus and DNA Replication",
+              description: "Nuclear structure and DNA replication processes",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "protein-synthesis",
+              title: "Protein Synthesis",
+              description: "Transcription and translation processes",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "cell-growth-division",
+              title: "Cell Growth and Division",
+              description: "Cell cycle and mitosis",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "cellular-differentiation",
+              title: "Cellular Differentiation",
+              description: "Development of specialized cell types",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "tissue-level-organization",
+          title: "The Tissue Level of Organization",
+          description: "Four basic tissue types and their functions",
+          concepts: [
+            {
+              id: "types-of-tissues",
+              title: "Types of Tissues",
+              description: "Overview of epithelial, connective, muscle, and nervous tissue",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "epithelial-tissue",
+              title: "Epithelial Tissue",
+              description: "Structure and function of epithelial tissue types",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "connective-tissue",
+              title: "Connective Tissue Supports and Protects",
+              description: "Types and functions of connective tissue",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "muscle-tissue-motion",
+              title: "Muscle Tissue and Motion",
+              description: "Types of muscle tissue and their functions",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "nervous-tissue",
+              title: "Nervous Tissue Mediates Perception and Response",
+              description: "Structure and function of nervous tissue",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "tissue-injury-aging",
+              title: "Tissue Injury and Aging",
+              description: "Response to injury and age-related changes",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "integumentary-system",
+          title: "The Integumentary System",
+          description: "Structure and function of skin and associated structures",
+          concepts: [
+            {
+              id: "layers-of-skin",
+              title: "Layers of the Skin",
+              description: "Epidermis, dermis, and hypodermis structure",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "accessory-structures",
+              title: "Accessory Structures of the Skin",
+              description: "Hair, nails, and skin glands",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "integumentary-functions",
+              title: "Functions of the Integumentary System",
+              description: "Protection, temperature regulation, and other functions",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "integumentary-diseases",
+              title: "Diseases, Disorders, and Injuries of the Integumentary System",
+              description: "Common skin conditions and injuries",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "bone-tissue-skeletal-system",
+          title: "Bone Tissue and the Skeletal System",
+          description: "Structure and function of bone tissue and the skeletal system",
+          concepts: [
+            {
+              id: "skeletal-system-functions",
+              title: "The Functions of the Skeletal System",
+              description: "Support, protection, movement, and metabolic functions",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "bone-classification",
+              title: "Bone Classification",
+              description: "Types of bones based on shape and structure",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "bone-structure",
+              title: "Bone Structure",
+              description: "Microscopic and macroscopic bone anatomy",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "bone-formation-development",
+              title: "Bone Formation and Development",
+              description: "Ossification and bone growth processes",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "bone-fractures-repair",
+              title: "Fractures: Bone Repair",
+              description: "Types of fractures and healing process",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "exercise-nutrition-bone",
+              title: "Exercise, Nutrition, Hormones, and Bone Tissue",
+              description: "Factors affecting bone health and remodeling",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "calcium-homeostasis",
+              title: "Calcium Homeostasis: Interactions of the Skeletal System and Other Organ Systems",
+              description: "Calcium regulation and systemic interactions",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "axial-skeleton",
+          title: "Axial Skeleton",
+          description: "Structure and function of the axial skeleton",
+          concepts: [
+            {
+              id: "skeletal-system-divisions",
+              title: "Divisions of the Skeletal System",
+              description: "Axial and appendicular skeleton organization",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "skull",
+              title: "The Skull",
+              description: "Cranial and facial bones of the skull",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "vertebral-column",
+              title: "The Vertebral Column",
+              description: "Structure and function of the spine",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "thoracic-cage",
+              title: "The Thoracic Cage",
+              description: "Ribs and sternum structure",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "axial-skeleton-development",
+              title: "Embryonic Development of the Axial Skeleton",
+              description: "Development of axial skeleton components",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "appendicular-skeleton",
+          title: "The Appendicular Skeleton",
+          description: "Structure and function of the appendicular skeleton",
+          concepts: [
+            {
+              id: "pectoral-girdle",
+              title: "The Pectoral Girdle",
+              description: "Clavicle and scapula structure and function",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "upper-limb-bones",
+              title: "Bones of the Upper Limb",
+              description: "Humerus, radius, ulna, and hand bones",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "pelvic-girdle",
+              title: "The Pelvic Girdle and Pelvis",
+              description: "Hip bones and pelvic structure",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "lower-limb-bones",
+              title: "Bones of the Lower Limb",
+              description: "Femur, tibia, fibula, and foot bones",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "appendicular-skeleton-development",
+              title: "Development of the Appendicular Skeleton",
+              description: "Development of appendicular skeleton components",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "joints",
+          title: "Joints",
+          description: "Classification and function of joints",
+          concepts: [
+            {
+              id: "joint-classification",
+              title: "Classification of Joints",
+              description: "Structural and functional classification of joints",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "fibrous-joints",
+              title: "Fibrous Joints",
+              description: "Immovable fibrous joint types",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "cartilaginous-joints",
+              title: "Cartilaginous Joints",
+              description: "Slightly movable cartilaginous joints",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "synovial-joints",
+              title: "Synovial Joints",
+              description: "Freely movable synovial joint structure",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "body-movements",
+              title: "Types of Body Movements",
+              description: "Movement terminology and types",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "synovial-joint-anatomy",
+              title: "Anatomy of Selected Synovial Joints",
+              description: "Detailed anatomy of major synovial joints",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "joint-development",
+              title: "Development of Joints",
+              description: "Formation and development of joint structures",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "muscle-tissue",
+          title: "Muscle Tissue",
+          description: "Structure and function of muscle tissue types",
+          concepts: [
+            {
+              id: "muscle-tissue-overview",
+              title: "Overview of Muscle Tissues",
+              description: "Three types of muscle tissue and their properties",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "skeletal-muscle",
+              title: "Skeletal Muscle",
+              description: "Structure and organization of skeletal muscle",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "muscle-fiber-contraction",
+              title: "Muscle Fiber Contraction and Relaxation",
+              description: "Mechanism of skeletal muscle contraction",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "nervous-system-muscle-control",
+              title: "Nervous System Control of Muscle Tension",
+              description: "Neural control of muscle contraction",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "muscle-fiber-types",
+              title: "Types of Muscle Fibers",
+              description: "Classification of skeletal muscle fibers",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "exercise-muscle-performance",
+              title: "Exercise and Muscle Performance",
+              description: "Effects of exercise on muscle tissue",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "cardiac-muscle",
+              title: "Cardiac Muscle Tissue",
+              description: "Structure and function of cardiac muscle",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "smooth-muscle",
+              title: "Smooth Muscle",
+              description: "Structure and function of smooth muscle",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "muscle-development-regeneration",
+              title: "Development and Regeneration of Muscle Tissue",
+              description: "Muscle tissue development and repair",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "muscular-system",
+          title: "The Muscular System",
+          description: "Organization and function of skeletal muscles",
+          concepts: [
+            {
+              id: "skeletal-muscle-interactions",
+              title: "Interactions of Skeletal Muscles, Their Fascicle Arrangement, and Their Lever Systems",
+              description: "Muscle organization and mechanical advantage",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "naming-skeletal-muscles",
+              title: "Naming Skeletal Muscles",
+              description: "Muscle naming conventions and terminology",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "axial-muscles-head-neck",
+              title: "Axial Muscles of the Head, Neck, and Back",
+              description: "Muscles of the head, neck, and back region",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "axial-muscles-abdomen-thorax",
+              title: "Axial Muscles of the Abdominal Wall, and Thorax",
+              description: "Muscles of the trunk region",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "pectoral-upper-limb-muscles",
+              title: "Muscles of the Pectoral Girdle and Upper Limbs",
+              description: "Upper extremity muscle groups",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "pelvic-lower-limb-muscles",
+              title: "Appendicular Muscles of the Pelvic Girdle and Lower Limbs",
+              description: "Lower extremity muscle groups",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "nervous-system-tissue",
+          title: "The Nervous System and Nervous Tissue",
+          description: "Basic structure and function of nervous tissue",
+          concepts: [
+            {
+              id: "nervous-system-structure-function",
+              title: "Basic Structure and Function of the Nervous System",
+              description: "Organization of the nervous system",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "nervous-tissue-structure",
+              title: "Nervous Tissue",
+              description: "Neurons and glial cells structure",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "nervous-tissue-function",
+              title: "The Function of Nervous Tissue",
+              description: "Nerve impulse generation and propagation",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "action-potential",
+              title: "The Action Potential",
+              description: "Generation and propagation of action potentials",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "neuron-communication",
+              title: "Communication Between Neurons",
+              description: "Synaptic transmission and neurotransmitters",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "anatomy-nervous-system",
+          title: "Anatomy of the Nervous System",
+          description: "Structure and organization of the nervous system",
+          concepts: [
+            {
+              id: "embryologic-perspective",
+              title: "The Embryologic Perspective",
+              description: "Development of the nervous system",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "central-nervous-system",
+              title: "The Central Nervous System",
+              description: "Brain and spinal cord structure",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "circulation-cns",
+              title: "Circulation and the Central Nervous System",
+              description: "Blood supply to the brain and spinal cord",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "peripheral-nervous-system",
+              title: "The Peripheral Nervous System",
+              description: "Cranial and spinal nerves",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "somatic-nervous-system",
+          title: "The Somatic Nervous System",
+          description: "Sensory and motor pathways of the somatic nervous system",
+          concepts: [
+            {
+              id: "sensory-perception",
+              title: "Sensory Perception",
+              description: "Sensory receptor types and sensory processing",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "central-processing",
+              title: "Central Processing",
+              description: "Brain processing of sensory information",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "motor-responses",
+              title: "Motor Responses",
+              description: "Motor control and voluntary movement",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "autonomic-nervous-system",
+          title: "The Autonomic Nervous System",
+          description: "Structure and function of the autonomic nervous system",
+          concepts: [
+            {
+              id: "autonomic-divisions",
+              title: "Divisions of the Autonomic Nervous System",
+              description: "Sympathetic and parasympathetic divisions",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "autonomic-reflexes",
+              title: "Autonomic Reflexes and Homeostasis",
+              description: "Involuntary responses and homeostatic control",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "central-control",
+              title: "Central Control",
+              description: "Brain control of autonomic functions",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "autonomic-drugs",
+              title: "Drugs that Affect the Autonomic System",
+              description: "Pharmacological effects on autonomic function",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "neurological-exam",
+          title: "The Neurological Exam",
+          description: "Clinical assessment of nervous system function",
+          concepts: [
+            {
+              id: "neurological-exam-overview",
+              title: "Overview of the Neurological Exam",
+              description: "Components of neurological assessment",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "mental-status-exam",
+              title: "The Mental Status Exam",
+              description: "Assessment of cognitive function",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "cranial-nerve-exam",
+              title: "The Cranial Nerve Exam",
+              description: "Testing cranial nerve function",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "sensory-motor-exams",
+              title: "The Sensory and Motor Exams",
+              description: "Testing sensory and motor function",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "coordination-gait-exams",
+              title: "The Coordination and Gait Exams",
+              description: "Testing coordination and walking ability",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "endocrine-system",
+          title: "The Endocrine System",
+          description: "Structure and function of the endocrine system",
+          concepts: [
+            {
+              id: "endocrine-overview",
+              title: "An Overview of the Endocrine System",
+              description: "Endocrine glands and hormone classification",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "hormones",
+              title: "Hormones",
+              description: "Chemical nature and mechanisms of hormone action",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "pituitary-hypothalamus",
+              title: "The Pituitary Gland and Hypothalamus",
+              description: "Structure and function of the pituitary-hypothalamic system",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "thyroid-gland",
+              title: "The Thyroid Gland",
+              description: "Thyroid structure and hormone production",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "parathyroid-glands",
+              title: "The Parathyroid Glands",
+              description: "Parathyroid hormone and calcium regulation",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "adrenal-glands",
+              title: "The Adrenal Glands",
+              description: "Adrenal cortex and medulla function",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "pineal-gland",
+              title: "The Pineal Gland",
+              description: "Melatonin production and circadian rhythms",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "gonadal-placental-hormones",
+              title: "Gonadal and Placental Hormones",
+              description: "Sex hormones and reproductive function",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "endocrine-pancreas",
+              title: "The Endocrine Pancreas",
+              description: "Insulin and glucagon regulation",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "secondary-endocrine-organs",
+              title: "Organs with Secondary Endocrine Functions",
+              description: "Organs with additional endocrine roles",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "endocrine-development-aging",
+              title: "Development and Aging of the Endocrine System",
+              description: "Endocrine system changes throughout life",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "cardiovascular-blood",
+          title: "The Cardiovascular System: Blood",
+          description: "Composition and functions of blood",
+          concepts: [
+            {
+              id: "blood-overview",
+              title: "An Overview of Blood",
+              description: "Blood composition and basic functions",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "formed-elements-production",
+              title: "Production of the Formed Elements",
+              description: "Hematopoiesis and blood cell formation",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "erythrocytes",
+              title: "Erythrocytes",
+              description: "Red blood cell structure and function",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "leukocytes-platelets",
+              title: "Leukocytes and Platelets",
+              description: "White blood cells and platelet function",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "hemostasis",
+              title: "Hemostasis",
+              description: "Blood clotting and bleeding control",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "blood-typing",
+              title: "Blood Typing",
+              description: "ABO and Rh blood group systems",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "cardiovascular-heart",
+          title: "The Cardiovascular System: The Heart",
+          description: "Structure and function of the heart",
+          concepts: [
+            {
+              id: "heart-anatomy",
+              title: "Heart Anatomy",
+              description: "Chambers, valves, and wall structure",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "cardiac-muscle-electrical",
+              title: "Cardiac Muscle and Electrical Activity",
+              description: "Cardiac muscle properties and electrical conduction",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "cardiac-cycle",
+              title: "Cardiac Cycle",
+              description: "Systole and diastole in the cardiac cycle",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "cardiac-physiology",
+              title: "Cardiac Physiology",
+              description: "Cardiac output and regulation",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "heart-development",
+              title: "Development of the Heart",
+              description: "Embryonic heart development",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "cardiovascular-vessels-circulation",
+          title: "The Cardiovascular System: Blood Vessels and Circulation",
+          description: "Structure and function of blood vessels and circulation",
+          concepts: [
+            {
+              id: "blood-vessel-structure",
+              title: "Structure and Function of Blood Vessels",
+              description: "Arteries, veins, and capillary structure",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "blood-flow-pressure",
+              title: "Blood Flow, Blood Pressure, and Resistance",
+              description: "Hemodynamics and blood pressure regulation",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "capillary-exchange",
+              title: "Capillary Exchange",
+              description: "Nutrient and waste exchange at capillaries",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "homeostatic-regulation",
+              title: "Homeostatic Regulation of the Vascular System",
+              description: "Blood pressure and flow regulation",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "circulatory-pathways",
+              title: "Circulatory Pathways",
+              description: "Major circulation routes in the body",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "blood-vessel-development",
+              title: "Development of Blood Vessels and Fetal Circulation",
+              description: "Vascular development and fetal circulation",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "lymphatic-immune-system",
+          title: "The Lymphatic and Immune System",
+          description: "Structure and function of the lymphatic and immune systems",
+          concepts: [
+            {
+              id: "lymphatic-immune-anatomy",
+              title: "Anatomy of the Lymphatic and Immune Systems",
+              description: "Lymphatic organs and immune system components",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "barrier-defenses",
+              title: "Barrier Defenses and the Innate Immune Response",
+              description: "First line of defense and innate immunity",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "adaptive-immune-t-cells",
+              title: "The Adaptive Immune Response: T lymphocytes and Their Functional Types",
+              description: "T cell types and cellular immunity",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "adaptive-immune-b-cells",
+              title: "The Adaptive Immune Response: B-lymphocytes and Antibodies",
+              description: "B cell function and humoral immunity",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "immune-response-pathogens",
+              title: "The Immune Response against Pathogens",
+              description: "Integrated immune responses to infections",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "immune-diseases",
+              title: "Diseases Associated with Depressed or Overactive Immune Responses",
+              description: "Immunodeficiency and autoimmune diseases",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "transplantation-cancer-immunology",
+              title: "Transplantation and Cancer Immunology",
+              description: "Immune responses in transplantation and cancer",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "respiratory-system",
+          title: "The Respiratory System",
+          description: "Structure and function of the respiratory system",
+          concepts: [
+            {
+              id: "respiratory-organs-structures",
+              title: "Organs and Structures of the Respiratory System",
+              description: "Anatomy of the respiratory tract",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "lungs",
+              title: "The Lungs",
+              description: "Lung structure and alveolar organization",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "process-breathing",
+              title: "The Process of Breathing",
+              description: "Ventilation mechanics and control",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "gas-exchange",
+              title: "Gas Exchange",
+              description: "Oxygen and carbon dioxide exchange",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "transport-gases",
+              title: "Transport of Gases",
+              description: "Oxygen and carbon dioxide transport in blood",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "respiratory-modifications",
+              title: "Modifications in Respiratory Functions",
+              description: "Adaptations and non-respiratory functions",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "respiratory-development",
+              title: "Embryonic Development of the Respiratory System",
+              description: "Development of respiratory structures",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "digestive-system",
+          title: "The Digestive System",
+          description: "Structure and function of the digestive system",
+          concepts: [
+            {
+              id: "digestive-system-overview",
+              title: "Overview of the Digestive System",
+              description: "General organization and function",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "digestive-processes-regulation",
+              title: "Digestive System Processes and Regulation",
+              description: "Digestion, absorption, and regulatory mechanisms",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "mouth-pharynx-esophagus",
+              title: "The Mouth, Pharynx, and Esophagus",
+              description: "Upper digestive tract structure and function",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "stomach",
+              title: "The Stomach",
+              description: "Stomach structure and digestive function",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "small-large-intestines",
+              title: "The Small and Large Intestines",
+              description: "Intestinal structure and function",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "accessory-organs-digestion",
+              title: "Accessory Organs in Digestion: The Liver, Pancreas, and Gallbladder",
+              description: "Digestive accessory organ functions",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "chemical-digestion-absorption",
+              title: "Chemical Digestion and Absorption: A Closer Look",
+              description: "Detailed mechanisms of digestion and absorption",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "metabolism-nutrition",
+          title: "Metabolism and Nutrition",
+          description: "Cellular metabolism and nutritional requirements",
+          concepts: [
+            {
+              id: "metabolic-reactions-overview",
+              title: "Overview of Metabolic Reactions",
+              description: "Catabolism and anabolism principles",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "carbohydrate-metabolism",
+              title: "Carbohydrate Metabolism",
+              description: "Glucose metabolism and energy production",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "lipid-metabolism",
+              title: "Lipid Metabolism",
+              description: "Fat metabolism and fatty acid oxidation",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "protein-metabolism",
+              title: "Protein Metabolism",
+              description: "Amino acid metabolism and protein synthesis",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "metabolic-states",
+              title: "Metabolic States of the Body",
+              description: "Fed and fasted states and their regulation",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "energy-heat-balance",
+              title: "Energy and Heat Balance",
+              description: "Energy expenditure and thermoregulation",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "nutrition-diet",
+              title: "Nutrition and Diet",
+              description: "Nutritional requirements and dietary recommendations",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "urinary-system",
+          title: "The Urinary System",
+          description: "Structure and function of the urinary system",
+          concepts: [
+            {
+              id: "urine-physical-characteristics",
+              title: "Physical Characteristics of Urine",
+              description: "Urine composition and properties",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "gross-anatomy-urine-transport",
+              title: "Gross Anatomy of Urine Transport",
+              description: "Ureters, bladder, and urethra structure",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "gross-anatomy-kidney",
+              title: "Gross Anatomy of the Kidney",
+              description: "Kidney structure and organization",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "microscopic-anatomy-kidney",
+              title: "Microscopic Anatomy of the Kidney",
+              description: "Nephron structure and function",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "physiology-urine-formation",
+              title: "Physiology of Urine Formation",
+              description: "Filtration, reabsorption, and secretion",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "tubular-reabsorption",
+              title: "Tubular Reabsorption",
+              description: "Reabsorption mechanisms and regulation",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "renal-blood-flow-regulation",
+              title: "Regulation of Renal Blood Flow",
+              description: "Autoregulation and blood flow control",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "endocrine-regulation-kidney",
+              title: "Endocrine Regulation of Kidney Function",
+              description: "Hormonal control of kidney function",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "fluid-volume-composition-regulation",
+              title: "Regulation of Fluid Volume and Composition",
+              description: "Water and electrolyte balance",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "urinary-homeostasis",
+              title: "The Urinary System and Homeostasis",
+              description: "Urinary system role in homeostasis",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "fluid-electrolyte-acid-base",
+          title: "Fluid, Electrolyte, and Acid-Base Balance",
+          description: "Homeostatic regulation of body fluids and pH",
+          concepts: [
+            {
+              id: "body-fluids-compartments",
+              title: "Body Fluids and Fluid Compartments",
+              description: "Intracellular and extracellular fluid compartments",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "water-balance",
+              title: "Water Balance",
+              description: "Water intake and loss regulation",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "electrolyte-balance",
+              title: "Electrolyte Balance",
+              description: "Sodium, potassium, and electrolyte regulation",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "acid-base-balance",
+              title: "Acid-Base Balance",
+              description: "pH regulation and buffer systems",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "acid-base-disorders",
+              title: "Disorders of Acid-Base Balance",
+              description: "Acidosis and alkalosis conditions",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "reproductive-system",
+          title: "The Reproductive System",
+          description: "Structure and function of the reproductive system",
+          concepts: [
+            {
+              id: "testicular-reproductive-system",
+              title: "Anatomy and Physiology of the Testicular Reproductive System",
+              description: "Male reproductive anatomy and physiology",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "ovarian-reproductive-system",
+              title: "Anatomy and Physiology of the Ovarian Reproductive System",
+              description: "Female reproductive anatomy and physiology",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "reproductive-system-development",
+              title: "Development of the Male and Female Reproductive Systems",
+              description: "Embryonic development of reproductive organs",
+              completed: false,
+              locked: true,
+              progress: 0
+            }
+          ]
+        },
+        {
+          id: "development-inheritance",
+          title: "Development and Inheritance",
+          description: "Human development and inheritance patterns",
+          concepts: [
+            {
+              id: "fertilization",
+              title: "Fertilization",
+              description: "Sperm-egg interaction and fertilization process",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "embryonic-development",
+              title: "Embryonic Development",
+              description: "Early development from fertilization to organ formation",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "fetal-development",
+              title: "Fetal Development",
+              description: "Development during the fetal period",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "changes-pregnancy-labor-birth",
+              title: "Changes During Pregnancy, Labor, and Birth",
+              description: "Maternal and fetal changes during pregnancy",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "infant-adjustments-birth",
+              title: "Adjustments of the Infant at Birth and Postnatal Stages",
+              description: "Physiological changes at birth and early development",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "lactation",
+              title: "Lactation",
+              description: "Milk production and breastfeeding physiology",
+              completed: false,
+              locked: true,
+              progress: 0
+            },
+            {
+              id: "patterns-of-inheritance",
+              title: "Patterns of Inheritance",
+              description: "Genetics and inheritance patterns in humans",
               completed: false,
               locked: true,
               progress: 0
