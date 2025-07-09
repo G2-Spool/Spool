@@ -235,6 +235,46 @@ export function SignInPage({ onSignIn, onBack }: SignInPageProps) {
     }
   }
 
+  const handleMockAuth = async () => {
+    setIsLoading(true)
+    setError("")
+    setSuccessMessage("")
+    
+    try {
+      // Simulate authentication delay
+      await new Promise(resolve => setTimeout(resolve, 1000))
+      
+      // Set mock authentication flags and user data
+      const mockUser = {
+        sub: "mock-user-123",
+        email: "mock@example.com",
+        email_verified: true,
+        given_name: "Mock",
+        family_name: "User"
+      }
+      
+      localStorage.setItem("mock-auth-enabled", "true")
+      localStorage.setItem("mock-user-data", JSON.stringify(mockUser))
+      
+      // Clear splash completion flag to force splash screen
+      localStorage.removeItem("splash-completed")
+      // Also clear onboarding completion to ensure full onboarding flow
+      localStorage.removeItem("onboarding-complete")
+      
+      setSuccessMessage("Mock authentication successful! Redirecting to splash screen...")
+      
+      // Call onSignIn to trigger auth context refresh
+      setTimeout(() => {
+        onSignIn()
+      }, 500)
+      
+    } catch (err: any) {
+      setError("Mock authentication failed. Please try again.")
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
   const toggleMode = () => {
     setIsSignUp(!isSignUp)
     setError("")

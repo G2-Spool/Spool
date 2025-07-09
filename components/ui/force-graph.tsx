@@ -9,6 +9,7 @@ interface Node {
   y?: number
   fx?: number | null
   fy?: number | null
+  color?: string
 }
 
 interface Link {
@@ -52,31 +53,14 @@ export function ForceGraph({
     const container = svg.append('g')
       .attr('transform', `translate(${width / 2}, ${height / 2})`)
 
-    // Create links
-    const link = container.selectAll('.link')
-      .data(links)
-      .enter()
-      .append('line')
-      .attr('class', 'link')
-      .attr('stroke', linkColor)
-      .attr('stroke-width', 2)
-      .attr('opacity', 0.6)
-
-    // Create nodes
-    const node = container.selectAll('.node')
-      .data(nodes)
-      .enter()
-      .append('circle')
-      .attr('class', 'node')
-      .attr('r', nodeRadius)
-      .attr('fill', nodeColor)
-      .attr('stroke', '#fff')
-      .attr('stroke-width', 2)
+    // Clone nodes and links to avoid mutation issues
+    const nodesCopy = nodes.map(d => ({ ...d }))
+    const linksCopy = links.map(d => ({ ...d }))
 
     // Add subtle glow effect
     const defs = svg.append('defs')
     const filter = defs.append('filter')
-      .attr('id', 'glow')
+      .attr('id', `glow-${Date.now()}`)
       .attr('x', '-50%')
       .attr('y', '-50%')
       .attr('width', '200%')
@@ -92,19 +76,42 @@ export function ForceGraph({
     feMerge.append('feMergeNode')
       .attr('in', 'SourceGraphic')
 
-    node.attr('filter', 'url(#glow)')
-
-    // Create force simulation
-    const simulation = d3.forceSimulation(nodes)
-      .force('link', d3.forceLink(links).id((d: any) => d.id).distance(30))
-      .force('charge', d3.forceManyBody().strength(-100))
+    // Create force simulation first
+    const simulation = d3.forceSimulation(nodesCopy)
+      .force('link', d3.forceLink(linksCopy).id((d: any) => d.id).distance(35).strength(1))
+      .force('charge', d3.forceManyBody().strength(-150))
       .force('center', d3.forceCenter(0, 0))
-      .force('collision', d3.forceCollide().radius(nodeRadius + 2))
+      .force('collision', d3.forceCollide().radius(nodeRadius + 3))
+      .alphaDecay(0.01)
+      .velocityDecay(0.4)
+      .stop() // Stop initially to let us control when it starts
 
     simulationRef.current = simulation
 
-    // Update positions on each tick
-    simulation.on('tick', () => {
+    // Create links after force simulation is set up
+    const link = container.selectAll('.link')
+      .data(linksCopy)
+      .enter()
+      .append('line')
+      .attr('class', 'link')
+      .attr('stroke', linkColor)
+      .attr('stroke-width', 2)
+      .attr('opacity', animate ? 0 : 0.6)
+
+    // Create nodes
+    const node = container.selectAll('.node')
+      .data(nodesCopy)
+      .enter()
+      .append('circle')
+      .attr('class', 'node')
+      .attr('r', animate ? 0 : nodeRadius)
+      .attr('fill', (d: Node) => d.color || nodeColor)
+      .attr('stroke', '#fff')
+      .attr('stroke-width', 2)
+      .attr('filter', `url(#glow-${Date.now()})`)
+
+    // Function to update positions
+    const updatePositions = () => {
       link
         .attr('x1', (d: any) => d.source.x)
         .attr('y1', (d: any) => d.source.y)
@@ -114,19 +121,31 @@ export function ForceGraph({
       node
         .attr('cx', (d: any) => d.x)
         .attr('cy', (d: any) => d.y)
-    })
+    }
+
+    // Set up tick handler
+    simulation.on('tick', updatePositions)
+
+    // Start simulation and let it run for initial stabilization
+    simulation.restart()
+    
+    // Run simulation for initial ticks to stabilize
+    for (let i = 0; i < 100; i++) {
+      simulation.tick()
+    }
+
+    // Update positions immediately after stabilization
+    updatePositions()
 
     // Add entrance animation
     if (animate) {
       node
-        .attr('r', 0)
         .transition()
         .duration(800)
         .delay((d: Node, i: number) => i * 100)
         .attr('r', nodeRadius)
 
       link
-        .attr('opacity', 0)
         .transition()
         .duration(800)
         .delay(200)
@@ -189,7 +208,9 @@ export function generateHobbyNetwork(): { nodes: Node[], links: Link[] } {
     { id: 'sports' },
     { id: 'music' },
     { id: 'reading' },
-    { id: 'coding' }
+    { id: 'coding' },
+    { id: 'photography' },
+    { id: 'travel' }
   ]
 
   const links: Link[] = [
@@ -200,7 +221,21 @@ export function generateHobbyNetwork(): { nodes: Node[], links: Link[] } {
     { source: 'sports', target: 'music' },
     { source: 'music', target: 'reading' },
     { source: 'coding', target: 'gaming' },
-    { source: 'art', target: 'music' }
+    { source: 'art', target: 'music' },
+    // Additional connections to make network more cohesive
+    { source: 'guitar', target: 'art' },
+    { source: 'sports', target: 'gaming' },
+    { source: 'reading', target: 'coding' },
+    { source: 'cooking', target: 'music' },
+    { source: 'guitar', target: 'coding' },
+    { source: 'sports', target: 'art' },
+    // New node connections
+    { source: 'photography', target: 'art' },
+    { source: 'photography', target: 'travel' },
+    { source: 'travel', target: 'reading' },
+    { source: 'travel', target: 'cooking' },
+    { source: 'photography', target: 'sports' },
+    { source: 'travel', target: 'music' }
   ]
 
   return { nodes, links }
