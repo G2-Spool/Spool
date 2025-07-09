@@ -82,7 +82,7 @@ const getSubjectColorForTopic = (topicId: string) => {
 }
 
 // Comprehensive mock data with rich content for multiple subjects
-const getTopicData = (topicId: string) => {
+export const getTopicData = (topicId: string) => {
   const topicDataMap: Record<string, { title: string; sections: Section[] }> = {
     "college-algebra": {
       title: "College Algebra",

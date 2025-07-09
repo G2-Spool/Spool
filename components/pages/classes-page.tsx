@@ -3,6 +3,24 @@
 import { useUnifiedNavigation } from "@/hooks/use-unified-navigation"
 import { SubjectCarousel } from "@/components/organisms/subject-carousel"
 
+// Import the topic data from topic-page.tsx
+import { getTopicData } from "./topic-page"
+
+// Utility function to calculate actual section and concept counts
+const calculateTopicStats = (topicId: string) => {
+  const topicData = getTopicData(topicId)
+  
+  // Count sections (excluding overview)
+  const sections = topicData.sections.filter((section: any) => section.id !== "overview").length
+  
+  // Count total concepts across all sections
+  const concepts = topicData.sections.reduce((total: number, section: any) => {
+    return total + (section.concepts?.length || 0)
+  }, 0)
+  
+  return { sections, concepts }
+}
+
 const subjectsData = [
   {
     title: "Mathematics",
@@ -12,16 +30,14 @@ const subjectsData = [
         id: "college-algebra",
         title: "College Algebra",
         description: "Master algebraic concepts and problem-solving techniques",
-        chapters: 12,
-        items: 48,
+        ...calculateTopicStats("college-algebra"),
         progress: 45
       },
       {
         id: "statistics",
         title: "Introductory Statistics",
         description: "Learn statistical analysis and data interpretation",
-        chapters: 10,
-        items: 40,
+        ...calculateTopicStats("statistics"),
         progress: 30
       }
     ]
@@ -34,24 +50,21 @@ const subjectsData = [
         id: "writing",
         title: "Writing Guide",
         description: "Develop your writing skills and communication abilities",
-        chapters: 8,
-        items: 32,
+        ...calculateTopicStats("writing"),
         progress: 60
       },
       {
         id: "philosophy",
         title: "Introduction to Philosophy",
         description: "Explore fundamental questions about existence and knowledge",
-        chapters: 15,
-        items: 60,
+        ...calculateTopicStats("philosophy"),
         progress: 25
       },
       {
         id: "world-history",
         title: "World History, Volume 2: from 1400",
         description: "Journey through major events and civilizations",
-        chapters: 20,
-        items: 80,
+        ...calculateTopicStats("world-history"),
         progress: 15
       }
     ]
@@ -64,16 +77,14 @@ const subjectsData = [
         id: "biology",
         title: "Biology",
         description: "Study living organisms and their interactions with the environment",
-        chapters: 14,
-        items: 56,
+        ...calculateTopicStats("biology"),
         progress: 75
       },
       {
         id: "anatomy",
         title: "Anatomy and Physiology",
         description: "Learn about the structure and organization of the human body",
-        chapters: 16,
-        items: 64,
+        ...calculateTopicStats("anatomy"),
         progress: 40
       }
     ]
