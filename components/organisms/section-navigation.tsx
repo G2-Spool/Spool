@@ -116,8 +116,10 @@ export function SectionNavigation({ sections, activeSection, onSectionChange }: 
   const sectionsToShow = showAll ? sections : windowedSections
   
   // Determine if we need Show All functionality
-  const hasMoreSections = totalSections > windowedSections.length
-  const sectionsAhead = totalSections - windowedSections.length
+  // Exclude overview section from windowed sections count since it's not counted in totalSections
+  const nonOverviewWindowedSections = windowedSections.filter(s => s.id !== "overview")
+  const hasMoreSections = totalSections > nonOverviewWindowedSections.length
+  const sectionsAhead = totalSections - nonOverviewWindowedSections.length
 
   return (
     <div className="h-full overflow-y-auto overflow-x-hidden">
