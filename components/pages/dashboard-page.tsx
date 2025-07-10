@@ -7,7 +7,6 @@ import { StatsGrid } from "@/components/organisms/stats-grid"
 import { StudyFocusCard } from "@/components/organisms/study-focus-card"
 import { InterestsCard } from "@/components/organisms/interests-card"
 import { AchievementsList } from "@/components/organisms/achievements-list"
-import { WeeklyProgressCard } from "@/components/organisms/weekly-progress-card"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { LoadingTestButton } from "@/components/ui/loading-test-button"
 import { Button } from "@/components/ui/button"
@@ -222,12 +221,6 @@ export function DashboardPage() {
     { title: "Connected guitar playing to sound waves", timeAgo: "1 week ago", color: "#d1d5db" },
   ]
 
-  const weeklyData = [
-    { day: "Monday", progress: 100 },
-    { day: "Tuesday", progress: 80 },
-    { day: "Wednesday", progress: 60 },
-  ]
-
   const handleContinueLearning = (e: React.MouseEvent) => {
     e.preventDefault()
     
@@ -312,9 +305,8 @@ export function DashboardPage() {
         </div>
 
       <Tabs defaultValue="overview" className="w-full">
-        <TabsList className="grid w-full grid-cols-4">
+        <TabsList className="grid w-full grid-cols-3">
           <TabsTrigger value="overview">Overview</TabsTrigger>
-          <TabsTrigger value="progress">Progress</TabsTrigger>
           <TabsTrigger value="achievements">Achievements</TabsTrigger>
           <TabsTrigger value="test-stats">Test Stats</TabsTrigger>
         </TabsList>
@@ -364,10 +356,6 @@ export function DashboardPage() {
               </div>
             </CardContent>
           </Card>
-        </TabsContent>
-
-        <TabsContent value="progress" className="space-y-6">
-          <WeeklyProgressCard weeklyData={weeklyData} />
         </TabsContent>
 
         <TabsContent value="achievements" className="space-y-6">
