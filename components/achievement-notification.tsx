@@ -8,7 +8,7 @@
 "use client"
 
 import { useEffect } from 'react'
-import { useToast } from '@/components/ui/use-toast'
+import { toast } from 'sonner'
 import { UnlockedAchievement } from '@/hooks/use-achievements'
 
 interface AchievementNotificationProps {
@@ -16,24 +16,19 @@ interface AchievementNotificationProps {
 }
 
 export function AchievementNotification({ onAchievementUnlocked }: AchievementNotificationProps) {
-  const { toast } = useToast()
-
+  useEffect(() => {
+    console.log('🔊 AchievementNotification component mounted and listening for events')
+  }, [])
+  
   useEffect(() => {
     const handleAchievementUnlocked = (event: CustomEvent<UnlockedAchievement>) => {
       const achievement = event.detail
       
-      // Show toast notification
-      toast({
-        title: `🎉 Achievement Unlocked!`,
-        description: (
-          <div className="flex items-center gap-2">
-            <span className="text-lg">{achievement.definition.icon}</span>
-            <div>
-              <p className="font-semibold">{achievement.definition.title}</p>
-              <p className="text-sm text-muted-foreground">{achievement.definition.description}</p>
-            </div>
-          </div>
-        ),
+      console.log('🎉 Achievement event received:', achievement)
+      
+      // Show toast notification using Sonner
+      toast.success(`🎉 Achievement Unlocked!`, {
+        description: `${achievement.definition.icon} ${achievement.definition.title} - ${achievement.definition.description}`,
         duration: 5000,
         className: getRarityClassName(achievement.definition.rarity)
       })
@@ -50,7 +45,7 @@ export function AchievementNotification({ onAchievementUnlocked }: AchievementNo
     return () => {
       window.removeEventListener('achievement-unlocked', handleAchievementUnlocked as EventListener)
     }
-  }, [toast, onAchievementUnlocked])
+  }, [onAchievementUnlocked])
 
   return null // This component doesn't render anything visible
 }

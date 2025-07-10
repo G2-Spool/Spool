@@ -223,7 +223,22 @@ export function useAchievements() {
   const loadAchievementData = useCallback((): AchievementData => {
     try {
       const stored = localStorage.getItem(getAchievementStorageKey(user?.sub))
-      return stored ? JSON.parse(stored) : { unlockedAchievements: [], lastChecked: new Date().toISOString() }
+      const data = stored ? JSON.parse(stored) : { unlockedAchievements: [], lastChecked: new Date().toISOString() }
+      
+      // Deduplicate achievements based on ID
+      const seen = new Set<string>()
+      const deduplicatedAchievements = data.unlockedAchievements.filter((achievement: UnlockedAchievement) => {
+        if (seen.has(achievement.id)) {
+          return false
+        }
+        seen.add(achievement.id)
+        return true
+      })
+      
+      return {
+        ...data,
+        unlockedAchievements: deduplicatedAchievements
+      }
     } catch (error) {
       console.error('Failed to load achievement data:', error)
       return { unlockedAchievements: [], lastChecked: new Date().toISOString() }
@@ -268,13 +283,26 @@ export function useAchievements() {
     }
 
     const data = loadAchievementData()
+    
+    // Double-check if achievement already exists in localStorage to prevent duplicates
+    const existingAchievement = data.unlockedAchievements.find(a => a.id === achievementId)
+    if (existingAchievement) {
+      return // Already exists in localStorage
+    }
+    
     data.unlockedAchievements.push(newAchievement)
     saveAchievementData(data)
 
-    setUnlockedAchievements(prev => [...prev, newAchievement])
+    setUnlockedAchievements(prev => {
+      // Check if achievement already exists in current state
+      const exists = prev.some(a => a.id === achievementId)
+      if (exists) return prev
+      return [...prev, newAchievement]
+    })
     setNewAchievements(prev => [...prev, newAchievement])
 
     // Dispatch event for notifications
+    console.log('🎉 Dispatching achievement event:', newAchievement)
     window.dispatchEvent(new CustomEvent('achievement-unlocked', { detail: newAchievement }))
   }, [getAchievementDefinition, isAchievementUnlocked, loadAchievementData, saveAchievementData])
 
@@ -595,9 +623,11 @@ export function useAchievements() {
 
   // Load initial data
   useEffect(() => {
+    if (!user?.sub) return // Wait for user to be loaded
+    
     const data = loadAchievementData()
     setUnlockedAchievements(data.unlockedAchievements)
-  }, [loadAchievementData])
+  }, [loadAchievementData, user?.sub])
 
   return {
     unlockedAchievements,

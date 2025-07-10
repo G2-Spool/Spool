@@ -15,7 +15,7 @@ import { useUnifiedNavigation } from "@/hooks/use-unified-navigation"
 import { useStudyStreak } from "@/hooks/use-study-streak"
 import { useAchievements } from "@/hooks/use-achievements"
 import { useAuth } from "@/contexts/auth-context"
-import { AchievementNotification } from "@/components/achievement-notification"
+
 import { TestStudyStreak } from "@/components/test-study-streak"
 import { getTopicData } from "./topic-page"
 
@@ -347,7 +347,6 @@ export function DashboardPage() {
 
   return (
     <div className="min-h-screen bg-background p-6">
-      <AchievementNotification />
       <div className="max-w-7xl mx-auto space-y-12">
         <div className="flex items-center justify-between">
           <PageHeader title="Dashboard" description="Track your learning progress and achievements" />

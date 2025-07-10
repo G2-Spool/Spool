@@ -7,6 +7,7 @@ import { AuthProvider } from '@/contexts/auth-context'
 import { LoadingProvider } from '@/contexts/loading-context'
 import { LoadingScreen } from '@/components/ui/loading-screen'
 import { Toaster } from '@/components/ui/sonner'
+import { AchievementNotification } from '@/components/achievement-notification'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -34,6 +35,7 @@ export default function RootLayout({
               {children}
               <Toaster />
               <LoadingScreen />
+              <AchievementNotification />
             </AuthProvider>
           </LoadingProvider>
         </ThemeProvider>
