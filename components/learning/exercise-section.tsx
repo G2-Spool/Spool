@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button'
 import { Textarea } from '@/components/ui/textarea'
 import { ChevronDown, ChevronUp, Send, Loader2 } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { useStudyStreak } from '@/hooks/use-study-streak'
 
 // Function to detect and format equations in text
 function formatTextWithEquations(text: string): JSX.Element[] {
@@ -77,12 +78,16 @@ type ExerciseStatus = 'in_progress' | 'wrong' | 'complete'
 
 interface ExerciseSectionProps {
   conceptId: string
+  conceptTitle?: string
+  topicId?: string
   className?: string
 }
 
-export function ExerciseSection({ conceptId, className }: ExerciseSectionProps) {
+export function ExerciseSection({ conceptId, conceptTitle, topicId, className }: ExerciseSectionProps) {
   const [isExpanded, setIsExpanded] = useState(false)
   const [exerciseStatus, setExerciseStatus] = useState<ExerciseStatus>('in_progress')
+  const [hasRecordedCompletion, setHasRecordedCompletion] = useState(false)
+  const { recordCompletion } = useStudyStreak()
   const [exerciseData, setExerciseData] = useState<ExercisePrompt[]>([
     {
       id: '1',
@@ -130,6 +135,14 @@ export function ExerciseSection({ conceptId, className }: ExerciseSectionProps) 
       document.head.appendChild(mathJaxScript)
     }
   }, [])
+
+  // Track concept completion for study streak
+  useEffect(() => {
+    if (exerciseStatus === 'complete' && !hasRecordedCompletion && topicId && conceptTitle) {
+      recordCompletion(conceptId, topicId, conceptTitle)
+      setHasRecordedCompletion(true)
+    }
+  }, [exerciseStatus, hasRecordedCompletion, conceptId, topicId, conceptTitle, recordCompletion])
 
   // Re-render equations when content changes
   useEffect(() => {

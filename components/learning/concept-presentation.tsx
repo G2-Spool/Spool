@@ -6,10 +6,11 @@ import { cn } from '@/lib/utils'
 interface ConceptPresentationProps {
   conceptId: string
   conceptTitle?: string
+  topicId?: string
   className?: string
 }
 
-export function ConceptPresentation({ conceptId, conceptTitle, className }: ConceptPresentationProps) {
+export function ConceptPresentation({ conceptId, conceptTitle, topicId, className }: ConceptPresentationProps) {
   // Mock data - in real implementation, this would come from API based on conceptId
   const conceptData = {
     title: "Solving Two-Step Linear Equations",
@@ -228,7 +229,11 @@ export function ConceptPresentation({ conceptId, conceptTitle, className }: Conc
       </section>
 
       {/* Exercise Section */}
-      <ExerciseSection conceptId={conceptId} />
+      <ExerciseSection 
+        conceptId={conceptId} 
+        conceptTitle={conceptTitle || conceptData.title}
+        topicId={topicId}
+      />
         </CardContent>
       </Card>
     </div>

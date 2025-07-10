@@ -9,9 +9,10 @@ interface StatsGridProps {
   todayProgress: number
   weeklyGoal: number
   learningPace: string
+  streakStatus?: { message: string; isActive: boolean }
 }
 
-export function StatsGrid({ studyStreak, todayProgress, weeklyGoal, learningPace }: StatsGridProps) {
+export function StatsGrid({ studyStreak, todayProgress, weeklyGoal, learningPace, streakStatus }: StatsGridProps) {
   const getPaceDescription = (pace: string) => {
     switch (pace) {
       case "turtle":
@@ -27,7 +28,12 @@ export function StatsGrid({ studyStreak, todayProgress, weeklyGoal, learningPace
 
   return (
     <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-      <StatCard title="Study Streak" value={`${studyStreak} days`} description="Keep it up!" icon={Calendar} />
+      <StatCard 
+        title="Study Streak" 
+        value={`${studyStreak} days`} 
+        description={streakStatus?.message || "Keep it up!"} 
+        icon={Calendar} 
+      />
 
       <StatCard title="Today's Progress" value={`${todayProgress}%`} icon={Clock}>
         <Progress value={todayProgress} className="mt-2" />

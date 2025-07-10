@@ -108,6 +108,7 @@ export function LearningPage({ conceptId, conceptTitle, topicId, section, onBack
             <ConceptPresentation
               conceptId={currentConceptId}
               conceptTitle={currentConcept?.title || conceptTitle}
+              topicId={effectiveTopicId || undefined}
             />
           </div>
         </div>

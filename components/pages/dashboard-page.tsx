@@ -13,6 +13,8 @@ import { LoadingTestButton } from "@/components/ui/loading-test-button"
 import { Button } from "@/components/ui/button"
 import { ArrowRight } from "lucide-react"
 import { useUnifiedNavigation } from "@/hooks/use-unified-navigation"
+import { useStudyStreak } from "@/hooks/use-study-streak"
+import { TestStudyStreak } from "@/components/test-study-streak"
 
 interface UserProfile {
   interests: string[]
@@ -36,10 +38,10 @@ const defaultProfile: UserProfile = {
 
 export function DashboardPage() {
   const [userProfile, setUserProfile] = useState<UserProfile>(defaultProfile)
-  const [studyStreak] = useState(7)
   const [todayProgress] = useState(60)
   const [weeklyGoal] = useState(75)
   const { navigateToTab } = useUnifiedNavigation()
+  const { currentStreak, getStreakStatus } = useStudyStreak()
 
   useEffect(() => {
     const profile = localStorage.getItem("user-profile")
@@ -92,18 +94,20 @@ export function DashboardPage() {
         </div>
 
       <Tabs defaultValue="overview" className="w-full">
-        <TabsList className="grid w-full grid-cols-3">
+        <TabsList className="grid w-full grid-cols-4">
           <TabsTrigger value="overview">Overview</TabsTrigger>
           <TabsTrigger value="progress">Progress</TabsTrigger>
           <TabsTrigger value="achievements">Achievements</TabsTrigger>
+          <TabsTrigger value="test-streak">Test Streak</TabsTrigger>
         </TabsList>
 
         <TabsContent value="overview" className="space-y-6">
           <StatsGrid
-            studyStreak={studyStreak}
+            studyStreak={currentStreak}
             todayProgress={todayProgress}
             weeklyGoal={weeklyGoal}
             learningPace={userProfile.learningPace}
+            streakStatus={getStreakStatus()}
           />
 
           <div className="grid gap-6 md:grid-cols-2">
@@ -148,6 +152,10 @@ export function DashboardPage() {
 
         <TabsContent value="achievements" className="space-y-6">
           <AchievementsList achievements={achievements} />
+        </TabsContent>
+
+        <TabsContent value="test-streak" className="space-y-6">
+          <TestStudyStreak />
         </TabsContent>
       </Tabs>
       </div>
