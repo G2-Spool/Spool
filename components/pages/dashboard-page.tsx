@@ -38,10 +38,9 @@ const defaultProfile: UserProfile = {
 
 export function DashboardPage() {
   const [userProfile, setUserProfile] = useState<UserProfile>(defaultProfile)
-  const [todayProgress] = useState(60)
   const [weeklyGoal] = useState(75)
   const { navigateToTab } = useUnifiedNavigation()
-  const { currentStreak, getStreakStatus } = useStudyStreak()
+  const { currentStreak, getStreakStatus, todayCompletions } = useStudyStreak()
 
   useEffect(() => {
     const profile = localStorage.getItem("user-profile")
@@ -98,16 +97,16 @@ export function DashboardPage() {
           <TabsTrigger value="overview">Overview</TabsTrigger>
           <TabsTrigger value="progress">Progress</TabsTrigger>
           <TabsTrigger value="achievements">Achievements</TabsTrigger>
-          <TabsTrigger value="test-streak">Test Streak</TabsTrigger>
+          <TabsTrigger value="test-stats">Test Stats</TabsTrigger>
         </TabsList>
 
         <TabsContent value="overview" className="space-y-6">
           <StatsGrid
             studyStreak={currentStreak}
-            todayProgress={todayProgress}
             weeklyGoal={weeklyGoal}
             learningPace={userProfile.learningPace}
             streakStatus={getStreakStatus()}
+            todayCompletions={todayCompletions}
           />
 
           <div className="grid gap-6 md:grid-cols-2">
@@ -154,7 +153,7 @@ export function DashboardPage() {
           <AchievementsList achievements={achievements} />
         </TabsContent>
 
-        <TabsContent value="test-streak" className="space-y-6">
+        <TabsContent value="test-stats" className="space-y-6">
           <TestStudyStreak />
         </TabsContent>
       </Tabs>

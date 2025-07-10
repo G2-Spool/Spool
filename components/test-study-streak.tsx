@@ -40,10 +40,10 @@ export function TestStudyStreak() {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Trophy className="h-5 w-5" />
-            Study Streak Test
+            Dashboard Stats Test
           </CardTitle>
           <CardDescription>
-            Test the study streak functionality by simulating concept completions
+            Test streak and daily progress by simulating concept completions
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">

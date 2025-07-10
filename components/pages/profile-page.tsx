@@ -93,13 +93,26 @@ export function ProfilePage() {
   const getPaceDescription = (pace: string) => {
     switch (pace) {
       case "turtle":
-        return "2 questions/day"
+        return "2 concepts/day"
       case "steady":
-        return "3-4 questions/day"
+        return "5 concepts/day"
       case "rabbit":
-        return "5-6 questions/day"
+        return "8 concepts/day"
       default:
         return "Custom pace"
+    }
+  }
+
+  const getPaceDisplayName = (pace: string) => {
+    switch (pace) {
+      case "turtle":
+        return "Calm"
+      case "steady":
+        return "Steady"
+      case "rabbit":
+        return "Energized"
+      default:
+        return pace.charAt(0).toUpperCase() + pace.slice(1)
     }
   }
 
@@ -224,7 +237,7 @@ export function ProfilePage() {
             <CardContent>
               <div className="flex items-center space-x-3">
                 <Badge variant="outline" className="text-sm">
-                  {userProfile.learningPace.charAt(0).toUpperCase() + userProfile.learningPace.slice(1)}
+                  {getPaceDisplayName(userProfile.learningPace)}
                 </Badge>
                 <span className="text-sm text-muted-foreground">
                   {getPaceDescription(userProfile.learningPace)}

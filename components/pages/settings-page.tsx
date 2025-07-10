@@ -7,9 +7,10 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Badge } from "@/components/ui/badge"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { RotateCcw } from "lucide-react"
+import { RotateCcw, Check } from "lucide-react"
 import { useUnifiedNavigation } from "@/hooks/use-unified-navigation"
 import { useAuth } from "@/contexts/auth-context"
+import { toast } from "sonner"
 
 interface UserProfile {
   interests: string[]
@@ -76,7 +77,7 @@ export function SettingsPage() {
   const saveProfile = () => {
     if (userProfile) {
       localStorage.setItem("user-profile", JSON.stringify(userProfile))
-      // Show success message
+      toast.success("Settings saved! Your preferences have been updated successfully.")
     }
   }
 
@@ -220,7 +221,7 @@ export function SettingsPage() {
           <Card>
             <CardHeader>
               <CardTitle className="text-white">Learning Pace</CardTitle>
-              <CardDescription>How quickly do you want to progress through the material?</CardDescription>
+              <CardDescription>Set your daily learning goal - this affects your "Today's Progress" tracking</CardDescription>
             </CardHeader>
             <CardContent>
               <Select
@@ -231,9 +232,9 @@ export function SettingsPage() {
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="turtle">Turtle - 2 questions/day</SelectItem>
-                  <SelectItem value="steady">Steady - 3-4 questions/day</SelectItem>
-                  <SelectItem value="rabbit">Fast - 5-6 questions/day</SelectItem>
+                  <SelectItem value="turtle">Calm - 2 concepts/day</SelectItem>
+                  <SelectItem value="steady">Steady - 5 concepts/day</SelectItem>
+                  <SelectItem value="rabbit">Energized - 8 concepts/day</SelectItem>
                 </SelectContent>
               </Select>
             </CardContent>
