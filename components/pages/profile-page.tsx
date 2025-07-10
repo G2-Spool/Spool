@@ -129,11 +129,24 @@ export function ProfilePage() {
           {/* Personal Information */}
           <Card>
             <CardHeader>
-              <CardTitle className="flex items-center space-x-2 text-white">
-                <User className="h-5 w-5" />
-                <span>Personal Information</span>
-              </CardTitle>
-              <CardDescription>Your account and profile details</CardDescription>
+              <div className="flex items-center justify-between">
+                <div className="space-y-1">
+                  <CardTitle className="flex items-center space-x-2 text-white">
+                    <User className="h-5 w-5" />
+                    <span>Personal Information</span>
+                  </CardTitle>
+                  <CardDescription>Your account and profile details</CardDescription>
+                </div>
+                <Button 
+                  variant="outline" 
+                  onClick={signOut} 
+                  disabled={isSigningOut}
+                  className="bg-red-50 border-red-200 text-red-700 hover:bg-red-100 dark:bg-red-950/10 dark:border-red-900/20 dark:text-red-300 dark:hover:bg-red-900/20"
+                >
+                  <LogOut className="h-4 w-4 mr-2" />
+                  {isSigningOut ? "Signing Out..." : "Sign Out"}
+                </Button>
+              </div>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -233,33 +246,7 @@ export function ProfilePage() {
             </CardContent>
           </Card>
 
-          {/* Account Management */}
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center space-x-2 text-white">
-                <LogOut className="h-5 w-5" />
-                <span>Account</span>
-              </CardTitle>
-              <CardDescription>Manage your account session</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="p-4 border border-orange-200 rounded-lg bg-orange-50 dark:border-orange-900/20 dark:bg-orange-900/5">
-                <div className="font-medium text-orange-700 dark:text-orange-300 mb-2">Sign Out</div>
-                <div className="text-sm text-muted-foreground mb-4">
-                  Sign out of your account and return to the landing page. Your learning progress will be preserved.
-                </div>
-                <Button 
-                  variant="outline" 
-                  onClick={signOut} 
-                  disabled={isSigningOut}
-                  className="border-orange-200 text-orange-700 hover:bg-orange-50 dark:border-orange-900/20 dark:text-orange-300 dark:hover:bg-orange-900/10"
-                >
-                  <LogOut className="h-4 w-4 mr-2" />
-                  {isSigningOut ? "Signing Out..." : "Sign Out"}
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
+
         </div>
       </div>
     </div>
