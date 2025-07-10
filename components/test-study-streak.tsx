@@ -12,7 +12,8 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { useStudyStreak } from '@/hooks/use-study-streak'
 import { Badge } from '@/components/ui/badge'
-import { Calendar, Trophy, Target } from 'lucide-react'
+import { Calendar, Trophy, Target, BookOpen } from 'lucide-react'
+import { getTopicData } from '@/components/pages/topic-page'
 
 export function TestStudyStreak() {
   const { currentStreak, totalCompletions, todayCompletions, recordCompletion, getStreakStatus, getWeeklyConsistency } = useStudyStreak()
@@ -22,6 +23,64 @@ export function TestStudyStreak() {
 
   const streakStatus = getStreakStatus()
   const weeklyConsistency = getWeeklyConsistency()
+
+  // Function to get current study focus (for debugging)
+  const getCurrentStudyFocusDebug = () => {
+    const availableTopics = ["college-algebra", "statistics", "biology", "anatomy"]
+    
+    const streakData = localStorage.getItem('study-streak-data')
+    let recentCompletions: any[] = []
+    
+    if (streakData) {
+      try {
+        const parsedData = JSON.parse(streakData)
+        recentCompletions = parsedData.completions || []
+        recentCompletions.sort((a, b) => new Date(b.completedAt).getTime() - new Date(a.completedAt).getTime())
+      } catch (error) {
+        console.error('Failed to parse study streak data:', error)
+      }
+    }
+    
+    const mostRecentTopic = recentCompletions.length > 0 ? recentCompletions[0].topicId : null
+    
+    const topicProgress = availableTopics.map(topicId => {
+      const topicData = getTopicData(topicId)
+      
+      let totalConcepts = 0
+      let completedConcepts = 0
+      let currentSection = null
+      
+      for (const section of topicData.sections) {
+        if (section.concepts && section.concepts.length > 0) {
+          totalConcepts += section.concepts.length
+          completedConcepts += section.concepts.filter(c => c.completed).length
+          
+          if (!currentSection) {
+            const firstIncomplete = section.concepts.find(c => !c.completed)
+            if (firstIncomplete) {
+              currentSection = section
+            }
+          }
+        }
+      }
+      
+      const overallProgress = totalConcepts > 0 ? (completedConcepts / totalConcepts) * 100 : 0
+      
+      return {
+        topicId,
+        title: topicData.title,
+        currentSection: currentSection?.title || 'No current section',
+        overallProgress: Math.round(overallProgress),
+        isRecentlyActive: topicId === mostRecentTopic,
+        totalConcepts,
+        completedConcepts
+      }
+    })
+
+    return { topicProgress, mostRecentTopic, recentCompletions: recentCompletions.slice(0, 3) }
+  }
+
+  const debugInfo = getCurrentStudyFocusDebug()
 
   const handleTestCompletion = () => {
     recordCompletion(testConceptId, testTopicId, testConceptTitle)
@@ -36,7 +95,7 @@ export function TestStudyStreak() {
   }
 
   return (
-    <div className="max-w-2xl mx-auto p-6 space-y-6">
+    <div className="max-w-4xl mx-auto p-6 space-y-6">
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
@@ -142,6 +201,75 @@ export function TestStudyStreak() {
               <li>• The streak resets if you miss a day</li>
               <li>• Use "Clear Data" to reset and start fresh</li>
             </ul>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Current Study Focus Debug */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <BookOpen className="h-5 w-5" />
+            Current Study Focus Debug
+          </CardTitle>
+          <CardDescription>
+            Shows how the system determines your current study focus
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          {/* Most Recent Activity */}
+          <div>
+            <h4 className="font-semibold mb-2">Most Recent Activity</h4>
+            {debugInfo.mostRecentTopic ? (
+              <Badge variant="default">{debugInfo.mostRecentTopic}</Badge>
+            ) : (
+              <Badge variant="secondary">No recent activity</Badge>
+            )}
+          </div>
+
+          {/* Recent Completions */}
+          <div>
+            <h4 className="font-semibold mb-2">Recent Completions</h4>
+            {debugInfo.recentCompletions.length > 0 ? (
+              <div className="space-y-2">
+                {debugInfo.recentCompletions.map((completion, index) => (
+                  <div key={index} className="text-sm bg-muted p-2 rounded">
+                    <strong>{completion.topicId}</strong>: {completion.conceptTitle} 
+                    <div className="text-xs text-muted-foreground">
+                      {new Date(completion.completedAt).toLocaleString()}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <p className="text-sm text-muted-foreground">No completions yet</p>
+            )}
+          </div>
+
+          {/* Topic Progress */}
+          <div>
+            <h4 className="font-semibold mb-2">All Topics Progress</h4>
+            <div className="grid gap-3">
+              {debugInfo.topicProgress.map((topic) => (
+                <div key={topic.topicId} className="border rounded p-3">
+                  <div className="flex items-center justify-between mb-2">
+                    <h5 className="font-medium">{topic.title}</h5>
+                    <div className="flex items-center gap-2">
+                      <Badge variant={topic.isRecentlyActive ? "default" : "secondary"} className="text-xs">
+                        {topic.overallProgress}%
+                      </Badge>
+                      {topic.isRecentlyActive && (
+                        <Badge variant="outline" className="text-xs">Recent</Badge>
+                      )}
+                    </div>
+                  </div>
+                  <div className="text-sm text-muted-foreground">
+                    <div>Current Section: {topic.currentSection}</div>
+                    <div>Progress: {topic.completedConcepts}/{topic.totalConcepts} concepts</div>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </CardContent>
       </Card>

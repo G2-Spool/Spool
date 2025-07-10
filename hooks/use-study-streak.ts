@@ -91,24 +91,36 @@ export function useStudyStreak() {
     // Check if streak is still active (completed today or yesterday)
     const latestDate = sortedDates[0]
     if (latestDate !== today && latestDate !== yesterday) {
+      console.log('Streak broken: latest date', latestDate, 'is not today', today, 'or yesterday', yesterday)
       return 0 // Streak is broken
     }
 
     // Count consecutive days with completions
     let streak = 0
-    let currentDate = new Date(latestDate)
+    // Parse the date string correctly to avoid timezone issues
+    const [year, month, day] = latestDate.split('-').map(Number)
+    let currentDate = new Date(year, month - 1, day) // month is 0-indexed
 
-    for (let i = 0; i < sortedDates.length; i++) {
+    console.log('Starting streak calculation from latest date:', latestDate)
+    console.log('Completions by date:', completionsByDate)
+    console.log('Today is:', today)
+
+    // Continue counting until we find a day with no completions
+    while (true) {
       const checkDate = getLocalDateString(currentDate)
+      console.log('Checking date:', checkDate, 'has completions:', !!completionsByDate[checkDate])
       
       if (completionsByDate[checkDate]) {
         streak++
+        console.log('Found completions for', checkDate, 'streak now:', streak)
         currentDate.setDate(currentDate.getDate() - 1)
       } else {
+        console.log('No completions for', checkDate, 'breaking streak at:', streak)
         break
       }
     }
 
+    console.log('Calculated streak:', streak, 'from', Object.keys(completionsByDate).length, 'days with completions')
     return streak
   }, [])
 

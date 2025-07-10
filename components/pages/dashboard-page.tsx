@@ -15,6 +15,7 @@ import { ArrowRight } from "lucide-react"
 import { useUnifiedNavigation } from "@/hooks/use-unified-navigation"
 import { useStudyStreak } from "@/hooks/use-study-streak"
 import { TestStudyStreak } from "@/components/test-study-streak"
+import { getTopicData } from "./topic-page"
 
 interface UserProfile {
   interests: string[]
@@ -62,29 +63,155 @@ export function DashboardPage() {
     }
   }, [])
 
-  // Helper function to get study focus data from either format
-  const getStudyFocus = () => {
+  // Comprehensive function to determine actual current study focus
+  const getCurrentStudyFocus = () => {
+    // Get available topics (you might want to make this dynamic based on user's enrolled topics)
+    const availableTopics = ["college-algebra", "statistics", "biology", "anatomy"]
+    
+    // Get study streak data to find most recent activity
+    const streakData = localStorage.getItem('study-streak-data')
+    let recentCompletions: any[] = []
+    
+    if (streakData) {
+      try {
+        const parsedData = JSON.parse(streakData)
+        recentCompletions = parsedData.completions || []
+        // Sort by most recent
+        recentCompletions.sort((a, b) => new Date(b.completedAt).getTime() - new Date(a.completedAt).getTime())
+      } catch (error) {
+        console.error('Failed to parse study streak data:', error)
+      }
+    }
+    
+    // Find most recently active topic
+    let mostRecentTopic = null
+    if (recentCompletions.length > 0) {
+      mostRecentTopic = recentCompletions[0].topicId
+    }
+    
+    // Check each topic for current progress
+    const topicProgress = availableTopics.map(topicId => {
+      const topicData = getTopicData(topicId)
+      
+      // Calculate overall progress and find current section
+      let totalConcepts = 0
+      let completedConcepts = 0
+      let currentSection = null
+      let currentConcept = null
+      
+      // Find the first section with incomplete concepts (current section)
+      for (const section of topicData.sections) {
+        if (section.concepts && section.concepts.length > 0) {
+          totalConcepts += section.concepts.length
+          completedConcepts += section.concepts.filter(c => c.completed).length
+          
+          // If we haven't found a current section yet, check if this section has incomplete concepts
+          if (!currentSection) {
+            const firstIncomplete = section.concepts.find(c => !c.completed)
+            if (firstIncomplete) {
+              currentSection = section
+              currentConcept = firstIncomplete
+            }
+          }
+        }
+      }
+      
+      const overallProgress = totalConcepts > 0 ? (completedConcepts / totalConcepts) * 100 : 0
+      
+      // Get subject mapping
+      const subjectMap: Record<string, string> = {
+        "college-algebra": "Mathematics",
+        "statistics": "Mathematics", 
+        "biology": "Science",
+        "anatomy": "Science"
+      }
+      
+      return {
+        topicId,
+        subject: subjectMap[topicId] || "Unknown",
+        topic: topicData.title,
+        currentSection,
+        currentConcept,
+        overallProgress,
+        isRecentlyActive: topicId === mostRecentTopic,
+        lastActivity: recentCompletions.find(c => c.topicId === topicId)?.completedAt || null
+      }
+    })
+    
+    // Filter to topics with actual progress or recent activity
+    const activeTopics = topicProgress.filter(t => 
+      t.overallProgress > 0 || t.isRecentlyActive || t.currentSection
+    )
+    
+    if (activeTopics.length === 0) {
+      // No progress yet, return default based on user preferences
+      const studyFocus = getStudyFocusFromProfile()
+      return studyFocus
+    }
+    
+    // Prioritize topics:
+    // 1. Most recently active topic with incomplete content
+    // 2. Topic with lowest completion but some progress  
+    // 3. Any topic with current section
+    let prioritizedTopic = activeTopics.find(t => t.isRecentlyActive && t.currentSection)
+    
+    if (!prioritizedTopic) {
+      // Find topic with progress but not completed
+      const inProgressTopics = activeTopics.filter(t => t.overallProgress > 0 && t.overallProgress < 100)
+      if (inProgressTopics.length > 0) {
+        // Sort by lowest progress (most urgent)
+        inProgressTopics.sort((a, b) => a.overallProgress - b.overallProgress)
+        prioritizedTopic = inProgressTopics[0]
+      }
+    }
+    
+    if (!prioritizedTopic) {
+      prioritizedTopic = activeTopics[0]
+    }
+    
+    if (prioritizedTopic?.currentSection) {
+      return {
+        subject: prioritizedTopic.subject,
+        topic: prioritizedTopic.topic,
+        focusArea: prioritizedTopic.currentSection.title,
+        progress: Math.round(prioritizedTopic.overallProgress),
+        currentConcept: prioritizedTopic.currentConcept?.title || null
+      }
+    }
+    
+    // Fallback to profile-based focus
+    return getStudyFocusFromProfile()
+  }
+
+  // Helper function to get study focus from user profile (fallback)
+  const getStudyFocusFromProfile = () => {
     if (Array.isArray(userProfile.studyGoals)) {
       // New array format - use first goal
       const firstGoal = userProfile.studyGoals[0]
       return {
         subject: firstGoal?.subject || "mathematics",
         topic: firstGoal?.topic || "Algebra", 
-        focusArea: "General concepts" // Default since array format doesn't have focusArea
+        focusArea: "General concepts",
+        progress: 0,
+        currentConcept: null
       }
     } else if (userProfile.studyGoals && typeof userProfile.studyGoals === 'object') {
       // Old object format
       return {
         subject: userProfile.studyGoals.subject || "mathematics",
         topic: userProfile.studyGoals.topic || "Algebra",
-        focusArea: userProfile.studyGoals.focusArea || "Linear Equations"
+        focusArea: userProfile.studyGoals.focusArea || "Linear Equations", 
+        progress: 0,
+        currentConcept: null
       }
     } else {
       // Fallback to default
       return {
         subject: "mathematics",
         topic: "Algebra",
-        focusArea: "Linear Equations"
+        focusArea: "Linear Equations",
+        progress: 0,
+        currentConcept: null
       }
     }
   }
@@ -105,6 +232,9 @@ export function DashboardPage() {
     e.preventDefault()
     navigateToTab("classes")
   }
+
+  // Calculate current study focus
+  const currentStudyFocus = getCurrentStudyFocus()
 
   return (
     <div className="min-h-screen bg-background p-6">
@@ -133,9 +263,9 @@ export function DashboardPage() {
 
           <div className="grid gap-6 md:grid-cols-2">
             <StudyFocusCard
-              subject={getStudyFocus().subject}
-              topic={getStudyFocus().topic}
-              focusArea={getStudyFocus().focusArea}
+              subject={currentStudyFocus.subject}
+              topic={currentStudyFocus.topic}
+              focusArea={currentStudyFocus.focusArea}
             />
             <InterestsCard interests={userProfile.interests} />
           </div>
