@@ -46,18 +46,31 @@ export function useStudyStreak() {
     }
   }, [])
 
-  // Get today's date in YYYY-MM-DD format
-  const getTodayDate = (): string => {
-    return new Date().toISOString().split('T')[0]
+  // Helper function to get local date from any Date object
+  const getLocalDateString = (date: Date): string => {
+    const year = date.getFullYear()
+    const month = String(date.getMonth() + 1).padStart(2, '0')
+    const day = String(date.getDate()).padStart(2, '0')
+    return `${year}-${month}-${day}`
   }
 
-  // Calculate current streak based on completion data
+  // Get today's date in YYYY-MM-DD format (local timezone)
+  const getTodayDate = (): string => {
+    return getLocalDateString(new Date())
+  }
+
+  // Get local date from ISO timestamp
+  const getLocalDateFromISO = (isoString: string): string => {
+    return getLocalDateString(new Date(isoString))
+  }
+
+  // Calculate current streak based on completion data (using local timezone)
   const calculateStreak = useCallback((completions: ConceptCompletion[]): number => {
     if (completions.length === 0) return 0
 
-    // Group completions by date
+    // Group completions by date (using local timezone)
     const completionsByDate = completions.reduce((acc, completion) => {
-      const date = completion.completedAt.split('T')[0]
+      const date = getLocalDateFromISO(completion.completedAt)
       if (!acc[date]) acc[date] = 0
       acc[date]++
       return acc
@@ -69,7 +82,11 @@ export function useStudyStreak() {
     if (sortedDates.length === 0) return 0
 
     const today = getTodayDate()
-    const yesterday = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString().split('T')[0]
+    const yesterday = (() => {
+      const yesterdayDate = new Date()
+      yesterdayDate.setDate(yesterdayDate.getDate() - 1)
+      return getLocalDateString(yesterdayDate)
+    })()
 
     // Check if streak is still active (completed today or yesterday)
     const latestDate = sortedDates[0]
@@ -82,7 +99,7 @@ export function useStudyStreak() {
     let currentDate = new Date(latestDate)
 
     for (let i = 0; i < sortedDates.length; i++) {
-      const checkDate = currentDate.toISOString().split('T')[0]
+      const checkDate = getLocalDateString(currentDate)
       
       if (completionsByDate[checkDate]) {
         streak++
@@ -104,7 +121,7 @@ export function useStudyStreak() {
     // Count today's completions
     const today = getTodayDate()
     const todayCount = data.completions.filter(
-      c => c.completedAt.split('T')[0] === today
+      c => getLocalDateFromISO(c.completedAt) === today
     ).length
     setTodayCompletions(todayCount)
   }, [calculateStreak])
@@ -112,17 +129,18 @@ export function useStudyStreak() {
   // Record a concept completion
   const recordCompletion = useCallback((conceptId: string, topicId: string, conceptTitle: string) => {
     const data = loadStreakData()
+    const now = new Date()
     const completion: ConceptCompletion = {
       conceptId,
       topicId,
       conceptTitle,
-      completedAt: new Date().toISOString()
+      completedAt: now.toISOString() // Keep full timestamp for reference
     }
 
     // Check if this concept was already completed today (prevent duplicates)
     const today = getTodayDate()
     const alreadyCompletedToday = data.completions.some(
-      c => c.conceptId === conceptId && c.completedAt.split('T')[0] === today
+      c => c.conceptId === conceptId && getLocalDateFromISO(c.completedAt) === today
     )
 
     if (!alreadyCompletedToday) {
@@ -175,7 +193,7 @@ export function useStudyStreak() {
     const today = getTodayDate()
     const data = loadStreakData()
     const hasCompletedToday = data.completions.some(
-      c => c.completedAt.split('T')[0] === today
+      c => getLocalDateFromISO(c.completedAt) === today
     )
 
     if (currentStreak === 0) {
@@ -211,7 +229,7 @@ export function useStudyStreak() {
     for (let i = 0; i < 7; i++) {
       const date = new Date(startOfWeek)
       date.setDate(startOfWeek.getDate() + i)
-      weekDates.push(date.toISOString().split('T')[0])
+      weekDates.push(getLocalDateString(date))
     }
     
     // Load user's learning pace to determine daily goal
@@ -231,7 +249,7 @@ export function useStudyStreak() {
     let daysCompleted = 0
     weekDates.forEach(date => {
       const dayCompletions = data.completions.filter(
-        c => c.completedAt.split('T')[0] === date
+        c => getLocalDateFromISO(c.completedAt) === date
       ).length
       
       if (dayCompletions >= dailyGoal) {
