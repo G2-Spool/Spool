@@ -35,7 +35,7 @@ const defaultProfile: UserProfile = {
 
 export function DashboardPage() {
   const [userProfile, setUserProfile] = useState<UserProfile>(defaultProfile)
-  const { navigateToTab } = useUnifiedNavigation()
+  const { navigateToTab, navigateToUrl } = useUnifiedNavigation()
   const { currentStreak, getStreakStatus, todayCompletions, getWeeklyConsistency } = useStudyStreak()
 
   useEffect(() => {
@@ -228,9 +228,76 @@ export function DashboardPage() {
     { day: "Wednesday", progress: 60 },
   ]
 
-  const handleGoToClasses = (e: React.MouseEvent) => {
+  const handleContinueLearning = (e: React.MouseEvent) => {
     e.preventDefault()
-    navigateToTab("classes")
+    
+    // Get available topics (same as in getCurrentStudyFocus)
+    const availableTopics = ["college-algebra", "statistics", "biology", "anatomy"]
+    
+    // Get study streak data to find most recent activity
+    const streakData = localStorage.getItem('study-streak-data')
+    let recentCompletions: any[] = []
+    
+    if (streakData) {
+      try {
+        const parsedData = JSON.parse(streakData)
+        recentCompletions = parsedData.completions || []
+        recentCompletions.sort((a, b) => new Date(b.completedAt).getTime() - new Date(a.completedAt).getTime())
+      } catch (error) {
+        console.error('Failed to parse study streak data:', error)
+      }
+    }
+    
+    // Find the current topic and concept to continue with
+    let targetTopicId = null
+    let targetConceptId = null
+    
+    // First, try to find most recently active topic with incomplete content
+    if (recentCompletions.length > 0) {
+      const mostRecentTopic = recentCompletions[0].topicId
+      if (availableTopics.includes(mostRecentTopic)) {
+        const topicData = getTopicData(mostRecentTopic)
+        
+        // Find the first incomplete concept in this topic
+        for (const section of topicData.sections) {
+          if (section.concepts && section.concepts.length > 0) {
+            const firstIncomplete = section.concepts.find(c => !c.completed)
+            if (firstIncomplete) {
+              targetTopicId = mostRecentTopic
+              targetConceptId = firstIncomplete.id
+              break
+            }
+          }
+        }
+      }
+    }
+    
+    // If no recent topic or it's completed, find any topic with incomplete content
+    if (!targetTopicId || !targetConceptId) {
+      for (const topicId of availableTopics) {
+        const topicData = getTopicData(topicId)
+        
+        for (const section of topicData.sections) {
+          if (section.concepts && section.concepts.length > 0) {
+            const firstIncomplete = section.concepts.find(c => !c.completed)
+            if (firstIncomplete) {
+              targetTopicId = topicId
+              targetConceptId = firstIncomplete.id
+              break
+            }
+          }
+        }
+        if (targetTopicId && targetConceptId) break
+      }
+    }
+    
+    // Navigate to the learning page
+    if (targetTopicId && targetConceptId) {
+      navigateToUrl(`/topic/${targetTopicId}/learn/${targetConceptId}`)
+    } else {
+      // Fallback to classes if no incomplete content found
+      navigateToTab("classes")
+    }
   }
 
   // Calculate current study focus
@@ -279,15 +346,17 @@ export function DashboardPage() {
                 <Button
                   variant="outline"
                   className="flex items-center justify-between p-4 h-auto"
-                  onClick={handleGoToClasses}
+                  onClick={handleContinueLearning}
                 >
                   <div className="flex items-center gap-3">
                     <div className="p-2 bg-primary/10 rounded-md">
                       <ArrowRight className="h-5 w-5 text-primary" />
                     </div>
                     <div className="text-left">
-                      <p className="font-medium">Go to Classes</p>
-                      <p className="text-sm text-muted-foreground">Browse and study your courses</p>
+                      <p className="font-medium">Continue Learning</p>
+                      <p className="text-sm text-muted-foreground">
+                        Resume {currentStudyFocus.topic} • {currentStudyFocus.focusArea}
+                      </p>
                     </div>
                   </div>
                   <ArrowRight className="h-4 w-4" />
