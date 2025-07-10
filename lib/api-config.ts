@@ -2,6 +2,8 @@
 export const API_SERVICES = {
   AUTH: process.env.NEXT_PUBLIC_AUTH_SERVICE_URL || 'http://localhost:3001',
   CONTENT: process.env.NEXT_PUBLIC_CONTENT_SERVICE_URL || 'http://localhost:3002',
+  EXERCISE: process.env.NEXT_PUBLIC_EXERCISE_SERVICE_URL || 'http://localhost:3003',
+  PROGRESS: process.env.NEXT_PUBLIC_PROGRESS_SERVICE_URL || 'http://localhost:3004',
   INTERVIEW: process.env.NEXT_PUBLIC_INTERVIEW_SERVICE_URL || 'http://localhost:8080',
 } as const;
 
@@ -21,12 +23,33 @@ export const API_ENDPOINTS = {
   
   // Content Service
   CONTENT: {
-    GENERATE_EXERCISE: `${API_SERVICES.CONTENT}/content/generate-exercise`,
-    ASSESS_ANSWER: `${API_SERVICES.CONTENT}/content/assess-answer`,
-    RECOMMENDATIONS: `${API_SERVICES.CONTENT}/content/recommendations`,
-    STATS: `${API_SERVICES.CONTENT}/content/stats`,
+    TOPICS: `${API_SERVICES.CONTENT}/content/topics`,
+    TOPIC_DETAILS: `${API_SERVICES.CONTENT}/content/topics`,
+    CONCEPTS: `${API_SERVICES.CONTENT}/content/concepts`,
+    CONCEPT_DETAILS: `${API_SERVICES.CONTENT}/content/concepts`,
+    MODULES: `${API_SERVICES.CONTENT}/content/modules`,
     LEARNING_PATH: `${API_SERVICES.CONTENT}/content/learning-path`,
     UPDATE_LEARNING_PATH: `${API_SERVICES.CONTENT}/content/learning-path/update`,
+    PERSONALIZED_CONTENT: `${API_SERVICES.CONTENT}/content/personalized`,
+    RECOMMENDATIONS: `${API_SERVICES.CONTENT}/content/recommendations`,
+  },
+  
+  // Exercise Service
+  EXERCISE: {
+    GENERATE: `${API_SERVICES.EXERCISE}/exercises/generate`,
+    ASSESS_ANSWER: `${API_SERVICES.EXERCISE}/exercises/assess`,
+    GET_EXERCISES: `${API_SERVICES.EXERCISE}/exercises`,
+    SUBMIT_ANSWER: `${API_SERVICES.EXERCISE}/exercises/submit`,
+    GET_FEEDBACK: `${API_SERVICES.EXERCISE}/exercises/feedback`,
+  },
+  
+  // Progress Service
+  PROGRESS: {
+    GET_PROGRESS: `${API_SERVICES.PROGRESS}/progress`,
+    UPDATE_PROGRESS: `${API_SERVICES.PROGRESS}/progress/update`,
+    GET_STATS: `${API_SERVICES.PROGRESS}/progress/stats`,
+    GET_ACHIEVEMENTS: `${API_SERVICES.PROGRESS}/progress/achievements`,
+    GET_LEARNING_STREAK: `${API_SERVICES.PROGRESS}/progress/streak`,
   },
   
   // Interview Service

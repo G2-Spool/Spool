@@ -10,32 +10,57 @@ interface ConceptPresentationProps {
   className?: string
 }
 
+// Utility function to format currency and avoid LaTeX interpretation
+const formatCurrency = (amount: string | number) => {
+  return `$${amount}` // Use regular dollar sign for display
+}
+
+// Alternative approach using HTML entity (if LaTeX issues persist)
+const formatCurrencyHtml = (amount: string | number) => {
+  return `&#36;${amount}` // HTML entity for dollar sign
+}
+
+// Alternative approach using Unicode dollar sign
+const formatCurrencyUnicode = (amount: string | number) => {
+  return `\u0024${amount}` // Unicode dollar sign
+}
+
+// Alternative approach wrapping in non-LaTeX context (for code/math expressions)
+const formatCurrencyInCode = (amount: string | number) => {
+  return `\$${amount}` // Single escape for code contexts
+}
+
+// Alternative approach using CSS class to prevent LaTeX processing
+const formatCurrencyWithClass = (amount: string | number) => {
+  return <span className="no-latex">${amount}</span> // Wrap in span with class
+}
+
 export function ConceptPresentation({ conceptId, conceptTitle, topicId, className }: ConceptPresentationProps) {
   // Mock data - in real implementation, this would come from API based on conceptId
   const conceptData = {
     title: "Solving Two-Step Linear Equations",
     subtitle: "e.g., 2x + 5 = 15",
     hooks: {
-      personal: "You have a $100 gift card and want to buy a new pair of jeans for $40. You also want to buy a few books that all cost the same price. You can use a two-step equation to figure out exactly how many books you can afford with the remaining balance.",
-      social: "You and your friends are planning a movie night. You spend $12 on snacks and drinks. Tickets cost $9 each. With a total budget set, you can use an equation to determine how many friends you can invite to stay within that budget.",
-      career: "As an event planner, you might have a client's total budget of $5,000. If your fixed fee for planning is $500, and the cost per guest is $75, you would use a two-step equation to calculate the maximum number of guests the event can have.",
-      service: "You are organizing a fundraiser to build a community garden. The project requires $1,000 for tools and lumber. Your goal is to raise $4,000 total. If you raise money by getting $50 sponsorships for each garden bed, an equation tells you exactly how many sponsorships you need to secure."
+      personal: `You have a ${formatCurrency(100)} gift card and want to buy a new pair of jeans for ${formatCurrency(40)}. You also want to buy a few books that all cost the same price. You can use a two-step equation to figure out exactly how many books you can afford with the remaining balance.`,
+      social: `You and your friends are planning a movie night. You spend ${formatCurrency(12)} on snacks and drinks. Tickets cost ${formatCurrency(9)} each. With a total budget set, you can use an equation to determine how many friends you can invite to stay within that budget.`,
+      career: `As an event planner, you might have a client's total budget of ${formatCurrency(5000)}. If your fixed fee for planning is ${formatCurrency(500)}, and the cost per guest is ${formatCurrency(75)}, you would use a two-step equation to calculate the maximum number of guests the event can have.`,
+      service: `You are organizing a fundraiser to build a community garden. The project requires ${formatCurrency(1000)} for tools and lumber. Your goal is to raise ${formatCurrency(4000)} total. If you raise money by getting ${formatCurrency(50)} sponsorships for each garden bed, an equation tells you exactly how many sponsorships you need to secure.`
     },
     examples: [
       {
         interest: "Gaming Interest",
-        scenario: "You want to buy some in-game items that cost $4 each. You also buy a one-time character skin for $7. Your total spending is $27. How many items (x) did you buy?",
-        equation: "$4x + 7 = 27"
+        scenario: `You want to buy some in-game items that cost ${formatCurrency(4)} each. You also buy a one-time character skin for ${formatCurrency(7)}. Your total spending is ${formatCurrency(27)}. How many items (x) did you buy?`,
+        equation: `${formatCurrency(4)}x + ${formatCurrency(7)} = ${formatCurrency(27)}`
       },
       {
         interest: "Music Interest", 
-        scenario: "You are saving for a $350 guitar. You already have $50 saved. If you save $25 per week (w), how many weeks will it take to afford the guitar?",
-        equation: "$25w + 50 = 350"
+        scenario: `You are saving for a ${formatCurrency(350)} guitar. You already have ${formatCurrency(50)} saved. If you save ${formatCurrency(25)} per week (w), how many weeks will it take to afford the guitar?`,
+        equation: `${formatCurrency(25)}w + ${formatCurrency(50)} = ${formatCurrency(350)}`
       },
       {
         interest: "Sports Interest",
-        scenario: "Your soccer team is raising money. They earned $100 from a car wash. They are also selling candy bars that make a $2 profit each (c). Their goal is to raise a total of $500. How many candy bars do they need to sell?",
-        equation: "$2c + 100 = 500"
+        scenario: `Your soccer team is raising money. They earned ${formatCurrency(100)} from a car wash. They are also selling candy bars that make a ${formatCurrency(2)} profit each (c). Their goal is to raise a total of ${formatCurrency(500)}. How many candy bars do they need to sell?`,
+        equation: `${formatCurrency(2)}c + ${formatCurrency(100)} = ${formatCurrency(500)}`
       }
     ],
     vocabulary: [
