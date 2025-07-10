@@ -1,25 +1,25 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useMemo } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Badge } from "@/components/ui/badge"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { RotateCcw, Check } from "lucide-react"
+import { RotateCcw, Plus, X } from "lucide-react"
 import { useUnifiedNavigation } from "@/hooks/use-unified-navigation"
 import { useAuth } from "@/contexts/auth-context"
 import { toast } from "sonner"
 
+interface StudyGoal {
+  subject: string
+  topic: string
+}
+
 interface UserProfile {
   interests: string[]
   interestDetails: Record<string, string>
-  studyGoals: {
-    subject: string
-    topic: string
-    focusArea: string
-  }
+  studyGoals: StudyGoal[]
   learningPace: string
 }
 
@@ -30,17 +30,18 @@ const defaultProfile: UserProfile = {
     "Science": "Fascinated by how things work and scientific discoveries",
     "Reading": "Love exploring different genres and expanding my knowledge"
   },
-  studyGoals: {
-    subject: "mathematics",
-    topic: "Algebra",
-    focusArea: "Linear Equations"
-  },
+  studyGoals: [
+    { subject: "Mathematics", topic: "Algebra" },
+    { subject: "Science", topic: "Biology" }
+  ],
   learningPace: "steady"
 }
 
 export function SettingsPage() {
   const [userProfile, setUserProfile] = useState<UserProfile>(defaultProfile)
+  const [originalProfile, setOriginalProfile] = useState<UserProfile>(defaultProfile)
   const [newInterest, setNewInterest] = useState("")
+  const [newStudyGoal, setNewStudyGoal] = useState<StudyGoal>({ subject: "", topic: "" })
   const [isSigningOut, setIsSigningOut] = useState(false)
   const { navigateToLanding } = useUnifiedNavigation()
   const { signOut: authSignOut } = useAuth()
@@ -50,6 +51,25 @@ export function SettingsPage() {
     if (profile) {
       try {
         const parsedProfile = JSON.parse(profile)
+        
+        // Handle migration from old format
+        if (parsedProfile.studyGoals && !Array.isArray(parsedProfile.studyGoals)) {
+          const oldGoals = parsedProfile.studyGoals
+          parsedProfile.studyGoals = [{
+            subject: oldGoals.subject || "Mathematics",
+            topic: oldGoals.topic || "Algebra"
+          }]
+        }
+        
+        // Migrate old pace values to new system
+        if (parsedProfile.learningPace === 'slow') {
+          parsedProfile.learningPace = 'turtle'
+        } else if (parsedProfile.learningPace === 'regular') {
+          parsedProfile.learningPace = 'steady'
+        } else if (parsedProfile.learningPace === 'fast') {
+          parsedProfile.learningPace = 'rabbit'
+        }
+        
         // Merge with default profile to ensure all properties exist
         const mergedProfile = {
           ...defaultProfile,
@@ -57,37 +77,79 @@ export function SettingsPage() {
           interestDetails: {
             ...defaultProfile.interestDetails,
             ...(parsedProfile.interestDetails || {})
-          }
+          },
+          studyGoals: parsedProfile.studyGoals || defaultProfile.studyGoals
         }
         setUserProfile(mergedProfile)
+        setOriginalProfile(mergedProfile)
         // Save the merged profile back to localStorage
         localStorage.setItem("user-profile", JSON.stringify(mergedProfile))
       } catch (error) {
         console.error("Failed to parse user profile, using default:", error)
         // Save default profile to localStorage
         localStorage.setItem("user-profile", JSON.stringify(defaultProfile))
+        setOriginalProfile(defaultProfile)
       }
     } else {
       // Create default profile if none exists
       console.log("No user profile found, creating default profile")
       localStorage.setItem("user-profile", JSON.stringify(defaultProfile))
+      setOriginalProfile(defaultProfile)
     }
   }, [])
+
+  // Normalize objects for consistent comparison
+  const normalizeForComparison = (obj: any): string => {
+    if (obj === null || obj === undefined) return 'null'
+    if (typeof obj !== 'object') return String(obj)
+    
+    // Handle arrays
+    if (Array.isArray(obj)) {
+      return JSON.stringify(obj.map(normalizeForComparison))
+    }
+    
+    // Handle objects - sort keys for consistent comparison
+    const sortedKeys = Object.keys(obj).sort()
+    const normalized: any = {}
+    sortedKeys.forEach(key => {
+      normalized[key] = obj[key]
+    })
+    
+    return JSON.stringify(normalized, sortedKeys)
+  }
+
+  // Check if there are any changes using useMemo for performance
+  const hasChanges = useMemo(() => {
+    const currentHash = normalizeForComparison(userProfile)
+    const originalHash = normalizeForComparison(originalProfile)
+    return currentHash !== originalHash
+  }, [userProfile, originalProfile])
 
   const saveProfile = () => {
     if (userProfile) {
       localStorage.setItem("user-profile", JSON.stringify(userProfile))
+      setOriginalProfile(userProfile) // Update original profile to current state
       toast.success("Settings saved! Your preferences have been updated successfully.")
     }
   }
 
+  const cancelChanges = () => {
+    setUserProfile(originalProfile)
+    setNewInterest("")
+    setNewStudyGoal({ subject: "", topic: "" })
+  }
+
   const addInterest = () => {
-    if (newInterest.trim() && userProfile && !userProfile.interests.includes(newInterest.trim())) {
-      setUserProfile({
-        ...userProfile,
-        interests: [...userProfile.interests, newInterest.trim()],
-      })
-      setNewInterest("")
+    if (newInterest.trim() && userProfile) {
+      const cleanedInterest = cleanText(newInterest)
+      
+      if (!userProfile.interests.includes(cleanedInterest)) {
+        setUserProfile({
+          ...userProfile,
+          interests: [...userProfile.interests, cleanedInterest],
+        })
+        setNewInterest("")
+      }
     }
   }
 
@@ -99,6 +161,60 @@ export function SettingsPage() {
         ...userProfile,
         interests: userProfile.interests.filter((i) => i !== interest),
         interestDetails: newDetails,
+      })
+    }
+  }
+
+  const cleanText = (text: string): string => {
+    if (!text || typeof text !== 'string') return ''
+    
+    return text
+      .trim() // Remove leading/trailing spaces
+      .replace(/\s+/g, ' ') // Replace multiple spaces with single space
+      .split(' ') // Split into words
+      .filter(word => word.length > 0) // Remove empty strings
+      .map(word => {
+        if (word.length === 1) {
+          return word.toUpperCase()
+        }
+        return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+      }) // Capitalize each word
+      .join(' ') // Join back together
+  }
+
+  const addStudyGoal = () => {
+    if (newStudyGoal.subject.trim() && newStudyGoal.topic.trim() && userProfile) {
+      const cleanedSubject = cleanText(newStudyGoal.subject)
+      const cleanedTopic = cleanText(newStudyGoal.topic)
+      
+      // Debug logging
+      console.log('Original subject:', newStudyGoal.subject)
+      console.log('Cleaned subject:', cleanedSubject)
+      console.log('Original topic:', newStudyGoal.topic)
+      console.log('Cleaned topic:', cleanedTopic)
+      
+      const goalExists = userProfile.studyGoals.some(
+        goal => goal.subject === cleanedSubject && goal.topic === cleanedTopic
+      )
+      
+      if (!goalExists) {
+        setUserProfile({
+          ...userProfile,
+          studyGoals: [...userProfile.studyGoals, {
+            subject: cleanedSubject,
+            topic: cleanedTopic
+          }]
+        })
+        setNewStudyGoal({ subject: "", topic: "" })
+      }
+    }
+  }
+
+  const removeStudyGoal = (index: number) => {
+    if (userProfile) {
+      setUserProfile({
+        ...userProfile,
+        studyGoals: userProfile.studyGoals.filter((_, i) => i !== index)
       })
     }
   }
@@ -150,6 +266,7 @@ export function SettingsPage() {
                     onKeyPress={(e) => e.key === "Enter" && addInterest()}
                   />
                   <Button onClick={addInterest} size="sm">
+                    <Plus className="h-4 w-4 mr-1" />
                     Add
                   </Button>
                 </div>
@@ -162,56 +279,77 @@ export function SettingsPage() {
                     className="cursor-pointer hover:bg-destructive hover:text-destructive-foreground"
                     onClick={() => removeInterest(interest)}
                   >
-                    {interest} ×
+                    {interest} <X className="h-3 w-3 ml-1" />
                   </Badge>
                 ))}
               </div>
             </CardContent>
           </Card>
 
-          {/* Study Goals */}
+          {/* Study Materials */}
           <Card>
             <CardHeader>
-              <CardTitle className="text-white">Study Goals</CardTitle>
-              <CardDescription>Set your current learning objectives</CardDescription>
+              <CardTitle className="text-white">Study Materials</CardTitle>
+              <CardDescription>Add subjects and topics you want to focus on</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="subject">Subject</Label>
-                  <Input
-                    id="subject"
-                    value={userProfile.studyGoals.subject}
-                    onChange={(e) => setUserProfile({
-                      ...userProfile,
-                      studyGoals: { ...userProfile.studyGoals, subject: e.target.value }
-                    })}
-                    placeholder="e.g., Mathematics"
-                  />
+              <div className="space-y-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="newSubject">Subject</Label>
+                    <Input
+                      id="newSubject"
+                      value={newStudyGoal.subject}
+                      onChange={(e) => setNewStudyGoal({ ...newStudyGoal, subject: e.target.value })}
+                      placeholder="e.g., Mathematics, History, Science"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="newTopic">Topic</Label>
+                    <Input
+                      id="newTopic"
+                      value={newStudyGoal.topic}
+                      onChange={(e) => setNewStudyGoal({ ...newStudyGoal, topic: e.target.value })}
+                      placeholder="e.g., Algebra, World War II, Biology"
+                      onKeyPress={(e) => e.key === "Enter" && addStudyGoal()}
+                    />
+                  </div>
                 </div>
-                <div className="space-y-2">
-                  <Label htmlFor="topic">Topic</Label>
-                  <Input
-                    id="topic"
-                    value={userProfile.studyGoals.topic}
-                    onChange={(e) => setUserProfile({
-                      ...userProfile,
-                      studyGoals: { ...userProfile.studyGoals, topic: e.target.value }
-                    })}
-                    placeholder="e.g., Algebra"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="focusArea">Focus Area</Label>
-                  <Input
-                    id="focusArea"
-                    value={userProfile.studyGoals.focusArea}
-                    onChange={(e) => setUserProfile({
-                      ...userProfile,
-                      studyGoals: { ...userProfile.studyGoals, focusArea: e.target.value }
-                    })}
-                    placeholder="e.g., Linear Equations"
-                  />
+                <Button onClick={addStudyGoal} size="sm" className="px-3 py-1 text-sm h-8">
+                  <Plus className="h-3 w-3 mr-1" />
+                  Add Class
+                </Button>
+              </div>
+              
+              <div className="space-y-2">
+                <Label>Current Study Materials</Label>
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
+                  {userProfile.studyGoals.map((goal, index) => (
+                    <div
+                      key={index}
+                      className="relative group flex items-center justify-between p-2 border rounded-lg bg-muted/50 hover:bg-muted/70 transition-colors"
+                    >
+                      <div className="flex-1 min-w-0">
+                        <span className="text-sm font-medium truncate block">
+                          {goal.subject}: {goal.topic}
+                        </span>
+                      </div>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => removeStudyGoal(index)}
+                        className="h-6 w-6 p-0 ml-2 hover:bg-destructive hover:text-destructive-foreground"
+                      >
+                        <X className="h-3 w-3" />
+                      </Button>
+                    </div>
+                  ))}
+                  {userProfile.studyGoals.length === 0 && (
+                    <div className="col-span-full text-center py-8 text-muted-foreground">
+                      <p>No study materials added yet</p>
+                      <p className="text-sm">Add your first subject and topic above</p>
+                    </div>
+                  )}
                 </div>
               </div>
             </CardContent>
@@ -224,19 +362,52 @@ export function SettingsPage() {
               <CardDescription>Set your daily learning goal - this affects your "Today's Progress" tracking</CardDescription>
             </CardHeader>
             <CardContent>
-              <Select
-                value={userProfile.learningPace}
-                onValueChange={(pace: string) => setUserProfile({ ...userProfile, learningPace: pace })}
-              >
-                <SelectTrigger>
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="turtle">Calm - 2 concepts/day</SelectItem>
-                  <SelectItem value="steady">Steady - 5 concepts/day</SelectItem>
-                  <SelectItem value="rabbit">Energized - 8 concepts/day</SelectItem>
-                </SelectContent>
-              </Select>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <Card 
+                  className={`cursor-pointer transition-all duration-200 ${
+                    userProfile.learningPace === 'turtle'
+                      ? 'ring-2 ring-primary bg-primary/10 border-primary' 
+                      : 'hover:bg-muted/50'
+                  }`}
+                  onClick={() => setUserProfile({ ...userProfile, learningPace: 'turtle' })}
+                >
+                  <CardContent className="p-4 text-center">
+                    <div className="text-2xl mb-2">🧘</div>
+                    <div className="font-semibold text-lg">Calm</div>
+                    <div className="text-sm text-muted-foreground">2 concepts/day</div>
+                  </CardContent>
+                </Card>
+
+                <Card 
+                  className={`cursor-pointer transition-all duration-200 ${
+                    userProfile.learningPace === 'steady'
+                      ? 'ring-2 ring-primary bg-primary/10 border-primary' 
+                      : 'hover:bg-muted/50'
+                  }`}
+                  onClick={() => setUserProfile({ ...userProfile, learningPace: 'steady' })}
+                >
+                  <CardContent className="p-4 text-center">
+                    <div className="text-2xl mb-2">⚡</div>
+                    <div className="font-semibold text-lg">Steady</div>
+                    <div className="text-sm text-muted-foreground">5 concepts/day</div>
+                  </CardContent>
+                </Card>
+
+                <Card 
+                  className={`cursor-pointer transition-all duration-200 ${
+                    userProfile.learningPace === 'rabbit'
+                      ? 'ring-2 ring-primary bg-primary/10 border-primary' 
+                      : 'hover:bg-muted/50'
+                  }`}
+                  onClick={() => setUserProfile({ ...userProfile, learningPace: 'rabbit' })}
+                >
+                  <CardContent className="p-4 text-center">
+                    <div className="text-2xl mb-2">🚀</div>
+                    <div className="font-semibold text-lg">Energized</div>
+                    <div className="text-sm text-muted-foreground">8 concepts/day</div>
+                  </CardContent>
+                </Card>
+              </div>
             </CardContent>
           </Card>
 
@@ -244,12 +415,30 @@ export function SettingsPage() {
           <Card>
             <CardHeader>
               <CardTitle className="text-white">Save Changes</CardTitle>
-              <CardDescription>Save your updated preferences</CardDescription>
+              <CardDescription>
+                {hasChanges ? "You have unsaved changes" : "Save your updated preferences"}
+              </CardDescription>
             </CardHeader>
             <CardContent>
-              <Button onClick={saveProfile} className="w-full">
-                Save Settings
-              </Button>
+              <div className="flex gap-3">
+                <Button 
+                  onClick={saveProfile} 
+                  disabled={!hasChanges}
+                  size="sm"
+                  className="px-4 py-2"
+                >
+                  Save Settings
+                </Button>
+                <Button 
+                  variant="outline" 
+                  onClick={cancelChanges}
+                  disabled={!hasChanges}
+                  size="sm"
+                  className="px-4 py-2"
+                >
+                  Cancel
+                </Button>
+              </div>
             </CardContent>
           </Card>
 
