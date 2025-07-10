@@ -11,6 +11,7 @@ import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
 import { ChevronRight, ChevronLeft, Plus, X, Turtle, Zap, Gauge, Mic, MicOff } from "lucide-react"
 import { useVoiceInterview } from "@/hooks/use-voice-interview"
+import { useAuth } from "@/contexts/auth-context"
 
 interface OnboardingFlowProps {
   onComplete: () => void
@@ -29,6 +30,10 @@ export function OnboardingFlow({ onComplete }: OnboardingFlowProps) {
   const [competencyAnswers, setCompetencyAnswers] = useState<string[]>([])
   const [learningPace, setLearningPace] = useState("")
   const [useVoice, setUseVoice] = useState(false)
+  const { user } = useAuth()
+
+  // Helper function to get user-specific profile key
+  const getUserProfileKey = () => user?.sub ? `user-profile-${user.sub}` : "user-profile"
 
   const steps = ["Interests & Hobbies", "Interest Details", "Study Goals", "Competency Assessment", "Learning Pace"]
   
@@ -71,7 +76,8 @@ export function OnboardingFlow({ onComplete }: OnboardingFlowProps) {
         competencyAnswers,
         learningPace,
       }
-      localStorage.setItem("user-profile", JSON.stringify(onboardingData))
+      const profileKey = getUserProfileKey()
+      localStorage.setItem(profileKey, JSON.stringify(onboardingData))
       onComplete()
     }
   }

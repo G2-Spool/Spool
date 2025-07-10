@@ -6,10 +6,12 @@
  */
 
 import { useState, useEffect, useCallback } from 'react'
+import { useAuth } from '@/contexts/auth-context'
 
 interface ConceptCompletion {
   conceptId: string
   completedAt: string // ISO date string
+  completedTime: string // Time of completion in HH:MM format (24-hour)
   topicId: string
   conceptTitle: string
 }
@@ -19,9 +21,10 @@ interface StudyStreakData {
   lastUpdated: string
 }
 
-const STORAGE_KEY = 'study-streak-data'
+const getStorageKey = (userId?: string) => userId ? `study-streak-data-${userId}` : 'study-streak-data'
 
 export function useStudyStreak() {
+  const { user } = useAuth()
   const [currentStreak, setCurrentStreak] = useState<number>(0)
   const [totalCompletions, setTotalCompletions] = useState<number>(0)
   const [todayCompletions, setTodayCompletions] = useState<number>(0)
@@ -29,22 +32,22 @@ export function useStudyStreak() {
   // Load streak data from localStorage
   const loadStreakData = useCallback((): StudyStreakData => {
     try {
-      const stored = localStorage.getItem(STORAGE_KEY)
+      const stored = localStorage.getItem(getStorageKey(user?.sub))
       return stored ? JSON.parse(stored) : { completions: [], lastUpdated: new Date().toISOString() }
     } catch (error) {
       console.error('Failed to load streak data:', error)
       return { completions: [], lastUpdated: new Date().toISOString() }
     }
-  }, [])
+  }, [user?.sub])
 
   // Save streak data to localStorage
   const saveStreakData = useCallback((data: StudyStreakData) => {
     try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(data))
+      localStorage.setItem(getStorageKey(user?.sub), JSON.stringify(data))
     } catch (error) {
       console.error('Failed to save streak data:', error)
     }
-  }, [])
+  }, [user?.sub])
 
   // Helper function to get local date from any Date object
   const getLocalDateString = (date: Date): string => {
@@ -146,7 +149,8 @@ export function useStudyStreak() {
       conceptId,
       topicId,
       conceptTitle,
-      completedAt: now.toISOString() // Keep full timestamp for reference
+      completedAt: now.toISOString(), // Keep full timestamp for reference
+      completedTime: now.toTimeString().substring(0, 5) // HH:MM format
     }
 
     // Check if this concept was already completed today (prevent duplicates)
@@ -177,7 +181,7 @@ export function useStudyStreak() {
   // Listen for storage changes (when other components update the streak data)
   useEffect(() => {
     const handleStorageChange = (e: StorageEvent) => {
-      if (e.key === STORAGE_KEY) {
+      if (e.key === getStorageKey(user?.sub)) {
         const data = loadStreakData()
         updateStats(data)
       }
@@ -245,7 +249,8 @@ export function useStudyStreak() {
     }
     
     // Load user's learning pace to determine daily goal
-    const profile = localStorage.getItem("user-profile")
+    const profileKey = user?.sub ? `user-profile-${user.sub}` : "user-profile"
+    const profile = localStorage.getItem(profileKey)
     let dailyGoal = 5 // default to steady
     if (profile) {
       try {
@@ -276,7 +281,7 @@ export function useStudyStreak() {
       daysCompleted,
       totalDays: 7
     }
-  }, [loadStreakData])
+  }, [loadStreakData, user?.sub])
 
   return {
     currentStreak,

@@ -9,6 +9,7 @@ import { Label } from "@/components/ui/label"
 import { Button } from "@/components/ui/button"
 import { generateMockOnboardingData } from "@/lib/utils"
 import { cn } from "@/lib/utils"
+import { useAuth } from "@/contexts/auth-context"
 
 interface OnboardingPageProps {
   onComplete: () => void
@@ -20,6 +21,10 @@ export function OnboardingPage({ onComplete }: OnboardingPageProps) {
   const [selectedTopics, setSelectedTopics] = useState<string[]>([])
   const [gradeLevel, setGradeLevel] = useState("")
   const [learningPace, setLearningPace] = useState("")
+  const { user } = useAuth()
+
+  // Helper function to get user-specific profile key
+  const getUserProfileKey = () => user?.sub ? `user-profile-${user.sub}` : "user-profile"
 
   const steps = ["Interests & Hobbies", "Study Topics", "Grade Level", "Learning Pace"]
 
@@ -69,7 +74,8 @@ export function OnboardingPage({ onComplete }: OnboardingPageProps) {
         learningPace,
       }
       if (typeof window !== 'undefined') {
-        localStorage.setItem("user-profile", JSON.stringify(onboardingData))
+        const profileKey = getUserProfileKey()
+        localStorage.setItem(profileKey, JSON.stringify(onboardingData))
       }
       onComplete()
     }
@@ -78,7 +84,8 @@ export function OnboardingPage({ onComplete }: OnboardingPageProps) {
   const handleSkip = () => {
     const mockData = generateMockOnboardingData()
     if (typeof window !== 'undefined') {
-      localStorage.setItem("user-profile", JSON.stringify(mockData))
+      const profileKey = getUserProfileKey()
+      localStorage.setItem(profileKey, JSON.stringify(mockData))
     }
     onComplete()
   }

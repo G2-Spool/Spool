@@ -106,11 +106,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       await amplifySignOut()
       setUser(null)
       
-      // Clear all user data
+      // Clear session-specific data only (not user data)
       localStorage.removeItem("user-signed-in")
-      localStorage.removeItem("onboarding-complete")
-      localStorage.removeItem("user-profile")
       localStorage.removeItem("splash-completed")
+      
+      // Clear legacy non-user-specific keys (for cleanup)
+      localStorage.removeItem("study-streak-data")
+      localStorage.removeItem("achievement-data")
+      localStorage.removeItem("user-profile")
       
       // Reset to landing page by clearing the visited flag and setting return flag
       localStorage.setItem("return-to-landing", "true")

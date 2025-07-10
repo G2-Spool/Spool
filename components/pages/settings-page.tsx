@@ -44,10 +44,16 @@ export function SettingsPage() {
   const [newStudyGoal, setNewStudyGoal] = useState<StudyGoal>({ subject: "", topic: "" })
   const [isSigningOut, setIsSigningOut] = useState(false)
   const { navigateToLanding } = useUnifiedNavigation()
-  const { signOut: authSignOut } = useAuth()
+  const { signOut: authSignOut, user } = useAuth()
+
+  // Helper function to get user-specific profile key
+  const getUserProfileKey = () => user?.sub ? `user-profile-${user.sub}` : "user-profile"
 
   useEffect(() => {
-    const profile = localStorage.getItem("user-profile")
+    if (!user?.sub) return // Wait for user to be loaded
+    
+    const profileKey = getUserProfileKey()
+    const profile = localStorage.getItem(profileKey)
     if (profile) {
       try {
         const parsedProfile = JSON.parse(profile)
@@ -83,20 +89,20 @@ export function SettingsPage() {
         setUserProfile(mergedProfile)
         setOriginalProfile(mergedProfile)
         // Save the merged profile back to localStorage
-        localStorage.setItem("user-profile", JSON.stringify(mergedProfile))
+        localStorage.setItem(profileKey, JSON.stringify(mergedProfile))
       } catch (error) {
         console.error("Failed to parse user profile, using default:", error)
         // Save default profile to localStorage
-        localStorage.setItem("user-profile", JSON.stringify(defaultProfile))
+        localStorage.setItem(profileKey, JSON.stringify(defaultProfile))
         setOriginalProfile(defaultProfile)
       }
     } else {
       // Create default profile if none exists
       console.log("No user profile found, creating default profile")
-      localStorage.setItem("user-profile", JSON.stringify(defaultProfile))
+      localStorage.setItem(profileKey, JSON.stringify(defaultProfile))
       setOriginalProfile(defaultProfile)
     }
-  }, [])
+  }, [user?.sub])
 
   // Normalize objects for consistent comparison
   const normalizeForComparison = (obj: any): string => {
@@ -127,7 +133,8 @@ export function SettingsPage() {
 
   const saveProfile = () => {
     if (userProfile) {
-      localStorage.setItem("user-profile", JSON.stringify(userProfile))
+      const profileKey = getUserProfileKey()
+      localStorage.setItem(profileKey, JSON.stringify(userProfile))
       setOriginalProfile(userProfile) // Update original profile to current state
       toast.success("Settings saved! Your preferences have been updated successfully.")
     }
@@ -221,7 +228,8 @@ export function SettingsPage() {
 
   const resetOnboarding = () => {
     localStorage.removeItem("onboarding-complete")
-    localStorage.removeItem("user-profile")
+    const profileKey = getUserProfileKey()
+    localStorage.removeItem(profileKey)
     navigateToLanding()
   }
 

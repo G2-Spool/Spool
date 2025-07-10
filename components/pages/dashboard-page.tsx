@@ -13,6 +13,9 @@ import { Button } from "@/components/ui/button"
 import { ArrowRight } from "lucide-react"
 import { useUnifiedNavigation } from "@/hooks/use-unified-navigation"
 import { useStudyStreak } from "@/hooks/use-study-streak"
+import { useAchievements } from "@/hooks/use-achievements"
+import { useAuth } from "@/contexts/auth-context"
+import { AchievementNotification } from "@/components/achievement-notification"
 import { TestStudyStreak } from "@/components/test-study-streak"
 import { getTopicData } from "./topic-page"
 
@@ -34,11 +37,18 @@ const defaultProfile: UserProfile = {
 
 export function DashboardPage() {
   const [userProfile, setUserProfile] = useState<UserProfile>(defaultProfile)
+  const { user } = useAuth()
   const { navigateToTab, navigateToUrl } = useUnifiedNavigation()
   const { currentStreak, getStreakStatus, todayCompletions, getWeeklyConsistency } = useStudyStreak()
+  const { getRecentAchievements, checkAchievements } = useAchievements()
 
   useEffect(() => {
-    const profile = localStorage.getItem("user-profile")
+    if (!user?.sub) return // Wait for user to be loaded
+    
+    const getUserProfileKey = (userId: string) => `user-profile-${userId}`
+    const profileKey = getUserProfileKey(user.sub)
+    const profile = localStorage.getItem(profileKey)
+    
     if (profile) {
       try {
         const parsedProfile = JSON.parse(profile)
@@ -49,18 +59,19 @@ export function DashboardPage() {
         }
         setUserProfile(mergedProfile)
         // Save the merged profile back to localStorage
-        localStorage.setItem("user-profile", JSON.stringify(mergedProfile))
+        localStorage.setItem(profileKey, JSON.stringify(mergedProfile))
       } catch (error) {
         console.error("Failed to parse user profile, using default:", error)
         // Save default profile to localStorage
-        localStorage.setItem("user-profile", JSON.stringify(defaultProfile))
+        localStorage.setItem(profileKey, JSON.stringify(defaultProfile))
       }
     } else {
       // Create default profile if none exists
       console.log("No user profile found, creating default profile")
-      localStorage.setItem("user-profile", JSON.stringify(defaultProfile))
+      localStorage.setItem(profileKey, JSON.stringify(defaultProfile))
+      setUserProfile(defaultProfile)
     }
-  }, [])
+  }, [user?.sub])
 
   // Comprehensive function to determine actual current study focus
   const getCurrentStudyFocus = () => {
@@ -215,11 +226,49 @@ export function DashboardPage() {
     }
   }
 
-  const achievements = [
-    { title: "Completed 7-day study streak", timeAgo: "Today", color: "#78af9f" },
-    { title: "Mastered basic wave properties", timeAgo: "2 days ago", color: "#e5e7eb" },
-    { title: "Connected guitar playing to sound waves", timeAgo: "1 week ago", color: "#d1d5db" },
-  ]
+  // Check achievements on component mount and when data changes
+  useEffect(() => {
+    checkAchievements()
+  }, [checkAchievements, currentStreak, todayCompletions])
+
+  // Get recent achievements for display
+  const recentAchievements = getRecentAchievements()
+  
+  // Format achievements for the AchievementsList component
+  const formattedAchievements = recentAchievements.map(achievement => {
+    const unlockedDate = new Date(achievement.unlockedAt)
+    const now = new Date()
+    const daysDiff = Math.floor((now.getTime() - unlockedDate.getTime()) / (1000 * 60 * 60 * 24))
+    
+    let timeAgo: string
+    if (daysDiff === 0) {
+      timeAgo = "Today"
+    } else if (daysDiff === 1) {
+      timeAgo = "Yesterday"
+    } else if (daysDiff < 7) {
+      timeAgo = `${daysDiff} days ago`
+    } else if (daysDiff < 30) {
+      const weeks = Math.floor(daysDiff / 7)
+      timeAgo = weeks === 1 ? "1 week ago" : `${weeks} weeks ago`
+    } else {
+      const months = Math.floor(daysDiff / 30)
+      timeAgo = months === 1 ? "1 month ago" : `${months} months ago`
+    }
+
+    // Color based on rarity
+    const rarityColors = {
+      common: "#78af9f",
+      uncommon: "#60a5fa", 
+      rare: "#a855f7",
+      legendary: "#fbbf24"
+    }
+
+    return {
+      title: `${achievement.definition.icon} ${achievement.definition.title}`,
+      timeAgo,
+      color: rarityColors[achievement.definition.rarity] || "#78af9f"
+    }
+  })
 
   const handleContinueLearning = (e: React.MouseEvent) => {
     e.preventDefault()
@@ -298,6 +347,7 @@ export function DashboardPage() {
 
   return (
     <div className="min-h-screen bg-background p-6">
+      <AchievementNotification />
       <div className="max-w-7xl mx-auto space-y-12">
         <div className="flex items-center justify-between">
           <PageHeader title="Dashboard" description="Track your learning progress and achievements" />
@@ -359,7 +409,7 @@ export function DashboardPage() {
         </TabsContent>
 
         <TabsContent value="achievements" className="space-y-6">
-          <AchievementsList achievements={achievements} />
+          <AchievementsList achievements={formattedAchievements} />
         </TabsContent>
 
         <TabsContent value="test-stats" className="space-y-6">

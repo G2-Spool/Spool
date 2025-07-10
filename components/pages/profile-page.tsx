@@ -49,6 +49,9 @@ export function ProfilePage() {
   const { user, signOut: authSignOut } = useAuth()
   const { navigateToLanding } = useUnifiedNavigation()
 
+  // Helper function to get user-specific profile key
+  const getUserProfileKey = () => user?.sub ? `user-profile-${user.sub}` : "user-profile"
+
   // Set user email from auth context
   useEffect(() => {
     if (user?.email) {
@@ -62,7 +65,10 @@ export function ProfilePage() {
   }, [user])
 
   useEffect(() => {
-    const profile = localStorage.getItem("user-profile")
+    if (!user?.sub) return // Wait for user to be loaded
+    
+    const profileKey = getUserProfileKey()
+    const profile = localStorage.getItem(profileKey)
     if (profile) {
       try {
         const parsedProfile = JSON.parse(profile)
@@ -77,18 +83,18 @@ export function ProfilePage() {
         }
         setUserProfile(mergedProfile)
         // Save the merged profile back to localStorage
-        localStorage.setItem("user-profile", JSON.stringify(mergedProfile))
+        localStorage.setItem(profileKey, JSON.stringify(mergedProfile))
       } catch (error) {
         console.error("Failed to parse user profile, using default:", error)
         // Save default profile to localStorage
-        localStorage.setItem("user-profile", JSON.stringify(defaultProfile))
+        localStorage.setItem(profileKey, JSON.stringify(defaultProfile))
       }
     } else {
       // Create default profile if none exists
       console.log("No user profile found, creating default profile")
-      localStorage.setItem("user-profile", JSON.stringify(defaultProfile))
+      localStorage.setItem(profileKey, JSON.stringify(defaultProfile))
     }
-  }, [])
+  }, [user?.sub])
 
   const getPaceDescription = (pace: string) => {
     switch (pace) {
