@@ -6,13 +6,13 @@ import { Calendar, Clock, Target, TrendingUp } from "lucide-react"
 
 interface StatsGridProps {
   studyStreak: number
-  weeklyGoal: number
+  weeklyConsistency: { percentage: number; daysCompleted: number; totalDays: number }
   learningPace: string
   streakStatus?: { message: string; isActive: boolean }
   todayCompletions: number
 }
 
-export function StatsGrid({ studyStreak, weeklyGoal, learningPace, streakStatus, todayCompletions }: StatsGridProps) {
+export function StatsGrid({ studyStreak, weeklyConsistency, learningPace, streakStatus, todayCompletions }: StatsGridProps) {
   const getPaceDescription = (pace: string) => {
     switch (pace) {
       case "turtle":
@@ -68,7 +68,7 @@ export function StatsGrid({ studyStreak, weeklyGoal, learningPace, streakStatus,
         <Progress value={dailyProgress} className="mt-2" />
       </StatCard>
 
-      <StatCard title="Weekly Goal" value={`${weeklyGoal}%`} description="5/7 days completed" icon={Target} />
+      <StatCard title="Weekly Consistency" value={`${weeklyConsistency.percentage}%`} description={`${weeklyConsistency.daysCompleted}/${weeklyConsistency.totalDays} days met goal`} icon={Target} />
 
       <StatCard
         title="Learning Pace"

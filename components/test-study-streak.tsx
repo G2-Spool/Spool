@@ -15,12 +15,13 @@ import { Badge } from '@/components/ui/badge'
 import { Calendar, Trophy, Target } from 'lucide-react'
 
 export function TestStudyStreak() {
-  const { currentStreak, totalCompletions, todayCompletions, recordCompletion, getStreakStatus } = useStudyStreak()
+  const { currentStreak, totalCompletions, todayCompletions, recordCompletion, getStreakStatus, getWeeklyConsistency } = useStudyStreak()
   const [testConceptId, setTestConceptId] = useState('test-concept-1')
   const [testTopicId, setTestTopicId] = useState('college-algebra')  
   const [testConceptTitle, setTestConceptTitle] = useState('Linear Equations')
 
   const streakStatus = getStreakStatus()
+  const weeklyConsistency = getWeeklyConsistency()
 
   const handleTestCompletion = () => {
     recordCompletion(testConceptId, testTopicId, testConceptTitle)
@@ -48,7 +49,7 @@ export function TestStudyStreak() {
         </CardHeader>
         <CardContent className="space-y-6">
           {/* Current Stats */}
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div className="text-center">
               <div className="text-2xl font-bold text-primary">{currentStreak}</div>
               <div className="text-sm text-muted-foreground">Day Streak</div>
@@ -58,9 +59,21 @@ export function TestStudyStreak() {
               <div className="text-sm text-muted-foreground">Today</div>
             </div>
             <div className="text-center">
+              <div className="text-2xl font-bold text-purple-600">{weeklyConsistency.percentage}%</div>
+              <div className="text-sm text-muted-foreground">Weekly</div>
+            </div>
+            <div className="text-center">
               <div className="text-2xl font-bold text-blue-600">{totalCompletions}</div>
               <div className="text-sm text-muted-foreground">Total</div>
             </div>
+          </div>
+          
+          {/* Weekly Detail */}
+          <div className="text-center">
+            <Badge variant="outline" className="flex items-center gap-2 mx-auto w-fit">
+              <Target className="h-4 w-4" />
+              {weeklyConsistency.daysCompleted}/{weeklyConsistency.totalDays} days met daily goal this week
+            </Badge>
           </div>
 
           {/* Streak Status */}
@@ -123,8 +136,9 @@ export function TestStudyStreak() {
             <h4 className="font-semibold mb-2">How to Test:</h4>
             <ul className="space-y-1">
               <li>• Click "Complete Concept" to simulate finishing a concept</li>
-              <li>• Each completion counts toward your daily streak</li>
+              <li>• Each completion counts toward your daily streak and weekly consistency</li>
               <li>• You need at least 1 concept per day to maintain your streak</li>
+              <li>• Weekly consistency tracks days you met your personal daily goal (2/5/8 concepts based on pace)</li>
               <li>• The streak resets if you miss a day</li>
               <li>• Use "Clear Data" to reset and start fresh</li>
             </ul>

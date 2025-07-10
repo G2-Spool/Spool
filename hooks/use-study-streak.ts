@@ -189,11 +189,71 @@ export function useStudyStreak() {
     return { message: "Complete a concept to maintain streak", isActive: false }
   }, [currentStreak, loadStreakData])
 
+  // Calculate weekly consistency (days meeting daily goal this week)
+  const getWeeklyConsistency = useCallback((): { percentage: number; daysCompleted: number; totalDays: number } => {
+    const data = loadStreakData()
+    
+    // Get the start and end of current week (Monday to Sunday)
+    const today = new Date()
+    const dayOfWeek = today.getDay() // 0 = Sunday, 1 = Monday, etc.
+    const mondayOffset = dayOfWeek === 0 ? -6 : 1 - dayOfWeek // Adjust for Sunday = 0
+    
+    const startOfWeek = new Date(today)
+    startOfWeek.setDate(today.getDate() + mondayOffset)
+    startOfWeek.setHours(0, 0, 0, 0)
+    
+    const endOfWeek = new Date(startOfWeek)
+    endOfWeek.setDate(startOfWeek.getDate() + 6)
+    endOfWeek.setHours(23, 59, 59, 999)
+    
+    // Get all dates in this week
+    const weekDates: string[] = []
+    for (let i = 0; i < 7; i++) {
+      const date = new Date(startOfWeek)
+      date.setDate(startOfWeek.getDate() + i)
+      weekDates.push(date.toISOString().split('T')[0])
+    }
+    
+    // Load user's learning pace to determine daily goal
+    const profile = localStorage.getItem("user-profile")
+    let dailyGoal = 5 // default to steady
+    if (profile) {
+      try {
+        const parsedProfile = JSON.parse(profile)
+        const pace = parsedProfile.learningPace || 'steady'
+        dailyGoal = pace === 'turtle' ? 2 : pace === 'rabbit' ? 8 : 5
+      } catch (error) {
+        console.error('Failed to parse profile for daily goal:', error)
+      }
+    }
+    
+    // Count how many days this week the user met their daily goal
+    let daysCompleted = 0
+    weekDates.forEach(date => {
+      const dayCompletions = data.completions.filter(
+        c => c.completedAt.split('T')[0] === date
+      ).length
+      
+      if (dayCompletions >= dailyGoal) {
+        daysCompleted++
+      }
+    })
+    
+    const percentage = Math.round((daysCompleted / 7) * 100)
+    
+    return {
+      percentage,
+      daysCompleted,
+      totalDays: 7
+    }
+  }, [loadStreakData])
+
   return {
     currentStreak,
     totalCompletions,
     todayCompletions,
     recordCompletion,
-    getStreakStatus
+    getStreakStatus,
+    getWeeklyConsistency
   }
 } 

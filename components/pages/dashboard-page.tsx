@@ -38,9 +38,8 @@ const defaultProfile: UserProfile = {
 
 export function DashboardPage() {
   const [userProfile, setUserProfile] = useState<UserProfile>(defaultProfile)
-  const [weeklyGoal] = useState(75)
   const { navigateToTab } = useUnifiedNavigation()
-  const { currentStreak, getStreakStatus, todayCompletions } = useStudyStreak()
+  const { currentStreak, getStreakStatus, todayCompletions, getWeeklyConsistency } = useStudyStreak()
 
   useEffect(() => {
     const profile = localStorage.getItem("user-profile")
@@ -103,7 +102,7 @@ export function DashboardPage() {
         <TabsContent value="overview" className="space-y-6">
           <StatsGrid
             studyStreak={currentStreak}
-            weeklyGoal={weeklyGoal}
+            weeklyConsistency={getWeeklyConsistency()}
             learningPace={userProfile.learningPace}
             streakStatus={getStreakStatus()}
             todayCompletions={todayCompletions}
