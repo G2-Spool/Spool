@@ -18,11 +18,7 @@ import { TestStudyStreak } from "@/components/test-study-streak"
 
 interface UserProfile {
   interests: string[]
-  studyGoals: {
-    subject: string
-    topic: string
-    focusArea: string
-  }
+  studyGoals: any  // Can be object or array format
   learningPace: string
 }
 
@@ -65,6 +61,33 @@ export function DashboardPage() {
       localStorage.setItem("user-profile", JSON.stringify(defaultProfile))
     }
   }, [])
+
+  // Helper function to get study focus data from either format
+  const getStudyFocus = () => {
+    if (Array.isArray(userProfile.studyGoals)) {
+      // New array format - use first goal
+      const firstGoal = userProfile.studyGoals[0]
+      return {
+        subject: firstGoal?.subject || "mathematics",
+        topic: firstGoal?.topic || "Algebra", 
+        focusArea: "General concepts" // Default since array format doesn't have focusArea
+      }
+    } else if (userProfile.studyGoals && typeof userProfile.studyGoals === 'object') {
+      // Old object format
+      return {
+        subject: userProfile.studyGoals.subject || "mathematics",
+        topic: userProfile.studyGoals.topic || "Algebra",
+        focusArea: userProfile.studyGoals.focusArea || "Linear Equations"
+      }
+    } else {
+      // Fallback to default
+      return {
+        subject: "mathematics",
+        topic: "Algebra",
+        focusArea: "Linear Equations"
+      }
+    }
+  }
 
   const achievements = [
     { title: "Completed 7-day study streak", timeAgo: "Today", color: "#78af9f" },
@@ -110,9 +133,9 @@ export function DashboardPage() {
 
           <div className="grid gap-6 md:grid-cols-2">
             <StudyFocusCard
-              subject={userProfile.studyGoals.subject}
-              topic={userProfile.studyGoals.topic}
-              focusArea={userProfile.studyGoals.focusArea}
+              subject={getStudyFocus().subject}
+              topic={getStudyFocus().topic}
+              focusArea={getStudyFocus().focusArea}
             />
             <InterestsCard interests={userProfile.interests} />
           </div>
