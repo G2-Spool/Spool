@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useState } from "react"
-import { ChevronLeft, BookOpen, Play, CheckCircle, Lock } from "lucide-react"
+import { ChevronLeft, BookOpen, Play, CheckCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { ConceptList } from "@/components/organisms/concept-list"
@@ -223,7 +223,7 @@ Credits: 3 credit hours`
               title: "Domain and Range",
               description: "Determining domain and range of functions",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -231,7 +231,7 @@ Credits: 3 credit hours`
               title: "Rates of Change and Behavior of Graphs",
               description: "Analyzing function behavior and rates of change",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -239,7 +239,7 @@ Credits: 3 credit hours`
               title: "Composition of Functions",
               description: "Combining functions and function composition",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -247,7 +247,7 @@ Credits: 3 credit hours`
               title: "Transformation of Functions",
               description: "Shifting, stretching, and reflecting functions",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -255,7 +255,7 @@ Credits: 3 credit hours`
               title: "Absolute Value Functions",
               description: "Properties and graphs of absolute value functions",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -263,7 +263,7 @@ Credits: 3 credit hours`
               title: "Inverse Functions",
               description: "Finding and working with inverse functions",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -286,7 +286,7 @@ Credits: 3 credit hours`
               title: "Modeling with Linear Functions",
               description: "Using linear functions to model real-world situations",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -294,7 +294,7 @@ Credits: 3 credit hours`
               title: "Fitting Linear Models to Data",
               description: "Regression analysis and best-fit lines",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -309,7 +309,7 @@ Credits: 3 credit hours`
               title: "Quadratic Functions",
               description: "Properties and graphs of quadratic functions",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -317,7 +317,7 @@ Credits: 3 credit hours`
               title: "Power Functions and Polynomial Functions",
               description: "General polynomial functions and their properties",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -325,7 +325,7 @@ Credits: 3 credit hours`
               title: "Graphs of Polynomial Functions",
               description: "Analyzing and sketching polynomial graphs",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -333,7 +333,7 @@ Credits: 3 credit hours`
               title: "Dividing Polynomials",
               description: "Polynomial division techniques",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -341,7 +341,7 @@ Credits: 3 credit hours`
               title: "Zeros of Polynomial Functions",
               description: "Finding roots and zeros of polynomial functions",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -349,7 +349,7 @@ Credits: 3 credit hours`
               title: "Rational Functions",
               description: "Properties and graphs of rational functions",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -357,7 +357,7 @@ Credits: 3 credit hours`
               title: "Inverses and Radical Functions",
               description: "Inverse functions and radical function properties",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -365,7 +365,7 @@ Credits: 3 credit hours`
               title: "Modeling Using Variation",
               description: "Direct, inverse, and joint variation models",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -380,7 +380,7 @@ Credits: 3 credit hours`
               title: "Exponential Functions",
               description: "Properties and applications of exponential functions",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -388,7 +388,7 @@ Credits: 3 credit hours`
               title: "Graphs of Exponential Functions",
               description: "Analyzing exponential function graphs",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -396,7 +396,7 @@ Credits: 3 credit hours`
               title: "Logarithmic Functions",
               description: "Properties and applications of logarithmic functions",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -404,7 +404,7 @@ Credits: 3 credit hours`
               title: "Graphs of Logarithmic Functions",
               description: "Analyzing logarithmic function graphs",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -412,7 +412,7 @@ Credits: 3 credit hours`
               title: "Logarithmic Properties",
               description: "Properties and rules of logarithms",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -420,7 +420,7 @@ Credits: 3 credit hours`
               title: "Exponential and Logarithmic Equations",
               description: "Solving exponential and logarithmic equations",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -428,7 +428,7 @@ Credits: 3 credit hours`
               title: "Exponential and Logarithmic Models",
               description: "Real-world applications and modeling",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -436,7 +436,7 @@ Credits: 3 credit hours`
               title: "Fitting Exponential Models to Data",
               description: "Using exponential functions to model data sets",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -451,7 +451,7 @@ Credits: 3 credit hours`
               title: "Systems of Linear Equations: Two Variables",
               description: "Methods for solving two-variable linear systems",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -459,7 +459,7 @@ Credits: 3 credit hours`
               title: "Systems of Linear Equations: Three Variables",
               description: "Solving three-variable linear systems",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -467,7 +467,7 @@ Credits: 3 credit hours`
               title: "Systems of Nonlinear Equations and Inequalities: Two Variables",
               description: "Solving nonlinear systems and inequalities with two variables",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -475,7 +475,7 @@ Credits: 3 credit hours`
               title: "Partial Fractions",
               description: "Decomposing rational functions using partial fractions",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -483,7 +483,7 @@ Credits: 3 credit hours`
               title: "Matrices and Matrix Operations",
               description: "Using matrices to solve systems of equations",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -491,7 +491,7 @@ Credits: 3 credit hours`
               title: "Solving Systems with Gaussian Elimination",
               description: "Row reduction method for solving linear systems",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -499,7 +499,7 @@ Credits: 3 credit hours`
               title: "Solving Systems with Inverses",
               description: "Using matrix inverses to solve linear systems",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -507,7 +507,7 @@ Credits: 3 credit hours`
               title: "Solving Systems with Cramer's Rule",
               description: "Using determinants and Cramer's rule for solving systems",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -522,7 +522,7 @@ Credits: 3 credit hours`
               title: "The Ellipse",
               description: "Properties and equations of ellipses",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -530,7 +530,7 @@ Credits: 3 credit hours`
               title: "The Hyperbola",
               description: "Properties and equations of hyperbolas",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -538,7 +538,7 @@ Credits: 3 credit hours`
               title: "The Parabola",
               description: "Properties and equations of parabolas",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -546,7 +546,7 @@ Credits: 3 credit hours`
               title: "Rotation of Axes",
               description: "Rotating coordinate systems for conic sections",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -554,7 +554,7 @@ Credits: 3 credit hours`
               title: "Conic Sections in Polar Coordinates",
               description: "Representing conic sections in polar form",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -569,7 +569,7 @@ Credits: 3 credit hours`
               title: "Sequences and Their Notations",
               description: "Introduction to sequences and notation",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -577,7 +577,7 @@ Credits: 3 credit hours`
               title: "Arithmetic Sequences",
               description: "Properties and formulas for arithmetic sequences",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -585,7 +585,7 @@ Credits: 3 credit hours`
               title: "Geometric Sequences",
               description: "Properties and formulas for geometric sequences",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -593,7 +593,7 @@ Credits: 3 credit hours`
               title: "Series and Their Notations",
               description: "Introduction to series and summation notation",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -601,7 +601,7 @@ Credits: 3 credit hours`
               title: "Counting Principles",
               description: "Fundamental counting techniques",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -609,7 +609,7 @@ Credits: 3 credit hours`
               title: "Binomial Theorem",
               description: "Expanding binomial expressions",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -617,7 +617,7 @@ Credits: 3 credit hours`
               title: "Probability",
               description: "Basic probability concepts and calculations",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -689,7 +689,7 @@ By the end of this course, you'll be able to analyze data critically and make in
               title: "Sampling Experiment",
               description: "Understanding sampling distributions through experimentation",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -736,7 +736,7 @@ By the end of this course, you'll be able to analyze data critically and make in
               title: "Measures of the Center of the Data",
               description: "Mean, median, and mode",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -744,7 +744,7 @@ By the end of this course, you'll be able to analyze data critically and make in
               title: "Skewness and the Mean, Median, and Mode",
               description: "Understanding distribution shape and central tendency",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -752,7 +752,7 @@ By the end of this course, you'll be able to analyze data critically and make in
               title: "Measures of the Spread of the Data",
               description: "Range, variance, and standard deviation",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -760,7 +760,7 @@ By the end of this course, you'll be able to analyze data critically and make in
               title: "Descriptive Statistics",
               description: "Applications and summary of descriptive statistics",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -783,7 +783,7 @@ By the end of this course, you'll be able to analyze data critically and make in
               title: "Independent and Mutually Exclusive Events",
               description: "Understanding different types of events",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -791,7 +791,7 @@ By the end of this course, you'll be able to analyze data critically and make in
               title: "Two Basic Rules of Probability",
               description: "Addition and multiplication rules",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -799,7 +799,7 @@ By the end of this course, you'll be able to analyze data critically and make in
               title: "Contingency Tables",
               description: "Joint and conditional probabilities using tables",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -807,7 +807,7 @@ By the end of this course, you'll be able to analyze data critically and make in
               title: "Tree and Venn Diagrams",
               description: "Visual representations of probability",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -815,7 +815,7 @@ By the end of this course, you'll be able to analyze data critically and make in
               title: "Probability Topics",
               description: "Advanced probability concepts and applications",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -830,7 +830,7 @@ By the end of this course, you'll be able to analyze data critically and make in
               title: "Probability Distribution Function (PDF) for a Discrete Random Variable",
               description: "Defining and working with discrete probability distributions",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -838,7 +838,7 @@ By the end of this course, you'll be able to analyze data critically and make in
               title: "Mean or Expected Value and Standard Deviation",
               description: "Calculating central tendency and spread for discrete variables",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -846,7 +846,7 @@ By the end of this course, you'll be able to analyze data critically and make in
               title: "Binomial Distribution",
               description: "Fixed number of independent trials",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -854,7 +854,7 @@ By the end of this course, you'll be able to analyze data critically and make in
               title: "Geometric Distribution",
               description: "Number of trials until first success",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -862,7 +862,7 @@ By the end of this course, you'll be able to analyze data critically and make in
               title: "Hypergeometric Distribution",
               description: "Sampling without replacement scenarios",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -870,7 +870,7 @@ By the end of this course, you'll be able to analyze data critically and make in
               title: "Poisson Distribution",
               description: "Rate of occurrence over time or space",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -878,7 +878,7 @@ By the end of this course, you'll be able to analyze data critically and make in
               title: "Discrete Distribution (Playing Card Experiment)",
               description: "Exploring discrete distributions using playing cards",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -886,7 +886,7 @@ By the end of this course, you'll be able to analyze data critically and make in
               title: "Discrete Distribution (Dice Experiment Using Three Regular Dice)",
               description: "Analyzing discrete distributions with three-dice experiments",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -901,7 +901,7 @@ By the end of this course, you'll be able to analyze data critically and make in
               title: "Continuous Probability Functions",
               description: "Properties of continuous distributions",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -909,7 +909,7 @@ By the end of this course, you'll be able to analyze data critically and make in
               title: "The Uniform Distribution",
               description: "Equally likely outcomes over an interval",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -917,7 +917,7 @@ By the end of this course, you'll be able to analyze data critically and make in
               title: "The Exponential Distribution",
               description: "Time between events in a Poisson process",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -925,7 +925,7 @@ By the end of this course, you'll be able to analyze data critically and make in
               title: "Continuous Distribution",
               description: "Applications and summary of continuous distributions",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -940,7 +940,7 @@ By the end of this course, you'll be able to analyze data critically and make in
               title: "The Standard Normal Distribution",
               description: "Properties and characteristics of the standard normal distribution",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -948,7 +948,7 @@ By the end of this course, you'll be able to analyze data critically and make in
               title: "Using the Normal Distribution",
               description: "Applications and calculations with normal distributions",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -956,7 +956,7 @@ By the end of this course, you'll be able to analyze data critically and make in
               title: "Normal Distribution (Lap Times)",
               description: "Real-world application using lap time data",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -964,7 +964,7 @@ By the end of this course, you'll be able to analyze data critically and make in
               title: "Normal Distribution (Pinkie Length)",
               description: "Real-world application using pinkie length measurements",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -979,7 +979,7 @@ By the end of this course, you'll be able to analyze data critically and make in
               title: "The Central Limit Theorem for Sample Means (Averages)",
               description: "Distribution of sample means",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -987,7 +987,7 @@ By the end of this course, you'll be able to analyze data critically and make in
               title: "The Central Limit Theorem for Sums",
               description: "Distribution of sample sums",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -995,7 +995,7 @@ By the end of this course, you'll be able to analyze data critically and make in
               title: "Using the Central Limit Theorem",
               description: "Applications and practical use",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -1003,7 +1003,7 @@ By the end of this course, you'll be able to analyze data critically and make in
               title: "Central Limit Theorem (Pocket Change)",
               description: "Real-world application using pocket change data",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -1011,7 +1011,7 @@ By the end of this course, you'll be able to analyze data critically and make in
               title: "Central Limit Theorem (Cookie Recipes)",
               description: "Real-world application using cookie recipe measurements",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -1026,7 +1026,7 @@ By the end of this course, you'll be able to analyze data critically and make in
               title: "A Single Population Mean using the Normal Distribution",
               description: "Confidence intervals when σ is known",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -1034,7 +1034,7 @@ By the end of this course, you'll be able to analyze data critically and make in
               title: "A Single Population Mean using the Student t Distribution",
               description: "Confidence intervals when σ is unknown",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -1042,7 +1042,7 @@ By the end of this course, you'll be able to analyze data critically and make in
               title: "A Population Proportion",
               description: "Confidence intervals for proportions",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -1050,7 +1050,7 @@ By the end of this course, you'll be able to analyze data critically and make in
               title: "Confidence Interval (Home Costs)",
               description: "Real-world application using home cost data",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -1058,7 +1058,7 @@ By the end of this course, you'll be able to analyze data critically and make in
               title: "Confidence Interval (Place of Birth)",
               description: "Real-world application using place of birth data",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -1066,7 +1066,7 @@ By the end of this course, you'll be able to analyze data critically and make in
               title: "Confidence Interval (Women's Heights)",
               description: "Real-world application using women's height measurements",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -1081,7 +1081,7 @@ By the end of this course, you'll be able to analyze data critically and make in
               title: "Null and Alternative Hypotheses",
               description: "Setting up hypothesis tests",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -1089,7 +1089,7 @@ By the end of this course, you'll be able to analyze data critically and make in
               title: "Outcomes and the Type I and Type II Errors",
               description: "Understanding test results and errors",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -1097,7 +1097,7 @@ By the end of this course, you'll be able to analyze data critically and make in
               title: "Distribution Needed for Hypothesis Testing",
               description: "Choosing the appropriate test statistic",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -1105,7 +1105,7 @@ By the end of this course, you'll be able to analyze data critically and make in
               title: "Rare Events, the Sample, Decision and Conclusion",
               description: "Making decisions from hypothesis tests",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -1113,7 +1113,7 @@ By the end of this course, you'll be able to analyze data critically and make in
               title: "Additional Information and Full Hypothesis Test Examples",
               description: "Complete hypothesis testing procedures",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -1121,7 +1121,7 @@ By the end of this course, you'll be able to analyze data critically and make in
               title: "Hypothesis Testing of a Single Mean and Single Proportion",
               description: "Comprehensive hypothesis testing applications",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -1136,7 +1136,7 @@ By the end of this course, you'll be able to analyze data critically and make in
               title: "Two Population Means with Unknown Standard Deviations",
               description: "Comparing means from two groups",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -1144,7 +1144,7 @@ By the end of this course, you'll be able to analyze data critically and make in
               title: "Two Population Means with Known Standard Deviations",
               description: "Comparing means when σ is known",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -1152,7 +1152,7 @@ By the end of this course, you'll be able to analyze data critically and make in
               title: "Comparing Two Independent Population Proportions",
               description: "Testing differences in proportions",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -1160,7 +1160,7 @@ By the end of this course, you'll be able to analyze data critically and make in
               title: "Matched or Paired Samples",
               description: "Tests for dependent samples",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -1168,7 +1168,7 @@ By the end of this course, you'll be able to analyze data critically and make in
               title: "Hypothesis Testing for Two Means and Two Proportions",
               description: "Comprehensive two-sample hypothesis testing applications",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -1183,7 +1183,7 @@ By the end of this course, you'll be able to analyze data critically and make in
               title: "Facts About the Chi-Square Distribution",
               description: "Properties of the chi-square distribution",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -1191,7 +1191,7 @@ By the end of this course, you'll be able to analyze data critically and make in
               title: "Goodness-of-Fit Test",
               description: "Testing if data fits a particular distribution",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -1199,7 +1199,7 @@ By the end of this course, you'll be able to analyze data critically and make in
               title: "Test of Independence",
               description: "Testing relationships between categorical variables",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -1207,7 +1207,7 @@ By the end of this course, you'll be able to analyze data critically and make in
               title: "Test for Homogeneity",
               description: "Comparing distributions across groups",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -1215,7 +1215,7 @@ By the end of this course, you'll be able to analyze data critically and make in
               title: "Comparison of the Chi-Square Tests",
               description: "When to use different chi-square tests",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -1223,7 +1223,7 @@ By the end of this course, you'll be able to analyze data critically and make in
               title: "Test of a Single Variance",
               description: "Testing claims about population variance",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -1231,7 +1231,7 @@ By the end of this course, you'll be able to analyze data critically and make in
               title: "Lab 1: Chi-Square Goodness-of-Fit",
               description: "Hands-on practice with chi-square goodness-of-fit tests",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -1239,7 +1239,7 @@ By the end of this course, you'll be able to analyze data critically and make in
               title: "Lab 2: Chi-Square Test of Independence",
               description: "Hands-on practice with chi-square independence tests",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -1254,7 +1254,7 @@ By the end of this course, you'll be able to analyze data critically and make in
               title: "Linear Equations",
               description: "Understanding linear relationships",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -1262,7 +1262,7 @@ By the end of this course, you'll be able to analyze data critically and make in
               title: "Scatter Plots",
               description: "Visualizing relationships between variables",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -1270,7 +1270,7 @@ By the end of this course, you'll be able to analyze data critically and make in
               title: "The Regression Equation",
               description: "Developing and interpreting regression equations",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -1278,7 +1278,7 @@ By the end of this course, you'll be able to analyze data critically and make in
               title: "Testing the Significance of the Correlation Coefficient",
               description: "Statistical significance of relationships",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -1286,7 +1286,7 @@ By the end of this course, you'll be able to analyze data critically and make in
               title: "Prediction",
               description: "Using regression for prediction",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -1294,7 +1294,7 @@ By the end of this course, you'll be able to analyze data critically and make in
               title: "Outliers",
               description: "Identifying and handling unusual data points",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -1302,7 +1302,7 @@ By the end of this course, you'll be able to analyze data critically and make in
               title: "Regression (Distance from School)",
               description: "Assumptions and limitations of regression",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -1310,7 +1310,7 @@ By the end of this course, you'll be able to analyze data critically and make in
               title: "Regression (Textbook Cost)",
               description: "Real-world application using textbook cost data",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -1318,7 +1318,7 @@ By the end of this course, you'll be able to analyze data critically and make in
               title: "Regression (Fuel Efficiency)",
               description: "Real-world application using fuel efficiency data",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -1333,7 +1333,7 @@ By the end of this course, you'll be able to analyze data critically and make in
               title: "One-Way ANOVA",
               description: "Analysis of variance for multiple groups",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -1341,7 +1341,7 @@ By the end of this course, you'll be able to analyze data critically and make in
               title: "The F Distribution and the F-Ratio",
               description: "Understanding the F distribution",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -1349,7 +1349,7 @@ By the end of this course, you'll be able to analyze data critically and make in
               title: "Facts About the F Distribution",
               description: "Properties and applications of F distribution",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -1357,7 +1357,7 @@ By the end of this course, you'll be able to analyze data critically and make in
               title: "Test of Two Variances",
               description: "Testing equality of variances between two populations",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -1365,7 +1365,7 @@ By the end of this course, you'll be able to analyze data critically and make in
               title: "Lab: One-Way ANOVA",
               description: "Hands-on practice with one-way analysis of variance",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -1423,7 +1423,7 @@ Regardless of your initial skill level, you should be comfortable with preparing
               title: "Notes before starting",
               description: "Important preparation notes",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -1454,7 +1454,7 @@ Regardless of your initial skill level, you should be comfortable with preparing
               title: "Two Pointers Technique",
               description: "Efficient array traversal patterns",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -1502,7 +1502,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Glance at Critical Response: Rhetoric and Critical Thinking",
               description: "Understanding rhetoric in digital contexts",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -1510,7 +1510,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Annotated Student Sample: Social Media Post and Responses on Voter Suppression",
               description: "Analyze social media discourse",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -1518,7 +1518,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: 'Writing Process: Thinking Critically About a "Text"',
               description: "Develop critical thinking about texts",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -1526,7 +1526,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Evaluation: Intention vs. Execution",
               description: "Assess writing effectiveness",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -1534,7 +1534,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Spotlight on ... Academia",
               description: "Academic writing contexts",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -1542,7 +1542,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Portfolio: Tracing Writing Development",
               description: "Track your writing growth",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -1557,7 +1557,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Seeds of Self",
               description: "Discover your writing identity",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -1565,7 +1565,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Identity Trailblazer: Cathy Park Hong",
               description: "Learn from identity-focused writers",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -1573,7 +1573,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Glance at the Issues: Oppression and Reclamation",
               description: "Understand social justice in writing",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -1581,7 +1581,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Annotated Sample Reading from The Souls of Black Folk by W. E. B. Du Bois",
               description: "Analyze classic identity writing",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -1589,7 +1589,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Writing Process: Thinking Critically about How Identity Is Constructed Through Writing",
               description: "Examine identity construction in writing",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -1597,7 +1597,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Evaluation: Antiracism and Inclusivity",
               description: "Assess inclusive writing practices",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -1605,7 +1605,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Spotlight on ... Variations of English",
               description: "Explore linguistic diversity",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -1613,7 +1613,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Portfolio: Decolonizing Self",
               description: "Reflect on cultural identity in writing",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -1628,7 +1628,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Identity and Expression",
               description: "Connect identity to literacy experiences",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -1636,7 +1636,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Literacy Narrative Trailblazer: Tara Westover",
               description: "Study exemplary literacy narratives",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -1644,7 +1644,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Glance at Genre: The Literacy Narrative",
               description: "Understand the literacy narrative genre",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -1652,7 +1652,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Annotated Sample Reading: from Narrative of the Life of Frederick Douglass by Frederick Douglass",
               description: "Analyze classic literacy narrative",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -1660,7 +1660,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Writing Process: Tracing the Beginnings of Literacy",
               description: "Develop your literacy narrative",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -1668,7 +1668,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Editing Focus: Sentence Structure",
               description: "Improve sentence construction",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -1676,7 +1676,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Evaluation: Self-Evaluating",
               description: "Assess your own writing",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -1684,7 +1684,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Spotlight on ... The Digital Archive of Literacy Narratives (DALN)",
               description: "Explore digital literacy collections",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -1692,7 +1692,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Portfolio: A Literacy Artifact",
               description: "Create a literacy portfolio piece",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -1707,7 +1707,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Exploring the Past to Understand the Present",
               description: "Connect past experiences to current insights",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -1715,7 +1715,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Memoir Trailblazer: Ta-Nehisi Coates",
               description: "Study powerful memoir writing",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -1723,7 +1723,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Glance at Genre: Conflict, Detail, and Revelation",
               description: "Understand memoir elements",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -1731,7 +1731,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Annotated Sample Reading: from Life on the Mississippi by Mark Twain",
               description: "Analyze classic memoir writing",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -1739,7 +1739,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Writing Process: Making the Personal Public",
               description: "Transform personal experience into public narrative",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -1747,7 +1747,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Editing Focus: More on Characterization and Point of View",
               description: "Develop character and perspective",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -1755,7 +1755,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Evaluation: Structure and Organization",
               description: "Assess narrative structure",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -1763,7 +1763,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Spotlight on ... Multilingual Writers",
               description: "Support diverse language backgrounds",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -1771,7 +1771,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Portfolio: Filtered Memories",
               description: "Reflect on memory and narrative",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -1786,7 +1786,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Profiles as Inspiration",
               description: "Understand the power of profile writing",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -1794,7 +1794,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Profile Trailblazer: Veronica Chambers",
               description: "Study expert profile writers",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -1802,7 +1802,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Glance at Genre: Subject, Angle, Background, and Description",
               description: "Master profile writing elements",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -1810,7 +1810,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: 'Annotated Sample Reading: "Remembering John Lewis" by Carla D. Hayden',
               description: "Analyze profile writing techniques",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -1818,7 +1818,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Writing Process: Focusing on the Angle of Your Subject",
               description: "Develop your profile approach",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -1826,7 +1826,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Editing Focus: Verb Tense Consistency",
               description: "Maintain consistent verb tenses",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -1834,7 +1834,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Evaluation: Text as Personal Introduction",
               description: "Assess profile effectiveness",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -1842,7 +1842,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Spotlight on ... Profiling a Cultural Artifact",
               description: "Profile objects and cultural items",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -1850,7 +1850,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Portfolio: Subject as a Reflection of Self",
               description: "Reflect on profile choices",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -1865,7 +1865,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Proposing Change: Thinking Critically About Problems and Solutions",
               description: "Develop problem-solving thinking",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -1873,7 +1873,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Proposal Trailblazer: Atul Gawande",
               description: "Study effective proposal writing",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -1881,7 +1881,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Glance at Genre: Features of Proposals",
               description: "Understand proposal structure",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -1889,7 +1889,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: 'Annotated Student Sample: "Slowing Climate Change" by Shawn Krukowski',
               description: "Analyze student proposal writing",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -1897,7 +1897,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Writing Process: Creating a Proposal",
               description: "Develop your proposal",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -1905,7 +1905,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Editing Focus: Subject-Verb Agreement",
               description: "Master subject-verb agreement",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -1913,7 +1913,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Evaluation: Conventions, Clarity, and Coherence",
               description: "Assess proposal quality",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -1921,7 +1921,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Spotlight on ... Technical Writing as a Career",
               description: "Explore technical writing professions",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -1929,7 +1929,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Portfolio: Reflecting on Problems and Solutions",
               description: "Reflect on problem-solving approaches",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -1944,7 +1944,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Thumbs Up or Down?",
               description: "Understand evaluation criteria",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -1952,7 +1952,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Review Trailblazer: Michiko Kakutani",
               description: "Study expert review writing",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -1960,7 +1960,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Glance at Genre: Criteria, Evidence, Evaluation",
               description: "Master review elements",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -1968,7 +1968,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: 'Annotated Student Sample: "Black Representation in Film" by Caelia Marshall',
               description: "Analyze student review writing",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -1976,7 +1976,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Writing Process: Thinking Critically About Entertainment",
               description: "Develop evaluation skills",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -1984,7 +1984,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Editing Focus: Quotations",
               description: "Use quotations effectively",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -1992,7 +1992,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Evaluation: Effect on Audience",
               description: "Assess audience impact",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -2000,7 +2000,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Spotlight on ... Language and Culture",
               description: "Explore cultural contexts in evaluation",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -2008,7 +2008,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Portfolio: What the Arts Say About You",
               description: "Reflect on cultural preferences",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -2023,7 +2023,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Information and Critical Thinking",
               description: "Develop analytical thinking skills",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -2031,7 +2031,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Analytical Report Trailblazer: Barbara Ehrenreich",
               description: "Study analytical reporting",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -2039,7 +2039,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Glance at Genre: Informal and Formal Analytical Reports",
               description: "Understand report types",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -2047,7 +2047,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: 'Annotated Student Sample: "U.S. Response to COVID-19" by Trevor Garcia',
               description: "Analyze student analytical writing",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -2055,7 +2055,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Writing Process: Creating an Analytical Report",
               description: "Develop analytical reports",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -2063,7 +2063,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Editing Focus: Commas with Nonessential and Essential Information",
               description: "Master comma usage",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -2071,7 +2071,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Evaluation: Reviewing the Final Draft",
               description: "Assess analytical writing quality",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -2079,7 +2079,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Spotlight on ... Discipline-Specific and Technical Language",
               description: "Use appropriate professional language",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -2087,7 +2087,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Portfolio: Evidence and Objectivity",
               description: "Reflect on analytical approaches",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -2102,7 +2102,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Breaking the Whole into Its Parts",
               description: "Understand analytical decomposition",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -2110,7 +2110,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Rhetorical Analysis Trailblazer: Jamil Smith",
               description: "Study rhetorical analysis experts",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -2118,7 +2118,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Glance at Genre: Rhetorical Strategies",
               description: "Identify rhetorical techniques",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -2126,7 +2126,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: 'Annotated Student Sample: "Rhetorical Analysis: Evicted by Matthew Desmond" by Eliana Evans',
               description: "Analyze student rhetorical analysis",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -2134,7 +2134,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Writing Process: Thinking Critically about Rhetoric",
               description: "Develop rhetorical analysis skills",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -2142,7 +2142,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Editing Focus: Mixed Sentence Constructions",
               description: "Improve sentence clarity",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -2150,7 +2150,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Evaluation: Rhetorical Analysis",
               description: "Assess rhetorical analysis quality",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -2158,7 +2158,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Spotlight on ... Business and Law",
               description: "Apply rhetoric in professional contexts",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -2166,7 +2166,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Portfolio: How Thinking Critically about Rhetoric Affects Intellectual Growth",
               description: "Reflect on rhetorical awareness",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -2181,7 +2181,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Making a Case: Defining a Position Argument",
               description: "Understand argumentative writing",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -2189,7 +2189,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Position Argument Trailblazer: Charles Blow",
               description: "Study effective argumentation",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -2197,7 +2197,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Glance at Genre: Thesis, Reasoning, and Evidence",
               description: "Master argument structure",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -2205,7 +2205,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: 'Annotated Sample Reading: "Remarks at the University of Michigan" by Lyndon B. Johnson',
               description: "Analyze political argumentation",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -2213,7 +2213,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Writing Process: Creating a Position Argument",
               description: "Develop persuasive arguments",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -2221,7 +2221,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Editing Focus: Paragraphs and Transitions",
               description: "Improve paragraph flow",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -2229,7 +2229,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Evaluation: Varied Appeals",
               description: "Assess persuasive techniques",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -2237,7 +2237,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Spotlight on ... Citation",
               description: "Master citation practices",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -2245,7 +2245,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Portfolio: Growth in the Development of Argument",
               description: "Reflect on argumentative skills",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -2260,7 +2260,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Developing Your Sense of Logic",
               description: "Build logical thinking skills",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -2268,7 +2268,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Reasoning Trailblazer: Paul D. N. Hebert",
               description: "Study logical reasoning examples",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -2276,7 +2276,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Glance at Genre: Reasoning Strategies and Signal Words",
               description: "Identify reasoning patterns",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -2284,7 +2284,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Annotated Sample Reading: from Book VII of The Republic by Plato",
               description: "Analyze classical reasoning",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -2292,7 +2292,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Writing Process: Reasoning Supported by Evidence",
               description: "Develop evidence-based reasoning",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -2307,7 +2307,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Introducing Research and Research Evidence",
               description: "Understand research in argumentation",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -2315,7 +2315,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Argumentative Research Trailblazer: Samin Nosrat",
               description: "Study research-based arguments",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -2323,7 +2323,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Glance at Genre: Introducing Research as Evidence",
               description: "Use research effectively in arguments",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -2331,7 +2331,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: 'Annotated Student Sample: "Healthy Diets from Sustainable Sources Can Save the Earth" by Lily Tran',
               description: "Analyze research-based student writing",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -2339,7 +2339,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Writing Process: Integrating Research",
               description: "Blend research with argumentation",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -2347,7 +2347,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Editing Focus: Integrating Sources and Quotations",
               description: "Seamlessly incorporate sources",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -2355,7 +2355,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Evaluation: Effectiveness of Research Paper",
               description: "Assess research integration",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -2363,7 +2363,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Spotlight on ... Bias in Language and Research",
               description: "Identify and avoid bias",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -2371,7 +2371,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Portfolio: Why Facts Matter in Research Argumentation",
               description: "Reflect on evidence and truth",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -2386,7 +2386,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "The Research Process: Where to Look for Existing Sources",
               description: "Find and evaluate sources",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -2394,7 +2394,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "The Research Process: How to Create Sources",
               description: "Conduct primary research",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -2402,7 +2402,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Glance at the Research Process: Key Skills",
               description: "Develop essential research skills",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -2410,7 +2410,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Annotated Student Sample: Research Log",
               description: "Learn research documentation",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -2418,7 +2418,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Research Process: Making Notes, Synthesizing Information, and Keeping a Research Log",
               description: "Organize and synthesize research",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -2426,7 +2426,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Spotlight on ... Ethical Research",
               description: "Understand research ethics",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -2441,7 +2441,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Compiling Sources for an Annotated Bibliography",
               description: "Gather and organize sources",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -2449,7 +2449,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Glance at Form: Citation Style, Purpose, and Formatting",
               description: "Master citation formats",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -2457,7 +2457,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: 'Annotated Student Sample: "Healthy Diets from Sustainable Sources Can Save the Earth" by Lily Tran',
               description: "Study annotated bibliography examples",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -2465,7 +2465,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Writing Process: Informing and Analyzing",
               description: "Write effective annotations",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -2480,7 +2480,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Tracing a Broad Issue in the Individual",
               description: "Connect individual to universal",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -2488,7 +2488,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Case Study Trailblazer: Vilayanur S. Ramachandran",
               description: "Study case study methodology",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -2496,7 +2496,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Glance at Genre: Observation, Description, and Analysis",
               description: "Master case study elements",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -2504,7 +2504,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: 'Annotated Sample Reading: Case Study on Louis Victor "Tan" Leborgne',
               description: "Analyze case study writing",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -2512,7 +2512,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Writing Process: Thinking Critically About How People and Language Interact",
               description: "Develop case study approach",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -2520,7 +2520,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Editing Focus: Words Often Confused",
               description: "Avoid common word errors",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -2528,7 +2528,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Evaluation: Presentation and Analysis of Case Study",
               description: "Assess case study effectiveness",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -2536,7 +2536,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Spotlight on ... Applied Linguistics",
               description: "Explore language research applications",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -2544,7 +2544,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Portfolio: Your Own Uses of Language",
               description: "Reflect on personal language use",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -2559,7 +2559,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "An Author's Choices: What Text Says and How It Says It",
               description: "Understand authorial decisions",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -2567,7 +2567,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Textual Analysis Trailblazer: bell hooks",
               description: "Study textual analysis experts",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -2575,7 +2575,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Glance at Genre: Print or Textual Analysis",
               description: "Understand textual analysis approaches",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -2583,7 +2583,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: 'Annotated Student Sample: "Artists at Work" by Gwyn Garrison',
               description: "Analyze student textual analysis",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -2591,7 +2591,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Writing Process: Thinking Critically About Text",
               description: "Develop textual analysis skills",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -2599,7 +2599,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Editing Focus: Literary Works Live in the Present",
               description: "Use proper tense for literary analysis",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -2607,7 +2607,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Evaluation: Self-Directed Assessment",
               description: "Self-assess analytical writing",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -2615,7 +2615,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Spotlight on ... Humanities",
               description: "Apply analysis in humanities contexts",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -2623,7 +2623,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Portfolio: The Academic and the Personal",
               description: "Balance scholarly and personal perspectives",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -2638,7 +2638,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: '"Reading" Images',
               description: "Develop visual literacy skills",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -2646,7 +2646,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Image Trailblazer: Sara Ludy",
               description: "Study visual analysis experts",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -2654,7 +2654,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Glance at Genre: Relationship Between Image and Rhetoric",
               description: "Understand visual rhetoric",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -2662,7 +2662,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: 'Annotated Student Sample: "Hints of the Homoerotic" by Leo Davis',
               description: "Analyze student image analysis",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -2670,7 +2670,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Writing Process: Thinking Critically and Writing Persuasively About Images",
               description: "Develop visual analysis writing",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -2678,7 +2678,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Editing Focus: Descriptive Diction",
               description: "Use precise descriptive language",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -2686,7 +2686,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Evaluation: Relationship Between Analysis and Image",
               description: "Assess visual analysis quality",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -2694,7 +2694,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Spotlight on ... Video and Film",
               description: "Extend analysis to moving images",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -2702,7 +2702,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Portfolio: Interplay Between Text and Image",
               description: "Explore multimodal communication",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -2717,7 +2717,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Mixing Genres and Modes",
               description: "Combine different communication modes",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -2725,7 +2725,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Multimodal Trailblazer: Torika Bolatagici",
               description: "Study multimodal communication experts",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -2733,7 +2733,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Glance at Genre: Genre, Audience, Purpose, Organization",
               description: "Design for digital audiences",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -2741,7 +2741,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: 'Annotated Sample Reading: "Celebrating a Win-Win" by Alexandra Dapolito Dunn',
               description: "Analyze multimodal texts",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -2749,7 +2749,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Writing Process: Create a Multimodal Advocacy Project",
               description: "Develop multimodal projects",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -2757,7 +2757,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Evaluation: Transitions",
               description: "Connect multimodal elements",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -2765,7 +2765,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Spotlight on ... Technology",
               description: "Leverage digital tools",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -2773,7 +2773,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Portfolio: Multimodalism",
               description: "Reflect on multimodal communication",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -2788,7 +2788,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Writing, Speaking, and Activism",
               description: "Connect writing to social action",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -2796,7 +2796,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Podcast Trailblazer: Alice Wong",
               description: "Study audio communication",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -2804,7 +2804,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Glance at Genre: Language Performance and Visuals",
               description: "Design for spoken delivery",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -2812,7 +2812,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: 'Annotated Student Sample: "Are New DOT Regulations Discriminatory?" by Zain A. Kumar',
               description: "Analyze writing for speaking",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -2820,7 +2820,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Writing Process: Writing to Speak",
               description: "Adapt writing for oral presentation",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -2828,7 +2828,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Evaluation: Bridging Writing and Speaking",
               description: "Assess oral communication writing",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -2836,7 +2836,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Spotlight on ... Delivery/Public Speaking",
               description: "Master presentation skills",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -2844,7 +2844,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Portfolio: Everyday Rhetoric, Rhetoric Every Day",
               description: "Recognize rhetoric in daily life",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -2859,7 +2859,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Thinking Critically about Your Semester",
               description: "Assess your learning journey",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -2867,7 +2867,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Reflection Trailblazer: Sandra Cisneros",
               description: "Study reflective writing",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -2875,7 +2875,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Glance at Genre: Purpose and Structure",
               description: "Organize reflective writing",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -2883,7 +2883,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: 'Annotated Sample Reading: "Don\'t Expect Congrats" by Dale Trumbore',
               description: "Analyze reflective writing",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -2891,7 +2891,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Writing Process: Looking Back, Looking Forward",
               description: "Develop reflective perspective",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -2899,7 +2899,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Editing Focus: Pronouns",
               description: "Use pronouns effectively",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -2907,7 +2907,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Evaluation: Evaluating Self-Reflection",
               description: "Assess reflective writing quality",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -2915,7 +2915,7 @@ By the end of this course, you'll have a strong foundation in writing principles
               title: "Spotlight on ... Pronouns in Context",
               description: "Understand pronoun usage in context",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -2957,7 +2957,7 @@ This course covers 12 comprehensive chapters spanning ancient wisdom to contempo
               title: "How Do Philosophers Arrive at Truth?",
               description: "Learn about philosophical methods and approaches to truth",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -2965,7 +2965,7 @@ This course covers 12 comprehensive chapters spanning ancient wisdom to contempo
               title: "Socrates as a Paradigmatic Historical Philosopher",
               description: "Study Socrates' method and influence on philosophy",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -2973,7 +2973,7 @@ This course covers 12 comprehensive chapters spanning ancient wisdom to contempo
               title: "An Overview of Contemporary Philosophy",
               description: "Survey modern philosophical movements and issues",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -2988,7 +2988,7 @@ This course covers 12 comprehensive chapters spanning ancient wisdom to contempo
               title: "The Brain Is an Inference Machine",
               description: "Understand how the mind processes information and makes inferences",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -2996,7 +2996,7 @@ This course covers 12 comprehensive chapters spanning ancient wisdom to contempo
               title: "Overcoming Cognitive Biases and Engaging in Critical Reflection",
               description: "Learn to identify and overcome common thinking errors",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -3004,7 +3004,7 @@ This course covers 12 comprehensive chapters spanning ancient wisdom to contempo
               title: "Developing Good Habits of Mind",
               description: "Cultivate intellectual virtues and thinking skills",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -3012,7 +3012,7 @@ This course covers 12 comprehensive chapters spanning ancient wisdom to contempo
               title: "Gathering Information, Evaluating Sources, and Understanding Evidence",
               description: "Learn research methods and source evaluation for philosophy",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -3020,7 +3020,7 @@ This course covers 12 comprehensive chapters spanning ancient wisdom to contempo
               title: "Reading Philosophy",
               description: "Develop skills for reading and interpreting philosophical texts",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -3028,7 +3028,7 @@ This course covers 12 comprehensive chapters spanning ancient wisdom to contempo
               title: "Writing Philosophy Papers",
               description: "Learn to write clear, persuasive philosophical arguments",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -3043,7 +3043,7 @@ This course covers 12 comprehensive chapters spanning ancient wisdom to contempo
               title: "Indigenous Philosophy",
               description: "Study philosophical traditions of indigenous peoples",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -3051,7 +3051,7 @@ This course covers 12 comprehensive chapters spanning ancient wisdom to contempo
               title: "Classical Indian Philosophy",
               description: "Explore Hindu, Buddhist, and Jain philosophical traditions",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -3059,7 +3059,7 @@ This course covers 12 comprehensive chapters spanning ancient wisdom to contempo
               title: "Classical Chinese Philosophy",
               description: "Study Confucian, Daoist, and other Chinese philosophical schools",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -3074,7 +3074,7 @@ This course covers 12 comprehensive chapters spanning ancient wisdom to contempo
               title: "Historiography and the History of Philosophy",
               description: "Understand how we study and interpret philosophical history",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -3082,7 +3082,7 @@ This course covers 12 comprehensive chapters spanning ancient wisdom to contempo
               title: "Classical Philosophy",
               description: "Study ancient Greek and Roman philosophical traditions",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -3090,7 +3090,7 @@ This course covers 12 comprehensive chapters spanning ancient wisdom to contempo
               title: "Jewish, Christian, and Islamic Philosophy",
               description: "Explore medieval religious philosophical traditions",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -3105,7 +3105,7 @@ This course covers 12 comprehensive chapters spanning ancient wisdom to contempo
               title: "Philosophical Methods for Discovering Truth",
               description: "Learn systematic approaches to philosophical inquiry",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -3113,7 +3113,7 @@ This course covers 12 comprehensive chapters spanning ancient wisdom to contempo
               title: "Logical Statements",
               description: "Understand the structure and types of logical statements",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -3121,7 +3121,7 @@ This course covers 12 comprehensive chapters spanning ancient wisdom to contempo
               title: "Arguments",
               description: "Learn to construct and evaluate philosophical arguments",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -3129,7 +3129,7 @@ This course covers 12 comprehensive chapters spanning ancient wisdom to contempo
               title: "Types of Inferences",
               description: "Study deductive, inductive, and abductive reasoning",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -3137,7 +3137,7 @@ This course covers 12 comprehensive chapters spanning ancient wisdom to contempo
               title: "Informal Fallacies",
               description: "Identify and avoid common logical fallacies",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -3152,7 +3152,7 @@ This course covers 12 comprehensive chapters spanning ancient wisdom to contempo
               title: "Substance",
               description: "Examine theories about the basic building blocks of reality",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -3160,7 +3160,7 @@ This course covers 12 comprehensive chapters spanning ancient wisdom to contempo
               title: "Self and Identity",
               description: "Study questions of personal identity and the nature of self",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -3168,7 +3168,7 @@ This course covers 12 comprehensive chapters spanning ancient wisdom to contempo
               title: "Cosmology and the Existence of God",
               description: "Explore arguments for and against the existence of God",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -3176,7 +3176,7 @@ This course covers 12 comprehensive chapters spanning ancient wisdom to contempo
               title: "Free Will",
               description: "Examine debates about determinism and human freedom",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -3191,7 +3191,7 @@ This course covers 12 comprehensive chapters spanning ancient wisdom to contempo
               title: "What Epistemology Studies",
               description: "Understand the scope and methods of epistemological inquiry",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -3199,7 +3199,7 @@ This course covers 12 comprehensive chapters spanning ancient wisdom to contempo
               title: "Knowledge",
               description: "Examine different theories of knowledge and its conditions",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -3207,7 +3207,7 @@ This course covers 12 comprehensive chapters spanning ancient wisdom to contempo
               title: "Justification",
               description: "Study what makes beliefs justified or warranted",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -3215,7 +3215,7 @@ This course covers 12 comprehensive chapters spanning ancient wisdom to contempo
               title: "Skepticism",
               description: "Explore skeptical challenges to knowledge claims",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -3223,7 +3223,7 @@ This course covers 12 comprehensive chapters spanning ancient wisdom to contempo
               title: "Applied Epistemology",
               description: "Apply epistemological principles to practical questions",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -3238,7 +3238,7 @@ This course covers 12 comprehensive chapters spanning ancient wisdom to contempo
               title: "The Fact-Value Distinction",
               description: "Examine the relationship between facts and values",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -3246,7 +3246,7 @@ This course covers 12 comprehensive chapters spanning ancient wisdom to contempo
               title: "Basic Questions about Values",
               description: "Study fundamental questions in value theory",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -3254,7 +3254,7 @@ This course covers 12 comprehensive chapters spanning ancient wisdom to contempo
               title: "Metaethics",
               description: "Explore the nature and meaning of ethical claims",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -3262,7 +3262,7 @@ This course covers 12 comprehensive chapters spanning ancient wisdom to contempo
               title: "Well-Being",
               description: "Study theories of human flourishing and the good life",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -3270,7 +3270,7 @@ This course covers 12 comprehensive chapters spanning ancient wisdom to contempo
               title: "Aesthetics",
               description: "Examine philosophical questions about art and beauty",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -3285,7 +3285,7 @@ This course covers 12 comprehensive chapters spanning ancient wisdom to contempo
               title: "Requirements of a Normative Moral Theory",
               description: "Understand what makes a moral theory adequate",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -3293,7 +3293,7 @@ This course covers 12 comprehensive chapters spanning ancient wisdom to contempo
               title: "Consequentialism",
               description: "Study moral theories based on outcomes and consequences",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -3301,7 +3301,7 @@ This course covers 12 comprehensive chapters spanning ancient wisdom to contempo
               title: "Deontology",
               description: "Examine duty-based approaches to moral reasoning",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -3309,7 +3309,7 @@ This course covers 12 comprehensive chapters spanning ancient wisdom to contempo
               title: "Virtue Ethics",
               description: "Study character-based approaches to moral philosophy",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -3317,7 +3317,7 @@ This course covers 12 comprehensive chapters spanning ancient wisdom to contempo
               title: "Daoism",
               description: "Explore Daoist approaches to ethics and the good life",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -3325,7 +3325,7 @@ This course covers 12 comprehensive chapters spanning ancient wisdom to contempo
               title: "Feminist Theories of Ethics",
               description: "Study feminist perspectives on moral reasoning",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -3340,7 +3340,7 @@ This course covers 12 comprehensive chapters spanning ancient wisdom to contempo
               title: "The Challenge of Bioethics",
               description: "Examine ethical issues in medicine and biology",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -3348,7 +3348,7 @@ This course covers 12 comprehensive chapters spanning ancient wisdom to contempo
               title: "Environmental Ethics",
               description: "Study moral obligations to the natural world",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -3356,7 +3356,7 @@ This course covers 12 comprehensive chapters spanning ancient wisdom to contempo
               title: "Business Ethics and Emerging Technology",
               description: "Explore ethical issues in business and technology",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -3371,7 +3371,7 @@ This course covers 12 comprehensive chapters spanning ancient wisdom to contempo
               title: "Historical Perspectives on Government",
               description: "Study the evolution of political thought and institutions",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -3379,7 +3379,7 @@ This course covers 12 comprehensive chapters spanning ancient wisdom to contempo
               title: "Forms of Government",
               description: "Examine different systems of political organization",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -3387,7 +3387,7 @@ This course covers 12 comprehensive chapters spanning ancient wisdom to contempo
               title: "Political Legitimacy and Duty",
               description: "Study the justification of political authority",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -3395,7 +3395,7 @@ This course covers 12 comprehensive chapters spanning ancient wisdom to contempo
               title: "Political Ideologies",
               description: "Explore major political theories and movements",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -3410,7 +3410,7 @@ This course covers 12 comprehensive chapters spanning ancient wisdom to contempo
               title: "Enlightenment Social Theory",
               description: "Examine Enlightenment approaches to society and politics",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -3418,7 +3418,7 @@ This course covers 12 comprehensive chapters spanning ancient wisdom to contempo
               title: "The Marxist Solution",
               description: "Study Marxist critiques of capitalism and society",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -3426,7 +3426,7 @@ This course covers 12 comprehensive chapters spanning ancient wisdom to contempo
               title: "Continental Philosophy's Challenge to Enlightenment Theories",
               description: "Explore continental critiques of Enlightenment thought",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -3434,7 +3434,7 @@ This course covers 12 comprehensive chapters spanning ancient wisdom to contempo
               title: "The Frankfurt School",
               description: "Study critical theory and the Frankfurt School tradition",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -3442,7 +3442,7 @@ This course covers 12 comprehensive chapters spanning ancient wisdom to contempo
               title: "Postmodernism",
               description: "Examine postmodern critiques of traditional philosophy",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -3484,7 +3484,7 @@ This course covers 15 comprehensive chapters from medieval trade networks throug
               title: "Primary Sources",
               description: "Learn to analyze and interpret historical documents and evidence",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -3492,7 +3492,7 @@ This course covers 15 comprehensive chapters from medieval trade networks throug
               title: "Causation and Interpretation in History",
               description: "Understand how historians determine causes and interpret historical events",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -3507,7 +3507,7 @@ This course covers 15 comprehensive chapters from medieval trade networks throug
               title: "India and International Connections",
               description: "Study India's role in medieval international trade and diplomacy",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -3515,7 +3515,7 @@ This course covers 15 comprehensive chapters from medieval trade networks throug
               title: "The Malacca Sultanate",
               description: "Examine the powerful trading state that controlled Southeast Asian commerce",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -3523,7 +3523,7 @@ This course covers 15 comprehensive chapters from medieval trade networks throug
               title: "Exchange in East Asia",
               description: "Analyze trade and cultural exchange in China, Japan, and Korea",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -3538,7 +3538,7 @@ This course covers 15 comprehensive chapters from medieval trade networks throug
               title: "The Roots of African Trade",
               description: "Understand the foundations of African commercial networks",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -3546,7 +3546,7 @@ This course covers 15 comprehensive chapters from medieval trade networks throug
               title: "The Songhai Empire",
               description: "Explore one of Africa's greatest medieval empires",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -3554,7 +3554,7 @@ This course covers 15 comprehensive chapters from medieval trade networks throug
               title: "The Swahili Coast",
               description: "Study the trading cities of East Africa and their Indian Ocean connections",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -3562,7 +3562,7 @@ This course covers 15 comprehensive chapters from medieval trade networks throug
               title: "The Trans-Saharan Slave Trade",
               description: "Examine the impact of slavery on African societies",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -3577,7 +3577,7 @@ This course covers 15 comprehensive chapters from medieval trade networks throug
               title: "A Connected Islamic World",
               description: "Understand the unity and diversity of Islamic civilization",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -3585,7 +3585,7 @@ This course covers 15 comprehensive chapters from medieval trade networks throug
               title: "The Ottoman Empire",
               description: "Study the rise and expansion of the Ottoman Empire",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -3593,7 +3593,7 @@ This course covers 15 comprehensive chapters from medieval trade networks throug
               title: "The Safavid Empire",
               description: "Examine the Persian Safavid Empire and its cultural achievements",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -3608,7 +3608,7 @@ This course covers 15 comprehensive chapters from medieval trade networks throug
               title: "The Protestant Reformation",
               description: "Understand the religious revolution that transformed Europe",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -3616,7 +3616,7 @@ This course covers 15 comprehensive chapters from medieval trade networks throug
               title: "Crossing the Atlantic",
               description: "Study European exploration and colonization of the Americas",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -3624,7 +3624,7 @@ This course covers 15 comprehensive chapters from medieval trade networks throug
               title: "The Mercantilist Economy",
               description: "Examine early modern economic theories and practices",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -3632,7 +3632,7 @@ This course covers 15 comprehensive chapters from medieval trade networks throug
               title: "The Atlantic Slave Trade",
               description: "Analyze the devastating impact of the Atlantic slave trade",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -3647,7 +3647,7 @@ This course covers 15 comprehensive chapters from medieval trade networks throug
               title: "European Colonization in the Americas",
               description: "Study the establishment and development of European colonies",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -3655,7 +3655,7 @@ This course covers 15 comprehensive chapters from medieval trade networks throug
               title: "The Rise of a Global Economy",
               description: "Understand the emergence of worldwide economic connections",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -3663,7 +3663,7 @@ This course covers 15 comprehensive chapters from medieval trade networks throug
               title: "Capitalism and the First Industrial Revolution",
               description: "Explore the transformation of production and economic systems",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -3678,7 +3678,7 @@ This course covers 15 comprehensive chapters from medieval trade networks throug
               title: "The Enlightenment",
               description: "Examine the intellectual revolution that changed European thought",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -3686,7 +3686,7 @@ This course covers 15 comprehensive chapters from medieval trade networks throug
               title: "The Exchange of Ideas in the Public Sphere",
               description: "Study how new ideas spread through society",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -3694,7 +3694,7 @@ This course covers 15 comprehensive chapters from medieval trade networks throug
               title: "Revolutions: America, France, and Haiti",
               description: "Analyze the great democratic revolutions of the 18th century",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -3702,7 +3702,7 @@ This course covers 15 comprehensive chapters from medieval trade networks throug
               title: "Nationalism, Liberalism, Conservatism, and the Political Order",
               description: "Understand the competing political ideologies of the 19th century",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -3717,7 +3717,7 @@ This course covers 15 comprehensive chapters from medieval trade networks throug
               title: "Revolution for Whom?",
               description: "Examine who benefited from Latin American independence movements",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -3725,7 +3725,7 @@ This course covers 15 comprehensive chapters from medieval trade networks throug
               title: "Spanish North America",
               description: "Study independence movements in Mexico and Central America",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -3733,7 +3733,7 @@ This course covers 15 comprehensive chapters from medieval trade networks throug
               title: "Spanish South America",
               description: "Analyze revolutionary movements in Spanish South America",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -3741,7 +3741,7 @@ This course covers 15 comprehensive chapters from medieval trade networks throug
               title: "Portuguese South America",
               description: "Examine Brazilian independence and its unique characteristics",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -3756,7 +3756,7 @@ This course covers 15 comprehensive chapters from medieval trade networks throug
               title: "The Second Industrial Revolution",
               description: "Explore technological advances and industrial growth",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -3764,7 +3764,7 @@ This course covers 15 comprehensive chapters from medieval trade networks throug
               title: "Motives and Means of Imperialism",
               description: "Understand why and how European powers expanded globally",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -3772,7 +3772,7 @@ This course covers 15 comprehensive chapters from medieval trade networks throug
               title: "Colonial Empires",
               description: "Study the establishment and administration of colonial systems",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -3780,7 +3780,7 @@ This course covers 15 comprehensive chapters from medieval trade networks throug
               title: "Exploitation and Resistance",
               description: "Examine colonial exploitation and indigenous resistance movements",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -3795,7 +3795,7 @@ This course covers 15 comprehensive chapters from medieval trade networks throug
               title: "Inventions, Innovations, and Mechanization",
               description: "Study technological advances that transformed production",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -3803,7 +3803,7 @@ This course covers 15 comprehensive chapters from medieval trade networks throug
               title: "Life in the Industrial City",
               description: "Examine urbanization and the transformation of city life",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -3811,7 +3811,7 @@ This course covers 15 comprehensive chapters from medieval trade networks throug
               title: "Coerced and Semicoerced Labor",
               description: "Analyze various forms of forced labor in the industrial era",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -3819,7 +3819,7 @@ This course covers 15 comprehensive chapters from medieval trade networks throug
               title: "Communities in Diaspora",
               description: "Study migration patterns and diaspora communities",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -3827,7 +3827,7 @@ This course covers 15 comprehensive chapters from medieval trade networks throug
               title: "Regulation, Reform, and Revolutionary Ideologies",
               description: "Examine responses to industrial social problems",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -3842,7 +3842,7 @@ This course covers 15 comprehensive chapters from medieval trade networks throug
               title: "Alliances, Expansion, and Conflict",
               description: "Understand the causes and outbreak of World War I",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -3850,7 +3850,7 @@ This course covers 15 comprehensive chapters from medieval trade networks throug
               title: "The Collapse of the Ottomans and the Coming of War",
               description: "Examine the decline of the Ottoman Empire and regional conflicts",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -3858,7 +3858,7 @@ This course covers 15 comprehensive chapters from medieval trade networks throug
               title: "Total War",
               description: "Study the unprecedented scale and nature of World War I",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -3866,7 +3866,7 @@ This course covers 15 comprehensive chapters from medieval trade networks throug
               title: "War on the Homefront",
               description: "Analyze how the war transformed societies at home",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -3874,7 +3874,7 @@ This course covers 15 comprehensive chapters from medieval trade networks throug
               title: "The War Ends",
               description: "Examine the conclusion of World War I and its immediate aftermath",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -3889,7 +3889,7 @@ This course covers 15 comprehensive chapters from medieval trade networks throug
               title: "Recovering from World War I",
               description: "Understand post-war reconstruction and its challenges",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -3897,7 +3897,7 @@ This course covers 15 comprehensive chapters from medieval trade networks throug
               title: "The Formation of the Soviet Union",
               description: "Study the Russian Revolution and creation of the Soviet state",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -3905,7 +3905,7 @@ This course covers 15 comprehensive chapters from medieval trade networks throug
               title: "The Great Depression",
               description: "Analyze the global economic crisis of the 1930s",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -3913,7 +3913,7 @@ This course covers 15 comprehensive chapters from medieval trade networks throug
               title: "Old Empires and New Colonies",
               description: "Examine changes in imperial systems after World War I",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -3921,7 +3921,7 @@ This course covers 15 comprehensive chapters from medieval trade networks throug
               title: "Resistance, Civil Rights, and Democracy",
               description: "Study movements for rights and democracy in the interwar period",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -3936,7 +3936,7 @@ This course covers 15 comprehensive chapters from medieval trade networks throug
               title: "An Unstable Peace",
               description: "Understand the factors that led to World War II",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -3944,7 +3944,7 @@ This course covers 15 comprehensive chapters from medieval trade networks throug
               title: "Theaters of War",
               description: "Study the global scope and major campaigns of World War II",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -3952,7 +3952,7 @@ This course covers 15 comprehensive chapters from medieval trade networks throug
               title: "Keeping the Home Fires Burning",
               description: "Examine the war's impact on civilian populations",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -3960,7 +3960,7 @@ This course covers 15 comprehensive chapters from medieval trade networks throug
               title: "Out of the Ashes",
               description: "Analyze the end of World War II and its immediate consequences",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -3975,7 +3975,7 @@ This course covers 15 comprehensive chapters from medieval trade networks throug
               title: "The Cold War Begins",
               description: "Understand the origins and early development of the Cold War",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -3983,7 +3983,7 @@ This course covers 15 comprehensive chapters from medieval trade networks throug
               title: "The Spread of Communism",
               description: "Examine the expansion of communist influence worldwide",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -3991,7 +3991,7 @@ This course covers 15 comprehensive chapters from medieval trade networks throug
               title: "The Non-Aligned Movement",
               description: "Study nations that sought neutrality in the Cold War",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -3999,7 +3999,7 @@ This course covers 15 comprehensive chapters from medieval trade networks throug
               title: "Global Tensions and Decolonization",
               description: "Analyze the end of colonial empires and its impact",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -4007,7 +4007,7 @@ This course covers 15 comprehensive chapters from medieval trade networks throug
               title: "A New World Order",
               description: "Examine the end of the Cold War and its consequences",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -4022,7 +4022,7 @@ This course covers 15 comprehensive chapters from medieval trade networks throug
               title: "A Global Economy",
               description: "Study economic globalization and its effects",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -4030,7 +4030,7 @@ This course covers 15 comprehensive chapters from medieval trade networks throug
               title: "Debates about the Environment",
               description: "Examine environmental challenges and responses",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -4038,7 +4038,7 @@ This course covers 15 comprehensive chapters from medieval trade networks throug
               title: "Science and Technology for Today's World",
               description: "Analyze the role of technology in shaping the modern world",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -4046,7 +4046,7 @@ This course covers 15 comprehensive chapters from medieval trade networks throug
               title: "Ongoing Problems and Solutions",
               description: "Study contemporary global challenges and potential solutions",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -4086,7 +4086,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Themes and Concepts of Biology",
               description: "Core themes that unify biological sciences",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -4109,7 +4109,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Water",
               description: "Properties of water and its biological importance",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -4117,7 +4117,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Carbon",
               description: "Carbon's role in biological molecules",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -4140,7 +4140,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Carbohydrates",
               description: "Structure and function of carbohydrates",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -4148,7 +4148,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Lipids",
               description: "Structure and function of lipids",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -4156,7 +4156,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Proteins",
               description: "Structure and function of proteins",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -4164,7 +4164,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Nucleic Acids",
               description: "Structure and function of DNA and RNA",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -4187,7 +4187,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Prokaryotic Cells",
               description: "Structure and characteristics of prokaryotic cells",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -4195,7 +4195,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Eukaryotic Cells",
               description: "Structure and characteristics of eukaryotic cells",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -4203,7 +4203,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "The Endomembrane System and Proteins",
               description: "Internal membrane systems and protein processing",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -4211,7 +4211,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "The Cytoskeleton",
               description: "Cell's structural framework and movement",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -4219,7 +4219,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Connections between Cells and Cellular Activities",
               description: "How cells communicate and interact",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -4242,7 +4242,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Passive Transport",
               description: "Movement across membranes without energy",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -4250,7 +4250,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Active Transport",
               description: "Energy-requiring membrane transport",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -4258,7 +4258,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Bulk Transport",
               description: "Large-scale movement across membranes",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -4281,7 +4281,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Potential, Kinetic, Free, and Activation Energy",
               description: "Different forms of energy in biological processes",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -4289,7 +4289,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "The Laws of Thermodynamics",
               description: "Fundamental laws governing energy transformations",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -4297,7 +4297,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "ATP: Adenosine Triphosphate",
               description: "The universal energy currency of cells",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -4305,7 +4305,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Enzymes",
               description: "Biological catalysts and their functions",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -4328,7 +4328,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Glycolysis",
               description: "Breakdown of glucose to pyruvate",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -4336,7 +4336,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Oxidation of Pyruvate and the Citric Acid Cycle",
               description: "Central metabolic pathway for energy production",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -4344,7 +4344,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Oxidative Phosphorylation",
               description: "ATP production through electron transport",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -4352,7 +4352,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Metabolism without Oxygen",
               description: "Fermentation and anaerobic respiration",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -4360,7 +4360,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Connections of Carbohydrate, Protein, and Lipid Metabolic Pathways",
               description: "Integration of different metabolic processes",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -4368,7 +4368,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Regulation of Cellular Respiration",
               description: "Control mechanisms of respiratory processes",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -4391,7 +4391,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "The Light-Dependent Reactions of Photosynthesis",
               description: "Capturing light energy and producing ATP",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -4399,7 +4399,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Using Light Energy to Make Organic Molecules",
               description: "Calvin cycle and carbon fixation",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -4422,7 +4422,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Propagation of the Signal",
               description: "Signal transduction pathways",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -4430,7 +4430,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Response to the Signal",
               description: "Cellular responses to signaling",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -4438,7 +4438,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Signaling in Single-Celled Organisms",
               description: "Communication in unicellular life",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -4461,7 +4461,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "The Cell Cycle",
               description: "Stages of cell division and growth",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -4469,7 +4469,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Control of the Cell Cycle",
               description: "Regulatory mechanisms of cell division",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -4477,7 +4477,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Cancer and the Cell Cycle",
               description: "When cell division goes wrong",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -4485,7 +4485,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Prokaryotic Cell Division",
               description: "Cell division in bacteria and archaea",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -4508,7 +4508,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Sexual Reproduction",
               description: "Advantages and mechanisms of sexual reproduction",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -4531,7 +4531,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Characteristics and Traits",
               description: "Genetic traits and their inheritance patterns",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -4539,7 +4539,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Laws of Inheritance",
               description: "Mendel's laws and their applications",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -4562,7 +4562,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Chromosomal Basis of Inherited Disorders",
               description: "Genetic diseases and chromosomal abnormalities",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -4585,7 +4585,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "DNA Structure and Sequencing",
               description: "Double helix structure and sequencing methods",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -4593,7 +4593,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Basics of DNA Replication",
               description: "Fundamental principles of DNA copying",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -4601,7 +4601,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "DNA Replication in Prokaryotes",
               description: "Bacterial DNA replication mechanisms",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -4609,7 +4609,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "DNA Replication in Eukaryotes",
               description: "Eukaryotic DNA replication complexities",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -4617,7 +4617,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "DNA Repair",
               description: "Mechanisms for maintaining DNA integrity",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -4640,7 +4640,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Prokaryotic Transcription",
               description: "RNA synthesis in bacteria",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -4648,7 +4648,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Eukaryotic Transcription",
               description: "RNA synthesis in eukaryotes",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -4656,7 +4656,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "RNA Processing in Eukaryotes",
               description: "mRNA modification and maturation",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -4664,7 +4664,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Ribosomes and Protein Synthesis",
               description: "Translation of mRNA to proteins",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -4687,7 +4687,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Prokaryotic Gene Regulation",
               description: "Gene control in bacteria",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -4695,7 +4695,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Eukaryotic Epigenetic Gene Regulation",
               description: "Epigenetic modifications and inheritance",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -4703,7 +4703,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Eukaryotic Transcription Gene Regulation",
               description: "Transcriptional control mechanisms",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -4711,7 +4711,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Eukaryotic Post-transcriptional Gene Regulation",
               description: "RNA-based gene regulation",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -4719,7 +4719,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Eukaryotic Translational and Post-translational Gene Regulation",
               description: "Protein-level gene regulation",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -4727,7 +4727,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Cancer and Gene Regulation",
               description: "Disrupted gene regulation in cancer",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -4750,7 +4750,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Mapping Genomes",
               description: "Techniques for genome mapping",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -4758,7 +4758,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Whole-Genome Sequencing",
               description: "Large-scale DNA sequencing projects",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -4766,7 +4766,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Applying Genomics",
               description: "Practical applications of genomic data",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -4774,7 +4774,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Genomics and Proteomics",
               description: "Studying genes and proteins at scale",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -4797,7 +4797,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Formation of New Species",
               description: "Speciation mechanisms and patterns",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -4805,7 +4805,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Reconnection and Speciation Rates",
               description: "Factors affecting speciation rates",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -4828,7 +4828,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Population Genetics",
               description: "Genetic variation in populations",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -4836,7 +4836,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Adaptive Evolution",
               description: "Natural selection and adaptation",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -4859,7 +4859,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Determining Evolutionary Relationships",
               description: "Methods for inferring phylogenies",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -4867,7 +4867,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Perspectives on the Phylogenetic Tree",
               description: "Interpreting evolutionary trees",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -4890,7 +4890,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Virus Infections and Hosts",
               description: "Viral life cycles and host interactions",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -4898,7 +4898,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Prevention and Treatment of Viral Infections",
               description: "Antiviral strategies and vaccines",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -4906,7 +4906,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Other Acellular Entities: Prions and Viroids",
               description: "Non-viral infectious agents",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -4929,7 +4929,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Structure of Prokaryotes: Bacteria and Archaea",
               description: "Cellular organization of prokaryotes",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -4937,7 +4937,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Prokaryotic Metabolism",
               description: "Energy and nutrient processing in prokaryotes",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -4945,7 +4945,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Bacterial Diseases in Humans",
               description: "Pathogenic bacteria and human health",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -4953,7 +4953,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Beneficial Prokaryotes",
               description: "Positive roles of prokaryotes in ecosystems",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -4976,7 +4976,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Characteristics of Protists",
               description: "Common features of protist organisms",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -4984,7 +4984,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Groups of Protists",
               description: "Major protist classifications",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -4992,7 +4992,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Ecology of Protists",
               description: "Protist roles in ecosystems",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -5015,7 +5015,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Classifications of Fungi",
               description: "Major fungal groups and taxonomy",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -5023,7 +5023,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Ecology of Fungi",
               description: "Fungal roles in ecosystems",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -5031,7 +5031,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Fungal Parasites and Pathogens",
               description: "Disease-causing fungi",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -5039,7 +5039,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Importance of Fungi in Human Life",
               description: "Beneficial uses of fungi",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -5062,7 +5062,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Green Algae: Precursors of Land Plants",
               description: "Algal ancestors of plants",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -5070,7 +5070,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Bryophytes",
               description: "Mosses, liverworts, and hornworts",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -5078,7 +5078,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Seedless Vascular Plants",
               description: "Ferns and their relatives",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -5101,7 +5101,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Gymnosperms",
               description: "Conifers and other naked seed plants",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -5109,7 +5109,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Angiosperms",
               description: "Flowering plants and their diversity",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -5117,7 +5117,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "The Role of Seed Plants",
               description: "Ecological and economic importance",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -5140,7 +5140,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Features Used to Classify Animals",
               description: "Criteria for animal taxonomy",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -5148,7 +5148,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Animal Phylogeny",
               description: "Evolutionary relationships among animals",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -5156,7 +5156,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "The Evolutionary History of the Animal Kingdom",
               description: "Major events in animal evolution",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -5179,7 +5179,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Phylum Cnidaria",
               description: "Jellyfish, corals, and relatives",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -5187,7 +5187,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Superphylum Lophotrochozoa: Flatworms, Rotifers, and Nemerteans",
               description: "Simple bilateral animals",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -5195,7 +5195,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Superphylum Lophotrochozoa: Molluscs and Annelids",
               description: "Soft-bodied animals and segmented worms",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -5203,7 +5203,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Superphylum Ecdysozoa: Nematodes and Tardigrades",
               description: "Molting animals - roundworms",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -5211,7 +5211,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Superphylum Ecdysozoa: Arthropods",
               description: "Insects, spiders, and crustaceans",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -5219,7 +5219,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Superphylum Deuterostomia",
               description: "Echinoderms and early chordates",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -5242,7 +5242,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Fishes",
               description: "Aquatic vertebrates and their diversity",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -5250,7 +5250,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Amphibians",
               description: "Transition from water to land",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -5258,7 +5258,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Reptiles",
               description: "First fully terrestrial vertebrates",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -5266,7 +5266,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Birds",
               description: "Feathered vertebrates and flight",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -5274,7 +5274,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Mammals",
               description: "Hair-bearing vertebrates",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -5282,7 +5282,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "The Evolution of Primates",
               description: "Human evolutionary history",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -5305,7 +5305,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Stems",
               description: "Structure and function of plant stems",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -5313,7 +5313,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Roots",
               description: "Root systems and their functions",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -5321,7 +5321,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Leaves",
               description: "Leaf structure and photosynthesis",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -5329,7 +5329,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Transport of Water and Solutes in Plants",
               description: "Vascular transport systems",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -5337,7 +5337,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Plant Sensory Systems and Responses",
               description: "How plants detect and respond to stimuli",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -5360,7 +5360,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "The Soil",
               description: "Soil composition and properties",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -5368,7 +5368,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Nutritional Adaptations of Plants",
               description: "Special strategies for nutrient acquisition",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -5391,7 +5391,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Pollination and Fertilization",
               description: "Sexual reproduction mechanisms",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -5399,7 +5399,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Asexual Reproduction",
               description: "Vegetative propagation methods",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -5422,7 +5422,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Animal Primary Tissues",
               description: "Basic tissue types in animals",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -5430,7 +5430,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Homeostasis",
               description: "Maintaining internal balance",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -5453,7 +5453,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Nutrition and Energy Production",
               description: "Nutritional requirements and energy",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -5461,7 +5461,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Digestive System Processes",
               description: "Mechanical and chemical digestion",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -5469,7 +5469,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Digestive System Regulation",
               description: "Control of digestive processes",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -5492,7 +5492,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "How Neurons Communicate",
               description: "Electrical and chemical signaling",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -5500,7 +5500,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "The Central Nervous System",
               description: "Brain and spinal cord organization",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -5508,7 +5508,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "The Peripheral Nervous System",
               description: "Nerves and ganglia outside the CNS",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -5516,7 +5516,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Nervous System Disorders",
               description: "Diseases of the nervous system",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -5539,7 +5539,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Somatosensation",
               description: "Touch, temperature, and pain",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -5547,7 +5547,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Taste and Smell",
               description: "Chemical senses",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -5555,7 +5555,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Hearing and Vestibular Sensation",
               description: "Sound detection and balance",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -5563,7 +5563,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Vision",
               description: "Light detection and image formation",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -5586,7 +5586,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "How Hormones Work",
               description: "Mechanisms of hormone action",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -5594,7 +5594,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Regulation of Body Processes",
               description: "Hormonal control of physiology",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -5602,7 +5602,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Regulation of Hormone Production",
               description: "Control of hormone synthesis and release",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -5610,7 +5610,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Endocrine Glands",
               description: "Major hormone-producing organs",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -5633,7 +5633,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Bone",
               description: "Structure and function of bone tissue",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -5641,7 +5641,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Joints and Skeletal Movement",
               description: "Types of joints and their functions",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -5649,7 +5649,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Muscle Contraction and Locomotion",
               description: "How muscles produce movement",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -5672,7 +5672,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Gas Exchange across Respiratory Surfaces",
               description: "Mechanisms of gas exchange",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -5680,7 +5680,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Breathing",
               description: "Ventilation mechanisms",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -5688,7 +5688,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Transport of Gases in Human Bodily Fluids",
               description: "Oxygen and carbon dioxide transport",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -5711,7 +5711,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Components of the Blood",
               description: "Blood composition and functions",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -5719,7 +5719,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Mammalian Heart and Blood Vessels",
               description: "Structure of the cardiovascular system",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -5727,7 +5727,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Blood Flow and Blood Pressure Regulation",
               description: "Control of circulation",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -5750,7 +5750,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "The Kidneys and Osmoregulatory Organs",
               description: "Organs that regulate water balance",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -5758,7 +5758,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Excretion Systems",
               description: "Removal of metabolic wastes",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -5766,7 +5766,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Nitrogenous Wastes",
               description: "Types of nitrogen waste products",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -5774,7 +5774,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Hormonal Control of Osmoregulatory Functions",
               description: "Hormonal regulation of water balance",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -5797,7 +5797,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Adaptive Immune Response",
               description: "Specific immune responses",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -5805,7 +5805,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Antibodies",
               description: "Structure and function of antibodies",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -5813,7 +5813,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Disruptions in the Immune System",
               description: "Immune system disorders",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -5836,7 +5836,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Fertilization",
               description: "Sperm and egg fusion",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -5844,7 +5844,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Human Reproductive Anatomy and Gametogenesis",
               description: "Human reproductive systems",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -5852,7 +5852,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Hormonal Control of Human Reproduction",
               description: "Reproductive hormones",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -5860,7 +5860,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Human Pregnancy and Birth",
               description: "Development and birth process",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -5868,7 +5868,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Fertilization and Early Embryonic Development",
               description: "Early stages of development",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -5876,7 +5876,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Organogenesis and Vertebrate Formation",
               description: "Organ system development",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -5899,7 +5899,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Biogeography",
               description: "Distribution of life on Earth",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -5907,7 +5907,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Terrestrial Biomes",
               description: "Major land-based ecosystems",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -5915,7 +5915,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Aquatic Biomes",
               description: "Freshwater and marine ecosystems",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -5923,7 +5923,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Climate and the Effects of Global Climate Change",
               description: "Climate patterns and global change",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -5946,7 +5946,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Life Histories and Natural Selection",
               description: "Evolutionary strategies",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -5954,7 +5954,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Environmental Limits to Population Growth",
               description: "Carrying capacity and limiting factors",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -5962,7 +5962,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Population Dynamics and Regulation",
               description: "Population growth and regulation",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -5970,7 +5970,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Human Population Growth",
               description: "Human demographics and growth",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -5978,7 +5978,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Community Ecology",
               description: "Species interactions and communities",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -5986,7 +5986,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Behavioral Biology: Proximate and Ultimate Causes of Behavior",
               description: "Animal behavior and its evolution",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -6009,7 +6009,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Energy Flow through Ecosystems",
               description: "Trophic levels and energy transfer",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -6017,7 +6017,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Biogeochemical Cycles",
               description: "Nutrient cycling in ecosystems",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -6040,7 +6040,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "The Importance of Biodiversity to Human Life",
               description: "Ecosystem services and human welfare",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -6048,7 +6048,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Threats to Biodiversity",
               description: "Human impacts on biodiversity",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -6056,7 +6056,7 @@ By the end of this course, you'll have a solid foundation in biological science 
               title: "Preserving Biodiversity",
               description: "Conservation strategies and solutions",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -6096,7 +6096,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Structural Organization of the Human Body",
               description: "Levels of structural organization from atoms to organ systems",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -6104,7 +6104,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Functions of Human Life",
               description: "Essential life processes and characteristics of living organisms",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -6112,7 +6112,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Requirements for Human Life",
               description: "Basic needs for survival and optimal functioning",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -6120,7 +6120,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Homeostasis",
               description: "Dynamic equilibrium and regulatory mechanisms",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -6128,7 +6128,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Anatomical Terminology",
               description: "Standard terminology used in anatomy and physiology",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -6136,7 +6136,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Medical Imaging",
               description: "Various imaging techniques used in medical diagnosis",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -6151,7 +6151,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Elements and Atoms: The Building Blocks of Matter",
               description: "Atomic structure and properties of biologically important elements",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -6159,7 +6159,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Chemical Bonds",
               description: "Types of chemical bonds and their role in biological molecules",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -6167,7 +6167,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Chemical Reactions",
               description: "Types of chemical reactions and their biological significance",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -6175,7 +6175,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Inorganic Compounds Essential to Human Functioning",
               description: "Water, acids, bases, and salts in biological systems",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -6183,7 +6183,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Organic Compounds Essential to Human Functioning",
               description: "Carbohydrates, lipids, proteins, and nucleic acids",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -6198,7 +6198,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "The Cell Membrane",
               description: "Structure and function of the plasma membrane",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -6206,7 +6206,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "The Cytoplasm and Cellular Organelles",
               description: "Internal structure and organelles of cells",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -6214,7 +6214,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "The Nucleus and DNA Replication",
               description: "Nuclear structure and DNA replication processes",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -6222,7 +6222,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Protein Synthesis",
               description: "Transcription and translation processes",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -6230,7 +6230,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Cell Growth and Division",
               description: "Cell cycle and mitosis",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -6238,7 +6238,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Cellular Differentiation",
               description: "Development of specialized cell types",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -6253,7 +6253,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Types of Tissues",
               description: "Overview of epithelial, connective, muscle, and nervous tissue",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -6261,7 +6261,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Epithelial Tissue",
               description: "Structure and function of epithelial tissue types",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -6269,7 +6269,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Connective Tissue Supports and Protects",
               description: "Types and functions of connective tissue",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -6277,7 +6277,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Muscle Tissue and Motion",
               description: "Types of muscle tissue and their functions",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -6285,7 +6285,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Nervous Tissue Mediates Perception and Response",
               description: "Structure and function of nervous tissue",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -6293,7 +6293,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Tissue Injury and Aging",
               description: "Response to injury and age-related changes",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -6308,7 +6308,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Layers of the Skin",
               description: "Epidermis, dermis, and hypodermis structure",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -6316,7 +6316,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Accessory Structures of the Skin",
               description: "Hair, nails, and skin glands",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -6324,7 +6324,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Functions of the Integumentary System",
               description: "Protection, temperature regulation, and other functions",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -6332,7 +6332,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Diseases, Disorders, and Injuries of the Integumentary System",
               description: "Common skin conditions and injuries",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -6347,7 +6347,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "The Functions of the Skeletal System",
               description: "Support, protection, movement, and metabolic functions",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -6355,7 +6355,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Bone Classification",
               description: "Types of bones based on shape and structure",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -6363,7 +6363,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Bone Structure",
               description: "Microscopic and macroscopic bone anatomy",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -6371,7 +6371,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Bone Formation and Development",
               description: "Ossification and bone growth processes",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -6379,7 +6379,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Fractures: Bone Repair",
               description: "Types of fractures and healing process",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -6387,7 +6387,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Exercise, Nutrition, Hormones, and Bone Tissue",
               description: "Factors affecting bone health and remodeling",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -6395,7 +6395,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Calcium Homeostasis: Interactions of the Skeletal System and Other Organ Systems",
               description: "Calcium regulation and systemic interactions",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -6410,7 +6410,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Divisions of the Skeletal System",
               description: "Axial and appendicular skeleton organization",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -6418,7 +6418,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "The Skull",
               description: "Cranial and facial bones of the skull",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -6426,7 +6426,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "The Vertebral Column",
               description: "Structure and function of the spine",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -6434,7 +6434,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "The Thoracic Cage",
               description: "Ribs and sternum structure",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -6442,7 +6442,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Embryonic Development of the Axial Skeleton",
               description: "Development of axial skeleton components",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -6457,7 +6457,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "The Pectoral Girdle",
               description: "Clavicle and scapula structure and function",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -6465,7 +6465,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Bones of the Upper Limb",
               description: "Humerus, radius, ulna, and hand bones",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -6473,7 +6473,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "The Pelvic Girdle and Pelvis",
               description: "Hip bones and pelvic structure",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -6481,7 +6481,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Bones of the Lower Limb",
               description: "Femur, tibia, fibula, and foot bones",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -6489,7 +6489,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Development of the Appendicular Skeleton",
               description: "Development of appendicular skeleton components",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -6504,7 +6504,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Classification of Joints",
               description: "Structural and functional classification of joints",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -6512,7 +6512,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Fibrous Joints",
               description: "Immovable fibrous joint types",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -6520,7 +6520,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Cartilaginous Joints",
               description: "Slightly movable cartilaginous joints",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -6528,7 +6528,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Synovial Joints",
               description: "Freely movable synovial joint structure",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -6536,7 +6536,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Types of Body Movements",
               description: "Movement terminology and types",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -6544,7 +6544,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Anatomy of Selected Synovial Joints",
               description: "Detailed anatomy of major synovial joints",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -6552,7 +6552,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Development of Joints",
               description: "Formation and development of joint structures",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -6567,7 +6567,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Overview of Muscle Tissues",
               description: "Three types of muscle tissue and their properties",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -6575,7 +6575,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Skeletal Muscle",
               description: "Structure and organization of skeletal muscle",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -6583,7 +6583,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Muscle Fiber Contraction and Relaxation",
               description: "Mechanism of skeletal muscle contraction",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -6591,7 +6591,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Nervous System Control of Muscle Tension",
               description: "Neural control of muscle contraction",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -6599,7 +6599,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Types of Muscle Fibers",
               description: "Classification of skeletal muscle fibers",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -6607,7 +6607,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Exercise and Muscle Performance",
               description: "Effects of exercise on muscle tissue",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -6615,7 +6615,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Cardiac Muscle Tissue",
               description: "Structure and function of cardiac muscle",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -6623,7 +6623,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Smooth Muscle",
               description: "Structure and function of smooth muscle",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -6631,7 +6631,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Development and Regeneration of Muscle Tissue",
               description: "Muscle tissue development and repair",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -6646,7 +6646,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Interactions of Skeletal Muscles, Their Fascicle Arrangement, and Their Lever Systems",
               description: "Muscle organization and mechanical advantage",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -6654,7 +6654,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Naming Skeletal Muscles",
               description: "Muscle naming conventions and terminology",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -6662,7 +6662,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Axial Muscles of the Head, Neck, and Back",
               description: "Muscles of the head, neck, and back region",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -6670,7 +6670,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Axial Muscles of the Abdominal Wall, and Thorax",
               description: "Muscles of the trunk region",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -6678,7 +6678,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Muscles of the Pectoral Girdle and Upper Limbs",
               description: "Upper extremity muscle groups",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -6686,7 +6686,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Appendicular Muscles of the Pelvic Girdle and Lower Limbs",
               description: "Lower extremity muscle groups",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -6701,7 +6701,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Basic Structure and Function of the Nervous System",
               description: "Organization of the nervous system",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -6709,7 +6709,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Nervous Tissue",
               description: "Neurons and glial cells structure",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -6717,7 +6717,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "The Function of Nervous Tissue",
               description: "Nerve impulse generation and propagation",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -6725,7 +6725,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "The Action Potential",
               description: "Generation and propagation of action potentials",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -6733,7 +6733,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Communication Between Neurons",
               description: "Synaptic transmission and neurotransmitters",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -6748,7 +6748,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "The Embryologic Perspective",
               description: "Development of the nervous system",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -6756,7 +6756,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "The Central Nervous System",
               description: "Brain and spinal cord structure",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -6764,7 +6764,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Circulation and the Central Nervous System",
               description: "Blood supply to the brain and spinal cord",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -6772,7 +6772,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "The Peripheral Nervous System",
               description: "Cranial and spinal nerves",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -6787,7 +6787,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Sensory Perception",
               description: "Sensory receptor types and sensory processing",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -6795,7 +6795,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Central Processing",
               description: "Brain processing of sensory information",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -6803,7 +6803,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Motor Responses",
               description: "Motor control and voluntary movement",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -6818,7 +6818,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Divisions of the Autonomic Nervous System",
               description: "Sympathetic and parasympathetic divisions",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -6826,7 +6826,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Autonomic Reflexes and Homeostasis",
               description: "Involuntary responses and homeostatic control",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -6834,7 +6834,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Central Control",
               description: "Brain control of autonomic functions",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -6842,7 +6842,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Drugs that Affect the Autonomic System",
               description: "Pharmacological effects on autonomic function",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -6857,7 +6857,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Overview of the Neurological Exam",
               description: "Components of neurological assessment",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -6865,7 +6865,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "The Mental Status Exam",
               description: "Assessment of cognitive function",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -6873,7 +6873,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "The Cranial Nerve Exam",
               description: "Testing cranial nerve function",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -6881,7 +6881,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "The Sensory and Motor Exams",
               description: "Testing sensory and motor function",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -6889,7 +6889,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "The Coordination and Gait Exams",
               description: "Testing coordination and walking ability",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -6904,7 +6904,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "An Overview of the Endocrine System",
               description: "Endocrine glands and hormone classification",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -6912,7 +6912,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Hormones",
               description: "Chemical nature and mechanisms of hormone action",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -6920,7 +6920,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "The Pituitary Gland and Hypothalamus",
               description: "Structure and function of the pituitary-hypothalamic system",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -6928,7 +6928,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "The Thyroid Gland",
               description: "Thyroid structure and hormone production",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -6936,7 +6936,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "The Parathyroid Glands",
               description: "Parathyroid hormone and calcium regulation",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -6944,7 +6944,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "The Adrenal Glands",
               description: "Adrenal cortex and medulla function",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -6952,7 +6952,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "The Pineal Gland",
               description: "Melatonin production and circadian rhythms",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -6960,7 +6960,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Gonadal and Placental Hormones",
               description: "Sex hormones and reproductive function",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -6968,7 +6968,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "The Endocrine Pancreas",
               description: "Insulin and glucagon regulation",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -6976,7 +6976,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Organs with Secondary Endocrine Functions",
               description: "Organs with additional endocrine roles",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -6984,7 +6984,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Development and Aging of the Endocrine System",
               description: "Endocrine system changes throughout life",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -6999,7 +6999,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "An Overview of Blood",
               description: "Blood composition and basic functions",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -7007,7 +7007,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Production of the Formed Elements",
               description: "Hematopoiesis and blood cell formation",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -7015,7 +7015,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Erythrocytes",
               description: "Red blood cell structure and function",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -7023,7 +7023,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Leukocytes and Platelets",
               description: "White blood cells and platelet function",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -7031,7 +7031,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Hemostasis",
               description: "Blood clotting and bleeding control",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -7039,7 +7039,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Blood Typing",
               description: "ABO and Rh blood group systems",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -7054,7 +7054,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Heart Anatomy",
               description: "Chambers, valves, and wall structure",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -7062,7 +7062,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Cardiac Muscle and Electrical Activity",
               description: "Cardiac muscle properties and electrical conduction",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -7070,7 +7070,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Cardiac Cycle",
               description: "Systole and diastole in the cardiac cycle",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -7078,7 +7078,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Cardiac Physiology",
               description: "Cardiac output and regulation",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -7086,7 +7086,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Development of the Heart",
               description: "Embryonic heart development",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -7101,7 +7101,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Structure and Function of Blood Vessels",
               description: "Arteries, veins, and capillary structure",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -7109,7 +7109,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Blood Flow, Blood Pressure, and Resistance",
               description: "Hemodynamics and blood pressure regulation",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -7117,7 +7117,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Capillary Exchange",
               description: "Nutrient and waste exchange at capillaries",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -7125,7 +7125,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Homeostatic Regulation of the Vascular System",
               description: "Blood pressure and flow regulation",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -7133,7 +7133,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Circulatory Pathways",
               description: "Major circulation routes in the body",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -7141,7 +7141,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Development of Blood Vessels and Fetal Circulation",
               description: "Vascular development and fetal circulation",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -7156,7 +7156,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Anatomy of the Lymphatic and Immune Systems",
               description: "Lymphatic organs and immune system components",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -7164,7 +7164,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Barrier Defenses and the Innate Immune Response",
               description: "First line of defense and innate immunity",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -7172,7 +7172,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "The Adaptive Immune Response: T lymphocytes and Their Functional Types",
               description: "T cell types and cellular immunity",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -7180,7 +7180,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "The Adaptive Immune Response: B-lymphocytes and Antibodies",
               description: "B cell function and humoral immunity",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -7188,7 +7188,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "The Immune Response against Pathogens",
               description: "Integrated immune responses to infections",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -7196,7 +7196,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Diseases Associated with Depressed or Overactive Immune Responses",
               description: "Immunodeficiency and autoimmune diseases",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -7204,7 +7204,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Transplantation and Cancer Immunology",
               description: "Immune responses in transplantation and cancer",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -7219,7 +7219,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Organs and Structures of the Respiratory System",
               description: "Anatomy of the respiratory tract",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -7227,7 +7227,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "The Lungs",
               description: "Lung structure and alveolar organization",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -7235,7 +7235,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "The Process of Breathing",
               description: "Ventilation mechanics and control",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -7243,7 +7243,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Gas Exchange",
               description: "Oxygen and carbon dioxide exchange",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -7251,7 +7251,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Transport of Gases",
               description: "Oxygen and carbon dioxide transport in blood",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -7259,7 +7259,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Modifications in Respiratory Functions",
               description: "Adaptations and non-respiratory functions",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -7267,7 +7267,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Embryonic Development of the Respiratory System",
               description: "Development of respiratory structures",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -7282,7 +7282,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Overview of the Digestive System",
               description: "General organization and function",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -7290,7 +7290,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Digestive System Processes and Regulation",
               description: "Digestion, absorption, and regulatory mechanisms",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -7298,7 +7298,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "The Mouth, Pharynx, and Esophagus",
               description: "Upper digestive tract structure and function",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -7306,7 +7306,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "The Stomach",
               description: "Stomach structure and digestive function",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -7314,7 +7314,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "The Small and Large Intestines",
               description: "Intestinal structure and function",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -7322,7 +7322,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Accessory Organs in Digestion: The Liver, Pancreas, and Gallbladder",
               description: "Digestive accessory organ functions",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -7330,7 +7330,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Chemical Digestion and Absorption: A Closer Look",
               description: "Detailed mechanisms of digestion and absorption",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -7345,7 +7345,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Overview of Metabolic Reactions",
               description: "Catabolism and anabolism principles",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -7353,7 +7353,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Carbohydrate Metabolism",
               description: "Glucose metabolism and energy production",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -7361,7 +7361,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Lipid Metabolism",
               description: "Fat metabolism and fatty acid oxidation",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -7369,7 +7369,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Protein Metabolism",
               description: "Amino acid metabolism and protein synthesis",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -7377,7 +7377,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Metabolic States of the Body",
               description: "Fed and fasted states and their regulation",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -7385,7 +7385,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Energy and Heat Balance",
               description: "Energy expenditure and thermoregulation",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -7393,7 +7393,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Nutrition and Diet",
               description: "Nutritional requirements and dietary recommendations",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -7408,7 +7408,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Physical Characteristics of Urine",
               description: "Urine composition and properties",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -7416,7 +7416,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Gross Anatomy of Urine Transport",
               description: "Ureters, bladder, and urethra structure",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -7424,7 +7424,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Gross Anatomy of the Kidney",
               description: "Kidney structure and organization",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -7432,7 +7432,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Microscopic Anatomy of the Kidney",
               description: "Nephron structure and function",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -7440,7 +7440,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Physiology of Urine Formation",
               description: "Filtration, reabsorption, and secretion",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -7448,7 +7448,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Tubular Reabsorption",
               description: "Reabsorption mechanisms and regulation",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -7456,7 +7456,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Regulation of Renal Blood Flow",
               description: "Autoregulation and blood flow control",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -7464,7 +7464,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Endocrine Regulation of Kidney Function",
               description: "Hormonal control of kidney function",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -7472,7 +7472,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Regulation of Fluid Volume and Composition",
               description: "Water and electrolyte balance",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -7480,7 +7480,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "The Urinary System and Homeostasis",
               description: "Urinary system role in homeostasis",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -7495,7 +7495,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Body Fluids and Fluid Compartments",
               description: "Intracellular and extracellular fluid compartments",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -7503,7 +7503,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Water Balance",
               description: "Water intake and loss regulation",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -7511,7 +7511,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Electrolyte Balance",
               description: "Sodium, potassium, and electrolyte regulation",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -7519,7 +7519,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Acid-Base Balance",
               description: "pH regulation and buffer systems",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -7527,7 +7527,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Disorders of Acid-Base Balance",
               description: "Acidosis and alkalosis conditions",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -7542,7 +7542,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Anatomy and Physiology of the Testicular Reproductive System",
               description: "Male reproductive anatomy and physiology",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -7550,7 +7550,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Anatomy and Physiology of the Ovarian Reproductive System",
               description: "Female reproductive anatomy and physiology",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -7558,7 +7558,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Development of the Male and Female Reproductive Systems",
               description: "Embryonic development of reproductive organs",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -7573,7 +7573,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Fertilization",
               description: "Sperm-egg interaction and fertilization process",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -7581,7 +7581,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Embryonic Development",
               description: "Early development from fertilization to organ formation",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -7589,7 +7589,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Fetal Development",
               description: "Development during the fetal period",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -7597,7 +7597,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Changes During Pregnancy, Labor, and Birth",
               description: "Maternal and fetal changes during pregnancy",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -7605,7 +7605,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Adjustments of the Infant at Birth and Postnatal Stages",
               description: "Physiological changes at birth and early development",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -7613,7 +7613,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Lactation",
               description: "Milk production and breastfeeding physiology",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             },
             {
@@ -7621,7 +7621,7 @@ By the end of this course, you'll have detailed knowledge of human anatomy and p
               title: "Patterns of Inheritance",
               description: "Genetics and inheritance patterns in humans",
               completed: false,
-              locked: true,
+              locked: false,
               progress: 0
             }
           ]
@@ -7674,7 +7674,7 @@ function applySequentialLocking(topicData: { title: string; sections: Section[] 
         return { ...concept, locked: false }
       } else {
         // All subsequent concepts are locked
-        return { ...concept, locked: true }
+        return { ...concept, locked: false }
       }
     })
     

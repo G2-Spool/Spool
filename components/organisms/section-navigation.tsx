@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { FileText, CheckCircle, Circle, Lock, ChevronDown, ChevronUp, BookOpen, Check } from "lucide-react"
+import { FileText, CheckCircle, Circle, ChevronDown, ChevronUp, BookOpen, Check } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { ProgressRing } from "@/components/atoms/progress-ring"
 import { cn } from "@/lib/utils"
@@ -188,10 +188,6 @@ export function SectionNavigation({ sections, activeSection, onSectionChange }: 
                         <Check className="h-7 w-7 text-white" style={{ width: '28px', height: '28px' }} />
                       </div>
                     </div>
-                  ) : sectionState === "upcoming" && progress === 0 && section !== sectionWindow.current ? (
-                    <div className="flex items-center justify-center flex-shrink-0" style={{ width: 36, height: 36 }}>
-                      <Lock className="h-9 w-9 text-muted-foreground" style={{ transform: 'scale(2.0)' }} />
-                    </div>
                   ) : (
                     <ProgressRing 
                       progress={progress} 
@@ -237,7 +233,6 @@ export function SectionNavigation({ sections, activeSection, onSectionChange }: 
         {/* Show indicator if there are more sections (only in windowed view) */}
         {!showAll && sectionsAhead > 0 && (
           <div className="text-center py-4 text-sm text-muted-foreground">
-            <Lock className="h-4 w-4 mx-auto mb-2" />
             {sectionsAhead} more section{sectionsAhead === 1 ? '' : 's'} ahead
           </div>
         )}
