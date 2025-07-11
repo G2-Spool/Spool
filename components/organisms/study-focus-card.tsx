@@ -2,34 +2,41 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { BookOpen } from "lucide-react"
+import { ClassBadge } from "@/components/atoms/class-badge"
 
-interface StudyFocusCardProps {
+interface ClassItem {
+  id: string
+  title: string
+  color: string
   subject: string
-  topic: string
-  focusArea: string
 }
 
-export function StudyFocusCard({ subject, topic, focusArea }: StudyFocusCardProps) {
+interface StudyFocusCardProps {
+  classes: ClassItem[]
+  onClassClick?: (classId: string) => void
+}
+
+export function StudyFocusCard({ classes, onClassClick }: StudyFocusCardProps) {
   return (
     <Card>
       <CardHeader>
         <CardTitle className="flex items-center space-x-2 text-white">
           <BookOpen className="h-5 w-5" />
-          <span>Current Study Focus</span>
+          <span>Current Classes</span>
         </CardTitle>
       </CardHeader>
-      <CardContent className="space-y-4">
-        <div>
-          <div className="text-sm font-medium text-gray-300">Subject</div>
-          <div className="text-lg capitalize text-white">{subject}</div>
-        </div>
-        <div>
-          <div className="text-sm font-medium text-gray-300">Topic</div>
-          <div className="text-lg text-white">{topic}</div>
-        </div>
-        <div>
-          <div className="text-sm font-medium text-gray-300">Focus Area</div>
-          <div className="text-lg text-white">{focusArea}</div>
+      <CardContent>
+        <div className="flex flex-wrap gap-3">
+          {classes.map((classItem) => (
+            <ClassBadge
+              key={classItem.id}
+              className={classItem.title}
+              subject={classItem.subject}
+              color={classItem.color}
+              size="large"
+              onClick={() => onClassClick?.(classItem.id)}
+            />
+          ))}
         </div>
       </CardContent>
     </Card>

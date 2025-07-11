@@ -8,7 +8,7 @@ import { StudyFocusCard } from "@/components/organisms/study-focus-card"
 import { InterestsCard } from "@/components/organisms/interests-card"
 import { AchievementsList } from "@/components/organisms/achievements-list"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { LoadingTestButton } from "@/components/ui/loading-test-button"
+
 import { Button } from "@/components/ui/button"
 import { ArrowRight } from "lucide-react"
 import { useUnifiedNavigation } from "@/hooks/use-unified-navigation"
@@ -73,10 +73,11 @@ export function DashboardPage() {
     }
   }, [user?.sub])
 
+  // Get available topics (you might want to make this dynamic based on user's enrolled topics)
+  const availableTopics = ["college-algebra", "statistics", "biology", "anatomy", "chemistry", "physics", "psychology", "economics", "computer-science", "calculus"]
+
   // Comprehensive function to determine actual current study focus
   const getCurrentStudyFocus = () => {
-    // Get available topics (you might want to make this dynamic based on user's enrolled topics)
-    const availableTopics = ["college-algebra", "statistics", "biology", "anatomy"]
     
     // Get study streak data to find most recent activity
     const streakData = localStorage.getItem('study-streak-data')
@@ -132,8 +133,14 @@ export function DashboardPage() {
       const subjectMap: Record<string, string> = {
         "college-algebra": "Mathematics",
         "statistics": "Mathematics", 
+        "calculus": "Mathematics",
         "biology": "Science",
-        "anatomy": "Science"
+        "anatomy": "Science",
+        "chemistry": "Science",
+        "physics": "Science",
+        "psychology": "Social Sciences",
+        "economics": "Social Sciences",
+        "computer-science": "Computer Science"
       }
       
       return {
@@ -273,9 +280,6 @@ export function DashboardPage() {
   const handleContinueLearning = (e: React.MouseEvent) => {
     e.preventDefault()
     
-    // Get available topics (same as in getCurrentStudyFocus)
-    const availableTopics = ["college-algebra", "statistics", "biology", "anatomy"]
-    
     // Get study streak data to find most recent activity
     const streakData = localStorage.getItem('study-streak-data')
     let recentCompletions: any[] = []
@@ -345,35 +349,79 @@ export function DashboardPage() {
   // Calculate current study focus
   const currentStudyFocus = getCurrentStudyFocus()
 
+  // Get all available classes with their colors and subjects
+  const getAvailableClasses = () => {
+    const classColors: Record<string, string> = {
+      "college-algebra": "#667eea",
+      "statistics": "#7c3aed",
+      "calculus": "#3b82f6",
+      "biology": "#10b981",
+      "anatomy": "#059669",
+      "chemistry": "#f59e0b",
+      "physics": "#06b6d4",
+      "psychology": "#f97316",
+      "economics": "#8b5cf6",
+      "computer-science": "#6366f1"
+    }
+
+    const subjectMap: Record<string, string> = {
+      "college-algebra": "Mathematics",
+      "statistics": "Mathematics", 
+      "calculus": "Mathematics",
+      "biology": "Science",
+      "anatomy": "Science",
+      "chemistry": "Science",
+      "physics": "Science",
+      "psychology": "Social Sciences",
+      "economics": "Social Sciences",
+      "computer-science": "Computer Science"
+    }
+
+    const classTitles: Record<string, string> = {
+      "college-algebra": "College Algebra",
+      "statistics": "Statistics",
+      "calculus": "Calculus I",
+      "biology": "Biology",
+      "anatomy": "Anatomy & Physiology",
+      "chemistry": "General Chemistry",
+      "physics": "General Physics",
+      "psychology": "Psychology",
+      "economics": "Economics",
+      "computer-science": "Computer Science"
+    }
+
+    return availableTopics.map((topicId: string) => ({
+      id: topicId,
+      title: classTitles[topicId] || topicId,
+      color: classColors[topicId] || "#667eea",
+      subject: subjectMap[topicId] || "Unknown"
+    }))
+  }
+
   return (
     <div className="min-h-screen bg-background p-6">
       <div className="max-w-7xl mx-auto space-y-12">
         <div className="flex items-center justify-between">
           <PageHeader title="Dashboard" description="Track your learning progress and achievements" />
-          <LoadingTestButton />
         </div>
 
       <Tabs defaultValue="overview" className="w-full">
-        <TabsList className="grid w-full grid-cols-3">
+        <TabsList className="grid w-full grid-cols-2">
           <TabsTrigger value="overview">Overview</TabsTrigger>
-          <TabsTrigger value="achievements">Achievements</TabsTrigger>
           <TabsTrigger value="test-stats">Test Stats</TabsTrigger>
         </TabsList>
 
         <TabsContent value="overview" className="space-y-6">
           <StatsGrid
             studyStreak={currentStreak}
-            weeklyConsistency={getWeeklyConsistency()}
-            learningPace={userProfile.learningPace}
             streakStatus={getStreakStatus()}
             todayCompletions={todayCompletions}
           />
 
           <div className="grid gap-6 md:grid-cols-2">
             <StudyFocusCard
-              subject={currentStudyFocus.subject}
-              topic={currentStudyFocus.topic}
-              focusArea={currentStudyFocus.focusArea}
+              classes={getAvailableClasses()}
+              onClassClick={(classId) => navigateToUrl(`/topic/${classId}`)}
             />
             <InterestsCard interests={userProfile.interests} />
           </div>
@@ -407,9 +455,7 @@ export function DashboardPage() {
           </Card>
         </TabsContent>
 
-        <TabsContent value="achievements" className="space-y-6">
-          <AchievementsList achievements={formattedAchievements} />
-        </TabsContent>
+
 
         <TabsContent value="test-stats" className="space-y-6">
           <TestStudyStreak />

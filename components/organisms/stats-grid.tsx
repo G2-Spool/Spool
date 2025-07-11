@@ -2,64 +2,30 @@
 
 import { StatCard } from "@/components/atoms/stat-card"
 import { Progress } from "@/components/ui/progress"
-import { Calendar, Clock, Target, TrendingUp } from "lucide-react"
+import { Calendar, Clock, Target, TrendingUp, Flame } from "lucide-react"
 
 interface StatsGridProps {
   studyStreak: number
-  weeklyConsistency: { percentage: number; daysCompleted: number; totalDays: number }
-  learningPace: string
+  weeklyConsistency?: { percentage: number; daysCompleted: number; totalDays: number }
+  learningPace?: string
   streakStatus?: { message: string; isActive: boolean }
   todayCompletions: number
 }
 
 export function StatsGrid({ studyStreak, weeklyConsistency, learningPace, streakStatus, todayCompletions }: StatsGridProps) {
-  const getPaceDescription = (pace: string) => {
-    switch (pace) {
-      case "turtle":
-        return "2 concepts/day"
-      case "steady":
-        return "5 concepts/day"
-      case "rabbit":
-        return "8 concepts/day"
-      default:
-        return "Custom pace"
-    }
-  }
-
-  const getPaceDisplayName = (pace: string) => {
-    switch (pace) {
-      case "turtle":
-        return "Calm"
-      case "steady":
-        return "Steady"
-      case "rabbit":
-        return "Energized"
-      default:
-        return pace
-    }
-  }
-
-  const getDailyGoal = (pace: string): number => {
-    switch (pace) {
-      case "turtle":
-        return 2
-      case "steady":
-        return 5
-      case "rabbit":
-        return 8
-      default:
-        return 3
-    }
-  }
-
-  const dailyGoal = getDailyGoal(learningPace)
+  const dailyGoal = 5 // Default daily goal of 5 concepts
   const dailyProgress = Math.min(100, Math.round((todayCompletions / dailyGoal) * 100))
 
   return (
-    <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+    <div className="grid gap-4 md:grid-cols-2">
       <StatCard 
         title="Study Streak" 
-        value={`${studyStreak} days`} 
+        value={
+          <div className="flex items-center gap-2">
+            <Flame className="h-6 w-6 text-orange-500" />
+            <span>{studyStreak} days</span>
+          </div>
+        } 
         description={streakStatus?.message || "Keep it up!"} 
         icon={Calendar} 
       />
@@ -67,15 +33,6 @@ export function StatsGrid({ studyStreak, weeklyConsistency, learningPace, streak
       <StatCard title="Today's Progress" value={`${dailyProgress}%`} description={`${todayCompletions}/${dailyGoal} concepts`} icon={Clock}>
         <Progress value={dailyProgress} className="mt-2" />
       </StatCard>
-
-      <StatCard title="Weekly Consistency" value={`${weeklyConsistency.percentage}%`} description={`${weeklyConsistency.daysCompleted}/${weeklyConsistency.totalDays} days met goal`} icon={Target} />
-
-      <StatCard
-        title="Learning Pace"
-        value={getPaceDisplayName(learningPace)}
-        description={getPaceDescription(learningPace)}
-        icon={TrendingUp}
-      />
     </div>
   )
 }

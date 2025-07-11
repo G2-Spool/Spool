@@ -7,7 +7,7 @@ import type { LucideIcon } from "lucide-react"
 
 interface StatCardProps {
   title: string
-  value: string | number
+  value: string | number | React.ReactNode
   description?: string
   icon: LucideIcon
   children?: React.ReactNode
