@@ -125,29 +125,29 @@ export function ConceptPresentation({ conceptId, conceptTitle, topicId, classNam
       {/* Section 1: Hook & Relevance */}
       <section className="space-y-6">
                   <div className="space-y-2">
-            <h2 className="text-2xl font-bold text-foreground">Hook & Relevance</h2>
+            <h2 className="text-xl font-bold text-foreground">Hook & Relevance</h2>
             <p className="text-muted-foreground font-bold">Where will you ever use this?</p>
           <div className="w-full h-px bg-border"></div>
         </div>
 
-        <div className="space-y-6">
+        <div className="space-y-8">
           <div className="space-y-3">
-            <h3 className="text-lg font-bold text-foreground">Personal</h3>
+            <h3 className="text-lg font-semibold text-rose-500 tracking-wide">Personal</h3>
             <p className="text-foreground leading-relaxed pl-4">{conceptData.hooks.personal}</p>
           </div>
 
           <div className="space-y-3">
-            <h3 className="text-lg font-bold text-foreground">Social</h3>
+            <h3 className="text-lg font-semibold text-cyan-400 tracking-wide">Social</h3>
             <p className="text-foreground leading-relaxed pl-4">{conceptData.hooks.social}</p>
           </div>
 
           <div className="space-y-3">
-            <h3 className="text-lg font-bold text-foreground">Career</h3>
+            <h3 className="text-lg font-semibold text-yellow-400 tracking-wide">Career</h3>
             <p className="text-foreground leading-relaxed pl-4">{conceptData.hooks.career}</p>
           </div>
 
           <div className="space-y-3">
-            <h3 className="text-lg font-bold text-foreground">Service (Philanthropic)</h3>
+            <h3 className="text-lg font-semibold text-violet-500 tracking-wide">Service (Philanthropic)</h3>
             <p className="text-foreground leading-relaxed pl-4">{conceptData.hooks.service}</p>
           </div>
         </div>
@@ -159,7 +159,7 @@ export function ConceptPresentation({ conceptId, conceptTitle, topicId, classNam
       {/* Section 2: Show Me Examples */}
       <section className="space-y-6">
         <div className="space-y-2">
-          <h2 className="text-2xl font-bold text-foreground">Show Me Examples</h2>
+          <h2 className="text-xl font-bold text-foreground">Show Me Examples</h2>
           <p className="text-muted-foreground font-bold">See it in action</p>
           <div className="w-full h-px bg-border"></div>
         </div>
@@ -186,7 +186,7 @@ export function ConceptPresentation({ conceptId, conceptTitle, topicId, classNam
       {/* Section 3: What & How */}
       <section className="space-y-6">
         <div className="space-y-2">
-          <h2 className="text-2xl font-bold text-foreground">What & How</h2>
+          <h2 className="text-xl font-bold text-foreground">What & How</h2>
           <p className="text-muted-foreground font-bold">The building blocks</p>
           <div className="w-full h-px bg-border"></div>
         </div>
@@ -195,10 +195,10 @@ export function ConceptPresentation({ conceptId, conceptTitle, topicId, classNam
           {/* Vocabulary */}
           <div className="space-y-4">
             <h3 className="text-xl font-bold text-foreground">Vocabulary</h3>
-            <div className="space-y-4">
+            <div className="space-y-6 pl-6">
               {conceptData.vocabulary.map((item, index) => (
                 <div key={index} className="space-y-1">
-                  <h4 className="font-bold text-foreground">{item.term}:</h4>
+                  <h4 className="font-extrabold text-foreground">{item.term}:</h4>
                   <p className="text-foreground leading-relaxed pl-4">{item.definition}</p>
                 </div>
               ))}
