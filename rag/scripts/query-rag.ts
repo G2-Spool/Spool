@@ -8,6 +8,20 @@
 import { RAGOrchestrator } from '../services/rag-orchestrator.js';
 import { logger } from '../utils/logger.js';
 
+/**
+ * Convert cosine similarity score to qualitative match assessment
+ * @param score - Cosine similarity score (0-1)
+ * @returns Quality label that accurately represents match strength for RAG context
+ */
+function cosineToQuality(score: number): string {
+  if (score >= 0.7) return "Excellent Match";
+  if (score >= 0.6) return "Very Good Match"; 
+  if (score >= 0.5) return "Good Match";
+  if (score >= 0.4) return "Okay Match";
+  if (score >= 0.3) return "Weak Match";
+  return "Poor Match";
+}
+
 async function queryRAG() {
   console.log('🔍 RAG System Query Interface');
   console.log('=' .repeat(40));
@@ -42,7 +56,9 @@ async function queryRAG() {
     console.log(`Found ${results.length} results:\n`);
     
     results.forEach((result, index) => {
-      console.log(`${index + 1}. Score: ${result.score?.toFixed(4)}`);
+      const qualityLabel = cosineToQuality(result.score || 0);
+      
+      console.log(`${index + 1}. Score: ${result.score?.toFixed(4)} (${qualityLabel})`);
       console.log(`   Book: ${result.metadata?.title || 'Unknown'}`);
       console.log(`   Subject: ${result.metadata?.subject || 'Unknown'}`);
       console.log(`   Chapter: ${result.metadata?.chapter || 'Unknown'}`);
