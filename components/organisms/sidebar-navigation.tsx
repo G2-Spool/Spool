@@ -1,6 +1,6 @@
 "use client"
 
-import { BarChart3, BookOpen, Home, Settings, User, LucideIcon } from "lucide-react"
+import { BarChart3, BookOpen, Home, User, LucideIcon } from "lucide-react"
 import { SidebarLink, SidebarBody } from "../ui/sidebar"
 import { motion } from "framer-motion"
 import Link from "next/link"
@@ -38,12 +38,6 @@ export function SidebarNavigation() {
   ]
 
   const bottomItems: MenuItem[] = [
-    { 
-      label: "Settings", 
-      value: "settings",
-      href: "/?tab=settings", 
-      icon: Settings
-    },
     { 
       label: "Profile", 
       value: "profile",

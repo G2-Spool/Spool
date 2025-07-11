@@ -26,7 +26,7 @@ function MainLayoutContent({ children, title }: MainLayoutProps) {
       case "visualization":
         return "Learning Progress"
       case "settings":
-        return "Settings"
+        return "Profile"
       case "profile":
         return "Profile"
       default:

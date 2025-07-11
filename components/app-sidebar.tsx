@@ -1,6 +1,6 @@
 "use client"
 
-import { BookOpen, Home, BarChart3, Settings, User } from "lucide-react"
+import { BookOpen, Home, BarChart3, User } from "lucide-react"
 import { useUnifiedNavigation, AppTab } from "@/hooks/use-unified-navigation"
 import {
   Sidebar,
@@ -36,11 +36,6 @@ export function AppSidebar() {
   ]
 
   const bottomItems = [
-    {
-      title: "Settings",
-      icon: Settings,
-      value: "settings" as AppTab,
-    },
     {
       title: "Profile",
       icon: User,

@@ -4,7 +4,6 @@ import { DailyLearningPage } from "@/components/pages/daily-learning-page"
 import { DashboardPage } from "@/components/pages/dashboard-page"
 import { ClassesPage } from "@/components/pages/classes-page"
 import { ProgressPage } from "@/components/pages/progress-page"
-import { SettingsPage } from "@/components/pages/settings-page"
 import { ProfilePage } from "@/components/pages/profile-page"
 import { useUnifiedNavigation } from "@/hooks/use-unified-navigation"
 
@@ -22,7 +21,7 @@ export function Dashboard() {
       case "visualization":
         return <ProgressPage />
       case "settings":
-        return <SettingsPage />
+        return <ProfilePage />
       case "profile":
         return <ProfilePage />
       default:
