@@ -18,6 +18,11 @@ import {
   Brain
 } from 'lucide-react'
 import { useStudyStreak } from '@/hooks/use-study-streak'
+import { TypingMessage } from './typing-message'
+import ReactMarkdown from 'react-markdown'
+import remarkMath from 'remark-math'
+import rehypeKatex from 'rehype-katex'
+import 'katex/dist/katex.min.css'
 
 // Types
 interface VocabularyTerm {
@@ -32,6 +37,8 @@ interface ChatMessage {
   content: string
   timestamp: Date
   isTyping?: boolean
+  hasBeenTyped?: boolean // Track if the message has completed typing
+  isCurrentlyTyping?: boolean // Track if this message is actively being typed right now
   exerciseId?: string
   isSubExercise?: boolean
   subExerciseLevel?: number
@@ -84,14 +91,18 @@ const mockExercises: Exercise[] = [
         type: 'system',
         content: 'Let\'s practice solving two-step equations! I\'ll guide you through this step by step.',
         timestamp: new Date(),
-        exerciseId: 'exercise-1'
+        exerciseId: 'exercise-1',
+        hasBeenTyped: true, // Mark as already typed
+        isCurrentlyTyping: false
       },
       {
         id: 'msg-2',
         type: 'system',
         content: 'Problem: You want to join a gym. The gym charges a one-time $20 sign-up fee and then $15 per month. You have a total budget of $80 to spend. Write and solve an equation to find out how many months (m) you can be a member.\n\nExplain each step of your thought process.',
         timestamp: new Date(),
-        exerciseId: 'exercise-1'
+        exerciseId: 'exercise-1',
+        hasBeenTyped: true, // Mark as already typed
+        isCurrentlyTyping: false
       }
     ]
   }
@@ -103,25 +114,25 @@ const mockExercises: Exercise[] = [
 const mockFeedbackResponses = [
   {
     id: 'feedback-1',
-    content: 'Evaluation Complete.\n\nStep 1: ✅ Correctly formulated equation.\n\nStep 2: ❌ Incorrect order of operations.\n\nStep 3: ❌ Incorrect application of division.\n\nStep 4: ❌ Incorrect result.\n\nSending articulated Step 2 to remediation AI...'
+    content: 'Evaluation Complete.\n\n**Step 1:** ✅ Correctly formulated equation.\n\n**Step 2:** ❌ Incorrect order of operations.\n\n**Step 3:** ❌ Incorrect application of division.\n\n**Step 4:** ❌ Incorrect result.\n\nSending articulated Step 2 to remediation AI...'
   },
   {
     id: 'remediation-1',
-    content: 'I see your logic in Step 2 was to "get rid of the 15 first." Let\'s look at the Workflow section again.\n\nWorkflow Step 2 is "Undo Addition/Subtraction" and Step 3 is "Undo Multiplication/Division." You tried to do multiplication/division first. Remember the "getting dressed" mental model: you have to undo things in the reverse order.',
+    content: 'I see your logic in Step 2 was to "get rid of the 15 first." Let\'s look at the **Workflow** section again.\n\n*Workflow Step 2* is "Undo Addition/Subtraction" and *Step 3* is "Undo Multiplication/Division." You tried to do multiplication/division first. Remember the "getting dressed" mental model: you have to undo things in the reverse order.',
     isSubExercise: true
   },
   {
     id: 'sub-exercise-1',
-    content: 'Sub-Exercise: Let\'s practice that specific step. If you have the equation 10x + 4 = 24, what is the very first thing you must do to both sides to follow the correct workflow?',
+    content: 'Sub-Exercise: Let\'s practice that specific step. If you have the equation $10x + 4 = 24$, what is the very first thing you must do to both sides to follow the correct workflow?',
     isSubExercise: true
   },
   {
     id: 'sub-exercise-response',
-    content: 'Exactly! Now, apply that same logic to your original problem: 15m + 20 = 80.\n\nWhat should be the very first step?'
+    content: 'Exactly! Now, apply that same logic to your original problem: $15m + 20 = 80$.\n\nWhat should be the very first step?'
   },
   {
     id: 'completion-response',
-    content: 'Perfect! You correctly identified that we need to subtract 20 from both sides first. This gives us 15m = 60, and then dividing by 15 gives us m = 4.\n\nYou can be a member for 4 months! 🎉\n\n<EXERCISE_COMPLETE>Two-Step Linear Equations Practice</EXERCISE_COMPLETE>\n\nExcellent work mastering this concept! You\'ve demonstrated solid understanding of the correct order of operations in solving two-step equations.'
+    content: 'Perfect! You correctly identified that we need to subtract 20 from both sides first. This gives us $15m = 60$, and then dividing by 15 gives us $m = 4$.\n\n**Solution:** You can be a member for 4 months! 🎉\n\n<EXERCISE_COMPLETE>Two-Step Linear Equations Practice</EXERCISE_COMPLETE>\n\nExcellent work mastering this concept! You\'ve demonstrated solid understanding of the correct order of operations in solving two-step equations.'
   }
 ]
 
@@ -237,6 +248,46 @@ const TypingIndicator: React.FC = () => (
     <div className="w-2 h-2 bg-[#596f6c] rounded-full animate-bounce" style={{animationDelay: '0.2s'}}></div>
   </div>
 )
+
+// Formatted message component for completed messages
+const FormattedMessage: React.FC<{
+  content: string
+  parseVocabulary?: (text: string) => React.ReactNode
+}> = ({ content, parseVocabulary }) => {
+  return (
+    <ReactMarkdown
+      remarkPlugins={[remarkMath]}
+      rehypePlugins={[rehypeKatex]}
+      components={{
+        p: ({ children }: { children?: React.ReactNode }) => <p className="mb-2 last:mb-0">{children}</p>,
+        strong: ({ children }: { children?: React.ReactNode }) => <strong className="font-semibold">{children}</strong>,
+        em: ({ children }: { children?: React.ReactNode }) => <em className="italic">{children}</em>,
+        code: ({ inline, children }: { inline?: boolean; children?: React.ReactNode }) => {
+          if (inline) {
+            return <code className="px-1 py-0.5 bg-gray-700 rounded text-sm">{children}</code>
+          }
+          return (
+            <pre className="my-2 p-3 bg-gray-800 rounded overflow-x-auto">
+              <code>{children}</code>
+            </pre>
+          )
+        },
+        ul: ({ children }: { children?: React.ReactNode }) => <ul className="list-disc list-inside ml-4 my-2">{children}</ul>,
+        ol: ({ children }: { children?: React.ReactNode }) => <ol className="list-decimal list-inside ml-4 my-2">{children}</ol>,
+        li: ({ children }: { children?: React.ReactNode }) => <li className="my-1">{children}</li>,
+        // Custom text renderer that applies vocabulary parsing
+        text: ({ children }: { children?: React.ReactNode }) => {
+          if (parseVocabulary && typeof children === 'string') {
+            return <>{parseVocabulary(children)}</>
+          }
+          return <>{children}</>
+        }
+      }}
+    >
+      {content}
+    </ReactMarkdown>
+  )
+}
 
 // Hint button component
 const HintButton: React.FC<{ onHint: () => void }> = ({ onHint }) => {
@@ -469,6 +520,7 @@ export function ChatExerciseInterface({
   const [hintTooltipTimer, setHintTooltipTimer] = useState<NodeJS.Timeout | null>(null)
   const [jumpToExerciseVisible, setJumpToExerciseVisible] = useState(false)
   const [collapseTimer, setCollapseTimer] = useState<NodeJS.Timeout | null>(null)
+  const subExerciseCreationInProgress = useRef<Set<string>>(new Set())
   const [buttonTooltips, setButtonTooltips] = useState<{
     vocab: boolean
     equations: boolean
@@ -518,6 +570,36 @@ export function ChatExerciseInterface({
     }
   }, [])
 
+  // Manage typing queue - ensure only one message types at a time
+  useEffect(() => {
+    const activeExercise = exercises.find(ex => ex.status === 'active')
+    if (!activeExercise) return
+
+    // Find the first system message that needs typing
+    const messageNeedingTyping = activeExercise.messages.find(msg => 
+      msg.type === 'system' && !msg.hasBeenTyped && !msg.isCurrentlyTyping
+    )
+
+    // Check if any message is currently typing
+    const isAnyMessageTyping = activeExercise.messages.some(msg => msg.isCurrentlyTyping)
+
+    // Start typing the next message if nothing is currently typing
+    if (messageNeedingTyping && !isAnyMessageTyping) {
+      setExercises(prev => prev.map(ex => 
+        ex.id === activeExercise.id 
+          ? {
+              ...ex,
+              messages: ex.messages.map(msg => 
+                msg.id === messageNeedingTyping.id 
+                  ? { ...msg, isCurrentlyTyping: true }
+                  : msg
+              )
+            }
+          : ex
+      ))
+    }
+  }, [exercises])
+
   // Auto-scroll to bottom when new messages arrive
   const scrollToBottom = () => {
     if (chatContainerRef.current) {
@@ -538,6 +620,11 @@ export function ChatExerciseInterface({
     const exercise = exercises.find(ex => ex.id === exerciseId)
     if (!exercise || !exercise.currentInput?.trim()) return
 
+    // Prevent double submissions
+    if (exercise.isLoading) {
+      return
+    }
+
     // Set loading state for this specific exercise
     setExercises(prev => prev.map(ex => 
       ex.id === exerciseId ? { ...ex, isLoading: true } : ex
@@ -552,6 +639,7 @@ export function ChatExerciseInterface({
       exerciseId: exerciseId
     }
 
+    // Update state with student message
     setExercises(prev => prev.map(ex => 
       ex.id === exerciseId 
         ? { ...ex, messages: [...ex.messages, studentMessage], currentInput: '' }
@@ -567,105 +655,138 @@ export function ChatExerciseInterface({
 
     // Simulate AI processing with realistic delays
     setTimeout(() => {
-      setExercises(prev => prev.map(ex => 
-        ex.id === exerciseId ? { ...ex, isTyping: false } : ex
-      ))
-      
-      // Determine response based on conversation stage
-      const currentExercise = exercises.find(ex => ex.id === exerciseId)
-      if (!currentExercise) return
-      
-      const messageCount = currentExercise.messages.length
-      const hasSubExercise = currentExercise.messages.some(msg => msg.isSubExercise)
-      const studentMessageCount = currentExercise.messages.filter(msg => msg.type === 'student').length
-      
-      let responseContent = ''
-      let shouldCreateSubExercise = false
-      let isCompleted = false
-      
-      // First student response - give feedback and create sub-exercise
-      if (studentMessageCount === 1 && !hasSubExercise) {
-        responseContent = mockFeedbackResponses[0].content
-        shouldCreateSubExercise = true
-      } 
-      // Response to sub-exercise (student has responded to sub-exercise)
-      else if (hasSubExercise && studentMessageCount === 2) {
-        responseContent = mockFeedbackResponses[3].content // sub-exercise-response
-      }
-      // Final response after student gets it right
-      else if (studentMessageCount >= 3) {
-        responseContent = mockFeedbackResponses[4].content // completion-response
-        isCompleted = true
-      }
-      // Fallback for any other case
-      else {
-        responseContent = "I can see you're working on this problem. Let me help guide you through the correct approach to solving two-step linear equations."
-      }
-      
-      // Add AI response
-      const aiMessage: ChatMessage = {
-        id: `ai-${Date.now()}`,
-        type: 'system',
-        content: responseContent,
-        timestamp: new Date(),
-        exerciseId: exerciseId,
-        isTyping: true
-      }
+      setExercises(prev => {
+        const updatedExercises = prev.map(ex => 
+          ex.id === exerciseId ? { ...ex, isTyping: false } : ex
+        )
+        
+        // Get the current exercise with fresh state
+        const currentExercise = updatedExercises.find(ex => ex.id === exerciseId)
+        if (!currentExercise) return updatedExercises
+        
+        const hasSubExercise = currentExercise.messages.some(msg => msg.isSubExercise)
+        const studentMessageCount = currentExercise.messages.filter(msg => msg.type === 'student').length
+        
+        let responseContent = ''
+        let shouldCreateSubExercise = false
+        let isCompleted = false
+        
+        // First student response - give feedback and create sub-exercise
+        if (studentMessageCount === 1 && !hasSubExercise) {
+          responseContent = mockFeedbackResponses[0].content
+          shouldCreateSubExercise = true
+        } 
+        // Response to sub-exercise (student has responded to sub-exercise)
+        else if (hasSubExercise && studentMessageCount === 2) {
+          responseContent = mockFeedbackResponses[3].content // sub-exercise-response
+        }
+        // Final response after student gets it right
+        else if (studentMessageCount >= 3) {
+          responseContent = mockFeedbackResponses[4].content // completion-response
+          isCompleted = true
+        }
+        // Fallback for any other case
+        else {
+          responseContent = "I can see you're working on this problem. Let me help guide you through the correct approach to solving two-step linear equations."
+        }
+        
+        // Add AI response
+        const aiMessage: ChatMessage = {
+          id: `ai-${Date.now()}`,
+          type: 'system',
+          content: responseContent,
+          timestamp: new Date(),
+          exerciseId: exerciseId,
+          hasBeenTyped: false, // New messages should be typed
+          isCurrentlyTyping: false // Will be set to true by the typing queue
+        }
 
-      setExercises(prev => prev.map(ex => 
-        ex.id === exerciseId 
-          ? { ...ex, messages: [...ex.messages, aiMessage], isLoading: false }
-          : ex
-      ))
+        const finalExercises = updatedExercises.map(ex => 
+          ex.id === exerciseId 
+            ? { ...ex, messages: [...ex.messages, aiMessage], isLoading: false }
+            : ex
+        )
 
-      // Detect new vocabulary terms
-      const detectedTerms = vocabularyTerms
-        .filter(vocab => responseContent.includes(vocab.term))
-        .map(vocab => vocab.term)
-      
-      if (detectedTerms.length > 0) {
-        setNewTerms(prev => [...prev, ...detectedTerms])
-      }
+        // Detect new vocabulary terms
+        const detectedTerms = vocabularyTerms
+          .filter(vocab => responseContent.includes(vocab.term))
+          .map(vocab => vocab.term)
+        
+        if (detectedTerms.length > 0) {
+          setNewTerms(prev => [...prev, ...detectedTerms])
+        }
 
-      setTimeout(scrollToBottom, 100)
+        setTimeout(scrollToBottom, 100)
 
-      // Create sub-exercise if needed
-      if (shouldCreateSubExercise && messageCount === 3) {
-        setTimeout(() => {
-          createSubExercise(exerciseId)
-        }, 3000)
-      }
-      
-      // Handle exercise completion
-      if (isCompleted && responseContent.includes('<EXERCISE_COMPLETE>')) {
-        setTimeout(() => {
-          // Mark current exercise as completed
-          setExercises(prev => prev.map(ex => 
-            ex.id === exerciseId 
-              ? { ...ex, status: 'completed' }
-              : ex
-          ))
-          
-          // Create new advanced exercise after a delay
+        // Create sub-exercise if needed - use a timeout to ensure the AI message is displayed first
+        if (shouldCreateSubExercise) {
+          // Check if sub-exercise creation is already in progress
+          if (!subExerciseCreationInProgress.current.has(exerciseId)) {
+            subExerciseCreationInProgress.current.add(exerciseId)
+            
+            setTimeout(() => {
+              createSubExercise(exerciseId)
+            }, 2000) // Wait for AI response to finish typing
+          }
+        }
+        
+        // Handle exercise completion
+        if (isCompleted && responseContent.includes('<EXERCISE_COMPLETE>')) {
           setTimeout(() => {
-            createAdvancedExercise()
-          }, 2000)
-        }, 3000)
-      }
+            // Mark current exercise as completed
+            setExercises(prev => prev.map(ex => 
+              ex.id === exerciseId 
+                ? { ...ex, status: 'completed' }
+                : ex
+            ))
+            
+            // Create new advanced exercise after a delay
+            setTimeout(() => {
+              createAdvancedExercise()
+            }, 2000)
+          }, 3000)
+        }
+        
+        return finalExercises
+      })
     }, 2000)
   }
 
   // Create sub-exercise for specific exercise
   const createSubExercise = (exerciseId: string) => {
+    
+    // Check if already in progress
+    if (!subExerciseCreationInProgress.current.has(exerciseId)) {
+      return
+    }
+    
+    // Check if remediation message already exists
+    const currentExercise = exercises.find(ex => ex.id === exerciseId)
+    if (!currentExercise) {
+      subExerciseCreationInProgress.current.delete(exerciseId)
+      return
+    }
+    
+    const hasRemediation = currentExercise.messages.some(msg => 
+      msg.content.includes('I see your logic in Step 2')
+    )
+    
+    if (hasRemediation) {
+      subExerciseCreationInProgress.current.delete(exerciseId)
+      return
+    }
+
     // First add the remediation explanation
     const remediationMessage: ChatMessage = {
-      id: `remediation-${Date.now()}`,
+      id: `remediation-${Date.now()}-${Math.random()}`,
       type: 'system',
       content: mockFeedbackResponses[1].content,
       timestamp: new Date(),
       exerciseId: exerciseId,
       isSubExercise: true,
-      subExerciseLevel: 1
+      subExerciseLevel: 1,
+      hasBeenTyped: false, // Should be typed
+      isCurrentlyTyping: false // Will be set to true by the typing queue
     }
 
     setExercises(prev => prev.map(ex => 
@@ -676,32 +797,54 @@ export function ChatExerciseInterface({
 
     // Then add the sub-exercise after a delay
     setTimeout(() => {
-      const subExerciseMessage: ChatMessage = {
-        id: `sub-${Date.now()}`,
-        type: 'system',
-        content: mockFeedbackResponses[2].content,
-        timestamp: new Date(),
-        exerciseId: exerciseId,
-        isSubExercise: true,
-        subExerciseLevel: 1
-      }
+      setExercises(prev => {
+        const currentEx = prev.find(ex => ex.id === exerciseId)
+        if (!currentEx) {
+          return prev
+        }
+        
+        // Check if sub-exercise already exists
+        const hasSubExercise = currentEx.messages.some(msg => 
+          msg.content.includes('Sub-Exercise: Let\'s practice')
+        )
+        
+        if (hasSubExercise) {
+          return prev
+        }
+        
+        const subExerciseMessage: ChatMessage = {
+          id: `sub-${Date.now()}-${Math.random()}`,
+          type: 'system',
+          content: mockFeedbackResponses[2].content,
+          timestamp: new Date(),
+          exerciseId: exerciseId,
+          isSubExercise: true,
+          subExerciseLevel: 1,
+          hasBeenTyped: false, // Should be typed
+          isCurrentlyTyping: false // Will be set to true by the typing queue
+        }
 
-      setExercises(prev => prev.map(ex => 
-        ex.id === exerciseId 
-          ? { ...ex, messages: [...ex.messages, subExerciseMessage] }
-          : ex
-      ))
+        const updatedExercises = prev.map(ex => 
+          ex.id === exerciseId 
+            ? { ...ex, messages: [...ex.messages, subExerciseMessage] }
+            : ex
+        )
 
-      // Detect new vocabulary terms in sub-exercise
-      const detectedTerms = vocabularyTerms
-        .filter(vocab => subExerciseMessage.content.includes(vocab.term))
-        .map(vocab => vocab.term)
+        // Detect new vocabulary terms in sub-exercise
+        const detectedTerms = vocabularyTerms
+          .filter(vocab => subExerciseMessage.content.includes(vocab.term))
+          .map(vocab => vocab.term)
+        
+        if (detectedTerms.length > 0) {
+          setNewTerms(prev => [...prev, ...detectedTerms])
+        }
+
+        setTimeout(scrollToBottom, 100)
+        return updatedExercises
+      })
       
-      if (detectedTerms.length > 0) {
-        setNewTerms(prev => [...prev, ...detectedTerms])
-      }
-
-      setTimeout(scrollToBottom, 100)
+      // Clear the in-progress flag
+      subExerciseCreationInProgress.current.delete(exerciseId)
     }, 2000)
 
     setTimeout(scrollToBottom, 100)
@@ -731,14 +874,18 @@ export function ChatExerciseInterface({
           type: 'system',
           content: 'Great work on the basic exercise! Now let\'s try a more complex problem.',
           timestamp: new Date(),
-          exerciseId: exerciseId
+          exerciseId: exerciseId,
+          hasBeenTyped: false, // New messages should be typed
+          isCurrentlyTyping: false // Will be set to true by the typing queue
         },
         {
           id: 'adv-msg-2',
           type: 'system',
           content: 'Problem: You are ordering custom t-shirts for a club. The company charges a $40 setup fee for the design. Each shirt costs $8. You also have a coupon for $10 off your entire order. If your final bill is $110, how many shirts (s) did you order?\n\nAdded Complexity: This problem introduces a third number that must be correctly applied before solving. The student must realize that the coupon reduces the total cost before they start solving for the number of shirts, requiring them to combine the constants first (40 - 10).',
           timestamp: new Date(),
-          exerciseId: exerciseId
+          exerciseId: exerciseId,
+          hasBeenTyped: false, // New messages should be typed
+          isCurrentlyTyping: false // Will be set to true by the typing queue
         }
       ]
     }
@@ -755,7 +902,9 @@ export function ChatExerciseInterface({
       type: 'system',
       content: 'Think about what we said earlier about the reverse order of operations. What comes first when you\'re "undoing" operations?',
       timestamp: new Date(),
-      exerciseId: exerciseId
+      exerciseId: exerciseId,
+      hasBeenTyped: false, // Should be typed
+      isCurrentlyTyping: false // Will be set to true by the typing queue
     }
 
     setExercises(prev => prev.map(ex => 
@@ -947,43 +1096,88 @@ export function ChatExerciseInterface({
                       >
                         {exercise.messages.map((message, index) => {
                           const isSubExercise = message.isSubExercise
+                          const prevMessage = exercise.messages[index - 1]
                           const nextMessage = exercise.messages[index + 1]
-                          const isFollowedBySubExercise = nextMessage?.isSubExercise
+                          const isPrevSubExercise = prevMessage?.isSubExercise
+                          const isNextSubExercise = nextMessage?.isSubExercise
+                          
+                          // Only show the threading line on the first sub-exercise in a sequence
+                          const isFirstInSubExerciseSequence = isSubExercise && !isPrevSubExercise
+                          
+                          // Calculate how many consecutive sub-exercises follow this one
+                          let consecutiveSubExercises = 0
+                          if (isFirstInSubExerciseSequence) {
+                            for (let i = index; i < exercise.messages.length && exercise.messages[i]?.isSubExercise; i++) {
+                              const msg = exercise.messages[i]
+                              // Only count messages that are visible (student messages, currently typing, or already typed)
+                              if (msg.type === 'student' || msg.isCurrentlyTyping || msg.hasBeenTyped) {
+                                consecutiveSubExercises++
+                              }
+                            }
+                          }
                           
                           return (
                             <div key={message.id} className="space-y-2">
-                              {/* Sub-exercise threading indicator */}
-                              {isSubExercise && (
-                                <div className="flex items-center gap-2 text-sm text-[#805AD5] ml-6">
-                                  <div className="w-8 h-0.5 bg-[#805AD5]"></div>
-                                  <span className="font-medium">Sub-Exercise</span>
-                                </div>
-                              )}
-
                               {/* Message with threading */}
                               <div className={cn(
                                 "flex relative",
                                 message.type === 'student' ? "justify-end" : "justify-start"
                               )}>
-                                {/* Vertical threading line */}
-                                {isSubExercise && (
-                                  <div className="absolute left-6 top-0 w-0.5 h-full bg-[#805AD5]/30" />
+                                {/* Single continuous vertical line for the entire sub-exercise sequence */}
+                                {isFirstInSubExerciseSequence && (
+                                  <div 
+                                    className="absolute left-2 w-0.5 bg-gray-400/30"
+                                    style={{
+                                      top: 0,
+                                      height: consecutiveSubExercises === 1 
+                                        ? '70%' 
+                                        : `calc(${(consecutiveSubExercises - 0.4) * 100}% + ${(consecutiveSubExercises - 1) * 0.7}rem)`
+                                    }}
+                                  />
                                 )}
                                 
-                                <div className={cn(
-                                  "rounded-lg px-4 py-3 relative",
-                                  message.type === 'student' 
-                                    ? "bg-[#525252] border border-[#606060] text-white ml-auto min-w-[60%] max-w-[85%]" 
-                                    : "bg-[#3c5552]/100 text-white max-w-[95%]",
-                                  isSubExercise && "ml-12 border-l-4 border-[#805AD5]"
-                                )}>
-                                  <div className="leading-relaxed whitespace-pre-wrap">
-                                    {message.type === 'system' 
-                                      ? parseVocabularyTerms(message.content)
-                                      : message.content
-                                    }
+                                {/* Only render message if it's a student message, currently typing, or has been typed */}
+                                {(message.type === 'student' || message.isCurrentlyTyping || message.hasBeenTyped) && (
+                                  <div className={cn(
+                                    "rounded-lg px-4 py-3 relative",
+                                    message.type === 'student' 
+                                      ? "bg-[#525252] border border-[#606060] text-white ml-auto min-w-[60%] max-w-[85%]" 
+                                      : "bg-[#3c5552]/100 text-white max-w-[95%]",
+                                    isSubExercise && "ml-6"
+                                  )}>
+                                    <div className="leading-relaxed whitespace-pre-wrap">
+                                      {message.type === 'system' && message.isCurrentlyTyping ? (
+                                        <TypingMessage
+                                          content={message.content}
+                                          speed={100}
+                                          parseVocabulary={parseVocabularyTerms}
+                                          onComplete={() => {
+                                            // Mark message as typed and not currently typing
+                                            setExercises(prev => prev.map(ex => 
+                                              ex.id === exercise.id 
+                                                ? {
+                                                    ...ex,
+                                                    messages: ex.messages.map(msg => 
+                                                      msg.id === message.id 
+                                                        ? { ...msg, hasBeenTyped: true, isCurrentlyTyping: false }
+                                                        : msg
+                                                    )
+                                                  }
+                                                : ex
+                                            ))
+                                          }}
+                                        />
+                                      ) : message.type === 'system' && !message.hasBeenTyped ? (
+                                        // Don't show messages that haven't been typed yet
+                                        null
+                                      ) : message.type === 'system' ? (
+                                        <FormattedMessage content={message.content} parseVocabulary={parseVocabularyTerms} />
+                                      ) : (
+                                        message.content
+                                      )}
+                                    </div>
                                   </div>
-                                </div>
+                                )}
                               </div>
                             </div>
                           )
