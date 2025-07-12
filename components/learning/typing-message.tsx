@@ -184,8 +184,38 @@ export function TypingMessage({
   const renderContent = () => {
     const displayContent = getDisplayContent()
     
-    // We should NOT apply parseVocabulary inside markdown components
-    // Instead, let's render markdown first, then apply vocabulary parsing
+    // Pre-process vocabulary terms if parseVocabulary is provided
+    let processedDisplay = displayContent
+    const replacements: { placeholder: string; component: React.ReactNode }[] = []
+    
+    if (parseVocabulary) {
+      // Extract vocabulary terms and create placeholders
+      const vocabRegex = /\b(Variable|Coefficient|Constant|PEMDAS|15m \+ 20 = 80|10x \+ 4 = 24|2x \+ 5 = 15)\b/gi
+      const matches: { start: number; end: number; term: string }[] = []
+      let match: RegExpExecArray | null
+      
+      while ((match = vocabRegex.exec(displayContent)) !== null) {
+        matches.push({
+          start: match.index,
+          end: match.index + match[0].length,
+          term: match[0]
+        })
+      }
+      
+      // Replace from end to start to maintain positions
+      matches.reverse().forEach((m, idx) => {
+        const placeholder = `__VOCAB_TYPE_${idx}__`
+        processedDisplay = 
+          processedDisplay.slice(0, m.start) + 
+          placeholder + 
+          processedDisplay.slice(m.end)
+        
+        // Store the vocabulary component
+        const vocabComponent = parseVocabulary(m.term)
+        replacements.unshift({ placeholder, component: vocabComponent })
+      })
+    }
+    
     return (
       <ReactMarkdown
         remarkPlugins={[remarkMath]}
@@ -207,16 +237,41 @@ export function TypingMessage({
           ul: ({ children }: { children?: React.ReactNode }) => <ul className="list-disc list-inside ml-4 my-2">{children}</ul>,
           ol: ({ children }: { children?: React.ReactNode }) => <ol className="list-decimal list-inside ml-4 my-2">{children}</ol>,
           li: ({ children }: { children?: React.ReactNode }) => <li className="my-1">{children}</li>,
-          // Custom text renderer that applies vocabulary parsing
+          // Handle vocabulary placeholders
           text: ({ children }: { children?: React.ReactNode }) => {
-            if (parseVocabulary && typeof children === 'string') {
-              return <>{parseVocabulary(children)}</>
+            if (typeof children === 'string' && replacements.length > 0) {
+              const parts: React.ReactNode[] = []
+              let lastIndex = 0
+              
+              const placeholderRegex = /__VOCAB_TYPE_\d+__/g
+              let match: RegExpExecArray | null
+              
+              while ((match = placeholderRegex.exec(children)) !== null) {
+                if (match.index > lastIndex) {
+                  parts.push(children.slice(lastIndex, match.index))
+                }
+                
+                const replacement = replacements.find(r => r.placeholder === match![0])
+                if (replacement) {
+                  parts.push(replacement.component)
+                } else {
+                  parts.push(match[0])
+                }
+                
+                lastIndex = match.index + match[0].length
+              }
+              
+              if (lastIndex < children.length) {
+                parts.push(children.slice(lastIndex))
+              }
+              
+              return parts.length > 0 ? <>{parts}</> : children
             }
             return <>{children}</>
           }
         }}
       >
-        {displayContent}
+        {processedDisplay}
       </ReactMarkdown>
     )
   }
@@ -224,9 +279,6 @@ export function TypingMessage({
   return (
     <div className={cn("typing-message", className)}>
       {renderContent()}
-      {!isComplete && (
-        <span className="inline-block w-1 h-4 bg-gray-400 animate-pulse ml-0.5" />
-      )}
     </div>
   )
 } 

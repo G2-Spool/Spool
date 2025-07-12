@@ -1,6 +1,7 @@
 "use client"
 
 import React, { useState, useEffect, useRef } from 'react'
+import { createPortal } from 'react-dom'
 import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Textarea } from '@/components/ui/textarea'
@@ -24,11 +25,130 @@ import remarkMath from 'remark-math'
 import rehypeKatex from 'rehype-katex'
 import 'katex/dist/katex.min.css'
 
+// Custom styles for subtle term highlighting
+const termHighlightStyles = `
+  @keyframes subtleHighlight {
+    0% { 
+      border-color: transparent; 
+      background-color: transparent;
+    }
+    11% { 
+      border-color: rgba(156, 163, 175, 0.4);
+      background-color: rgba(156, 163, 175, 0.05);
+    }
+    22% { 
+      border-color: transparent; 
+      background-color: transparent;
+    }
+    33% { 
+      border-color: rgba(156, 163, 175, 0.4);
+      background-color: rgba(156, 163, 175, 0.05);
+    }
+    44% { 
+      border-color: transparent; 
+      background-color: transparent;
+    }
+    56% { 
+      border-color: rgba(156, 163, 175, 0.4);
+      background-color: rgba(156, 163, 175, 0.05);
+    }
+    100% { 
+      border-color: transparent; 
+      background-color: transparent;
+    }
+  }
+  
+  .term-highlight {
+    border: 1px solid transparent;
+    border-radius: 6px;
+  }
+  
+  .term-highlight-active {
+    animation: subtleHighlight 3.6s ease-in-out;
+    border: 1px solid transparent;
+    border-radius: 6px;
+  }
+  
+  /* Gradient glow effects */
+  .vocab-glow:hover {
+    filter: drop-shadow(0 0 8px rgba(79, 209, 197, 0.5));
+  }
+  
+  .equation-glow:hover {
+    filter: drop-shadow(0 0 8px rgba(128, 90, 213, 0.5));
+  }
+  
+  .concept-glow:hover {
+    filter: drop-shadow(0 0 8px rgba(237, 100, 166, 0.5));
+  }
+  
+  /* Tooltip animations */
+  @keyframes animate-in {
+    from {
+      opacity: 0;
+      transform: translate(-50%, 0.25rem);
+    }
+    to {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+  }
+  
+  .animate-in {
+    animation: animate-in 0.2s ease-out;
+  }
+`
+
+// Response highlight styles
+const responseHighlightStyles = `
+  .response-highlight-vague {
+    background-color: rgba(252, 211, 77, 0.1);
+    border: 1px solid rgba(252, 211, 77, 0.4);
+    border-radius: 4px;
+    padding: 2px 4px;
+    transition: all 0.2s ease;
+  }
+  
+  .response-highlight-vague:hover {
+    background-color: rgba(252, 211, 77, 0.15);
+    border-color: rgba(252, 211, 77, 0.6);
+  }
+  
+  .response-highlight-incorrect {
+    background-color: rgba(248, 113, 113, 0.1);
+    border: 1px solid rgba(248, 113, 113, 0.4);
+    border-radius: 4px;
+    padding: 2px 4px;
+    transition: all 0.2s ease;
+  }
+  
+  .response-highlight-incorrect:hover {
+    background-color: rgba(248, 113, 113, 0.15);
+    border-color: rgba(248, 113, 113, 0.6);
+  }
+`
+
+// Inject styles
+if (typeof document !== 'undefined') {
+  const styleSheet = document.createElement('style')
+  styleSheet.textContent = termHighlightStyles + '\n' + responseHighlightStyles
+  if (!document.head.querySelector('style[data-term-highlight]')) {
+    styleSheet.setAttribute('data-term-highlight', 'true')
+    document.head.appendChild(styleSheet)
+  }
+}
+
 // Types
 interface VocabularyTerm {
   term: string
   definition: string
   type: 'vocabulary' | 'equation' | 'concept'
+}
+
+interface ResponseHighlight {
+  type: 'vague' | 'incorrect'
+  text: string
+  tooltip: string
 }
 
 interface ChatMessage {
@@ -42,6 +162,7 @@ interface ChatMessage {
   exerciseId?: string
   isSubExercise?: boolean
   subExerciseLevel?: number
+  highlights?: ResponseHighlight[] // New field for response highlights
 }
 
 interface Exercise {
@@ -63,6 +184,202 @@ interface ChatExerciseInterfaceProps {
   conceptTitle?: string
   topicId?: string
   className?: string
+}
+
+// Response Highlight Component
+const ResponseHighlight: React.FC<{
+  text: string
+  type: 'vague' | 'incorrect'
+  tooltip: string
+}> = ({ text, type, tooltip }) => {
+  const [showTooltip, setShowTooltip] = useState(false)
+  const [tooltipTimer, setTooltipTimer] = useState<NodeJS.Timeout | null>(null)
+  const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 })
+  const [isPositionSet, setIsPositionSet] = useState(false)
+  const spanRef = useRef<HTMLSpanElement>(null)
+
+  const updateTooltipPosition = () => {
+    if (spanRef.current) {
+      const rect = spanRef.current.getBoundingClientRect()
+      setTooltipPosition({
+        x: rect.left + rect.width / 2,
+        y: rect.top - 8
+      })
+      setIsPositionSet(true)
+    }
+  }
+
+  const handleMouseEnter = () => {
+    if (tooltipTimer) {
+      clearTimeout(tooltipTimer)
+    }
+    
+    // Reset position state
+    setIsPositionSet(false)
+    
+    const timer = setTimeout(() => {
+      updateTooltipPosition()
+      // Use requestAnimationFrame to ensure position is set before showing
+      requestAnimationFrame(() => {
+        setShowTooltip(true)
+      })
+    }, 300)
+    setTooltipTimer(timer)
+  }
+
+  const handleMouseLeave = () => {
+    if (tooltipTimer) {
+      clearTimeout(tooltipTimer)
+      setTooltipTimer(null)
+    }
+    setShowTooltip(false)
+  }
+
+  // Cleanup timer on unmount
+  useEffect(() => {
+    return () => {
+      if (tooltipTimer) {
+        clearTimeout(tooltipTimer)
+      }
+    }
+  }, [tooltipTimer])
+
+  return (
+    <>
+      <span
+        ref={spanRef}
+        className={cn(
+          "cursor-pointer",
+          type === 'vague' ? "response-highlight-vague" : "response-highlight-incorrect"
+        )}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+      >
+        {text}
+      </span>
+      
+      {showTooltip && isPositionSet && typeof document !== 'undefined' && createPortal(
+        <div 
+          className="fixed z-50 pointer-events-none transition-opacity duration-200"
+          style={{
+            left: `${tooltipPosition.x}px`,
+            top: `${tooltipPosition.y}px`,
+            transform: 'translate(-50%, -100%)',
+            opacity: showTooltip ? 1 : 0
+          }}
+        >
+          <div className="px-3 py-2 bg-[#373737] border border-gray-600 rounded-lg shadow-lg whitespace-nowrap">
+          <p className="text-sm text-white">{tooltip}</p>
+          <div className="absolute top-full left-1/2 transform -translate-x-1/2">
+              <div className="w-2 h-2 bg-[#373737] border-r border-b border-gray-600 rotate-45"></div>
+          </div>
+        </div>
+        </div>,
+        document.body
+      )}
+    </>
+  )
+}
+
+// Parse highlighted sections from AI response
+const parseHighlights = (content: string): ResponseHighlight[] => {
+  const highlights: ResponseHighlight[] = []
+  
+  // Parse vague highlights: [[vague:text]]
+  const vagueRegex = /\[\[vague:(.*?)\]\]/g
+  let match
+  while ((match = vagueRegex.exec(content)) !== null) {
+    highlights.push({
+      type: 'vague',
+      text: match[1],
+      tooltip: 'Try elaborating'
+    })
+  }
+  
+  // Parse incorrect highlights: [[incorrect:text]]
+  const incorrectRegex = /\[\[incorrect:(.*?)\]\]/g
+  while ((match = incorrectRegex.exec(content)) !== null) {
+    highlights.push({
+      type: 'incorrect',
+      text: match[1],
+      tooltip: "Let's correct this"
+    })
+  }
+  
+  return highlights
+}
+
+// Apply highlights to student message
+const applyHighlightsToText = (text: string, highlights: ResponseHighlight[]): React.ReactNode => {
+  if (!highlights || highlights.length === 0) {
+    return text
+  }
+
+  // Sort highlights by their position in the text (longest first to avoid partial matches)
+  const sortedHighlights = [...highlights].sort((a, b) => b.text.length - a.text.length)
+  
+  const elements: React.ReactNode[] = []
+  let remainingText = text
+  let currentIndex = 0
+  
+  // Track which parts have been highlighted to avoid overlaps
+  const highlightedRanges: Array<{start: number, end: number}> = []
+  
+  sortedHighlights.forEach(highlight => {
+    const regex = new RegExp(highlight.text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g')
+    let match
+    
+    while ((match = regex.exec(text)) !== null) {
+      const start = match.index
+      const end = start + highlight.text.length
+      
+      // Check if this range overlaps with any existing highlight
+      const overlaps = highlightedRanges.some(range => 
+        (start >= range.start && start < range.end) || 
+        (end > range.start && end <= range.end)
+      )
+      
+      if (!overlaps) {
+        highlightedRanges.push({ start, end })
+      }
+    }
+  })
+  
+  // Sort ranges by start position
+  highlightedRanges.sort((a, b) => a.start - b.start)
+  
+  // Build the elements array
+  let lastEnd = 0
+  highlightedRanges.forEach(range => {
+    // Add text before highlight
+    if (range.start > lastEnd) {
+      elements.push(text.slice(lastEnd, range.start))
+    }
+    
+    // Find the highlight for this range
+    const highlightText = text.slice(range.start, range.end)
+    const highlight = highlights.find(h => h.text === highlightText)
+    
+    if (highlight) {
+      elements.push(
+        <ResponseHighlight
+          key={`${highlight.type}-${range.start}`}
+          text={highlight.text}
+          type={highlight.type}
+          tooltip={highlight.tooltip}
+        />
+      )
+    }
+    
+    lastEnd = range.end
+  })
+  
+  // Add remaining text
+  if (lastEnd < text.length) {
+    elements.push(text.slice(lastEnd))
+  }
+  
+  return elements.length > 0 ? elements : text
 }
 
 // Vocabulary terms for the concept
@@ -89,19 +406,19 @@ const mockExercises: Exercise[] = [
       {
         id: 'msg-1',
         type: 'system',
-        content: 'Let\'s practice solving two-step equations! I\'ll guide you through this step by step.',
+        content: 'Let\'s practice solving two-step equations! In these problems, we\'ll work with a Variable (the unknown value we\'re solving for) and use PEMDAS to guide our solution steps.',
         timestamp: new Date(),
         exerciseId: 'exercise-1',
-        hasBeenTyped: true, // Mark as already typed
+        hasBeenTyped: true,
         isCurrentlyTyping: false
       },
       {
         id: 'msg-2',
         type: 'system',
-        content: 'Problem: You want to join a gym. The gym charges a one-time $20 sign-up fee and then $15 per month. You have a total budget of $80 to spend. Write and solve an equation to find out how many months (m) you can be a member.\n\nExplain each step of your thought process.',
+        content: 'Problem: You want to join a gym. The gym charges a one-time \\$20 sign-up fee and then \\$15 per month. You have a total budget of \\$80 to spend. Write and solve an equation to find out how many months (m) you can be a member.\n\nThis gives us the equation: 15m + 20 = 80\n\nExplain each step of your thought process.',
         timestamp: new Date(),
         exerciseId: 'exercise-1',
-        hasBeenTyped: true, // Mark as already typed
+        hasBeenTyped: true,
         isCurrentlyTyping: false
       }
     ]
@@ -114,71 +431,100 @@ const mockExercises: Exercise[] = [
 const mockFeedbackResponses = [
   {
     id: 'feedback-1',
-    content: 'Evaluation Complete.\n\n**Step 1:** ✅ Correctly formulated equation.\n\n**Step 2:** ❌ Incorrect order of operations.\n\n**Step 3:** ❌ Incorrect application of division.\n\n**Step 4:** ❌ Incorrect result.\n\nSending articulated Step 2 to remediation AI...'
+    content: 'Evaluation Complete.\n\n**Step 1:** ✅ Correctly formulated equation with the Variable m representing months.\n\n**Step 2:** ❌ Incorrect order of operations. [[incorrect:get rid of the 15 first]]\n\nLet me help you with Step 2 - this is a common mistake when working with the Coefficient that we can fix together.\n\nSending articulated Step 2 to remediation AI...'
   },
   {
     id: 'remediation-1',
-    content: 'I see your logic in Step 2 was to "get rid of the 15 first." Let\'s look at the **Workflow** section again.\n\n*Workflow Step 2* is "Undo Addition/Subtraction" and *Step 3* is "Undo Multiplication/Division." You tried to do multiplication/division first. Remember the "getting dressed" mental model: you have to undo things in the reverse order.',
+    content: 'I see your logic in Step 2 was to "get rid of the 15 first." Let\'s look at the **Workflow** section again.\n\n*Workflow Step 2* is "Undo Addition/Subtraction" and *Step 3* is "Undo Multiplication/Division." You tried to do multiplication/division first. Remember the "getting dressed" mental model and PEMDAS: you have to undo things in the reverse order.',
     isSubExercise: true
   },
   {
     id: 'sub-exercise-1',
-    content: 'Sub-Exercise: Let\'s practice that specific step. If you have the equation $10x + 4 = 24$, what is the very first thing you must do to both sides to follow the correct workflow?',
+    content: 'Sub-Exercise: Let\'s practice that specific step. If you have the equation 10x + 4 = 24, what is the very first thing you must do to both sides to isolate the Variable and follow the correct workflow?',
     isSubExercise: true
   },
   {
     id: 'sub-exercise-response',
-    content: 'Exactly! Now, apply that same logic to your original problem: $15m + 20 = 80$.\n\nWhat should be the very first step?'
+    content: 'Exactly! [[vague:Now, apply that same logic]] to your original problem: 15m + 20 = 80.\n\nNotice how we need to deal with the Constant (20) before we can work with the Coefficient (15).\n\nWhat should be the very first step?'
   },
   {
     id: 'completion-response',
-    content: 'Perfect! You correctly identified that we need to subtract 20 from both sides first. This gives us $15m = 60$, and then dividing by 15 gives us $m = 4$.\n\n**Solution:** You can be a member for 4 months! 🎉\n\n<EXERCISE_COMPLETE>Two-Step Linear Equations Practice</EXERCISE_COMPLETE>\n\nExcellent work mastering this concept! You\'ve demonstrated solid understanding of the correct order of operations in solving two-step equations.'
+    content: 'Perfect! You correctly identified that we need to subtract 20 from both sides first. This gives us 15m = 60, and then dividing by 15 (the Coefficient) gives us m = 4.\n\n**Solution:** You can be a member for 4 months! 🎉\n\n<EXERCISE_COMPLETE>Two-Step Linear Equations Practice</EXERCISE_COMPLETE>\n\nExcellent work mastering this concept! You\'ve demonstrated solid understanding of the correct order of operations in solving two-step equations using PEMDAS.'
   }
 ]
 
-// Vocabulary parsing function
-const parseVocabularyTerms = (text: string): React.ReactNode => {
+// Vocabulary parsing function - moved outside but made generic
+const parseVocabularyTermsGeneric = (
+  text: string, 
+  onTermClick?: (term: string, type: string) => void
+): React.ReactNode => {
   const elements: React.ReactNode[] = []
-  let lastIndex = 0
 
   // Sort terms by length (longest first) to avoid partial matches
   const sortedTerms = [...vocabularyTerms].sort((a, b) => b.term.length - a.term.length)
 
+  // Collect all matches with their positions
+  const matches: Array<{vocab: VocabularyTerm, start: number, end: number, matchedText: string}> = []
+
   sortedTerms.forEach(vocab => {
-    const regex = new RegExp(`\\b${vocab.term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`, 'gi')
+    // For equation terms, escape special regex characters
+    const escapedTerm = vocab.term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+    // For non-equation terms, use word boundaries
+    const pattern = vocab.type === 'equation' 
+      ? escapedTerm 
+      : `\\b${escapedTerm}\\b`
+    
+    const regex = new RegExp(pattern, 'gi')
     let match
     
     while ((match = regex.exec(text)) !== null) {
-      if (match.index !== undefined) {
-        const start = match.index
-        const end = start + match[0].length
-        
-        // Add text before the term
-        if (start > lastIndex) {
-          elements.push(text.slice(lastIndex, start))
+      matches.push({
+        vocab,
+        start: match.index,
+        end: match.index + match[0].length,
+        matchedText: match[0]
+      })
+    }
+  })
+
+  // Sort matches by position
+  matches.sort((a, b) => a.start - b.start)
+
+  // Remove overlapping matches (keep the first one)
+  const filteredMatches = matches.filter((match, index) => {
+    if (index === 0) return true
+    const prevMatch = matches[index - 1]
+    return match.start >= prevMatch.end
+  })
+
+  // Build the result
+  let lastEnd = 0
+  filteredMatches.forEach(match => {
+    // Add text before the match
+    if (match.start > lastEnd) {
+      elements.push(text.slice(lastEnd, match.start))
         }
         
         // Add the vocabulary term as interactive element
         elements.push(
           <VocabularyHighlight 
-            key={`${vocab.term}-${start}`}
-            term={vocab.term}
-            definition={vocab.definition}
-            type={vocab.type}
+        key={`${match.vocab.term}-${match.start}`}
+        term={match.matchedText}
+        definition={match.vocab.definition}
+        type={match.vocab.type}
+        onTermClick={() => onTermClick?.(match.matchedText, match.vocab.type)}
           />
         )
         
-        lastIndex = end
-      }
-    }
+    lastEnd = match.end
   })
 
   // Add remaining text
-  if (lastIndex < text.length) {
-    elements.push(text.slice(lastIndex))
+  if (lastEnd < text.length) {
+    elements.push(text.slice(lastEnd))
   }
 
-  return elements.length > 0 ? elements : text
+  return elements.length > 0 ? <>{elements}</> : text
 }
 
 // Vocabulary highlight component
@@ -186,40 +532,96 @@ const VocabularyHighlight: React.FC<{
   term: string
   definition: string
   type: 'vocabulary' | 'equation' | 'concept'
-}> = ({ term, definition, type }) => {
+  onTermClick?: (term: string) => void
+}> = ({ term, definition, type, onTermClick }) => {
   const [showTooltip, setShowTooltip] = useState(false)
   const [tooltipTimer, setTooltipTimer] = useState<NodeJS.Timeout | null>(null)
+  const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 })
+  const [isPositionSet, setIsPositionSet] = useState(false)
+  const spanRef = useRef<HTMLSpanElement>(null)
+
+  const updateTooltipPosition = () => {
+    if (spanRef.current) {
+      const rect = spanRef.current.getBoundingClientRect()
+      setTooltipPosition({
+        x: rect.left + rect.width / 2,
+        y: rect.top - 8
+      })
+      setIsPositionSet(true)
+    }
+  }
 
   const handleMouseEnter = () => {
+    if (tooltipTimer) {
+      clearTimeout(tooltipTimer)
+    }
+    
+    // Reset position state
+    setIsPositionSet(false)
+    
     const timer = setTimeout(() => {
-      setShowTooltip(true)
-    }, 2000)
+      updateTooltipPosition()
+      // Use requestAnimationFrame to ensure position is set before showing
+      requestAnimationFrame(() => {
+        setShowTooltip(true)
+      })
+    }, 300)
     setTooltipTimer(timer)
   }
 
   const handleMouseLeave = () => {
     if (tooltipTimer) {
       clearTimeout(tooltipTimer)
+      setTooltipTimer(null)
     }
     setShowTooltip(false)
   }
 
-  const handleClick = () => {
-    // Scroll to definition in upper sections
-    const definitionElement = document.getElementById(`definition-${term}`)
-    if (definitionElement) {
-      definitionElement.scrollIntoView({ behavior: 'smooth' })
+  const handleClick = (e: React.MouseEvent) => {
+    e.preventDefault()
+    
+    // Clear any existing timer
+    if (tooltipTimer) {
+      clearTimeout(tooltipTimer)
+      setTooltipTimer(null)
     }
+    
+    // Update position and show tooltip immediately on click
+    updateTooltipPosition()
+    setShowTooltip(true)
+    
+    // Call the parent's click handler if provided
+    if (onTermClick) {
+      onTermClick(term)
+    }
+    
+    // Also emit the custom event for any parent listeners
+    window.dispatchEvent(new CustomEvent('scrollToVocabularyTerm', { 
+      detail: { term, type } 
+    }))
+    
+    console.log(`Clicked on ${type}: ${term}`)
   }
 
+  // Cleanup timer on unmount
+  useEffect(() => {
+    return () => {
+      if (tooltipTimer) {
+        clearTimeout(tooltipTimer)
+    }
+  }
+  }, [tooltipTimer])
+
   return (
-    <span className="relative inline-block">
+    <>
       <span
+        ref={spanRef}
         className={cn(
-          "font-semibold cursor-pointer transition-colors duration-200",
-          type === 'vocabulary' && "text-[#4FD1C5] hover:text-[#5FE1D5]",
-          type === 'equation' && "text-[#805AD5] hover:text-[#9F7AEA]",
-          type === 'concept' && "text-[#ED64A6] hover:text-[#F687B3]"
+          "cursor-pointer transition-all duration-200 relative font-medium inline-block",
+          // Gradient text styles by type
+          type === 'vocabulary' && "bg-gradient-to-r from-[#4FD1C5] to-[#38B2AC] bg-clip-text text-transparent hover:from-[#5FE1D5] hover:to-[#48C2BC] vocab-glow",
+          type === 'equation' && "bg-gradient-to-r from-[#805AD5] to-[#9F7AEA] bg-clip-text text-transparent hover:from-[#9F7AEA] hover:to-[#B794F4] equation-glow",
+          type === 'concept' && "bg-gradient-to-r from-[#ED64A6] to-[#F687B3] bg-clip-text text-transparent hover:from-[#F687B3] hover:to-[#FBB6CE] concept-glow"
         )}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
@@ -228,15 +630,46 @@ const VocabularyHighlight: React.FC<{
         {term}
       </span>
       
-             {showTooltip && (
-         <div className="absolute z-50 bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-[#454545] border border-[#4a4a47] rounded-lg shadow-lg max-w-xs">
-           <p className="text-sm text-white leading-relaxed">{definition}</p>
-           <div className="absolute top-full left-1/2 transform -translate-x-1/2">
-             <div className="w-2 h-2 bg-[#454545] border-r border-b border-[#4a4a47] rotate-45"></div>
+      {showTooltip && isPositionSet && typeof document !== 'undefined' && createPortal(
+        <div 
+          className="fixed z-50 pointer-events-none transition-opacity duration-200"
+          style={{
+            left: `${tooltipPosition.x}px`,
+            top: `${tooltipPosition.y}px`,
+            transform: 'translate(-50%, -100%)',
+            opacity: showTooltip ? 1 : 0
+          }}
+        >
+          <div className="relative bg-[#373737] border border-gray-600 rounded-lg shadow-xl px-4 py-3 max-w-sm w-64">
+            {/* Type indicator */}
+            <div className="flex items-center gap-2 mb-2">
+              <div className={cn(
+                "w-2 h-2 rounded-full",
+                type === 'vocabulary' && "bg-[#4FD1C5]",
+                type === 'equation' && "bg-[#805AD5]",
+                type === 'concept' && "bg-[#ED64A6]"
+              )} />
+              <span className="text-xs text-gray-400 uppercase tracking-wider">
+                {type === 'equation' ? 'Formula' : type}
+              </span>
            </div>
+            
+            {/* Definition */}
+            <p className="text-sm text-gray-200 leading-relaxed">{definition}</p>
+            
+            {/* Click hint */}
+            <p className="text-xs text-gray-500 mt-2 italic">Click to view in context</p>
+            
+            {/* Arrow */}
+            <div className="absolute top-full left-1/2 transform -translate-x-1/2 -mt-px">
+              <div className="w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-t-[6px] border-t-[#373737]"></div>
+              <div className="w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-t-[6px] border-t-gray-600 -mt-[7px]"></div>
          </div>
+          </div>
+        </div>,
+        document.body
        )}
-    </span>
+    </>
   )
 }
 
@@ -254,15 +687,39 @@ const FormattedMessage: React.FC<{
   content: string
   parseVocabulary?: (text: string) => React.ReactNode
 }> = ({ content, parseVocabulary }) => {
+  // Process all text nodes recursively
+  const processNode = (node: React.ReactNode): React.ReactNode => {
+    if (!parseVocabulary) return node
+    
+    // Handle string nodes
+    if (typeof node === 'string') {
+      return parseVocabulary(node)
+    }
+    
+    // Handle React elements
+    if (React.isValidElement(node)) {
+      const children = React.Children.map(node.props.children, child => processNode(child))
+      return React.cloneElement(node, {}, children)
+    }
+    
+    // Handle arrays
+    if (Array.isArray(node)) {
+      return node.map((child, idx) => <React.Fragment key={idx}>{processNode(child)}</React.Fragment>)
+    }
+    
+    // Return other types as-is
+    return node
+  }
+  
   return (
     <ReactMarkdown
       remarkPlugins={[remarkMath]}
       rehypePlugins={[rehypeKatex]}
       components={{
-        p: ({ children }: { children?: React.ReactNode }) => <p className="mb-2 last:mb-0">{children}</p>,
-        strong: ({ children }: { children?: React.ReactNode }) => <strong className="font-semibold">{children}</strong>,
-        em: ({ children }: { children?: React.ReactNode }) => <em className="italic">{children}</em>,
-        code: ({ inline, children }: { inline?: boolean; children?: React.ReactNode }) => {
+        p: ({ children }) => <p className="mb-2 last:mb-0">{processNode(children)}</p>,
+        strong: ({ children }) => <strong className="font-semibold">{processNode(children)}</strong>,
+        em: ({ children }) => <em className="italic">{processNode(children)}</em>,
+        code: ({ inline, children }: any) => {
           if (inline) {
             return <code className="px-1 py-0.5 bg-gray-700 rounded text-sm">{children}</code>
           }
@@ -272,16 +729,9 @@ const FormattedMessage: React.FC<{
             </pre>
           )
         },
-        ul: ({ children }: { children?: React.ReactNode }) => <ul className="list-disc list-inside ml-4 my-2">{children}</ul>,
-        ol: ({ children }: { children?: React.ReactNode }) => <ol className="list-decimal list-inside ml-4 my-2">{children}</ol>,
-        li: ({ children }: { children?: React.ReactNode }) => <li className="my-1">{children}</li>,
-        // Custom text renderer that applies vocabulary parsing
-        text: ({ children }: { children?: React.ReactNode }) => {
-          if (parseVocabulary && typeof children === 'string') {
-            return <>{parseVocabulary(children)}</>
-          }
-          return <>{children}</>
-        }
+        ul: ({ children }) => <ul className="list-disc list-inside ml-4 my-2">{children}</ul>,
+        ol: ({ children }) => <ol className="list-decimal list-inside ml-4 my-2">{children}</ol>,
+        li: ({ children }) => <li className="my-1">{processNode(children)}</li>
       }}
     >
       {content}
@@ -323,8 +773,10 @@ const VocabularyDrawer: React.FC<{
   onClose: () => void
   newTerms: string[]
   onClearNewTerms: () => void
-}> = ({ isOpen, onClose, newTerms, onClearNewTerms }) => {
+  setDrawerOpen: (open: boolean) => void
+}> = ({ isOpen, onClose, newTerms, onClearNewTerms, setDrawerOpen }) => {
   const drawerRef = useRef<HTMLDivElement>(null)
+  const [shouldAnimate, setShouldAnimate] = useState(false)
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -342,6 +794,21 @@ const VocabularyDrawer: React.FC<{
     }
   }, [isOpen, onClose])
 
+  // Trigger animation when drawer opens and there are new terms
+  useEffect(() => {
+    if (isOpen && newTerms.length > 0) {
+      setShouldAnimate(true)
+      
+      // Clear animation state after animation completes
+      const timer = setTimeout(() => {
+        setShouldAnimate(false)
+        onClearNewTerms()
+      }, 4100) // Animation duration + small buffer
+      
+      return () => clearTimeout(timer)
+    }
+  }, [isOpen, newTerms.length, onClearNewTerms])
+
   return (
     <>
       {/* Drawer Tab */}
@@ -353,7 +820,7 @@ const VocabularyDrawer: React.FC<{
         >
           <button
             onClick={() => {
-              onClearNewTerms()
+              setDrawerOpen(true)
             }}
             className={cn(
               "bg-[#454545] border border-[#4a4a47] rounded-l-lg px-2 py-8 text-white text-sm font-medium transition-all duration-300",
@@ -398,10 +865,10 @@ const VocabularyDrawer: React.FC<{
                     <div 
                       className={cn(
                         "p-3 transition-all duration-300 hover:bg-[#454545]",
-                        newTerms.includes(vocab.term) && "ring-2 ring-yellow-400/50 animate-pulse"
+                        newTerms.includes(vocab.term) && shouldAnimate && "term-highlight-active"
                       )}
                       style={{
-                        animationDelay: newTerms.includes(vocab.term) ? `${index * 0.1}s` : '0s'
+                        animationDelay: newTerms.includes(vocab.term) && shouldAnimate ? `${index * 0.1}s` : '0s'
                       }}
                     >
                       <div className="flex items-start space-x-3">
@@ -431,10 +898,10 @@ const VocabularyDrawer: React.FC<{
                     <div 
                       className={cn(
                         "p-3 transition-all duration-300 hover:bg-[#454545]",
-                        newTerms.includes(vocab.term) && "ring-2 ring-yellow-400/50 animate-pulse"
+                        newTerms.includes(vocab.term) && shouldAnimate && "term-highlight-active"
                       )}
                       style={{
-                        animationDelay: newTerms.includes(vocab.term) ? `${index * 0.1}s` : '0s'
+                        animationDelay: newTerms.includes(vocab.term) && shouldAnimate ? `${index * 0.1}s` : '0s'
                       }}
                     >
                       <div className="flex items-start space-x-3">
@@ -464,10 +931,10 @@ const VocabularyDrawer: React.FC<{
                     <div 
                       className={cn(
                         "p-3 transition-all duration-300 hover:bg-[#454545]",
-                        newTerms.includes(vocab.term) && "ring-2 ring-yellow-400/50 animate-pulse"
+                        newTerms.includes(vocab.term) && shouldAnimate && "term-highlight-active"
                       )}
                       style={{
-                        animationDelay: newTerms.includes(vocab.term) ? `${index * 0.1}s` : '0s'
+                        animationDelay: newTerms.includes(vocab.term) && shouldAnimate ? `${index * 0.1}s` : '0s'
                       }}
                     >
                       <div className="flex items-start space-x-3">
@@ -515,6 +982,7 @@ export function ChatExerciseInterface({
   const [showHint, setShowHint] = useState(false)
   const [drawerOpen, setDrawerOpen] = useState(false)
   const [newTerms, setNewTerms] = useState<string[]>([])
+  const [clickedTerm, setClickedTerm] = useState<string | null>(null)
   const [typingTimer, setTypingTimer] = useState<NodeJS.Timeout | null>(null)
   const [showHintTooltip, setShowHintTooltip] = useState(false)
   const [hintTooltipTimer, setHintTooltipTimer] = useState<NodeJS.Timeout | null>(null)
@@ -690,26 +1158,56 @@ export function ChatExerciseInterface({
           responseContent = "I can see you're working on this problem. Let me help guide you through the correct approach to solving two-step linear equations."
         }
         
+        // Parse highlights from the response
+        const highlights = parseHighlights(responseContent)
+        
+        // Clean the response content by removing highlight markers
+        const cleanedContent = responseContent
+          .replace(/\[\[vague:(.*?)\]\]/g, '$1')
+          .replace(/\[\[incorrect:(.*?)\]\]/g, '$1')
+        
         // Add AI response
         const aiMessage: ChatMessage = {
           id: `ai-${Date.now()}`,
           type: 'system',
-          content: responseContent,
+          content: cleanedContent,
           timestamp: new Date(),
           exerciseId: exerciseId,
           hasBeenTyped: false, // New messages should be typed
           isCurrentlyTyping: false // Will be set to true by the typing queue
         }
 
-        const finalExercises = updatedExercises.map(ex => 
-          ex.id === exerciseId 
-            ? { ...ex, messages: [...ex.messages, aiMessage], isLoading: false }
-            : ex
-        )
+        // Update the final exercises with highlights applied to the last student message
+        const finalExercises = updatedExercises.map(ex => {
+          if (ex.id === exerciseId) {
+            const updatedMessages = [...ex.messages]
+            
+            // Apply highlights to the last student message if there are any
+            if (highlights.length > 0) {
+              const lastStudentMessageIndex = updatedMessages
+                .map((msg, idx) => ({ msg, idx }))
+                .filter(({ msg }) => msg.type === 'student')
+                .pop()?.idx
+                
+              if (lastStudentMessageIndex !== undefined) {
+                updatedMessages[lastStudentMessageIndex] = {
+                  ...updatedMessages[lastStudentMessageIndex],
+                  highlights: highlights
+                }
+              }
+            }
+            
+            // Add the AI response
+            updatedMessages.push(aiMessage)
+            
+            return { ...ex, messages: updatedMessages, isLoading: false }
+          }
+          return ex
+        })
 
         // Detect new vocabulary terms
         const detectedTerms = vocabularyTerms
-          .filter(vocab => responseContent.includes(vocab.term))
+          .filter(vocab => cleanedContent.includes(vocab.term))
           .map(vocab => vocab.term)
         
         if (detectedTerms.length > 0) {
@@ -731,7 +1229,7 @@ export function ChatExerciseInterface({
         }
         
         // Handle exercise completion
-        if (isCompleted && responseContent.includes('<EXERCISE_COMPLETE>')) {
+        if (isCompleted && cleanedContent.includes('<EXERCISE_COMPLETE>')) {
           setTimeout(() => {
             // Mark current exercise as completed
             setExercises(prev => prev.map(ex => 
@@ -934,6 +1432,7 @@ export function ChatExerciseInterface({
   return (
     <div className="chat-exercise-container">
       <div className={cn("w-full mt-8 space-y-4 relative", className)}>
+        
         {/* Jump to Exercise Button */}
         {jumpToExerciseVisible && (
           <div className="fixed bottom-4 right-4 z-20">
@@ -956,6 +1455,7 @@ export function ChatExerciseInterface({
             setNewTerms([])
             setDrawerOpen(true)
           }}
+          setDrawerOpen={setDrawerOpen}
         />
 
         {/* Render all exercises */}
@@ -969,7 +1469,7 @@ export function ChatExerciseInterface({
                     "flex items-center justify-between p-6 cursor-pointer z-20",
                     "bg-gradient-to-r from-[#3a3a3a] to-[#353535] hover:from-[#454545] hover:to-[#454545] transition-all duration-200",
                     "border-l-4",
-                    exercise.isExpanded ? "rounded-t-lg border-b border-[#4a4a47] sticky top-4" : "rounded-lg",
+                    exercise.isExpanded ? "rounded-t-lg border-b border-[#4a4a47] sticky top-0" : "rounded-lg",
                     exercise.status === 'active' && "border-l-blue-500",
                     exercise.status === 'completed' && "border-l-green-500",
                     exercise.status === 'collapsed' && "border-l-green-500"
@@ -988,6 +1488,7 @@ export function ChatExerciseInterface({
                       {/* Vocabulary Terms Button */}
                       <div className="relative">
                         <button
+                          data-vocab-drawer-trigger="true"
                           onClick={(e) => {
                             e.stopPropagation()
                             setDrawerOpen(true)
@@ -1145,12 +1646,18 @@ export function ChatExerciseInterface({
                                       : "bg-[#3c5552]/100 text-white max-w-[95%]",
                                     isSubExercise && "ml-6"
                                   )}>
-                                    <div className="leading-relaxed whitespace-pre-wrap">
+                                    <div className={cn(
+                                      "leading-relaxed",
+                                      message.type === 'student' && "whitespace-pre-wrap"
+                                    )}>
                                       {message.type === 'system' && message.isCurrentlyTyping ? (
                                         <TypingMessage
-                                          content={message.content}
+                                          content={message.content.trim()}
                                           speed={100}
-                                          parseVocabulary={parseVocabularyTerms}
+                                          parseVocabulary={(text) => parseVocabularyTermsGeneric(text, (term, type) => {
+                                            setNewTerms(prev => [...prev, term])
+                                            setDrawerOpen(true)
+                                          })}
                                           onComplete={() => {
                                             // Mark message as typed and not currently typing
                                             setExercises(prev => prev.map(ex => 
@@ -1171,9 +1678,17 @@ export function ChatExerciseInterface({
                                         // Don't show messages that haven't been typed yet
                                         null
                                       ) : message.type === 'system' ? (
-                                        <FormattedMessage content={message.content} parseVocabulary={parseVocabularyTerms} />
+                                        <FormattedMessage content={message.content.trim()} parseVocabulary={(text) => parseVocabularyTermsGeneric(text, (term, type) => {
+                                          setNewTerms(prev => [...prev, term])
+                                          setDrawerOpen(true)
+                                        })} />
                                       ) : (
-                                        message.content
+                                        // Student message - apply highlights if they exist
+                                        message.highlights && message.highlights.length > 0 ? (
+                                          applyHighlightsToText(message.content, message.highlights)
+                                        ) : (
+                                          message.content
+                                        )
                                       )}
                                     </div>
                                   </div>
