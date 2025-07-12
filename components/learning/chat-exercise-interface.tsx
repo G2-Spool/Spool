@@ -12,8 +12,7 @@ import {
   Loader2, 
   Lightbulb, 
   X,
-  CheckCircle,
-  AlertCircle
+  CheckCircle
 } from 'lucide-react'
 import { useStudyStreak } from '@/hooks/use-study-streak'
 
@@ -88,14 +87,7 @@ const mockExercises: Exercise[] = [
   }
 ]
 
-// Mock data for the student's first attempt (with errors)
-const mockStudentFirstAttempt = `Step 1: "The equation for the cost is 15m + 20. The total budget is $80. So, 15m + 20 = 80."
 
-Step 2: "My goal is to get m by itself. First I will get rid of the 15 that is multiplied by m."
-
-Step 3: "To do this, I will divide both sides by 15. 15m / 15 + 20 = 80 / 15."
-
-Step 4: "This gives m + 20 = 5.33. This doesn't seem right."`
 
 // Mock feedback responses
 const mockFeedbackResponses = [
@@ -117,7 +109,6 @@ const mockFeedbackResponses = [
 
 // Vocabulary parsing function
 const parseVocabularyTerms = (text: string): React.ReactNode => {
-  let parsedText = text
   const elements: React.ReactNode[] = []
   let lastIndex = 0
 
@@ -209,10 +200,10 @@ const VocabularyHighlight: React.FC<{
       </span>
       
              {showTooltip && (
-         <div className="absolute z-50 bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-[#3a3936] border border-[#4a4a47] rounded-lg shadow-lg max-w-xs">
+         <div className="absolute z-50 bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-[#454545] border border-[#4a4a47] rounded-lg shadow-lg max-w-xs">
            <p className="text-sm text-white leading-relaxed">{definition}</p>
            <div className="absolute top-full left-1/2 transform -translate-x-1/2">
-             <div className="w-2 h-2 bg-[#3a3936] border-r border-b border-[#4a4a47] rotate-45"></div>
+             <div className="w-2 h-2 bg-[#454545] border-r border-b border-[#4a4a47] rotate-45"></div>
            </div>
          </div>
        )}
@@ -296,8 +287,8 @@ const VocabularyDrawer: React.FC<{
               onClearNewTerms()
             }}
             className={cn(
-              "bg-[#3a3936] border border-[#4a4a47] rounded-l-lg px-2 py-8 text-white text-sm font-medium transition-all duration-300",
-              "hover:bg-[#3f3f3c] border-r-0 opacity-80"
+              "bg-[#454545] border border-[#4a4a47] rounded-l-lg px-2 py-8 text-white text-sm font-medium transition-all duration-300",
+              "hover:bg-[#505050] border-r-0 opacity-80"
             )}
           >
             <div className="flex flex-col items-center space-y-2">
@@ -337,7 +328,7 @@ const VocabularyDrawer: React.FC<{
                   <div key={vocab.term}>
                     <div 
                       className={cn(
-                        "p-3 transition-all duration-300 hover:bg-[#3a3936]",
+                        "p-3 transition-all duration-300 hover:bg-[#454545]",
                         newTerms.includes(vocab.term) && "ring-2 ring-yellow-400/50 animate-pulse"
                       )}
                       style={{
@@ -370,7 +361,7 @@ const VocabularyDrawer: React.FC<{
                   <div key={vocab.term}>
                     <div 
                       className={cn(
-                        "p-3 transition-all duration-300 hover:bg-[#3a3936]",
+                        "p-3 transition-all duration-300 hover:bg-[#454545]",
                         newTerms.includes(vocab.term) && "ring-2 ring-yellow-400/50 animate-pulse"
                       )}
                       style={{
@@ -403,7 +394,7 @@ const VocabularyDrawer: React.FC<{
                   <div key={vocab.term}>
                     <div 
                       className={cn(
-                        "p-3 transition-all duration-300 hover:bg-[#3a3936]",
+                        "p-3 transition-all duration-300 hover:bg-[#454545]",
                         newTerms.includes(vocab.term) && "ring-2 ring-yellow-400/50 animate-pulse"
                       )}
                       style={{
@@ -447,9 +438,12 @@ export function ChatExerciseInterface({
   const [drawerOpen, setDrawerOpen] = useState(false)
   const [newTerms, setNewTerms] = useState<string[]>([])
   const [typingTimer, setTypingTimer] = useState<NodeJS.Timeout | null>(null)
+  const [showHintTooltip, setShowHintTooltip] = useState(false)
+  const [hintTooltipTimer, setHintTooltipTimer] = useState<NodeJS.Timeout | null>(null)
   const [jumpToExerciseVisible, setJumpToExerciseVisible] = useState(false)
   const [exerciseCompleted, setExerciseCompleted] = useState(false)
   const [collapseTimer, setCollapseTimer] = useState<NodeJS.Timeout | null>(null)
+  const [isExpanded, setIsExpanded] = useState(true)
   
   const chatContainerRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLTextAreaElement>(null)
@@ -716,10 +710,21 @@ export function ChatExerciseInterface({
 
              {/* Render all exercises */}
        {exercises.map((exercise) => (
-         <Card key={exercise.id} className="bg-[#302f2c] border-[#4a4a47]">
+         <Card key={exercise.id} className="bg-[#3a3a3a] border-[#4a4a47]">
           <CardContent className="p-0">
                          {/* Header */}
-             <div className="flex items-center justify-between p-6 border-b border-[#4a4a47]">
+             <div 
+               className={cn(
+                 "flex items-center justify-between p-6 cursor-pointer",
+                 "bg-gradient-to-r from-[#3a3a3a] to-[#353535] hover:from-[#454545] hover:to-[#454545] transition-all duration-200",
+                 "border-l-4",
+                 isExpanded ? "rounded-t-lg border-b border-[#4a4a47]" : "rounded-lg",
+                 exercise.status === 'active' && "border-l-blue-500",
+                 exercise.status === 'completed' && "border-l-green-500",
+                 exercise.status === 'collapsed' && "border-l-green-500"
+               )}
+               onClick={() => setIsExpanded(!isExpanded)}
+             >
               <div className="flex items-center gap-3">
                 <h2 className="text-xl font-semibold text-white">{exercise.title}</h2>
                                  <div className="flex items-center gap-2 text-sm text-gray-400">
@@ -730,39 +735,38 @@ export function ChatExerciseInterface({
                  </div>
               </div>
               
-                             {exercise.status === 'active' && (
-                 <Button
-                   variant="ghost"
-                   size="sm"
-                   onClick={() => setDrawerOpen(true)}
-                   className="text-gray-400 hover:text-white"
-                 >
-                   View Terms
-                 </Button>
-               )}
+              {/* Chevron Icon */}
+              {isExpanded ? (
+                <ChevronUp className="w-5 h-5 text-gray-400" />
+              ) : (
+                <ChevronDown className="w-5 h-5 text-gray-400" />
+              )}
             </div>
 
-                         {/* Collapsed Exercise Summary */}
-             {exercise.status === 'collapsed' && (
-               <div className="p-6 text-gray-400">
-                <p className="text-sm">
-                  🎉 Exercise completed - You successfully mastered two-step linear equations!
-                </p>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  className="mt-2 text-[#4FD1C5] hover:text-[#5FE1D5]"
-                  onClick={() => setExercises(prev => prev.map(ex => 
-                    ex.id === exercise.id ? { ...ex, status: 'completed' } : ex
-                  ))}
-                >
-                  View Full Exercise
-                </Button>
-              </div>
-            )}
+            {/* Content - only show when expanded */}
+            {isExpanded && (
+              <div className="border-t border-[#4a4a47]">
+                {/* Collapsed Exercise Summary */}
+                {exercise.status === 'collapsed' && (
+                  <div className="p-6 text-gray-400">
+                   <p className="text-sm">
+                     🎉 Exercise completed - You successfully mastered two-step linear equations!
+                   </p>
+                   <Button
+                     variant="ghost"
+                     size="sm"
+                     className="mt-2 text-[#4FD1C5] hover:text-[#5FE1D5]"
+                     onClick={() => setExercises(prev => prev.map(ex => 
+                       ex.id === exercise.id ? { ...ex, status: 'completed' } : ex
+                     ))}
+                   >
+                     View Full Exercise
+                   </Button>
+                 </div>
+                )}
 
-            {/* Chat Container - only for active and completed exercises */}
-            {(exercise.status === 'active' || exercise.status === 'completed') && (
+                {/* Chat Container - only for active and completed exercises */}
+                {(exercise.status === 'active' || exercise.status === 'completed') && (
               <div 
                 ref={exercise.status === 'active' ? chatContainerRef : null}
                 className="p-6 space-y-4"
@@ -792,28 +796,18 @@ export function ChatExerciseInterface({
                           <div className="absolute left-6 top-0 w-0.5 h-full bg-[#805AD5]/30" />
                         )}
                         
-                                                 <div className={cn(
-                           "max-w-[85%] rounded-lg px-4 py-3 relative",
-                           message.type === 'student' 
-                             ? "bg-[#4FD1C5] text-[#1a1a18] ml-auto" 
-                             : "bg-[#3a3936] border border-[#4a4a47] text-white",
-                           isSubExercise && "ml-12 border-l-4 border-[#805AD5]"
-                         )}>
+                                                                         <div className={cn(
+                          "rounded-lg px-4 py-3 relative",
+                          message.type === 'student' 
+                            ? "bg-[#525252] border border-[#606060] text-white ml-auto min-w-[60%] max-w-[85%]" 
+                            : "bg-[#3c5552]/100 text-white max-w-[95%]",
+                          isSubExercise && "ml-12 border-l-4 border-[#805AD5]"
+                        )}>
                           <div className="leading-relaxed">
                             {message.type === 'system' 
                               ? parseVocabularyTerms(message.content)
                               : message.content
                             }
-                          </div>
-                          
-                          {/* Timestamp */}
-                                                     <div className={cn(
-                             "text-xs mt-2",
-                             message.type === 'student' 
-                               ? "text-[#1a1a18]/70 text-right" 
-                               : "text-gray-400 text-left"
-                           )}>
-                            {message.timestamp.toLocaleTimeString()}
                           </div>
 
 
@@ -826,7 +820,7 @@ export function ChatExerciseInterface({
                                  {/* Typing Indicator - only for active exercise */}
                  {exercise.status === 'active' && isTyping && (
                    <div className="flex justify-start">
-                     <div className="bg-[#3a3936] border border-[#4a4a47] rounded-lg px-4 py-3">
+                     <div className="bg-[#454545] border border-[#4a4a47] rounded-lg px-4 py-3">
                       <TypingIndicator />
                     </div>
                   </div>
@@ -842,25 +836,46 @@ export function ChatExerciseInterface({
                         onChange={(e) => setCurrentInput(e.target.value)}
                         onKeyDown={handleKeyDown}
                         placeholder="Explain your step-by-step approach..."
-                        className="min-h-[100px] resize-none pr-20 pt-12 bg-[#3a3936] border-[#4a4a47] text-white placeholder:text-gray-400 focus:outline-none focus:ring-0 focus:border-[#6b6b6b]"
+                        className="min-h-[100px] resize-none pr-20 bg-[#454545] border-[#4a4a47] text-white placeholder:text-gray-400 focus:border-[#6b6b6b] focus:ring-0"
                         disabled={isLoading}
                       />
                       
-                      {/* Hint Button - Top Right */}
-                      <Button
-                        onClick={handleHint}
-                        variant="ghost"
-                        size="sm"
-                        className="absolute top-2 right-2 h-8 w-8 p-0 text-gray-400 hover:text-yellow-400 hover:bg-transparent"
-                      >
-                        <Lightbulb className="w-6 h-6 font-bold" strokeWidth={3} />
-                      </Button>
+                      {/* Hint Button - Top Right Overlay */}
+                      <div className="absolute top-2 right-2 z-10">
+                        <Button
+                          onClick={handleHint}
+                          variant="ghost"
+                          size="sm"
+                          className="h-8 w-8 p-0 text-gray-400 hover:text-yellow-400 hover:bg-yellow-400/10"
+                          onMouseEnter={() => {
+                            const timer = setTimeout(() => {
+                              setShowHintTooltip(true)
+                            }, 500)
+                            setHintTooltipTimer(timer)
+                          }}
+                          onMouseLeave={() => {
+                            if (hintTooltipTimer) {
+                              clearTimeout(hintTooltipTimer)
+                            }
+                            setShowHintTooltip(false)
+                          }}
+                        >
+                          <Lightbulb className="w-9 h-9 font-bold" strokeWidth={3} />
+                        </Button>
+                        
+                        {/* Tooltip */}
+                        {showHintTooltip && (
+                          <div className="absolute bottom-[34px] right-0 bg-[#505050] border border-[#6a6a6a] text-white text-sm px-2 py-1 rounded shadow-lg whitespace-nowrap">
+                            Need help?
+                          </div>
+                        )}
+                      </div>
                       
                       {/* Send Button - Bottom Right */}
                       <Button
                         onClick={handleSendMessage}
                         disabled={isLoading || !currentInput.trim()}
-                        className="absolute right-2 bottom-2 h-8 w-12 p-0 bg-[#302f2c] hover:bg-[#4FD1C5]/10 hover:border-[#4FD1C5] border-2 border-transparent text-white transition-colors"
+                        className="absolute right-2 bottom-2 h-8 w-12 p-0 bg-[#3a3a3a] hover:bg-[#4FD1C5]/10 hover:border-[#618c7f] border-2 border-transparent text-white transition-colors"
                       >
                         {isLoading ? (
                           <Loader2 className="w-4 h-4 animate-spin" />
@@ -875,6 +890,8 @@ export function ChatExerciseInterface({
                     </p>
                   </div>
                 )}
+                </div>
+              )}
               </div>
             )}
           </CardContent>
