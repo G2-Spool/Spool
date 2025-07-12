@@ -5,13 +5,15 @@ import { SidebarNavigation } from "@/components/organisms/sidebar-navigation"
 
 import { Sidebar, useSidebar } from "@/components/ui/sidebar"
 import { useUnifiedNavigation } from "@/hooks/use-unified-navigation"
+import { cn } from "@/lib/utils"
 
 interface MainLayoutProps {
   children: React.ReactNode
   title?: string
+  allowOverflow?: boolean
 }
 
-function MainLayoutContent({ children, title }: MainLayoutProps) {
+function MainLayoutContent({ children, title, allowOverflow = false }: MainLayoutProps) {
   const { open } = useSidebar()
   const { activeTab } = useUnifiedNavigation()
   
@@ -40,16 +42,21 @@ function MainLayoutContent({ children, title }: MainLayoutProps) {
     <div className="min-h-screen bg-background">
       <SidebarNavigation />
       <main className={`flex flex-col transition-all duration-200 ${open ? 'ml-20 md:ml-[300px]' : 'ml-20 md:ml-20'}`}>
-        <div className="flex-1 space-y-4 p-6 bg-background overflow-hidden">{children}</div>
+        <div className={cn(
+          "flex-1 space-y-4 p-6 bg-background",
+          !allowOverflow && "overflow-hidden"
+        )}>
+          {children}
+        </div>
       </main>
     </div>
   )
 }
 
-export function MainLayout({ children, title }: MainLayoutProps) {
+export function MainLayout({ children, title, allowOverflow }: MainLayoutProps) {
   return (
     <Sidebar>
-      <MainLayoutContent title={title}>
+      <MainLayoutContent title={title} allowOverflow={allowOverflow}>
         {children}
       </MainLayoutContent>
     </Sidebar>

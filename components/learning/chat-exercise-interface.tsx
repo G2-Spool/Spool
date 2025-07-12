@@ -12,7 +12,10 @@ import {
   Loader2, 
   Lightbulb, 
   X,
-  CheckCircle
+  CheckCircle,
+  BookOpen,
+  Sigma,
+  Brain
 } from 'lucide-react'
 import { useStudyStreak } from '@/hooks/use-study-streak'
 
@@ -42,6 +45,10 @@ interface Exercise {
   isSubExercise?: boolean
   parentId?: string
   level?: number
+  currentInput?: string
+  isLoading?: boolean
+  isTyping?: boolean
+  isExpanded?: boolean
 }
 
 interface ChatExerciseInterfaceProps {
@@ -68,6 +75,9 @@ const mockExercises: Exercise[] = [
     id: 'exercise-1',
     title: 'Two-Step Linear Equations Practice',
     status: 'active',
+    currentInput: '',
+    isLoading: false,
+    isTyping: false,
     messages: [
       {
         id: 'msg-1',
@@ -89,7 +99,7 @@ const mockExercises: Exercise[] = [
 
 
 
-// Mock feedback responses
+// Mock feedback responses - Updated with completion tag
 const mockFeedbackResponses = [
   {
     id: 'feedback-1',
@@ -104,6 +114,14 @@ const mockFeedbackResponses = [
     id: 'sub-exercise-1',
     content: 'Sub-Exercise: Let\'s practice that specific step. If you have the equation 10x + 4 = 24, what is the very first thing you must do to both sides to follow the correct workflow?',
     isSubExercise: true
+  },
+  {
+    id: 'sub-exercise-response',
+    content: 'Exactly! Now, apply that same logic to your original problem: 15m + 20 = 80.\n\nWhat should be the very first step?'
+  },
+  {
+    id: 'completion-response',
+    content: 'Perfect! You correctly identified that we need to subtract 20 from both sides first. This gives us 15m = 60, and then dividing by 15 gives us m = 4.\n\nYou can be a member for 4 months! 🎉\n\n<EXERCISE_COMPLETE>Two-Step Linear Equations Practice</EXERCISE_COMPLETE>\n\nExcellent work mastering this concept! You\'ve demonstrated solid understanding of the correct order of operations in solving two-step equations.'
   }
 ]
 
@@ -214,9 +232,9 @@ const VocabularyHighlight: React.FC<{
 // Typing indicator component
 const TypingIndicator: React.FC = () => (
   <div className="flex space-x-1">
-    <div className="w-2 h-2 bg-[#4FD1C5] rounded-full animate-bounce"></div>
-    <div className="w-2 h-2 bg-[#4FD1C5] rounded-full animate-bounce" style={{animationDelay: '0.1s'}}></div>
-    <div className="w-2 h-2 bg-[#4FD1C5] rounded-full animate-bounce" style={{animationDelay: '0.2s'}}></div>
+    <div className="w-2 h-2 bg-[#596f6c] rounded-full animate-bounce"></div>
+    <div className="w-2 h-2 bg-[#596f6c] rounded-full animate-bounce" style={{animationDelay: '0.1s'}}></div>
+    <div className="w-2 h-2 bg-[#596f6c] rounded-full animate-bounce" style={{animationDelay: '0.2s'}}></div>
   </div>
 )
 
@@ -423,6 +441,15 @@ const VocabularyDrawer: React.FC<{
   )
 }
 
+// Helper function to count terms by type
+const getTermCounts = () => {
+  const vocabularyCount = vocabularyTerms.filter(term => term.type === 'vocabulary').length
+  const equationCount = vocabularyTerms.filter(term => term.type === 'equation').length
+  const conceptCount = vocabularyTerms.filter(term => term.type === 'concept').length
+  
+  return { vocabularyCount, equationCount, conceptCount }
+}
+
 // Main component
 export function ChatExerciseInterface({ 
   conceptId, 
@@ -430,10 +457,10 @@ export function ChatExerciseInterface({
   topicId, 
   className 
 }: ChatExerciseInterfaceProps) {
-  const [exercises, setExercises] = useState<Exercise[]>(mockExercises)
-  const [currentInput, setCurrentInput] = useState('')
+  const [exercises, setExercises] = useState<Exercise[]>(
+    mockExercises.map(ex => ({ ...ex, isExpanded: true }))
+  )
   const [isTyping, setIsTyping] = useState(false)
-  const [isLoading, setIsLoading] = useState(false)
   const [showHint, setShowHint] = useState(false)
   const [drawerOpen, setDrawerOpen] = useState(false)
   const [newTerms, setNewTerms] = useState<string[]>([])
@@ -441,13 +468,38 @@ export function ChatExerciseInterface({
   const [showHintTooltip, setShowHintTooltip] = useState(false)
   const [hintTooltipTimer, setHintTooltipTimer] = useState<NodeJS.Timeout | null>(null)
   const [jumpToExerciseVisible, setJumpToExerciseVisible] = useState(false)
-  const [exerciseCompleted, setExerciseCompleted] = useState(false)
   const [collapseTimer, setCollapseTimer] = useState<NodeJS.Timeout | null>(null)
-  const [isExpanded, setIsExpanded] = useState(true)
+  const [buttonTooltips, setButtonTooltips] = useState<{
+    vocab: boolean
+    equations: boolean
+    concepts: boolean
+  }>({ vocab: false, equations: false, concepts: false })
+  const [buttonTooltipTimers, setButtonTooltipTimers] = useState<{
+    vocab: NodeJS.Timeout | null
+    equations: NodeJS.Timeout | null
+    concepts: NodeJS.Timeout | null
+  }>({ vocab: null, equations: null, concepts: null })
   
   const chatContainerRef = useRef<HTMLDivElement>(null)
-  const inputRef = useRef<HTMLTextAreaElement>(null)
+  const inputRefs = useRef<{ [key: string]: HTMLTextAreaElement | null }>({})
   const { recordCompletion } = useStudyStreak()
+  const { vocabularyCount, equationCount, conceptCount } = getTermCounts()
+
+  // Button tooltip handlers
+  const handleButtonTooltip = (type: 'vocab' | 'equations' | 'concepts', show: boolean) => {
+    if (show) {
+      const timer = setTimeout(() => {
+        setButtonTooltips(prev => ({ ...prev, [type]: true }))
+      }, 500)
+      setButtonTooltipTimers(prev => ({ ...prev, [type]: timer }))
+    } else {
+      if (buttonTooltipTimers[type]) {
+        clearTimeout(buttonTooltipTimers[type])
+      }
+      setButtonTooltips(prev => ({ ...prev, [type]: false }))
+      setButtonTooltipTimers(prev => ({ ...prev, [type]: null }))
+    }
+  }
 
   // Scroll detection for jump to exercise button
   useEffect(() => {
@@ -475,68 +527,79 @@ export function ChatExerciseInterface({
 
   // Jump to latest exercise
   const jumpToLatestExercise = () => {
-    if (inputRef.current) {
-      inputRef.current.scrollIntoView({ behavior: 'smooth', block: 'end' })
+    const activeExercise = exercises.find(ex => ex.status === 'active')
+    if (activeExercise && inputRefs.current[activeExercise.id]) {
+      inputRefs.current[activeExercise.id]?.scrollIntoView({ behavior: 'smooth', block: 'end' })
     }
   }
 
-  // Handle sending student response
-  const handleSendMessage = async () => {
-    if (!currentInput.trim()) return
+  // Handle sending student response for specific exercise
+  const handleSendMessage = async (exerciseId: string) => {
+    const exercise = exercises.find(ex => ex.id === exerciseId)
+    if (!exercise || !exercise.currentInput?.trim()) return
 
-    setIsLoading(true)
+    // Set loading state for this specific exercise
+    setExercises(prev => prev.map(ex => 
+      ex.id === exerciseId ? { ...ex, isLoading: true } : ex
+    ))
     
     // Add student message
     const studentMessage: ChatMessage = {
       id: `student-${Date.now()}`,
       type: 'student',
-      content: currentInput,
+      content: exercise.currentInput,
       timestamp: new Date(),
-      exerciseId: exercises[0].id
+      exerciseId: exerciseId
     }
 
-    setExercises(prev => prev.map(exercise => 
-      exercise.id === exercises[0].id 
-        ? { ...exercise, messages: [...exercise.messages, studentMessage] }
-        : exercise
+    setExercises(prev => prev.map(ex => 
+      ex.id === exerciseId 
+        ? { ...ex, messages: [...ex.messages, studentMessage], currentInput: '' }
+        : ex
     ))
 
-    // Clear input
-    setCurrentInput('')
+    // Show typing indicator for this exercise
+    setExercises(prev => prev.map(ex => 
+      ex.id === exerciseId ? { ...ex, isTyping: true } : ex
+    ))
     
-    // Show typing indicator
-    setIsTyping(true)
     setTimeout(scrollToBottom, 100)
 
     // Simulate AI processing with realistic delays
     setTimeout(() => {
-      setIsTyping(false)
+      setExercises(prev => prev.map(ex => 
+        ex.id === exerciseId ? { ...ex, isTyping: false } : ex
+      ))
       
       // Determine response based on conversation stage
-      const currentExercise = exercises[0]
+      const currentExercise = exercises.find(ex => ex.id === exerciseId)
+      if (!currentExercise) return
+      
       const messageCount = currentExercise.messages.length
+      const hasSubExercise = currentExercise.messages.some(msg => msg.isSubExercise)
+      const studentMessageCount = currentExercise.messages.filter(msg => msg.type === 'student').length
       
       let responseContent = ''
       let shouldCreateSubExercise = false
+      let isCompleted = false
       
-      // First response - feedback on initial attempt
-      if (messageCount === 3) { // Initial problem + student response
+      // First student response - give feedback and create sub-exercise
+      if (studentMessageCount === 1 && !hasSubExercise) {
         responseContent = mockFeedbackResponses[0].content
         shouldCreateSubExercise = true
       } 
-      // Second response - remediation explanation
-      else if (messageCount === 4) {
-        responseContent = mockFeedbackResponses[1].content
-        shouldCreateSubExercise = true
+      // Response to sub-exercise (student has responded to sub-exercise)
+      else if (hasSubExercise && studentMessageCount === 2) {
+        responseContent = mockFeedbackResponses[3].content // sub-exercise-response
       }
-      // Sub-exercise response
-      else if (currentExercise.messages.some(msg => msg.isSubExercise)) {
-        responseContent = 'Exactly! Now, apply that same logic to your original problem: 15m + 20 = 80.\n\nWhat should be the very first step?'
+      // Final response after student gets it right
+      else if (studentMessageCount >= 3) {
+        responseContent = mockFeedbackResponses[4].content // completion-response
+        isCompleted = true
       }
-      // Final response
+      // Fallback for any other case
       else {
-        responseContent = 'Perfect! You correctly identified that we need to subtract 20 from both sides first. This gives us 15m = 60, and then dividing by 15 gives us m = 4.\n\nYou can be a member for 4 months! 🎉\n\nExercise completed! Moving to advanced practice...'
-        setExerciseCompleted(true)
+        responseContent = "I can see you're working on this problem. Let me help guide you through the correct approach to solving two-step linear equations."
       }
       
       // Add AI response
@@ -545,14 +608,14 @@ export function ChatExerciseInterface({
         type: 'system',
         content: responseContent,
         timestamp: new Date(),
-        exerciseId: exercises[0].id,
+        exerciseId: exerciseId,
         isTyping: true
       }
 
-      setExercises(prev => prev.map(exercise => 
-        exercise.id === exercises[0].id 
-          ? { ...exercise, messages: [...exercise.messages, aiMessage] }
-          : exercise
+      setExercises(prev => prev.map(ex => 
+        ex.id === exerciseId 
+          ? { ...ex, messages: [...ex.messages, aiMessage], isLoading: false }
+          : ex
       ))
 
       // Detect new vocabulary terms
@@ -564,85 +627,118 @@ export function ChatExerciseInterface({
         setNewTerms(prev => [...prev, ...detectedTerms])
       }
 
-      setIsLoading(false)
       setTimeout(scrollToBottom, 100)
 
       // Create sub-exercise if needed
       if (shouldCreateSubExercise && messageCount === 3) {
         setTimeout(() => {
-          createSubExercise()
+          createSubExercise(exerciseId)
         }, 3000)
       }
       
-      // Auto-collapse and create new exercise if completed
-      if (exerciseCompleted) {
-        const timer = setTimeout(() => {
-          // Mark current exercise as collapsed
-          setExercises(prev => prev.map(exercise => 
-            exercise.id === exercises[0].id 
-              ? { ...exercise, status: 'collapsed' }
-              : exercise
+      // Handle exercise completion
+      if (isCompleted && responseContent.includes('<EXERCISE_COMPLETE>')) {
+        setTimeout(() => {
+          // Mark current exercise as completed
+          setExercises(prev => prev.map(ex => 
+            ex.id === exerciseId 
+              ? { ...ex, status: 'completed' }
+              : ex
           ))
           
-          // Create new advanced exercise
-          createAdvancedExercise()
-        }, 5000)
-        
-        setCollapseTimer(timer)
+          // Create new advanced exercise after a delay
+          setTimeout(() => {
+            createAdvancedExercise()
+          }, 2000)
+        }, 3000)
       }
     }, 2000)
   }
 
-  // Create sub-exercise
-  const createSubExercise = () => {
-    const subExerciseMessage: ChatMessage = {
-      id: `sub-${Date.now()}`,
+  // Create sub-exercise for specific exercise
+  const createSubExercise = (exerciseId: string) => {
+    // First add the remediation explanation
+    const remediationMessage: ChatMessage = {
+      id: `remediation-${Date.now()}`,
       type: 'system',
-      content: mockFeedbackResponses[2].content,
+      content: mockFeedbackResponses[1].content,
       timestamp: new Date(),
-      exerciseId: exercises[0].id,
+      exerciseId: exerciseId,
       isSubExercise: true,
       subExerciseLevel: 1
     }
 
-    setExercises(prev => prev.map(exercise => 
-      exercise.id === exercises[0].id 
-        ? { ...exercise, messages: [...exercise.messages, subExerciseMessage] }
-        : exercise
+    setExercises(prev => prev.map(ex => 
+      ex.id === exerciseId 
+        ? { ...ex, messages: [...ex.messages, remediationMessage] }
+        : ex
     ))
 
-    // Detect new vocabulary terms in sub-exercise
-    const detectedTerms = vocabularyTerms
-      .filter(vocab => subExerciseMessage.content.includes(vocab.term))
-      .map(vocab => vocab.term)
-    
-    if (detectedTerms.length > 0) {
-      setNewTerms(prev => [...prev, ...detectedTerms])
-    }
+    // Then add the sub-exercise after a delay
+    setTimeout(() => {
+      const subExerciseMessage: ChatMessage = {
+        id: `sub-${Date.now()}`,
+        type: 'system',
+        content: mockFeedbackResponses[2].content,
+        timestamp: new Date(),
+        exerciseId: exerciseId,
+        isSubExercise: true,
+        subExerciseLevel: 1
+      }
+
+      setExercises(prev => prev.map(ex => 
+        ex.id === exerciseId 
+          ? { ...ex, messages: [...ex.messages, subExerciseMessage] }
+          : ex
+      ))
+
+      // Detect new vocabulary terms in sub-exercise
+      const detectedTerms = vocabularyTerms
+        .filter(vocab => subExerciseMessage.content.includes(vocab.term))
+        .map(vocab => vocab.term)
+      
+      if (detectedTerms.length > 0) {
+        setNewTerms(prev => [...prev, ...detectedTerms])
+      }
+
+      setTimeout(scrollToBottom, 100)
+    }, 2000)
 
     setTimeout(scrollToBottom, 100)
   }
 
+  // Toggle expansion for specific exercise
+  const toggleExerciseExpansion = (exerciseId: string) => {
+    setExercises(prev => prev.map(ex => 
+      ex.id === exerciseId ? { ...ex, isExpanded: !ex.isExpanded } : ex
+    ))
+  }
+
   // Create advanced exercise
   const createAdvancedExercise = () => {
+    const exerciseId = `exercise-${Date.now()}`
     const advancedExercise: Exercise = {
-      id: 'exercise-2',
+      id: exerciseId,
       title: 'Advanced Two-Step Equations',
       status: 'active',
+      currentInput: '',
+      isLoading: false,
+      isTyping: false,
+      isExpanded: true,
       messages: [
         {
           id: 'adv-msg-1',
           type: 'system',
           content: 'Great work on the basic exercise! Now let\'s try a more complex problem.',
           timestamp: new Date(),
-          exerciseId: 'exercise-2'
+          exerciseId: exerciseId
         },
         {
           id: 'adv-msg-2',
           type: 'system',
-          content: 'Problem: You are ordering custom t-shirts for a club. The company charges a $40 setup fee for the design. Each shirt costs $8. You also have a coupon for $10 off your entire order. If your final bill is $110, how many shirts (s) did you order?\n\nThis problem has an extra step - you need to account for the coupon that reduces the total cost.',
+          content: 'Problem: You are ordering custom t-shirts for a club. The company charges a $40 setup fee for the design. Each shirt costs $8. You also have a coupon for $10 off your entire order. If your final bill is $110, how many shirts (s) did you order?\n\nAdded Complexity: This problem introduces a third number that must be correctly applied before solving. The student must realize that the coupon reduces the total cost before they start solving for the number of shirts, requiring them to combine the constants first (40 - 10).',
           timestamp: new Date(),
-          exerciseId: 'exercise-2'
+          exerciseId: exerciseId
         }
       ]
     }
@@ -651,252 +747,330 @@ export function ChatExerciseInterface({
     setTimeout(scrollToBottom, 100)
   }
 
-  // Handle hint
-  const handleHint = () => {
+  // Handle hint for specific exercise
+  const handleHint = (exerciseId: string) => {
     setShowHint(true)
     const hintMessage: ChatMessage = {
       id: `hint-${Date.now()}`,
       type: 'system',
       content: 'Think about what we said earlier about the reverse order of operations. What comes first when you\'re "undoing" operations?',
       timestamp: new Date(),
-      exerciseId: exercises[0].id
+      exerciseId: exerciseId
     }
 
-    setExercises(prev => prev.map(exercise => 
-      exercise.id === exercises[0].id 
-        ? { ...exercise, messages: [...exercise.messages, hintMessage] }
-        : exercise
+    setExercises(prev => prev.map(ex => 
+      ex.id === exerciseId 
+        ? { ...ex, messages: [...ex.messages, hintMessage] }
+        : ex
     ))
 
     setTimeout(scrollToBottom, 100)
   }
 
-  // Handle keyboard shortcuts
-  const handleKeyDown = (e: React.KeyboardEvent) => {
+  // Handle keyboard shortcuts for specific exercise
+  const handleKeyDown = (e: React.KeyboardEvent, exerciseId: string) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault()
-      handleSendMessage()
+      handleSendMessage(exerciseId)
     }
   }
 
-    // Get active exercise
-  const activeExercise = exercises.find(ex => ex.status === 'active')
+  // Handle input change for specific exercise
+  const handleInputChange = (exerciseId: string, value: string) => {
+    setExercises(prev => prev.map(ex => 
+      ex.id === exerciseId ? { ...ex, currentInput: value } : ex
+    ))
+  }
 
   return (
-    <div className={cn("w-full mt-8 space-y-4", className)}>
-      {/* Jump to Exercise Button */}
-      {jumpToExerciseVisible && (
-        <div className="fixed bottom-4 right-4 z-20">
-          <Button
-            onClick={jumpToLatestExercise}
-            className="bg-[#4FD1C5] hover:bg-[#38B2AC] text-white shadow-lg"
-          >
-            <ChevronDown className="w-4 h-4 mr-2" />
-            Jump to Exercise
-          </Button>
-        </div>
-      )}
+    <div className="chat-exercise-container">
+      <div className={cn("w-full mt-8 space-y-4 relative", className)}>
+        {/* Jump to Exercise Button */}
+        {jumpToExerciseVisible && (
+          <div className="fixed bottom-4 right-4 z-20">
+            <Button
+              onClick={jumpToLatestExercise}
+              className="bg-[#4FD1C5] hover:bg-[#38B2AC] text-white shadow-lg"
+            >
+              <ChevronDown className="w-4 h-4 mr-2" />
+              Jump to Exercise
+            </Button>
+          </div>
+        )}
 
-      {/* Vocabulary Drawer */}
-      <VocabularyDrawer
-        isOpen={drawerOpen}
-        onClose={() => setDrawerOpen(false)}
-        newTerms={newTerms}
-        onClearNewTerms={() => {
-          setNewTerms([])
-          setDrawerOpen(true)
-        }}
-      />
+        {/* Vocabulary Drawer */}
+        <VocabularyDrawer
+          isOpen={drawerOpen}
+          onClose={() => setDrawerOpen(false)}
+          newTerms={newTerms}
+          onClearNewTerms={() => {
+            setNewTerms([])
+            setDrawerOpen(true)
+          }}
+        />
 
-             {/* Render all exercises */}
-       {exercises.map((exercise) => (
-         <Card key={exercise.id} className="bg-[#3a3a3a] border-[#4a4a47]">
-          <CardContent className="p-0">
-                         {/* Header */}
-             <div 
-               className={cn(
-                 "flex items-center justify-between p-6 cursor-pointer",
-                 "bg-gradient-to-r from-[#3a3a3a] to-[#353535] hover:from-[#454545] hover:to-[#454545] transition-all duration-200",
-                 "border-l-4",
-                 isExpanded ? "rounded-t-lg border-b border-[#4a4a47]" : "rounded-lg",
-                 exercise.status === 'active' && "border-l-blue-500",
-                 exercise.status === 'completed' && "border-l-green-500",
-                 exercise.status === 'collapsed' && "border-l-green-500"
-               )}
-               onClick={() => setIsExpanded(!isExpanded)}
-             >
-              <div className="flex items-center gap-3">
-                <h2 className="text-xl font-semibold text-white">{exercise.title}</h2>
-                                 <div className="flex items-center gap-2 text-sm text-gray-400">
-                   {exercise.status === 'active' && <CheckCircle className="w-4 h-4" />}
-                   {exercise.status === 'completed' && <CheckCircle className="w-4 h-4 text-green-500" />}
-                   {exercise.status === 'collapsed' && <CheckCircle className="w-4 h-4 text-green-500" />}
-                   <span className="capitalize">{exercise.status}</span>
-                 </div>
-              </div>
-              
-              {/* Chevron Icon */}
-              {isExpanded ? (
-                <ChevronUp className="w-5 h-5 text-gray-400" />
-              ) : (
-                <ChevronDown className="w-5 h-5 text-gray-400" />
-              )}
-            </div>
-
-            {/* Content - only show when expanded */}
-            {isExpanded && (
-              <div className="border-t border-[#4a4a47]">
-                {/* Collapsed Exercise Summary */}
-                {exercise.status === 'collapsed' && (
-                  <div className="p-6 text-gray-400">
-                   <p className="text-sm">
-                     🎉 Exercise completed - You successfully mastered two-step linear equations!
-                   </p>
-                   <Button
-                     variant="ghost"
-                     size="sm"
-                     className="mt-2 text-[#4FD1C5] hover:text-[#5FE1D5]"
-                     onClick={() => setExercises(prev => prev.map(ex => 
-                       ex.id === exercise.id ? { ...ex, status: 'completed' } : ex
-                     ))}
-                   >
-                     View Full Exercise
-                   </Button>
-                 </div>
-                )}
-
-                {/* Chat Container - only for active and completed exercises */}
-                {(exercise.status === 'active' || exercise.status === 'completed') && (
-              <div 
-                ref={exercise.status === 'active' ? chatContainerRef : null}
-                className="p-6 space-y-4"
-              >
-                {exercise.messages.map((message, index) => {
-                  const isSubExercise = message.isSubExercise
-                  const nextMessage = exercise.messages[index + 1]
-                  const isFollowedBySubExercise = nextMessage?.isSubExercise
-                  
-                  return (
-                    <div key={message.id} className="space-y-2">
-                      {/* Sub-exercise threading indicator */}
-                      {isSubExercise && (
-                        <div className="flex items-center gap-2 text-sm text-[#805AD5] ml-6">
-                          <div className="w-8 h-0.5 bg-[#805AD5]"></div>
-                          <span className="font-medium">Sub-Exercise</span>
-                        </div>
-                      )}
-
-                      {/* Message with threading */}
-                      <div className={cn(
-                        "flex relative",
-                        message.type === 'student' ? "justify-end" : "justify-start"
-                      )}>
-                        {/* Vertical threading line */}
-                        {isSubExercise && (
-                          <div className="absolute left-6 top-0 w-0.5 h-full bg-[#805AD5]/30" />
-                        )}
-                        
-                                                                         <div className={cn(
-                          "rounded-lg px-4 py-3 relative",
-                          message.type === 'student' 
-                            ? "bg-[#525252] border border-[#606060] text-white ml-auto min-w-[60%] max-w-[85%]" 
-                            : "bg-[#3c5552]/100 text-white max-w-[95%]",
-                          isSubExercise && "ml-12 border-l-4 border-[#805AD5]"
-                        )}>
-                          <div className="leading-relaxed">
-                            {message.type === 'system' 
-                              ? parseVocabularyTerms(message.content)
-                              : message.content
-                            }
+        {/* Render all exercises */}
+        {exercises.map((exercise) => (
+          <div key={exercise.id} className="relative">
+            <Card className="bg-[#3a3a3a] border-[#4a4a47] overflow-visible">
+              <CardContent className="p-0">
+                {/* Header with sticky positioning when expanded */}
+                <div 
+                  className={cn(
+                    "flex items-center justify-between p-6 cursor-pointer z-20",
+                    "bg-gradient-to-r from-[#3a3a3a] to-[#353535] hover:from-[#454545] hover:to-[#454545] transition-all duration-200",
+                    "border-l-4",
+                    exercise.isExpanded ? "rounded-t-lg border-b border-[#4a4a47] sticky top-4" : "rounded-lg",
+                    exercise.status === 'active' && "border-l-blue-500",
+                    exercise.status === 'completed' && "border-l-green-500",
+                    exercise.status === 'collapsed' && "border-l-green-500"
+                  )}
+                  style={{
+                    ...(exercise.isExpanded && {
+                      backgroundColor: '#3a3a3a',
+                      boxShadow: '0 2px 8px rgba(0, 0, 0, 0.3)'
+                    })
+                  }}
+                  onClick={() => toggleExerciseExpansion(exercise.id)}
+                >
+                  <div className="flex items-center justify-between w-full">
+                    <h2 className="text-xl font-semibold text-white">{exercise.title}</h2>
+                    <div className="flex items-center gap-1">
+                      {/* Vocabulary Terms Button */}
+                      <div className="relative">
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            setDrawerOpen(true)
+                          }}
+                          onMouseEnter={() => handleButtonTooltip('vocab', true)}
+                          onMouseLeave={() => handleButtonTooltip('vocab', false)}
+                          className="flex items-center gap-2 px-3 py-2 rounded-lg bg-transparent hover:bg-[#373737] border border-transparent hover:border-gray-600/50 transition-all duration-200 group"
+                        >
+                          <span className="text-sm font-medium text-[#4FD1C5] group-hover:text-[#5FE1D5]">
+                            {vocabularyCount}
+                          </span>
+                          <BookOpen className="w-5 h-5 text-gray-400 group-hover:text-gray-300" />
+                        </button>
+                        {buttonTooltips.vocab && (
+                          <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-[#373737] border border-[#4a4a47] rounded text-sm text-white whitespace-nowrap">
+                            Vocab
                           </div>
-
-
-                        </div>
+                        )}
+                      </div>
+                      
+                      {/* Equations Button */}
+                      <div className="relative">
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            setDrawerOpen(true)
+                          }}
+                          onMouseEnter={() => handleButtonTooltip('equations', true)}
+                          onMouseLeave={() => handleButtonTooltip('equations', false)}
+                          className="flex items-center gap-2 px-3 py-2 rounded-lg bg-transparent hover:bg-[#373737] border border-transparent hover:border-gray-600/50 transition-all duration-200 group"
+                        >
+                          <span className="text-sm font-medium text-[#805AD5] group-hover:text-[#9F7AEA]">
+                            {equationCount}
+                          </span>
+                          <Sigma className="w-5 h-5 text-gray-400 group-hover:text-gray-300" />
+                        </button>
+                        {buttonTooltips.equations && (
+                          <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-[#373737] border border-[#4a4a47] rounded text-sm text-white whitespace-nowrap">
+                            Formulas
+                          </div>
+                        )}
+                      </div>
+                      
+                      {/* Concepts Button */}
+                      <div className="relative">
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            setDrawerOpen(true)
+                          }}
+                          onMouseEnter={() => handleButtonTooltip('concepts', true)}
+                          onMouseLeave={() => handleButtonTooltip('concepts', false)}
+                          className="flex items-center gap-2 px-3 py-2 rounded-lg bg-transparent hover:bg-[#373737] border border-transparent hover:border-gray-600/50 transition-all duration-200 group"
+                        >
+                          <span className="text-sm font-medium text-[#ED64A6] group-hover:text-[#F687B3]">
+                            {conceptCount}
+                          </span>
+                          <Brain className="w-5 h-5 text-gray-400 group-hover:text-gray-300" />
+                        </button>
+                        {buttonTooltips.concepts && (
+                          <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-[#373737] border border-[#4a4a47] rounded text-sm text-white whitespace-nowrap">
+                            Concepts
+                          </div>
+                        )}
                       </div>
                     </div>
-                  )
-                })}
-
-                                 {/* Typing Indicator - only for active exercise */}
-                 {exercise.status === 'active' && isTyping && (
-                   <div className="flex justify-start">
-                     <div className="bg-[#454545] border border-[#4a4a47] rounded-lg px-4 py-3">
-                      <TypingIndicator />
-                    </div>
                   </div>
-                )}
+                  
+                  {/* Chevron Icon */}
+                  <div className="ml-4 p-2 rounded-full hover:bg-[#363636]/50 transition-colors duration-200">
+                    {exercise.isExpanded ? (
+                      <ChevronUp className="w-5 h-5 text-gray-400" />
+                    ) : (
+                      <ChevronDown className="w-5 h-5 text-gray-400" />
+                    )}
+                  </div>
+                </div>
 
-                {/* Input Area - only for active exercise */}
-                {exercise.status === 'active' && (
-                  <div className="mt-4 pt-4">
-                    <div className="relative">
-                      <Textarea
-                        ref={inputRef}
-                        value={currentInput}
-                        onChange={(e) => setCurrentInput(e.target.value)}
-                        onKeyDown={handleKeyDown}
-                        placeholder="Explain your step-by-step approach..."
-                        className="min-h-[100px] resize-none pr-20 bg-[#454545] border-[#4a4a47] text-white placeholder:text-gray-400 focus:border-[#6b6b6b] focus:ring-0"
-                        disabled={isLoading}
-                      />
-                      
-                      {/* Hint Button - Top Right Overlay */}
-                      <div className="absolute top-2 right-2 z-10">
+                {/* Content - only show when expanded */}
+                {exercise.isExpanded && (
+                  <div className="border-t border-[#4a4a47]">
+                    {/* Collapsed Exercise Summary */}
+                    {exercise.status === 'collapsed' && (
+                      <div className="p-6 text-gray-400">
+                        <p className="text-sm">
+                          🎉 Exercise completed - You successfully mastered two-step linear equations!
+                        </p>
                         <Button
-                          onClick={handleHint}
                           variant="ghost"
                           size="sm"
-                          className="h-8 w-8 p-0 text-gray-400 hover:text-yellow-400 hover:bg-yellow-400/10"
-                          onMouseEnter={() => {
-                            const timer = setTimeout(() => {
-                              setShowHintTooltip(true)
-                            }, 500)
-                            setHintTooltipTimer(timer)
-                          }}
-                          onMouseLeave={() => {
-                            if (hintTooltipTimer) {
-                              clearTimeout(hintTooltipTimer)
-                            }
-                            setShowHintTooltip(false)
-                          }}
+                          className="mt-2 text-[#4FD1C5] hover:text-[#5FE1D5]"
+                          onClick={() => setExercises(prev => prev.map(ex => 
+                            ex.id === exercise.id ? { ...ex, status: 'completed' } : ex
+                          ))}
                         >
-                          <Lightbulb className="w-9 h-9 font-bold" strokeWidth={3} />
+                          View Full Exercise
                         </Button>
-                        
-                        {/* Tooltip */}
-                        {showHintTooltip && (
-                          <div className="absolute bottom-[34px] right-0 bg-[#505050] border border-[#6a6a6a] text-white text-sm px-2 py-1 rounded shadow-lg whitespace-nowrap">
-                            Need help?
+                      </div>
+                    )}
+
+                    {/* Chat Container - only for active and completed exercises */}
+                    {(exercise.status === 'active' || exercise.status === 'completed') && (
+                      <div 
+                        ref={exercise.status === 'active' ? chatContainerRef : null}
+                        className="p-6 space-y-4"
+                      >
+                        {exercise.messages.map((message, index) => {
+                          const isSubExercise = message.isSubExercise
+                          const nextMessage = exercise.messages[index + 1]
+                          const isFollowedBySubExercise = nextMessage?.isSubExercise
+                          
+                          return (
+                            <div key={message.id} className="space-y-2">
+                              {/* Sub-exercise threading indicator */}
+                              {isSubExercise && (
+                                <div className="flex items-center gap-2 text-sm text-[#805AD5] ml-6">
+                                  <div className="w-8 h-0.5 bg-[#805AD5]"></div>
+                                  <span className="font-medium">Sub-Exercise</span>
+                                </div>
+                              )}
+
+                              {/* Message with threading */}
+                              <div className={cn(
+                                "flex relative",
+                                message.type === 'student' ? "justify-end" : "justify-start"
+                              )}>
+                                {/* Vertical threading line */}
+                                {isSubExercise && (
+                                  <div className="absolute left-6 top-0 w-0.5 h-full bg-[#805AD5]/30" />
+                                )}
+                                
+                                <div className={cn(
+                                  "rounded-lg px-4 py-3 relative",
+                                  message.type === 'student' 
+                                    ? "bg-[#525252] border border-[#606060] text-white ml-auto min-w-[60%] max-w-[85%]" 
+                                    : "bg-[#3c5552]/100 text-white max-w-[95%]",
+                                  isSubExercise && "ml-12 border-l-4 border-[#805AD5]"
+                                )}>
+                                  <div className="leading-relaxed whitespace-pre-wrap">
+                                    {message.type === 'system' 
+                                      ? parseVocabularyTerms(message.content)
+                                      : message.content
+                                    }
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          )
+                        })}
+
+                        {/* Typing Indicator - only for this exercise */}
+                        {exercise.isTyping && (
+                          <div className="flex justify-start">
+                            <div className="bg-[#454545] border border-[#4a4a47] rounded-lg px-4 py-3">
+                              <TypingIndicator />
+                            </div>
+                          </div>
+                        )}
+
+                        {/* Input Area - only for active exercise */}
+                        {exercise.status === 'active' && (
+                          <div className="mt-4 pt-4">
+                            <div className="relative">
+                              <Textarea
+                                ref={(el) => { inputRefs.current[exercise.id] = el }}
+                                value={exercise.currentInput || ''}
+                                onChange={(e) => handleInputChange(exercise.id, e.target.value)}
+                                onKeyDown={(e) => handleKeyDown(e, exercise.id)}
+                                placeholder="Explain your step-by-step approach..."
+                                className="min-h-[100px] resize-none pr-20 bg-[#454545] border-[#4a4a47] text-white placeholder:text-gray-400 focus:border-[#6b6b6b] focus:ring-0 custom-scrollbar overflow-auto"
+                                disabled={exercise.isLoading}
+                              />
+                              
+                              {/* Hint Button - Top Right Overlay */}
+                              <div className="absolute top-2 right-2 z-10">
+                                <Button
+                                  onClick={() => handleHint(exercise.id)}
+                                  variant="ghost"
+                                  size="sm"
+                                  className="h-8 w-8 p-0 text-gray-400 hover:text-yellow-400 hover:bg-yellow-400/10"
+                                  onMouseEnter={() => {
+                                    const timer = setTimeout(() => {
+                                      setShowHintTooltip(true)
+                                    }, 500)
+                                    setHintTooltipTimer(timer)
+                                  }}
+                                  onMouseLeave={() => {
+                                    if (hintTooltipTimer) {
+                                      clearTimeout(hintTooltipTimer)
+                                    }
+                                    setShowHintTooltip(false)
+                                  }}
+                                >
+                                  <Lightbulb className="w-9 h-9 font-bold" strokeWidth={3} />
+                                </Button>
+                                
+                                {/* Tooltip */}
+                                {showHintTooltip && (
+                                  <div className="absolute bottom-[34px] right-0 bg-[#505050] border border-[#6a6a6a] text-white text-sm px-2 py-1 rounded shadow-lg whitespace-nowrap">
+                                    Need help?
+                                  </div>
+                                )}
+                              </div>
+                              
+                              {/* Send Button - Bottom Right */}
+                              <Button
+                                onClick={() => handleSendMessage(exercise.id)}
+                                disabled={exercise.isLoading || !exercise.currentInput?.trim()}
+                                className="absolute right-2 bottom-2 h-8 w-12 p-0 bg-[#3a3a3a] hover:bg-[#4FD1C5]/10 hover:border-[#618c7f] border-2 border-transparent text-white transition-colors"
+                              >
+                                {exercise.isLoading ? (
+                                  <Loader2 className="w-4 h-4 animate-spin" />
+                                ) : (
+                                  <Send className="w-4 h-4" />
+                                )}
+                              </Button>
+                            </div>
+                            
+                            <p className="text-xs text-gray-400 mt-2">
+                              Press Enter to send, Shift+Enter for new line
+                            </p>
                           </div>
                         )}
                       </div>
-                      
-                      {/* Send Button - Bottom Right */}
-                      <Button
-                        onClick={handleSendMessage}
-                        disabled={isLoading || !currentInput.trim()}
-                        className="absolute right-2 bottom-2 h-8 w-12 p-0 bg-[#3a3a3a] hover:bg-[#4FD1C5]/10 hover:border-[#618c7f] border-2 border-transparent text-white transition-colors"
-                      >
-                        {isLoading ? (
-                          <Loader2 className="w-4 h-4 animate-spin" />
-                        ) : (
-                          <Send className="w-4 h-4" />
-                        )}
-                      </Button>
-                    </div>
-                    
-                    <p className="text-xs text-gray-400 mt-2">
-                      Press Enter to send, Shift+Enter for new line
-                    </p>
+                    )}
                   </div>
                 )}
-                </div>
-              )}
-              </div>
-            )}
-          </CardContent>
-        </Card>
-      ))}
+              </CardContent>
+            </Card>
+          </div>
+        ))}
+      </div>
     </div>
   )
 } 

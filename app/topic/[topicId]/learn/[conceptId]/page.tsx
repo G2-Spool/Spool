@@ -54,7 +54,7 @@ function LearningContent() {
 
   return (
     <div className="min-h-screen bg-background">
-      <MainLayout title={`${topicTitle} - ${conceptTitle}`}>
+      <MainLayout title={`${topicTitle} - ${conceptTitle}`} allowOverflow={true}>
         <LearningPage
           conceptId={conceptId}
           conceptTitle={conceptTitle}
