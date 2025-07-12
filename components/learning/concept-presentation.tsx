@@ -1,6 +1,6 @@
 import React from 'react'
 import { Card, CardContent } from '@/components/ui/card'
-import { ExerciseSection } from './exercise-section'
+import { ChatExerciseInterface } from './chat-exercise-interface'
 import { cn } from '@/lib/utils'
 
 interface ConceptPresentationProps {
@@ -197,7 +197,7 @@ export function ConceptPresentation({ conceptId, conceptTitle, topicId, classNam
             <h3 className="text-xl font-bold text-foreground">Vocabulary</h3>
             <div className="space-y-6 pl-6">
               {conceptData.vocabulary.map((item, index) => (
-                <div key={index} className="space-y-1">
+                <div key={index} className="space-y-1" id={`definition-${item.term}`}>
                   <h4 className="font-extrabold text-foreground">{item.term}:</h4>
                   <p className="text-foreground leading-relaxed pl-4">{item.definition}</p>
                 </div>
@@ -254,7 +254,7 @@ export function ConceptPresentation({ conceptId, conceptTitle, topicId, classNam
       </section>
 
       {/* Exercise Section */}
-      <ExerciseSection 
+      <ChatExerciseInterface 
         conceptId={conceptId} 
         conceptTitle={conceptTitle || conceptData.title}
         topicId={topicId}
